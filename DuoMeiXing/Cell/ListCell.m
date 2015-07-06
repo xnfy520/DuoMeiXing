@@ -75,7 +75,7 @@
     
     _avatarBadgeLabel.frame = CGRectMake(CGRectGetWidth(_avatarImageView.frame)-11, -3, 14, 14);
     
-    _avatarDateLabel.frame = CGRectMake(CGRectGetWidth(self.frame) - CGRectGetWidth(self.frame) / 3 - 5, 5, CGRectGetWidth(self.frame) / 3, 10);
+    _avatarDateLabel.frame = CGRectMake(CGRectGetWidth(self.frame) - CGRectGetWidth(self.frame) / 3 - 5, 7, CGRectGetWidth(self.frame) / 3, 10);
     
     _avatarTitleLabel.frame = CGRectMake(CGRectGetWidth(_avatarImageView.frame) + 10, CGRectGetMinX(_avatarImageView.frame) + CGRectGetHeight(_avatarBadgeLabel.frame) / 2, CGRectGetWidth(self.frame) / 2, 14);
     

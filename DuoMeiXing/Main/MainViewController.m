@@ -9,6 +9,8 @@
 #import "MainViewController.h"
 #import "DNADef.h"
 #import "ListCell.h"
+#import "WYPopoverController.h"
+#import "MineViewController.h"
 
 @interface MainViewController ()<UITableViewDelegate, UITableViewDataSource>
 

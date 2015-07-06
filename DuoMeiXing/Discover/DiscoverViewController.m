@@ -8,6 +8,8 @@
 
 #import "DiscoverViewController.h"
 #import "DNADef.h"
+#import "PhotographAlbumViewController.h"
+#import "WebViewController.h"
 
 @interface DiscoverViewController ()<UITableViewDelegate, UITableViewDataSource>
 {
@@ -32,26 +34,33 @@
     mainOptionData = @[
                        @[
                            @{
-                               @"title":@"最新"
+                               @"title":@"最新",
+                               @"ctrl":@"newest"
                                },
                            @{
-                               @"title":@"最热"
+                               @"title":@"最热",
+                               @"ctrl":@"hot"
                                }
                            ],
                        @[
                            @{
-                               @"title":@"大师"
+                               @"title":@"大师",
+                               @"ctrl":@""
                                },
                            @{
-                               @"title":@"专业老师"
+                               @"title":@"专业老师",
+                               @"ctrl":@""
+                               
                                }
                            ],
                        @[
                            @{
-                               @"title":@"乐器"
+                               @"title":@"乐器",
+                               @"ctrl":@"master"
                                },
                            @{
-                               @"title":@"琴行"
+                               @"title":@"琴行",
+                               @"ctrl":@"specialty"
                                }
                            ]
                        ];
@@ -98,8 +107,6 @@
     
     cell.imageView.image = [[UIImage imageNamed:@"limbo"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     
-//    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    
     return cell;
 }
 
@@ -107,6 +114,32 @@
 {
     
     [mainTableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    NSString *ctrl = [[[mainOptionData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] objectForKey:@"ctrl"];
+    
+    PhotographAlbumViewController *photographAlbumCtrl = [[PhotographAlbumViewController alloc] init];
+    
+    if([ctrl isEqualToString:@"newest"]){
+        
+        photographAlbumCtrl.listType = kPhotographAlbumTypeNewest;
+        
+        [self.navigationController pushViewController:photographAlbumCtrl animated:YES];
+        
+    }else if ([ctrl isEqualToString:@"hot"]) {
+        
+        photographAlbumCtrl.listType = kPhotographAlbumTypeHot;
+        
+        [self.navigationController pushViewController:photographAlbumCtrl animated:YES];
+        
+    }else if([ctrl isEqualToString:@"master"]){
+        
+        [WebViewController showWebPageInViewCtrl:self withUrl:@"http://www.163.com" withPostData:nil withViewTitle:appName];
+    
+    }else if([ctrl isEqualToString:@"specialty"]){
+    
+        [WebViewController showWebPageInViewCtrl:self withUrl:@"http://www.qq.com" withPostData:nil withViewTitle:appName];
+        
+    }
     
 }
 

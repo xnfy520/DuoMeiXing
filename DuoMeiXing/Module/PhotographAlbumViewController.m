@@ -22,7 +22,22 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = @"我的视频";
+//    self.automaticallyAdjustsScrollViewInsets = NO;
+    
+    switch (self.listType) {
+        case kPhotographAlbumTypeDefault:
+            self.title = @"我的视频";
+            break;
+        case kPhotographAlbumTypeNewest:
+            self.title = @"最新视频";
+            break;
+        case kPhotographAlbumTypeHot:
+            self.title = @"最热视频";
+            break;
+        default:
+            self.title = @"我的视频";
+            break;
+    }
     
     [self setupMainTableView];
     
@@ -30,7 +45,7 @@
 
 - (void)setupMainTableView
 {
-    mainTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight)];
+    mainTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight-64)];
     mainTableView.delegate = self;
     mainTableView.dataSource = self;
     mainTableView.tableFooterView = [[UIView alloc] init];
@@ -60,7 +75,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 5;
+    return 20;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

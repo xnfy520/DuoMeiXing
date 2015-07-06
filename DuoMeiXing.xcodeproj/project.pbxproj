@@ -63,14 +63,16 @@
 		722C53171B492F49004CBADA /* XLForm.m in Sources */ = {isa = PBXBuildFile; fileRef = 722C52E01B492F49004CBADA /* XLForm.m */; };
 		722C53181B492F49004CBADA /* XLForm.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 722C52E11B492F49004CBADA /* XLForm.bundle */; };
 		722C531E1B494540004CBADA /* limbo.png in Resources */ = {isa = PBXBuildFile; fileRef = 722C531D1B494540004CBADA /* limbo.png */; };
-		722C53221B49675A004CBADA /* MainTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 722C53211B49675A004CBADA /* MainTableViewCell.m */; };
 		722C53241B4974E0004CBADA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 722C53231B4974E0004CBADA /* QuartzCore.framework */; };
 		722C53281B499238004CBADA /* MineTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 722C53271B499238004CBADA /* MineTableViewCell.m */; };
 		724044851B4AB361008AD6BA /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 724044841B4AB361008AD6BA /* SettingsViewController.m */; };
 		724044891B4ABC34008AD6BA /* UIView+FrameMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = 724044881B4ABC34008AD6BA /* UIView+FrameMethods.m */; };
-		7240448C1B4ABF8D008AD6BA /* PhotographAlbumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7240448B1B4ABF8D008AD6BA /* PhotographAlbumViewController.m */; };
-		7240448F1B4AC112008AD6BA /* PhotographAlbumCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7240448E1B4AC112008AD6BA /* PhotographAlbumCell.m */; };
 		724044931B4ACA74008AD6BA /* ListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 724044921B4ACA74008AD6BA /* ListCell.m */; };
+		7240449A1B4AD1F4008AD6BA /* PhotographAlbumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 724044991B4AD1F4008AD6BA /* PhotographAlbumViewController.m */; };
+		7240449D1B4AD48C008AD6BA /* AccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7240449C1B4AD48C008AD6BA /* AccountViewController.m */; };
+		724044A01B4AD964008AD6BA /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7240449F1B4AD964008AD6BA /* WebViewController.m */; };
+		724044A71B4AEBFB008AD6BA /* WYPopoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = 724044A41B4AEBFB008AD6BA /* WYPopoverController.m */; };
+		724044A81B4AEBFB008AD6BA /* WYStoryboardPopoverSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 724044A61B4AEBFB008AD6BA /* WYStoryboardPopoverSegue.m */; };
 		7293864E1B3311F0006F3FED /* DNABadgeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 729386431B3311F0006F3FED /* DNABadgeButton.m */; };
 		7293864F1B3311F0006F3FED /* DNABaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 729386451B3311F0006F3FED /* DNABaseViewController.m */; };
 		729386501B3311F0006F3FED /* DNANavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 729386471B3311F0006F3FED /* DNANavigationViewController.m */; };
@@ -226,8 +228,6 @@
 		722C52E01B492F49004CBADA /* XLForm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLForm.m; sourceTree = "<group>"; };
 		722C52E11B492F49004CBADA /* XLForm.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = XLForm.bundle; sourceTree = "<group>"; };
 		722C531D1B494540004CBADA /* limbo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = limbo.png; sourceTree = "<group>"; };
-		722C53201B49675A004CBADA /* MainTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTableViewCell.h; sourceTree = "<group>"; };
-		722C53211B49675A004CBADA /* MainTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTableViewCell.m; sourceTree = "<group>"; };
 		722C53231B4974E0004CBADA /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		722C53261B499238004CBADA /* MineTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineTableViewCell.h; sourceTree = "<group>"; };
 		722C53271B499238004CBADA /* MineTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineTableViewCell.m; sourceTree = "<group>"; };
@@ -235,12 +235,19 @@
 		724044841B4AB361008AD6BA /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		724044871B4ABC34008AD6BA /* UIView+FrameMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+FrameMethods.h"; sourceTree = "<group>"; };
 		724044881B4ABC34008AD6BA /* UIView+FrameMethods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+FrameMethods.m"; sourceTree = "<group>"; };
-		7240448A1B4ABF8D008AD6BA /* PhotographAlbumViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotographAlbumViewController.h; sourceTree = "<group>"; };
-		7240448B1B4ABF8D008AD6BA /* PhotographAlbumViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotographAlbumViewController.m; sourceTree = "<group>"; };
-		7240448D1B4AC112008AD6BA /* PhotographAlbumCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotographAlbumCell.h; sourceTree = "<group>"; };
-		7240448E1B4AC112008AD6BA /* PhotographAlbumCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotographAlbumCell.m; sourceTree = "<group>"; };
 		724044911B4ACA74008AD6BA /* ListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListCell.h; sourceTree = "<group>"; };
 		724044921B4ACA74008AD6BA /* ListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListCell.m; sourceTree = "<group>"; };
+		724044981B4AD1F4008AD6BA /* PhotographAlbumViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotographAlbumViewController.h; sourceTree = "<group>"; };
+		724044991B4AD1F4008AD6BA /* PhotographAlbumViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotographAlbumViewController.m; sourceTree = "<group>"; };
+		7240449B1B4AD48C008AD6BA /* AccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountViewController.h; sourceTree = "<group>"; };
+		7240449C1B4AD48C008AD6BA /* AccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountViewController.m; sourceTree = "<group>"; };
+		7240449E1B4AD964008AD6BA /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
+		7240449F1B4AD964008AD6BA /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
+		724044A11B4AD9D8008AD6BA /* Singleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Singleton.h; sourceTree = "<group>"; };
+		724044A31B4AEBFB008AD6BA /* WYPopoverController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYPopoverController.h; sourceTree = "<group>"; };
+		724044A41B4AEBFB008AD6BA /* WYPopoverController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYPopoverController.m; sourceTree = "<group>"; };
+		724044A51B4AEBFB008AD6BA /* WYStoryboardPopoverSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYStoryboardPopoverSegue.h; sourceTree = "<group>"; };
+		724044A61B4AEBFB008AD6BA /* WYStoryboardPopoverSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYStoryboardPopoverSegue.m; sourceTree = "<group>"; };
 		729386421B3311F0006F3FED /* DNABadgeButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DNABadgeButton.h; sourceTree = "<group>"; };
 		729386431B3311F0006F3FED /* DNABadgeButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DNABadgeButton.m; sourceTree = "<group>"; };
 		729386441B3311F0006F3FED /* DNABaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DNABaseViewController.h; sourceTree = "<group>"; };
@@ -540,22 +547,11 @@
 			path = Validation;
 			sourceTree = "<group>";
 		};
-		722C531F1B496705004CBADA /* Cell */ = {
-			isa = PBXGroup;
-			children = (
-				722C53201B49675A004CBADA /* MainTableViewCell.h */,
-				722C53211B49675A004CBADA /* MainTableViewCell.m */,
-			);
-			path = Cell;
-			sourceTree = "<group>";
-		};
 		722C53251B4991DE004CBADA /* Cell */ = {
 			isa = PBXGroup;
 			children = (
 				722C53261B499238004CBADA /* MineTableViewCell.h */,
 				722C53271B499238004CBADA /* MineTableViewCell.m */,
-				7240448D1B4AC112008AD6BA /* PhotographAlbumCell.h */,
-				7240448E1B4AC112008AD6BA /* PhotographAlbumCell.m */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -576,6 +572,28 @@
 				724044921B4ACA74008AD6BA /* ListCell.m */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		724044971B4AD1CC008AD6BA /* Module */ = {
+			isa = PBXGroup;
+			children = (
+				724044981B4AD1F4008AD6BA /* PhotographAlbumViewController.h */,
+				724044991B4AD1F4008AD6BA /* PhotographAlbumViewController.m */,
+				7240449E1B4AD964008AD6BA /* WebViewController.h */,
+				7240449F1B4AD964008AD6BA /* WebViewController.m */,
+			);
+			path = Module;
+			sourceTree = "<group>";
+		};
+		724044A21B4AEBFB008AD6BA /* WYPopoverController */ = {
+			isa = PBXGroup;
+			children = (
+				724044A31B4AEBFB008AD6BA /* WYPopoverController.h */,
+				724044A41B4AEBFB008AD6BA /* WYPopoverController.m */,
+				724044A51B4AEBFB008AD6BA /* WYStoryboardPopoverSegue.h */,
+				724044A61B4AEBFB008AD6BA /* WYStoryboardPopoverSegue.m */,
+			);
+			path = WYPopoverController;
 			sourceTree = "<group>";
 		};
 		729386411B3311F0006F3FED /* UI */ = {
@@ -624,6 +642,7 @@
 		729386561B33127A006F3FED /* Extention */ = {
 			isa = PBXGroup;
 			children = (
+				724044A21B4AEBFB008AD6BA /* WYPopoverController */,
 				724044861B4ABC34008AD6BA /* DNA */,
 				722C52611B492F49004CBADA /* MJRefresh */,
 				722C528E1B492F49004CBADA /* XLForm */,
@@ -644,6 +663,7 @@
 		7293865C1B331480006F3FED /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				724044A11B4AD9D8008AD6BA /* Singleton.h */,
 				7293865D1B33149D006F3FED /* DisplayUtil.h */,
 				7293865E1B33149D006F3FED /* DisplayUtil.m */,
 			);
@@ -674,6 +694,7 @@
 		72ABD1AA1B3065310099CB74 /* DuoMeiXing */ = {
 			isa = PBXGroup;
 			children = (
+				724044971B4AD1CC008AD6BA /* Module */,
 				724044901B4ACA55008AD6BA /* Cell */,
 				72ABD1D31B30810C0099CB74 /* Main */,
 				72ABD1D11B30810C0099CB74 /* Contacts */,
@@ -740,7 +761,6 @@
 		72ABD1D31B30810C0099CB74 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				722C531F1B496705004CBADA /* Cell */,
 				72ABD1DA1B3081A80099CB74 /* MainViewController.h */,
 				72ABD1DB1B3081A80099CB74 /* MainViewController.m */,
 				72ABD1DC1B3081A80099CB74 /* MainViewController.xib */,
@@ -756,8 +776,8 @@
 				72ABD1D61B3081820099CB74 /* MineViewController.m */,
 				724044831B4AB361008AD6BA /* SettingsViewController.h */,
 				724044841B4AB361008AD6BA /* SettingsViewController.m */,
-				7240448A1B4ABF8D008AD6BA /* PhotographAlbumViewController.h */,
-				7240448B1B4ABF8D008AD6BA /* PhotographAlbumViewController.m */,
+				7240449B1B4AD48C008AD6BA /* AccountViewController.h */,
+				7240449C1B4AD48C008AD6BA /* AccountViewController.m */,
 			);
 			path = Mine;
 			sourceTree = "<group>";
@@ -875,6 +895,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				722C52EE1B492F49004CBADA /* MJRefreshNormalHeader.m in Sources */,
+				724044A01B4AD964008AD6BA /* WebViewController.m in Sources */,
 				722C53111B492F49004CBADA /* XLFormRightImageButton.m in Sources */,
 				722C53161B492F49004CBADA /* XLFormValidator.m in Sources */,
 				722C52E41B492F49004CBADA /* MJRefreshComponent.m in Sources */,
@@ -884,13 +905,11 @@
 				722C53051B492F49004CBADA /* XLFormOptionsViewController.m in Sources */,
 				722C53021B492F49004CBADA /* XLFormTextFieldCell.m in Sources */,
 				729386511B3311F0006F3FED /* DNATabBar.m in Sources */,
-				722C53221B49675A004CBADA /* MainTableViewCell.m in Sources */,
 				7293864E1B3311F0006F3FED /* DNABadgeButton.m in Sources */,
 				722C53141B492F49004CBADA /* XLFormRegexValidator.m in Sources */,
 				722C53131B492F49004CBADA /* XLFormTextView.m in Sources */,
 				729386521B3311F0006F3FED /* DNATabBarButton.m in Sources */,
 				724044931B4ACA74008AD6BA /* ListCell.m in Sources */,
-				7240448F1B4AC112008AD6BA /* PhotographAlbumCell.m in Sources */,
 				722C52F41B492F49004CBADA /* UIView+MJExtension.m in Sources */,
 				722C52FE1B492F49004CBADA /* XLFormSelectorCell.m in Sources */,
 				722C52F91B492F49004CBADA /* XLFormDatePickerCell.m in Sources */,
@@ -904,6 +923,7 @@
 				722C52E51B492F49004CBADA /* MJRefreshFooter.m in Sources */,
 				722C52FB1B492F49004CBADA /* XLFormLeftRightSelectorCell.m in Sources */,
 				72ABD1B11B3065310099CB74 /* AppDelegate.m in Sources */,
+				7240449D1B4AD48C008AD6BA /* AccountViewController.m in Sources */,
 				724044851B4AB361008AD6BA /* SettingsViewController.m in Sources */,
 				722C52EF1B492F49004CBADA /* MJRefreshStateHeader.m in Sources */,
 				722C530E1B492F49004CBADA /* NSString+XLFormAdditions.m in Sources */,
@@ -922,7 +942,8 @@
 				729386501B3311F0006F3FED /* DNANavigationViewController.m in Sources */,
 				722C53171B492F49004CBADA /* XLForm.m in Sources */,
 				722C52F81B492F49004CBADA /* XLFormDateCell.m in Sources */,
-				7240448C1B4ABF8D008AD6BA /* PhotographAlbumViewController.m in Sources */,
+				724044A71B4AEBFB008AD6BA /* WYPopoverController.m in Sources */,
+				7240449A1B4AD1F4008AD6BA /* PhotographAlbumViewController.m in Sources */,
 				722C52E21B492F49004CBADA /* MJRefreshAutoFooter.m in Sources */,
 				722C52F11B492F49004CBADA /* MJRefreshConst.m in Sources */,
 				722C53281B499238004CBADA /* MineTableViewCell.m in Sources */,
@@ -931,6 +952,7 @@
 				722C530C1B492F49004CBADA /* NSObject+XLFormAdditions.m in Sources */,
 				722C52F71B492F49004CBADA /* XLFormCheckCell.m in Sources */,
 				722C53031B492F49004CBADA /* XLFormTextViewCell.m in Sources */,
+				724044A81B4AEBFB008AD6BA /* WYStoryboardPopoverSegue.m in Sources */,
 				722C52F61B492F49004CBADA /* XLFormButtonCell.m in Sources */,
 				722C53091B492F49004CBADA /* XLFormSectionDescriptor.m in Sources */,
 				722C52E61B492F49004CBADA /* MJRefreshHeader.m in Sources */,

@@ -9,6 +9,7 @@
 #import "MineViewController.h"
 #import "DNADef.h"
 #import "MineTableViewCell.h"
+#import "AccountViewController.h"
 #import "PhotographAlbumViewController.h"
 #import "SettingsViewController.h"
 
@@ -29,8 +30,8 @@
     mainOptionData = @[
                        @[
                            @{
-                               @"title":@"我",
-                               @"ctrl":@""
+                               @"title":@"帐户",
+                               @"ctrl":@"Account"
                                }
                            ],
                        @[
@@ -145,15 +146,25 @@
     [mainTableView deselectRowAtIndexPath:indexPath animated:YES];
     
     NSString *ctrl = [[[mainOptionData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] objectForKey:@"ctrl"];
-
-    if([ctrl isEqualToString:@"PhotographAlbum"]){
-        PhotographAlbumViewController *photographAlbumCtrl = [[PhotographAlbumViewController alloc] init];
-        [self.navigationController pushViewController:photographAlbumCtrl animated:YES];
-    }
     
-    if ([ctrl isEqualToString:@"Settings"]) {
+    if ([ctrl isEqualToString:@"Account"]) {
+        
+        AccountViewController *accountCtrl = [[AccountViewController alloc] init];
+        
+        [self.navigationController pushViewController:accountCtrl animated:YES];
+        
+    }else if([ctrl isEqualToString:@"PhotographAlbum"]){
+        
+        PhotographAlbumViewController *photographAlbumCtrl = [[PhotographAlbumViewController alloc] init];
+        
+        [self.navigationController pushViewController:photographAlbumCtrl animated:YES];
+        
+    }else if ([ctrl isEqualToString:@"Settings"]) {
+        
         SettingsViewController *settingsCtrl = [[SettingsViewController alloc] init];
+        
         [self.navigationController pushViewController:settingsCtrl animated:YES];
+        
     }
     
 }

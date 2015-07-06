@@ -11,7 +11,15 @@
 
 #import "DisplayUtil.h"
 
+typedef enum : NSUInteger{
+    kPhotographAlbumTypeDefault,
+    kPhotographAlbumTypeNewest,
+    kPhotographAlbumTypeHot
+} PhotographAlbumType;
+
 #pragma mark - Global var
+
+#define appName @"哆每星"
 
 #define listCellHeight 50.0f
 
