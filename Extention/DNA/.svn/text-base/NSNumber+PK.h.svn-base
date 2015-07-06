@@ -1,0 +1,32 @@
+//
+//  NSNumber+PK.h
+//  Pumpkin
+//
+//  Created by wilson lee on 5/24/15.
+//  Copyright (c) 2015 wilsonli. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+
+@interface NSNumber (PK)
+//两位小数
+-(NSString*) toTwoDecimalString;
+-(NSString*) toDecimalString;
+//两位小数如果有需要
+-(NSString*) toTwoDecimalStringIfNecessary;
+//带百分号的2为小数
+-(NSString*) toPercentFormatString;
+//带 ￥的数字
+-(NSString*) toRMBFormatStringWithSymbols;
+// 带 xxxx元
+-(NSString*) toRMBFormatString:(BOOL)unitConvert;
+//时间格式带单位
+-(NSString*) toWithMonthUnitString;
+
+-(NSString*) toWithDaysUnitString;
+
+//-(NSNumber*) add:(NSNumber*)arg;
+//
+//-(NSNumber*) subtract:(NSNumber*)arg;
+
+@end

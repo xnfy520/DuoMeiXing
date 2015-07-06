@@ -1,0 +1,101 @@
+//
+//  NSString+PK.m
+//  Pumpkin
+//
+//  Created by wilsonli on 4/20/15.
+//  Copyright (c) 2015 wilsonli. All rights reserved.
+//
+#import "NSString+PK.h"
+#import "NSData+CommonCrypto.h"
+#import "GTMBase64.h"
+
+#define AESKEY @"L21YCmrb75wX6JrBca/McQ=="
+static const char encodingTable[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
+@implementation NSString (NSString_PK)
+
+- (NSString*)trim {
+    return [self stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+}
+
+- (NSString*)decodeUnicode {
+    NSString* result = [[NSPropertyListSerialization propertyListFromData:[[[@"\"" stringByAppendingString:[[self stringByReplacingOccurrencesOfString:@"\\u" withString:@"\\U"] stringByReplacingOccurrencesOfString:@"\"" withString:@"\\\""]] stringByAppendingString:@"\""] dataUsingEncoding:NSUTF8StringEncoding] mutabilityOption:NSPropertyListImmutable format:NULL errorDescription:NULL] stringByReplacingOccurrencesOfString:@"\\r\\n" withString:@"\n"]; // need autorelease ?
+    return result;
+}
+
+-(NSString *)replacingCFURLPercentEscapes{
+    NSString *type = nil;
+    if (nil != self && [self length] > 0) {
+        CFStringRef t = CFURLCreateStringByReplacingPercentEscapesUsingEncoding(kCFAllocatorDefault, (CFStringRef)self, CFSTR(""), kCFStringEncodingUTF8);
+        type = [NSString stringWithString:(__bridge NSString *)t];
+        CFRelease(t);
+    }
+    return type;
+}
+
+-(NSString *)AES128Encrypt
+{
+    NSString* keystr = [NSString stringWithFormat:@"%@", AESKEY];
+    NSData* key = [GTMBase64 decodeString:keystr];
+    
+    CCCryptorStatus status = kCCSuccess;
+    NSData* ecryptData = [[self dataUsingEncoding:NSUTF8StringEncoding]
+                      dataEncryptedUsingAlgorithm:kCCAlgorithmAES128
+                      key:key
+                      initializationVector:nil   // ECB加密不会用到iv
+                      options:(kCCOptionPKCS7Padding|kCCOptionECBMode)
+                      error:&status];
+    if (status != kCCSuccess) {
+        NSLog(@"AES128 Encode Fail");
+        return nil;
+    }
+    return [NSString stringWithString:[ecryptData base64Encoding]];
+}
+
+-(NSString *)AES128Decrypt
+{
+    NSString* keystr = [NSString stringWithFormat:@"%@", AESKEY];
+    NSData* key = [GTMBase64 decodeString:keystr];
+    NSData* data = [GTMBase64 decodeString:self];
+    
+    CCCryptorStatus status = kCCSuccess;
+    NSData* decodeData = [data
+                      decryptedDataUsingAlgorithm:kCCAlgorithmAES128
+                          key:key
+                            initializationVector:nil   // ECB解密不会用到iv
+                           options:(kCCOptionPKCS7Padding|kCCOptionECBMode)
+                           error:&status];
+                      if (status != kCCSuccess) {
+                          NSLog(@"AES128 Decode Fail");
+                          return nil;
+                      }
+    return [[NSString alloc] initWithData:decodeData encoding:NSUTF8StringEncoding];
+}
+//
+//#pragma mark - base64
++ (NSString*)encodeBase64String:(NSString * )input {
+    NSData *data = [input dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
+    data = [GTMBase64 encodeData:data];
+    NSString *base64String = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    return base64String;
+}
+
++ (NSString*)decodeBase64String:(NSString * )input {
+    NSData *data = [input dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
+    data = [GTMBase64 decodeData:data];
+    NSString *base64String = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    return base64String;
+}
+
++ (NSString*)encodeBase64Data:(NSData *)data {
+    data = [GTMBase64 encodeData:data];
+    NSString *base64String = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    return base64String;
+}
+
++ (NSString*)decodeBase64Data:(NSData *)data {
+    data = [GTMBase64 decodeData:data];
+    NSString *base64String = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    return base64String;
+}
+
+@end

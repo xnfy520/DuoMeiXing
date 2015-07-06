@@ -1,0 +1,55 @@
+//
+//  DNADef.h
+//  DuoMeiXing
+//
+//  Created by 天陨 on 15/6/18.
+//  Copyright (c) 2015年 wake. All rights reserved.
+//
+
+#ifndef DuoMeiXing_DNADef_h
+#define DuoMeiXing_DNADef_h
+
+#import "DisplayUtil.h"
+
+#pragma mark - Global var
+
+#define listCellHeight 50.0f
+
+//获取设备物理高度
+#define screenHeight [UIScreen mainScreen].bounds.size.height
+
+//获取设备物理宽度
+#define screenWidth [UIScreen mainScreen].bounds.size.width
+
+//默认背景色
+#define defaultBackgroundColor [UIColor colorWithRed:0.94 green:0.94 blue:0.94 alpha:1]
+
+//默认导航条颜色
+#define defaultNavigationBar [DisplayUtil hexStringToColor:@"#21292C"]
+
+#define defaultTabBarTitleColor [DisplayUtil hexStringToColor:@"#1284FF"]
+
+//获取设备物理高度
+#define screenHeight [UIScreen mainScreen].bounds.size.height
+
+//获取设备物理宽度
+#define screenWidth [UIScreen mainScreen].bounds.size.width
+
+//ios系统版本
+#define ios8x [[[UIDevice currentDevice] systemVersion] floatValue] >=8.0f
+#define ios7x ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0f) && ([[[UIDevice currentDevice] systemVersion] floatValue] < 8.0f)
+#define ios6x [[[UIDevice currentDevice] systemVersion] floatValue] < 7.0f
+#define iosNot6x [[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0f
+
+
+#define iphone4x_3_5 ([UIScreen mainScreen].bounds.size.height==480)
+
+#define iphone5x_4_0 ([UIScreen mainScreen].bounds.size.height==568)
+#define iphone5x_4_0_height 568
+
+#define iphone6_4_7 ([UIScreen mainScreen].bounds.size.height==667.0f)
+
+#define iphone6Plus_5_5 ([UIScreen mainScreen].bounds.size.height==736.0f || [UIScreen mainScreen].bounds.size.height==414.0f)
+
+
+#endif

@@ -1,0 +1,94 @@
+//
+//  NSNumber+PK.m
+//  Pumpkin
+//
+//  Created by wilson lee on 5/24/15.
+//  Copyright (c) 2015 wilsonli. All rights reserved.
+//
+
+#import "NSNumber+PK.h"
+
+
+
+@implementation NSNumber (PK)
+
+-(NSString*) toPercentFormatString
+{
+    return  [NSString stringWithFormat:@"%@%%", [self toTwoDecimalStringIfNecessary]];
+}
+
+-(NSString*) toRMBFormatStringWithSymbols
+{
+    return [NSString stringWithFormat:@"￥%.2f", [self doubleValue]];
+}
+
+-(NSString*) toRMBFormatString:(BOOL)unitConvert;
+{
+    if(unitConvert)
+    {
+        if([self doubleValue] > 100000000)
+        {
+            return [NSString stringWithFormat:@"%.2f亿元", [self doubleValue] /100000000 ];
+        }
+        else if([self doubleValue] > 10000)
+        {
+            return  [NSString stringWithFormat:@"%.2f万元", [self doubleValue] /10000 ];
+        }
+        else
+        {
+            return [NSString stringWithFormat:@"%.2f元", [self doubleValue]];
+        }
+        
+    }else{
+        NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+        formatter.numberStyle = kCFNumberFormatterCurrencyStyle;
+        NSString *string = [formatter stringFromNumber:self];
+
+        NSString *currencySymbol =[NSString stringWithFormat:@"%@" ,[[NSLocale currentLocale] objectForKey:NSLocaleCurrencySymbol] ];
+//        NSLog(@"%@", currencySymbol);
+        string = [string stringByReplacingOccurrencesOfString:currencySymbol withString:@""];
+        if([string hasPrefix:@" "])
+            string  = [string substringFromIndex:1];
+        return [NSString stringWithFormat:@"%@元", string];
+    }
+}
+
+-(NSString*) toWithMonthUnitString
+{
+    return [NSString stringWithFormat:@"%d个月", [self intValue]];
+}
+
+-(NSString*) toWithDaysUnitString
+{
+    return [NSString stringWithFormat:@"%d天", [self intValue]];
+}
+
+-(NSString*) toTwoDecimalString
+{
+    return [NSString stringWithFormat:@"%.2f", [self doubleValue]];
+}
+
+- (NSString *)toDecimalString
+{
+    if (([self doubleValue]-[self integerValue])>0.1) {
+        return [NSString stringWithFormat:@"%.1f", [self doubleValue]];
+    }else{
+        return [NSString stringWithFormat:@"%ld", (long)[self integerValue]];
+    }
+}
+
+-(NSString*) toTwoDecimalStringIfNecessary
+{
+    NSString* strValue = [self stringValue];
+    NSRange range;
+    range = [strValue rangeOfString:@"."];
+    if (range.location == NSNotFound) {
+    }else{
+        if(strValue.length - range.location > 2)
+        {
+            strValue = [strValue substringToIndex: (range.location + 3)];
+        }
+    }
+    return strValue;
+}
+@end

@@ -1,0 +1,111 @@
+//
+//  NSDictionary+PK.m
+//  Pumpkin
+//
+//  Created by wilsonli on 4/20/15.
+//  Copyright (c) 2015 wilsonli. All rights reserved.
+//
+
+#import "NSDictionary+PK.h"
+
+@implementation NSDictionary (NSDictionary_PK)
+
+- (NSDictionary*)dictionaryValueForKey:(NSString*)key defaultValue:(NSDictionary*)defaultValue {
+    if (key != nil && [key length] > 0) {
+        id ret = [self objectForKey:key];
+        if (ret != nil && ret != [NSNull null] && [ret isKindOfClass:[NSDictionary class]]) {
+            return ret;
+        }
+    }
+    return defaultValue;
+}
+
+- (NSArray*)arrayValueForKey:(NSString*)key defaultValue:(NSArray*)defaultValue {
+    if (key != nil && [key length] > 0) {
+        id ret = [self objectForKey:key];
+        if (ret != nil && ret != [NSNull null] && [ret isKindOfClass:[NSArray class]]) {
+            return ret;
+        }
+    }
+    return defaultValue;
+}
+
+- (NSString*)stringValueForKey:(NSString*)key defaultValue:(NSString*)defaultValue operation:(NSStringOperationType)type {
+    if (key != nil && [key length] > 0) {
+        id ret = [self objectForKey:key];
+        if (ret != nil && ret != [NSNull null]) {
+            if ([ret isKindOfClass:[NSString class]]) {
+                switch (type) {
+                    case NSStringOperationTypeDecodeUnicode: {
+                        return [[ret trim] decodeUnicode];
+                    }
+                    case NSStringOperationTypeNone: {
+                        return ret;
+                    }
+                    case NSStringOperationTypeTrim:
+                    default: {
+                        return [ret trim];
+                    }
+                }
+            }
+            else if ([ret isKindOfClass:[NSDecimalNumber class]]) {
+                return [NSString stringWithFormat:@"%@", ret];
+            }
+            else if ([ret isKindOfClass:[NSNumber class]]) {
+                return [NSString stringWithFormat:@"%@", ret];
+            }
+        }
+    }
+    return defaultValue;
+}
+
+- (int)intValueForKey:(NSString*)key defaultValue:(int)defaultValue {
+    if (key != nil && [key length] > 0) {
+        id ret = [self objectForKey:key];
+        if (ret != nil && ret != [NSNull null] && ([ret isKindOfClass:[NSDecimalNumber class]] || [ret isKindOfClass:[NSNumber class]] || [ret isKindOfClass:[NSString class]])) {
+            return [ret intValue];
+        }
+    }
+    return defaultValue;
+}
+
+- (uint64_t)longLongValueForKey:(NSString*)key defaultValue:(uint64_t)defaultValue {
+    if (key != nil && [key length] > 0) {
+        id ret = [self objectForKey:key];
+        if (ret != nil && ret != [NSNull null] && ([ret isKindOfClass:[NSDecimalNumber class]] || [ret isKindOfClass:[NSNumber class]] || [ret isKindOfClass:[NSString class]])) {
+            return [ret longLongValue];
+        }
+    }
+    return defaultValue;
+}
+
+- (double)doubleValueForKey:(NSString*)key defaultValue:(double)defaultValue {
+    if (key != nil && [key length] > 0) {
+        id ret = [self objectForKey:key];
+        if (ret != nil && ret != [NSNull null] && ([ret isKindOfClass:[NSDecimalNumber class]] || [ret isKindOfClass:[NSNumber class]] || [ret isKindOfClass:[NSString class]])) {
+            return [ret doubleValue];
+        }
+    }
+    return defaultValue;
+}
+
+- (float)floatValueForKey:(NSString*)key defaultValue:(float)defaultValue {
+    if (key != nil && [key length] > 0) {
+        id ret = [self objectForKey:key];
+        if (ret != nil && ret != [NSNull null] && ([ret isKindOfClass:[NSDecimalNumber class]] || [ret isKindOfClass:[NSNumber class]] || [ret isKindOfClass:[NSString class]])) {
+            return [ret floatValue];
+        }
+    }
+    return defaultValue;
+}
+
+- (BOOL)boolValueForKey:(NSString*)key defaultValue:(BOOL)defaultValue {
+    if (key != nil && [key length] > 0) {
+        id ret = [self objectForKey:key];
+        if (ret != nil && ret != [NSNull null]) {
+            return [ret boolValue];
+        }
+    }
+    return defaultValue;
+}
+@end

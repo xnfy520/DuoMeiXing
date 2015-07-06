@@ -1,0 +1,16 @@
+//
+//  JSONValueTransformer+PK.h
+//  Pumpkin
+//
+//  Created by wilson lee on 5/25/15.
+//  Copyright (c) 2015 wilsonli. All rights reserved.
+//
+
+#import "JSONValueTransformer.h"
+
+@interface JSONValueTransformer (PK)
+
+- (NSDecimalNumber*)NSDecimalNumberFromNSNumber:(NSNumber*)number;
+
+- (id)JSONObjectFromNSDecimalNumber:(NSDecimalNumber*)number; // number.description
+@end
