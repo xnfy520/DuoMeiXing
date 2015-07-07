@@ -23,6 +23,8 @@ typedef enum : NSUInteger{
 
 #define listCellHeight 50.0f
 
+#define popoverSize CGSizeMake(130, 119)
+
 //获取设备物理高度
 #define screenHeight [UIScreen mainScreen].bounds.size.height
 
@@ -32,8 +34,8 @@ typedef enum : NSUInteger{
 //默认背景色
 #define defaultBackgroundColor [UIColor colorWithRed:0.94 green:0.94 blue:0.94 alpha:1]
 
-//默认导航条颜色
-#define defaultNavigationBar [DisplayUtil hexStringToColor:@"#21292C"]
+//默认导航条颜色 //[DisplayUtil hexStringToColor:@"#21292C"]
+#define defaultNavigationBar [UIColor colorWithRed:55./255. green:63./255. blue:71./255. alpha:1.0]
 
 #define defaultTabBarTitleColor [DisplayUtil hexStringToColor:@"#1284FF"]
 

@@ -19,9 +19,7 @@
 //显示 HUB 提示性错误显示，自动消失
 -(void)showTips:(NSString*)msg;
 
-- (void) setupRightButton;
-
-- (void)setupRightListInView:(UIView *)view;
+- (void)setupRightButton;
 
 - (void)setupInsetsTableView :(UITableView *)tableView;
 

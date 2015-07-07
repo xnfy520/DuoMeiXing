@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		39CF7E771B4BAE8B00EF8C2D /* PopoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39CF7E761B4BAE8B00EF8C2D /* PopoverViewController.m */; };
+		39CF7E7A1B4BCEF700EF8C2D /* PopoverCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 39CF7E791B4BCEF700EF8C2D /* PopoverCell.m */; };
 		722C52E21B492F49004CBADA /* MJRefreshAutoFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 722C52641B492F49004CBADA /* MJRefreshAutoFooter.m */; };
 		722C52E31B492F49004CBADA /* MJRefreshBackFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 722C52661B492F49004CBADA /* MJRefreshBackFooter.m */; };
 		722C52E41B492F49004CBADA /* MJRefreshComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 722C52681B492F49004CBADA /* MJRefreshComponent.m */; };
@@ -95,11 +97,8 @@
 		72ABD1C81B3065310099CB74 /* DuoMeiXingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 72ABD1C71B3065310099CB74 /* DuoMeiXingTests.m */; };
 		72ABD1D81B3081820099CB74 /* MineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72ABD1D61B3081820099CB74 /* MineViewController.m */; };
 		72ABD1DD1B3081A80099CB74 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72ABD1DB1B3081A80099CB74 /* MainViewController.m */; };
-		72ABD1DE1B3081A80099CB74 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72ABD1DC1B3081A80099CB74 /* MainViewController.xib */; };
 		72ABD1E21B3081CD0099CB74 /* DiscoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72ABD1E01B3081CD0099CB74 /* DiscoverViewController.m */; };
-		72ABD1E31B3081CD0099CB74 /* DiscoverViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72ABD1E11B3081CD0099CB74 /* DiscoverViewController.xib */; };
 		72ABD1E71B3081DD0099CB74 /* ContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72ABD1E51B3081DD0099CB74 /* ContactsViewController.m */; };
-		72ABD1E81B3081DD0099CB74 /* ContactsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72ABD1E61B3081DD0099CB74 /* ContactsViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -113,6 +112,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		39CF7E751B4BAE8B00EF8C2D /* PopoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopoverViewController.h; sourceTree = "<group>"; };
+		39CF7E761B4BAE8B00EF8C2D /* PopoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopoverViewController.m; sourceTree = "<group>"; };
+		39CF7E781B4BCEF700EF8C2D /* PopoverCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopoverCell.h; sourceTree = "<group>"; };
+		39CF7E791B4BCEF700EF8C2D /* PopoverCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopoverCell.m; sourceTree = "<group>"; };
 		722C52631B492F49004CBADA /* MJRefreshAutoFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshAutoFooter.h; sourceTree = "<group>"; };
 		722C52641B492F49004CBADA /* MJRefreshAutoFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshAutoFooter.m; sourceTree = "<group>"; };
 		722C52651B492F49004CBADA /* MJRefreshBackFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshBackFooter.h; sourceTree = "<group>"; };
@@ -287,13 +290,10 @@
 		72ABD1D61B3081820099CB74 /* MineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineViewController.m; sourceTree = "<group>"; };
 		72ABD1DA1B3081A80099CB74 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		72ABD1DB1B3081A80099CB74 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
-		72ABD1DC1B3081A80099CB74 /* MainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
 		72ABD1DF1B3081CD0099CB74 /* DiscoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoverViewController.h; sourceTree = "<group>"; };
 		72ABD1E01B3081CD0099CB74 /* DiscoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoverViewController.m; sourceTree = "<group>"; };
-		72ABD1E11B3081CD0099CB74 /* DiscoverViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DiscoverViewController.xib; sourceTree = "<group>"; };
 		72ABD1E41B3081DD0099CB74 /* ContactsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsViewController.h; sourceTree = "<group>"; };
 		72ABD1E51B3081DD0099CB74 /* ContactsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsViewController.m; sourceTree = "<group>"; };
-		72ABD1E61B3081DD0099CB74 /* ContactsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContactsViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -570,6 +570,8 @@
 			children = (
 				724044911B4ACA74008AD6BA /* ListCell.h */,
 				724044921B4ACA74008AD6BA /* ListCell.m */,
+				39CF7E781B4BCEF700EF8C2D /* PopoverCell.h */,
+				39CF7E791B4BCEF700EF8C2D /* PopoverCell.m */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -581,6 +583,8 @@
 				724044991B4AD1F4008AD6BA /* PhotographAlbumViewController.m */,
 				7240449E1B4AD964008AD6BA /* WebViewController.h */,
 				7240449F1B4AD964008AD6BA /* WebViewController.m */,
+				39CF7E751B4BAE8B00EF8C2D /* PopoverViewController.h */,
+				39CF7E761B4BAE8B00EF8C2D /* PopoverViewController.m */,
 			);
 			path = Module;
 			sourceTree = "<group>";
@@ -743,7 +747,6 @@
 			children = (
 				72ABD1E41B3081DD0099CB74 /* ContactsViewController.h */,
 				72ABD1E51B3081DD0099CB74 /* ContactsViewController.m */,
-				72ABD1E61B3081DD0099CB74 /* ContactsViewController.xib */,
 			);
 			path = Contacts;
 			sourceTree = "<group>";
@@ -753,7 +756,6 @@
 			children = (
 				72ABD1DF1B3081CD0099CB74 /* DiscoverViewController.h */,
 				72ABD1E01B3081CD0099CB74 /* DiscoverViewController.m */,
-				72ABD1E11B3081CD0099CB74 /* DiscoverViewController.xib */,
 			);
 			path = Discover;
 			sourceTree = "<group>";
@@ -763,7 +765,6 @@
 			children = (
 				72ABD1DA1B3081A80099CB74 /* MainViewController.h */,
 				72ABD1DB1B3081A80099CB74 /* MainViewController.m */,
-				72ABD1DC1B3081A80099CB74 /* MainViewController.xib */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -831,6 +832,7 @@
 				TargetAttributes = {
 					72ABD1A71B3065310099CB74 = {
 						CreatedOnToolsVersion = 6.3.2;
+						DevelopmentTeam = 4C3SG9EXGH;
 					};
 					72ABD1C01B3065310099CB74 = {
 						CreatedOnToolsVersion = 6.3.2;
@@ -863,11 +865,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				729386791B331ADA006F3FED /* i101@2x.png in Resources */,
-				72ABD1E81B3081DD0099CB74 /* ContactsViewController.xib in Resources */,
 				722C52F01B492F49004CBADA /* MJRefresh.bundle in Resources */,
-				72ABD1E31B3081CD0099CB74 /* DiscoverViewController.xib in Resources */,
 				7293867A1B331ADA006F3FED /* i200@2x.png in Resources */,
-				72ABD1DE1B3081A80099CB74 /* MainViewController.xib in Resources */,
 				7293867E1B331ADA006F3FED /* i400@2x.png in Resources */,
 				7293867D1B331ADA006F3FED /* i301@2x.png in Resources */,
 				7293867F1B331ADA006F3FED /* i401@2x.png in Resources */,
@@ -949,6 +948,7 @@
 				722C53281B499238004CBADA /* MineTableViewCell.m in Sources */,
 				722C52EA1B492F49004CBADA /* MJRefreshBackGifFooter.m in Sources */,
 				7293865A1B33127A006F3FED /* MBProgressHUD.m in Sources */,
+				39CF7E7A1B4BCEF700EF8C2D /* PopoverCell.m in Sources */,
 				722C530C1B492F49004CBADA /* NSObject+XLFormAdditions.m in Sources */,
 				722C52F71B492F49004CBADA /* XLFormCheckCell.m in Sources */,
 				722C53031B492F49004CBADA /* XLFormTextViewCell.m in Sources */,
@@ -963,6 +963,7 @@
 				72ABD1DD1B3081A80099CB74 /* MainViewController.m in Sources */,
 				722C53041B492F49004CBADA /* XLFormOptionsObject.m in Sources */,
 				722C53081B492F49004CBADA /* XLFormRowDescriptor.m in Sources */,
+				39CF7E771B4BAE8B00EF8C2D /* PopoverViewController.m in Sources */,
 				722C52EB1B492F49004CBADA /* MJRefreshBackNormalFooter.m in Sources */,
 				722C53101B492F49004CBADA /* XLFormRightDetailCell.m in Sources */,
 				72ABD1D81B3081820099CB74 /* MineViewController.m in Sources */,
@@ -1087,9 +1088,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = DuoMeiXing/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "ca14ab05-9e04-4651-ab76-2532b1a598a6";
 			};
 			name = Debug;
 		};
@@ -1097,9 +1101,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = DuoMeiXing/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "ca14ab05-9e04-4651-ab76-2532b1a598a6";
 			};
 			name = Release;
 		};

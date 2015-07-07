@@ -447,6 +447,37 @@ static char const * const UINavigationControllerEmbedInPopoverTagKey = "UINaviga
     return result;
 }
 
++ (id)themeForIOS8 {
+
+    WYPopoverTheme *result = [[WYPopoverTheme alloc] init];
+
+    result.tintColor = [UIColor colorWithRed:55./255. green:63./255. blue:71./255. alpha:1.0];
+    result.outerStrokeColor = [UIColor clearColor];
+    result.innerStrokeColor = [UIColor clearColor];
+    result.fillTopColor = result.tintColor;
+    result.fillBottomColor = result.tintColor;
+    result.glossShadowColor = [UIColor clearColor];
+    result.glossShadowOffset = CGSizeMake(0, 0);
+    result.glossShadowBlurRadius = 0;
+    result.borderWidth = 0;
+    result.arrowBase = 20;
+    result.arrowHeight = 10;
+    result.outerShadowColor = [UIColor yellowColor];
+    result.outerShadowBlurRadius = 0;
+    result.outerShadowOffset = CGSizeMake(1, 0);
+    result.outerCornerRadius = 0;
+    result.minOuterCornerRadius = 0;
+    result.innerShadowColor = [UIColor clearColor];
+    result.innerShadowBlurRadius = 0;
+    result.innerShadowOffset = CGSizeMake(0, 0);
+    result.innerCornerRadius = 0;
+    result.viewContentInsets = UIEdgeInsetsMake(0, 0, 0, 0);//UIEdgeInsetsMake(3, 0, 0, 0);
+    result.overlayColor = [UIColor clearColor];
+    
+    return result;
+
+}
+
 + (id)themeForIOS6 {
     
     WYPopoverTheme *result = [[WYPopoverTheme alloc] init];

@@ -10,7 +10,6 @@
 #import "DNADef.h"
 #import "ListCell.h"
 #import "WYPopoverController.h"
-#import "MineViewController.h"
 
 @interface MainViewController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -30,7 +29,7 @@
 
 - (void)setupMainTableView
 {
-    mainTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight)];
+    mainTableView = [[UITableView alloc] initWithFrame:self.view.bounds];
     mainTableView.delegate = self;
     mainTableView.dataSource = self;
     mainTableView.tableFooterView = [[UIView alloc] init];

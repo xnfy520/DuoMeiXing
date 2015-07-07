@@ -51,7 +51,7 @@
 {
     // 取出 appearance对象
     UINavigationBar *navBar = [UINavigationBar appearance];
-    navBar.translucent = NO;
+//    navBar.translucent = NO;
     // 设置背景
 //    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     

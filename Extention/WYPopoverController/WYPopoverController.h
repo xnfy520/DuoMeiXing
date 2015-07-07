@@ -250,5 +250,6 @@ typedef NS_OPTIONS(NSUInteger, WYPopoverAnimationOptions) {
 + (instancetype)theme;
 + (instancetype)themeForIOS6;
 + (instancetype)themeForIOS7;
++ (instancetype)themeForIOS8;
 
 @end

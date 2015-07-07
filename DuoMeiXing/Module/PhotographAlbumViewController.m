@@ -45,7 +45,7 @@
 
 - (void)setupMainTableView
 {
-    mainTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight-64)];
+    mainTableView = [[UITableView alloc] initWithFrame:self.view.bounds];
     mainTableView.delegate = self;
     mainTableView.dataSource = self;
     mainTableView.tableFooterView = [[UIView alloc] init];

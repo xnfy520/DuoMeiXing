@@ -10,14 +10,13 @@
 #import "DNADef.h"
 #import "WYPopoverController.h"
 #import "MineViewController.h"
+#import "PopoverViewController.h"
 
-@interface DNABaseViewController ()<WYPopoverControllerDelegate>
+@interface DNABaseViewController ()<WYPopoverControllerDelegate, popoverClickDelegate>
 {
     MBProgressHUD* HUD;
     int staticHUBCounter;
     UIBarButtonItem *rightButton;
-    UIView *listView;
-    BOOL isOpen;
     WYPopoverController* popoverController;
 }
 @end
@@ -28,8 +27,7 @@
 {
     if (![super init])
         return nil;
-    
-    
+
     staticHUBCounter = 0;
     
     return self;
@@ -38,93 +36,52 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    isOpen = NO;
     [self setupRightButton];
 
-    WYPopoverTheme *theme = [WYPopoverTheme themeForIOS6];
+    WYPopoverTheme *theme = [WYPopoverTheme themeForIOS8];
     [WYPopoverController setDefaultTheme:theme];
 
-    WYPopoverBackgroundView *popoverAppearance = [WYPopoverBackgroundView appearance];
-    [popoverAppearance setBorderWidth:5];
-    [popoverAppearance setArrowHeight:10];
-    [popoverAppearance setArrowBase:20];
-    
-//    UIColor *greenColor = [UIColor colorWithRed:26.f/255.f green:188.f/255.f blue:156.f/255.f alpha:1];
-//    
-//    [WYPopoverController setDefaultTheme:[WYPopoverTheme themeForIOS7]];
-//    
-//    WYPopoverBackgroundView *popoverAppearance = [WYPopoverBackgroundView appearance];
-//    [popoverAppearance setOverlayColor:[UIColor clearColor]];
-//    [popoverAppearance setOuterCornerRadius:4];
-//    [popoverAppearance setOuterShadowBlurRadius:0];
-//    [popoverAppearance setOuterShadowColor:[UIColor clearColor]];
-//    [popoverAppearance setOuterShadowOffset:CGSizeMake(0, 0)];
-//    
-//    [popoverAppearance setGlossShadowColor:[UIColor clearColor]];
-//    [popoverAppearance setGlossShadowOffset:CGSizeMake(0, 0)];
-//    
-//    [popoverAppearance setBorderWidth:8];
-//    [popoverAppearance setArrowHeight:10];
-//    [popoverAppearance setArrowBase:20];
-//    
-//    [popoverAppearance setInnerCornerRadius:4];
-//    [popoverAppearance setInnerShadowBlurRadius:0];
-//    [popoverAppearance setInnerShadowColor:[UIColor clearColor]];
-//    [popoverAppearance setInnerShadowOffset:CGSizeMake(0, 0)];
-//    
-//    [popoverAppearance setFillTopColor:greenColor];
-//    [popoverAppearance setFillBottomColor:greenColor];
-//    [popoverAppearance setOuterStrokeColor:greenColor];
-//    [popoverAppearance setInnerStrokeColor:greenColor];
+}
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    if(HUD != nil)
+    {
+        [HUD removeFromSuperview];
+        HUD = nil;
+    }
 }
 
 - (void) setupRightButton
 {
-    rightButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(abc:)];
+    rightButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(popoverAction:)];
     self.navigationItem.rightBarButtonItem = rightButton;
-    NSLog(@"%@", [self class]);
 }
 
-- (void) abc:(id)sender
+- (void) popoverAction:(id)sender
 {
-    NSLog(@"hello");
-    
-    MineViewController *mine =[[MineViewController alloc] init];
-//    mine.preferredContentSize = CGSizeMake(100, 100);
-    
-    popoverController = [[WYPopoverController alloc] initWithContentViewController:mine];
-    [popoverController setPopoverContentSize:CGSizeMake(100, 100)];
+    PopoverViewController *popoverCtrl =[[PopoverViewController alloc] init];
+    popoverCtrl.delegate = self;
+    popoverController = [[WYPopoverController alloc] initWithContentViewController:popoverCtrl];
+    [popoverController setPopoverContentSize:popoverSize];
+    popoverController.delegate = self;
     [popoverController presentPopoverFromBarButtonItem:sender permittedArrowDirections:WYPopoverArrowDirectionUp animated:YES];
     
 }
 
+- (void)getPopoverClickType:(NSString *)type
+{
+    [self showTips:[NSString stringWithFormat:@"选择了:%@", type]];
+    [popoverController dismissPopoverAnimated:NO];
+}
 
 - (void)animView:(UIView *)view withHidden:(BOOL)isShow
 {
     [UIView animateWithDuration:0.3 animations:^{
         view.alpha = isShow ? 0 : 0.9;
     }];
-}
-
-- (void)setupRightListInView:(UIView *)view
-{
-    float navY = CGRectGetMaxY(self.navigationController.navigationBar.frame);
-    listView = [[UIView alloc] initWithFrame:CGRectMake(screenWidth-screenWidth/2.5-25, navY, screenWidth/2.5, 100)];
-    listView.backgroundColor = defaultNavigationBar;
-    listView.alpha = 0;
-    [view addSubview:listView];
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-
-    if(HUD != nil)
-    {
-        [HUD removeFromSuperview];
-        HUD = nil;
-    }
 }
 
 -(void)showHUB
@@ -167,7 +124,7 @@
     HUD.mode = MBProgressHUDModeText;
     HUD.labelText = msg;
     [HUD show:YES];
-    [HUD hide:YES afterDelay:1];
+    [HUD hide:YES afterDelay:1l];
     
 }
 
@@ -185,6 +142,26 @@
         [tableView setLayoutMargins:UIEdgeInsetsZero];
         
     }
+}
+
+
+#pragma mark popover delegate
+
+- (BOOL)popoverControllerShouldDismissPopover:(WYPopoverController *)controller
+{
+    return YES;
+}
+
+- (void)popoverControllerDidDismissPopover:(WYPopoverController *)controller
+{
+    popoverController.delegate = nil;
+    popoverController = nil;
+}
+
+- (void)popoverController:(WYPopoverController *)popoverController willTranslatePopoverWithYOffset:(float *)value
+{
+    NSLog(@"hel");
+    *value = 0;
 }
 
 @end
