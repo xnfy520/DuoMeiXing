@@ -73,8 +73,8 @@
     // 设置标题图片
     childVc.title = title;
     childVc.tabBarItem.tag = tag;
-    childVc.tabBarItem.image = [self imageToSize:CGSizeMake(22, 22) withImg:[[UIImage imageNamed:imageName] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
-    childVc.tabBarItem.selectedImage = [self imageToSize:CGSizeMake(22, 22) withImg:[[UIImage imageNamed:imageName] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+    childVc.tabBarItem.image = [[UIImage imageNamed:imageName] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    childVc.tabBarItem.selectedImage = [[UIImage imageNamed:selectedImageName] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     // 添加到导航控制器
     DNANavigationViewController *childVcNav = [DNATabBarController setCtrl:childVc];
     [self addChildViewController:childVcNav];
@@ -94,21 +94,6 @@
 - (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController
 {
     return YES;
-}
-
-- (UIImage *)imageToSize:(CGSize) size withImg:(UIImage *)img
-{
-    
-    UIGraphicsBeginImageContext(size);
-    
-    [img drawInRect:CGRectMake(0, 0, size.width, size.height)];
-    
-    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
-    
-    UIGraphicsEndImageContext();
-    
-    return newImage;
-    
 }
 
 

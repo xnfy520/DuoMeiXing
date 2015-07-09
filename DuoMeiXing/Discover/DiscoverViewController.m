@@ -35,20 +35,24 @@
                        @[
                            @{
                                @"title":@"最新",
+                               @"icon":@"home_disc_last",
                                @"ctrl":@"newest"
                                },
                            @{
                                @"title":@"最热",
+                               @"icon":@"home_disc_hot",
                                @"ctrl":@"hot"
                                }
                            ],
                        @[
                            @{
                                @"title":@"大师",
+                               @"icon":@"home_disc_mentor",
                                @"ctrl":@""
                                },
                            @{
                                @"title":@"专业老师",
+                               @"icon":@"home_disc_teacher",
                                @"ctrl":@""
                                
                                }
@@ -56,10 +60,12 @@
                        @[
                            @{
                                @"title":@"乐器",
+                               @"icon":@"home_disc_teaching_tgita",
                                @"ctrl":@"master"
                                },
                            @{
                                @"title":@"琴行",
+                               @"icon":@"home_disc_teaching_piano",
                                @"ctrl":@"specialty"
                                }
                            ]
@@ -101,11 +107,16 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
     }
     
-    cell.textLabel.text = [[[mainOptionData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] objectForKey:@"title"];
+    
+    NSString *title = [[[mainOptionData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] objectForKey:@"title"];
+    
+    NSString *icon = [[[mainOptionData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] objectForKey:@"icon"];
+    
+    cell.textLabel.text = title;
     
     cell.textLabel.font = [UIFont systemFontOfSize:15];
     
-    cell.imageView.image = [[UIImage imageNamed:@"limbo"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    cell.imageView.image = [[UIImage imageNamed:icon] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     
     return cell;
 }

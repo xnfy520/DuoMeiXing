@@ -26,15 +26,19 @@
     
     mainOptionData = @[
                        @{
-                           @"title":@"发起群聊",
+                           @"title":@"上传视频",
+                           @"icon":@"plus_video",
                            @"ctrl":@"1"
-                           },
-                       @{
-                           @"title":@"添加朋友",
-                           @"ctrl":@"2"
-                           },
+                       },
                        @{
                            @"title":@"扫一扫",
+                           @"icon":@"plus_scan",
+                           @"ctrl":@"2"
+                           },
+                       @
+                       {
+                           @"title":@"添加朋友",
+                           @"icon":@"plus_friend",
                            @"ctrl":@"3"
                            }
                        ];
@@ -44,7 +48,7 @@
 
 - (void)setupTableView
 {
-    mainTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 130, 120)];
+    mainTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 120, 120)];
     mainTableView.delegate = self;
     mainTableView.dataSource = self;
     mainTableView.tableFooterView = [[UIView alloc] init];
@@ -59,7 +63,7 @@
 {
     if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
         
-        [cell setSeparatorInset:UIEdgeInsetsMake(0, 10, 0, 5)];
+        [cell setSeparatorInset:UIEdgeInsetsMake(0, 10, 0, 10)];
         
     }
     
@@ -89,11 +93,15 @@
         cell = [[PopoverCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
     }
     
+    NSString *title = [[mainOptionData objectAtIndex:indexPath.row] objectForKey:@"title"];
+    
+    NSString *icon = [[mainOptionData objectAtIndex:indexPath.row] objectForKey:@"icon"];
+    
     cell.backgroundColor = [UIColor colorWithRed:55./255. green:63./255. blue:71./255. alpha:1.0];
     
-    cell.imageView.image = [UIImage imageNamed:@"limbo"];
+    cell.imageView.image = [UIImage imageNamed:icon];
     
-    cell.textLabel.text = [[mainOptionData objectAtIndex:indexPath.row] objectForKey:@"title"];
+    cell.textLabel.text = title;
     cell.textLabel.textColor = [UIColor whiteColor];
     cell.textLabel.font = [UIFont systemFontOfSize:14];
     
@@ -102,6 +110,21 @@
     cell.selectedBackgroundView = cellBg;
     
     return cell;
+}
+
+- (UIImage *)imageToSize:(CGSize) size withImg:(UIImage *)img
+{
+    
+    UIGraphicsBeginImageContext(size);
+    
+    [img drawInRect:CGRectMake(0, 0, size.width, size.height)];
+    
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    
+    UIGraphicsEndImageContext();
+    
+    return newImage;
+    
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

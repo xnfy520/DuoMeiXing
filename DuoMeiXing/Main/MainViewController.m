@@ -67,9 +67,9 @@
     static NSString *cellId = @"cellId";
     
     ListCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+    
     if (cell == nil) {
         cell = [[ListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
-        
     }
     
     cell.avatarImageView.image = [UIImage imageNamed:@"limbo"];

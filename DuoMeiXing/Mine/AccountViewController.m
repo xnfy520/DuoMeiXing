@@ -100,7 +100,7 @@
     if ([ctrl isEqualToString:@"nickname"]) {
         
         cell.detailTextLabel.text = @"天陨";
-        cell.detailTextLabel.font = [UIFont systemFontOfSize:12];
+        cell.detailTextLabel.font = [UIFont systemFontOfSize:14];
         
     }else if([ctrl isEqualToString:@"avatar"]){
     
@@ -124,7 +124,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     
-    return 10;
+    return 15;
     
 }
 

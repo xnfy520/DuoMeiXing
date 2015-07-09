@@ -31,19 +31,22 @@
                        @[
                            @{
                                @"title":@"帐户",
-                               @"ctrl":@"Account"
+                               @"ctrl":@"Account",
+                               @"icon":@""
                                }
                            ],
                        @[
                            @{
                                @"title":@"影集",
-                               @"ctrl":@"PhotographAlbum"
+                               @"ctrl":@"PhotographAlbum",
+                               @"icon":@"home_me_video"
                                }
                            ],
                        @[
                            @{
                                @"title":@"设置",
-                               @"ctrl":@"Settings"
+                               @"ctrl":@"Settings",
+                               @"icon":@"home_me_settings"
                                }
                            ]
                        ];
@@ -128,9 +131,13 @@
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIds];
         }
         
-        cell.imageView.image = [UIImage imageNamed:@"limbo"];
+        NSString *title = [[[mainOptionData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] objectForKey:@"title"];
         
-        cell.textLabel.text = [[[mainOptionData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] objectForKey:@"title"];
+        NSString *icon = [[[mainOptionData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] objectForKey:@"icon"];
+        
+        cell.imageView.image = [[UIImage imageNamed:icon] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        
+        cell.textLabel.text = title;
         
         cell.textLabel.font = [UIFont systemFontOfSize:15];
         
@@ -175,7 +182,7 @@
     if (section == 0) {
         return 0.001;
     }else{
-        return 10;
+        return 15;
     }
     
 }

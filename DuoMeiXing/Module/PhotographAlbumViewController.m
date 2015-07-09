@@ -20,11 +20,11 @@
 }
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
     
-//    self.automaticallyAdjustsScrollViewInsets = NO;
-    
     switch (self.listType) {
+            
         case kPhotographAlbumTypeDefault:
             self.title = @"我的视频";
             break;

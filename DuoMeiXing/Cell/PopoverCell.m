@@ -14,14 +14,16 @@
 {
     [super layoutSubviews];
 
-    CGRect tmpFrame = self.imageView.frame;
-    tmpFrame.origin.x = 10;
-    self.imageView.frame = tmpFrame;
+    CGRect imageViewFrame = self.imageView.frame;
+    imageViewFrame.origin.x = 10;
+//    imageViewFrame.origin.y = 7;
+    self.imageView.frame = imageViewFrame;
     
-    CGRect tmpTextFrame = self.textLabel.frame;
-    tmpTextFrame.origin.x = CGRectGetMaxX(self.imageView.frame)+10;
-    tmpTextFrame.size.width = CGRectGetWidth(self.frame)-CGRectGetMaxX(self.imageView.frame);
-    self.textLabel.frame = tmpTextFrame;
+    
+    CGRect textFrame = self.textLabel.frame;
+    textFrame.origin.x = CGRectGetMaxX(self.imageView.frame)+10;
+    textFrame.size.width = CGRectGetWidth(self.frame)-CGRectGetMaxX(self.imageView.frame);
+    self.textLabel.frame = textFrame;
     
 }
 

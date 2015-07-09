@@ -23,7 +23,7 @@ typedef enum : NSUInteger{
 
 #define listCellHeight 50.0f
 
-#define popoverSize CGSizeMake(130, 119)
+#define popoverSize CGSizeMake(120, 119)
 
 //获取设备物理高度
 #define screenHeight [UIScreen mainScreen].bounds.size.height
