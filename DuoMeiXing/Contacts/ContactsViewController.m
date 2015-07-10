@@ -31,8 +31,8 @@
     
     NSMutableArray *sectionsArray;
     
-    NSArray *keys;
-    NSArray *values;
+    NSMutableArray *keys;
+    NSMutableArray *values;
 }
 
 - (void)viewDidLoad {
@@ -40,9 +40,37 @@
 
     [self setupMainTableView];
     
-    keys = @[@"", @"A", @"B", @"C", @"D", @"E"];
+    keys = [[NSMutableArray alloc] init];
     
-    values = @[
+    values = [[NSMutableArray alloc] init];
+    
+//    NSArray *headerList = @[
+//                            @{
+//                                @"title":@"新朋友",
+//                                @"icon":@"home_friend_new",
+//                                @"ctrl":@"friend"
+//                                },
+//                            @{
+//                                @"title":@"老师",
+//                                @"icon":@"home_friend_teacher",
+//                                @"ctrl":@"friend"
+//                                }
+//                            ];
+//    
+//    if (self.notHeader && self.notSearchBar) {
+//        [keys addObjectsFromArray:@[@"A", @"B", @"C", @"D", @"E"]];
+//    }else if(!self.notHeader && self.notSearchBar){
+//        [keys addObjectsFromArray:@[@"", @"A", @"B", @"C", @"D", @"E"]];
+//    }else if(self.notHeader && !self.notSearchBar){
+//        [keys addObjectsFromArray:@[UITableViewIndexSearch, @"A", @"B", @"C", @"D", @"E"]];
+//    }else if(!self.notHeader && !self.notSearchBar){
+//        [keys addObjectsFromArray:@[UITableViewIndexSearch, @"", @"A", @"B", @"C", @"D", @"E"]];
+//    }
+    
+    
+    [keys addObjectsFromArray:@[@"", @"A", @"B", @"C", @"D", @"E"]];
+    
+    [values addObjectsFromArray: @[
                @[
                    @"新朋友",
                    @"老师"
@@ -136,9 +164,13 @@
                    @"emial"
                    ]
                
-               ];
+               ]];
+    
+    if (self.notHeader) {
+        [keys removeObjectAtIndex:0];
+        [values removeObjectAtIndex:0];
+    }
 
-//    [self configureSections];
 }
 
 - (void)setupMainTableView
@@ -165,8 +197,6 @@
     searchCtrl.searchResultsUpdater = self; //设置显示搜索结果的控制器
     searchCtrl.dimsBackgroundDuringPresentation = NO; //设置开始搜索时背景显示与否
     [searchCtrl.searchBar sizeToFit]; //设置searchBar位置自适应
-    searchCtrl.searchBar.tintColor = [UIColor whiteColor];
-    searchCtrl.searchBar.backgroundColor = [UIColor colorWithRed:0.592 green:1.000 blue:0.119 alpha:1.000];
     searchCtrl.searchBar.placeholder = @"搜索";
     searchCtrl.searchBar.delegate = self;
     searchCtrl.searchBar.showsBookmarkButton = NO;
@@ -180,26 +210,38 @@
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
-        
+
         [cell setSeparatorInset:UIEdgeInsetsZero];
-        
+
     }
     
     if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
-        
+
         [cell setLayoutMargins:UIEdgeInsetsZero];
-        
+
     }
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    UIView *sectionHeader = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, 15)];
+    UIView *sectionHeader = [[UIView alloc] init];
     sectionHeader.backgroundColor = [UIColor groupTableViewBackgroundColor];
-    UILabel *sectionLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, (28-14)/2, screenWidth-10, 14)];
+    UILabel *sectionLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, (20-14)/2, screenWidth-10, 14)];
     sectionLabel.text = [keys objectAtIndex:section];
+    sectionLabel.textColor = [UIColor grayColor];
+    sectionLabel.font = [UIFont systemFontOfSize:14];
     [sectionHeader addSubview:sectionLabel];
     return sectionHeader;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    NSString *sectionTitle = [keys objectAtIndex:section];
+    if ([sectionTitle isEqualToString:@""]) {
+        return 0;
+    }else{
+        return 20;
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -268,7 +310,16 @@
 
 - (NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index
 {
-    return index;
+    if(index==0)
+    {
+        //index是索引条的序号。从0开始，所以第0 个是放大镜。如果是放大镜坐标就移动到搜索框处
+        [tableView scrollRectToVisible:searchCtrl.searchBar.frame animated:NO];
+        return -1;
+    }else{
+        //因为返回的值是section的值。所以减1就是与section对应的值了
+        return index;
+    }
+    
 }
 
 - (void)updateSearchResultsForSearchController:(UISearchController *)searchController

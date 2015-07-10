@@ -8,7 +8,7 @@
 
 #import "MineViewController.h"
 #import "DNADef.h"
-#import "MineTableViewCell.h"
+#import "AccountAvatarCell.h"
 #import "AccountViewController.h"
 #import "PhotographAlbumViewController.h"
 #import "SettingsViewController.h"
@@ -105,13 +105,13 @@
         
         static NSString *cellId = @"cellId";
         
-        MineTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+        AccountAvatarCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
         if (cell == nil) {
-            cell = [[MineTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
+            cell = [[AccountAvatarCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
             
         }
         
-        cell.avatarImageView.image = [UIImage imageNamed:@"limbo"];
+        cell.avatarImageView.image = [UIImage imageNamed:@"avatar"];
         
         cell.avatarTitleLabel.text = @"天陨";
         

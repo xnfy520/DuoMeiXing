@@ -1,14 +1,14 @@
 //
-//  MineTableViewCell.m
+//  AccountAvatarCell.m
 //  DuoMeiXing
 //
 //  Created by 天陨 on 15/7/6.
 //  Copyright (c) 2015年 wake. All rights reserved.
 //
 
-#import "MineTableViewCell.h"
+#import "AccountAvatarCell.h"
 
-@implementation MineTableViewCell
+@implementation AccountAvatarCell
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -26,7 +26,7 @@
         
         _avatarPhoneLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMinX(_avatarTitleLabel.frame), CGRectGetMaxY(_avatarImageView.frame)-11, CGRectGetWidth(self.frame) - CGRectGetWidth(_avatarImageView.frame) + 10, 10)];
         _avatarPhoneLabel.font = [UIFont systemFontOfSize:13];
-        _avatarPhoneLabel.textColor = [UIColor magentaColor];
+        _avatarPhoneLabel.textColor = [UIColor colorWithRed:0.000 green:0.502 blue:1.000 alpha:1.000];
         [self.contentView addSubview:_avatarPhoneLabel];
         
     }

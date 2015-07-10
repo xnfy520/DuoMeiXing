@@ -32,6 +32,8 @@
 		39CBE3E51B4EA2FC0084A8D7 /* home_friend_new@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39CBE3E41B4EA2FC0084A8D7 /* home_friend_new@2x.png */; };
 		39CF7E771B4BAE8B00EF8C2D /* PopoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39CF7E761B4BAE8B00EF8C2D /* PopoverViewController.m */; };
 		39CF7E7A1B4BCEF700EF8C2D /* PopoverCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 39CF7E791B4BCEF700EF8C2D /* PopoverCell.m */; };
+		39F4EB581B4F6306009BBDC5 /* avatar.png in Resources */ = {isa = PBXBuildFile; fileRef = 39F4EB571B4F6306009BBDC5 /* avatar.png */; };
+		39F4EB5B1B4FC519009BBDC5 /* AccountAvatarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 39F4EB5A1B4FC519009BBDC5 /* AccountAvatarCell.m */; };
 		722C52E21B492F49004CBADA /* MJRefreshAutoFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 722C52641B492F49004CBADA /* MJRefreshAutoFooter.m */; };
 		722C52E31B492F49004CBADA /* MJRefreshBackFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 722C52661B492F49004CBADA /* MJRefreshBackFooter.m */; };
 		722C52E41B492F49004CBADA /* MJRefreshComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 722C52681B492F49004CBADA /* MJRefreshComponent.m */; };
@@ -89,7 +91,6 @@
 		722C53181B492F49004CBADA /* XLForm.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 722C52E11B492F49004CBADA /* XLForm.bundle */; };
 		722C531E1B494540004CBADA /* limbo.png in Resources */ = {isa = PBXBuildFile; fileRef = 722C531D1B494540004CBADA /* limbo.png */; };
 		722C53241B4974E0004CBADA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 722C53231B4974E0004CBADA /* QuartzCore.framework */; };
-		722C53281B499238004CBADA /* MineTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 722C53271B499238004CBADA /* MineTableViewCell.m */; };
 		724044851B4AB361008AD6BA /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 724044841B4AB361008AD6BA /* SettingsViewController.m */; };
 		724044891B4ABC34008AD6BA /* UIView+FrameMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = 724044881B4ABC34008AD6BA /* UIView+FrameMethods.m */; };
 		724044931B4ACA74008AD6BA /* ListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 724044921B4ACA74008AD6BA /* ListCell.m */; };
@@ -163,6 +164,9 @@
 		39CF7E761B4BAE8B00EF8C2D /* PopoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopoverViewController.m; sourceTree = "<group>"; };
 		39CF7E781B4BCEF700EF8C2D /* PopoverCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopoverCell.h; sourceTree = "<group>"; };
 		39CF7E791B4BCEF700EF8C2D /* PopoverCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopoverCell.m; sourceTree = "<group>"; };
+		39F4EB571B4F6306009BBDC5 /* avatar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = avatar.png; sourceTree = "<group>"; };
+		39F4EB591B4FC519009BBDC5 /* AccountAvatarCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountAvatarCell.h; sourceTree = "<group>"; };
+		39F4EB5A1B4FC519009BBDC5 /* AccountAvatarCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountAvatarCell.m; sourceTree = "<group>"; };
 		722C52631B492F49004CBADA /* MJRefreshAutoFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshAutoFooter.h; sourceTree = "<group>"; };
 		722C52641B492F49004CBADA /* MJRefreshAutoFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshAutoFooter.m; sourceTree = "<group>"; };
 		722C52651B492F49004CBADA /* MJRefreshBackFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshBackFooter.h; sourceTree = "<group>"; };
@@ -279,8 +283,6 @@
 		722C52E11B492F49004CBADA /* XLForm.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = XLForm.bundle; sourceTree = "<group>"; };
 		722C531D1B494540004CBADA /* limbo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = limbo.png; sourceTree = "<group>"; };
 		722C53231B4974E0004CBADA /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		722C53261B499238004CBADA /* MineTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineTableViewCell.h; sourceTree = "<group>"; };
-		722C53271B499238004CBADA /* MineTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineTableViewCell.m; sourceTree = "<group>"; };
 		724044831B4AB361008AD6BA /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		724044841B4AB361008AD6BA /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		724044871B4ABC34008AD6BA /* UIView+FrameMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+FrameMethods.h"; sourceTree = "<group>"; };
@@ -365,6 +367,7 @@
 		3944CCE31B4E22D2008B1AF1 /* Tmp */ = {
 			isa = PBXGroup;
 			children = (
+				39F4EB571B4F6306009BBDC5 /* avatar.png */,
 				39CBE3E41B4EA2FC0084A8D7 /* home_friend_new@2x.png */,
 				3944CD3C1B4E2601008B1AF1 /* home_disc_teaching_tgita@2x.png */,
 				3944CD121B4E25C5008B1AF1 /* home_disc_hot@2x.png */,
@@ -623,15 +626,6 @@
 			path = Validation;
 			sourceTree = "<group>";
 		};
-		722C53251B4991DE004CBADA /* Cell */ = {
-			isa = PBXGroup;
-			children = (
-				722C53261B499238004CBADA /* MineTableViewCell.h */,
-				722C53271B499238004CBADA /* MineTableViewCell.m */,
-			);
-			path = Cell;
-			sourceTree = "<group>";
-		};
 		724044861B4ABC34008AD6BA /* DNA */ = {
 			isa = PBXGroup;
 			children = (
@@ -644,6 +638,8 @@
 		724044901B4ACA55008AD6BA /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				39F4EB591B4FC519009BBDC5 /* AccountAvatarCell.h */,
+				39F4EB5A1B4FC519009BBDC5 /* AccountAvatarCell.m */,
 				724044911B4ACA74008AD6BA /* ListCell.h */,
 				724044921B4ACA74008AD6BA /* ListCell.m */,
 				39CF7E781B4BCEF700EF8C2D /* PopoverCell.h */,
@@ -851,7 +847,6 @@
 		72ABD1D41B30810C0099CB74 /* Mine */ = {
 			isa = PBXGroup;
 			children = (
-				722C53251B4991DE004CBADA /* Cell */,
 				72ABD1D51B3081820099CB74 /* MineViewController.h */,
 				72ABD1D61B3081820099CB74 /* MineViewController.m */,
 				724044831B4AB361008AD6BA /* SettingsViewController.h */,
@@ -944,6 +939,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				729386791B331ADA006F3FED /* i101@2x.png in Resources */,
+				39F4EB581B4F6306009BBDC5 /* avatar.png in Resources */,
 				3944CD361B4E25C5008B1AF1 /* home_me_video@2x.png in Resources */,
 				3944CD3D1B4E2601008B1AF1 /* home_disc_teaching_tgita@2x.png in Resources */,
 				3944CD271B4E25C5008B1AF1 /* home_disc_hot@2x.png in Resources */,
@@ -1010,6 +1006,7 @@
 				722C53131B492F49004CBADA /* XLFormTextView.m in Sources */,
 				729386521B3311F0006F3FED /* DNATabBarButton.m in Sources */,
 				724044931B4ACA74008AD6BA /* ListCell.m in Sources */,
+				39F4EB5B1B4FC519009BBDC5 /* AccountAvatarCell.m in Sources */,
 				722C52F41B492F49004CBADA /* UIView+MJExtension.m in Sources */,
 				722C52FE1B492F49004CBADA /* XLFormSelectorCell.m in Sources */,
 				722C52F91B492F49004CBADA /* XLFormDatePickerCell.m in Sources */,
@@ -1046,7 +1043,6 @@
 				7240449A1B4AD1F4008AD6BA /* PhotographAlbumViewController.m in Sources */,
 				722C52E21B492F49004CBADA /* MJRefreshAutoFooter.m in Sources */,
 				722C52F11B492F49004CBADA /* MJRefreshConst.m in Sources */,
-				722C53281B499238004CBADA /* MineTableViewCell.m in Sources */,
 				722C52EA1B492F49004CBADA /* MJRefreshBackGifFooter.m in Sources */,
 				7293865A1B33127A006F3FED /* MBProgressHUD.m in Sources */,
 				39CF7E7A1B4BCEF700EF8C2D /* PopoverCell.m in Sources */,

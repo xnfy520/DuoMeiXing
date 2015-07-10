@@ -10,6 +10,7 @@
 #import "DNADef.h"
 #import "PhotographAlbumViewController.h"
 #import "WebViewController.h"
+#import "ContactsViewController.h"
 
 @interface DiscoverViewController ()<UITableViewDelegate, UITableViewDataSource>
 {
@@ -48,12 +49,12 @@
                            @{
                                @"title":@"大师",
                                @"icon":@"home_disc_mentor",
-                               @"ctrl":@""
+                               @"ctrl":@"contacts"
                                },
                            @{
                                @"title":@"专业老师",
                                @"icon":@"home_disc_teacher",
-                               @"ctrl":@""
+                               @"ctrl":@"contacts"
                                
                                }
                            ],
@@ -126,9 +127,13 @@
     
     [mainTableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    NSString *title = [[[mainOptionData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] objectForKey:@"title"];
+    
     NSString *ctrl = [[[mainOptionData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] objectForKey:@"ctrl"];
     
     PhotographAlbumViewController *photographAlbumCtrl = [[PhotographAlbumViewController alloc] init];
+    
+    ContactsViewController *contactsCtrl = [[ContactsViewController alloc] init];
     
     if([ctrl isEqualToString:@"newest"]){
         
@@ -149,6 +154,12 @@
     }else if([ctrl isEqualToString:@"specialty"]){
     
         [WebViewController showWebPageInViewCtrl:self withUrl:@"http://www.qq.com" withPostData:nil withViewTitle:appName];
+        
+    }else if([ctrl isEqualToString:@"contacts"]){
+
+        contactsCtrl.title = title;
+        contactsCtrl.notHeader = YES;
+        [self.navigationController pushViewController:contactsCtrl animated:YES];
         
     }
     

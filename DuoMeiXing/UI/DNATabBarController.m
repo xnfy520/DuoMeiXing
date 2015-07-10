@@ -75,7 +75,15 @@
     childVc.tabBarItem.tag = tag;
     childVc.tabBarItem.image = [[UIImage imageNamed:imageName] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     childVc.tabBarItem.selectedImage = [[UIImage imageNamed:selectedImageName] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    
+    [childVc.tabBarItem setTitleTextAttributes:
+     [NSDictionary dictionaryWithObjectsAndKeys:
+      [UIColor lightGrayColor], NSForegroundColorAttributeName,
+      [UIFont systemFontOfSize:12], NSFontAttributeName,
+      nil] forState:UIControlStateNormal];
+    
     // 添加到导航控制器
+
     DNANavigationViewController *childVcNav = [DNATabBarController setCtrl:childVc];
     [self addChildViewController:childVcNav];
     
@@ -88,7 +96,7 @@
     //    [childVcNav.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], NSForegroundColorAttributeName, [UIFont fontWithName:@"ArialMT" size:18], NSFontAttributeName, nil]];
     
     // 添加自定义item
-    [self.customTabBar addButtonWithItem:childVc.tabBarItem];
+//    [self.customTabBar addButtonWithItem:childVc.tabBarItem];
 }
 
 - (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController

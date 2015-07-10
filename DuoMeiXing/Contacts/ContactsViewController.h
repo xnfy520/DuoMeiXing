@@ -11,4 +11,7 @@
 
 @interface ContactsViewController : DNABaseViewController
 
+@property(nonatomic, assign)BOOL notHeader;
+@property(nonatomic, assign)BOOL notSearchBar;
+
 @end

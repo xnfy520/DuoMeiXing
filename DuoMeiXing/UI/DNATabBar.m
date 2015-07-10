@@ -36,6 +36,7 @@
 
 - (void)addButtonWithItem:(UITabBarItem *)item
 {
+    NSLog(@"hello");
     // 创建按钮
     DNATabBarButton *button = [[DNATabBarButton alloc]init];
     [self addSubview:button];
@@ -73,7 +74,6 @@
     CGFloat buttonH = h;
     CGFloat buttonW = w / self.subviews.count;
     CGFloat buttonY = 0;
-    
     for (int index = 0; index<self.arrButton.count; index++) {
         // 1.取出按钮
         DNATabBarButton *button = self.arrButton[index];

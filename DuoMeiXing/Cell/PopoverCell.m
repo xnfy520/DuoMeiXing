@@ -16,7 +16,6 @@
 
     CGRect imageViewFrame = self.imageView.frame;
     imageViewFrame.origin.x = 10;
-//    imageViewFrame.origin.y = 7;
     self.imageView.frame = imageViewFrame;
     
     

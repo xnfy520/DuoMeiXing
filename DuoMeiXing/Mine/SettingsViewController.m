@@ -28,12 +28,14 @@
     mainOptionData = @[
                        @[
                            @{
-                               @"title":@"关于哆每星"
+                               @"title":@"关于哆每星",
+                               @"ctrl":@"about"
                                }
                            ],
                        @[
                            @{
-                               @"title":@"退出"
+                               @"title":@"退出登录",
+                               @"ctrl":@"exit"
                                }
                            ]
                        ];
@@ -91,8 +93,15 @@
     }
     
     cell.textLabel.text = [[[mainOptionData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] objectForKey:@"title"];
-    
+
     cell.textLabel.font = [UIFont systemFontOfSize:15];
+    
+    NSString *ctrl = [[[mainOptionData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] objectForKey:@"ctrl"];
+    
+    if ([ctrl isEqualToString:@"exit"]) {
+        cell.textLabel.textAlignment = NSTextAlignmentCenter;
+        cell.textLabel.font = [UIFont systemFontOfSize:16];
+    }
     
     return cell;
 

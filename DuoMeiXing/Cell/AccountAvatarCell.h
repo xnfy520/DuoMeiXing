@@ -1,5 +1,5 @@
 //
-//  MineTableViewCell.h
+//  AccountAvatarCell.h
 //  DuoMeiXing
 //
 //  Created by 天陨 on 15/7/6.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MineTableViewCell : UITableViewCell
+@interface AccountAvatarCell : UITableViewCell
 
 @property(nonatomic, retain) UIImageView *avatarImageView;
 @property(nonatomic, retain) UILabel *avatarTitleLabel;

@@ -103,8 +103,9 @@
         cell.detailTextLabel.font = [UIFont systemFontOfSize:14];
         
     }else if([ctrl isEqualToString:@"avatar"]){
-    
-        cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"limbo"]];
+        UIImageView * avatarImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+        avatarImageView.image = [UIImage imageNamed:@"avatar"];
+        cell.accessoryView = avatarImageView;
         
     }
     
