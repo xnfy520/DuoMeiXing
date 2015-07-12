@@ -38,6 +38,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    [self setupRightButton];
+    
     [self setupMainTableView];
     
     keys = [[NSMutableArray alloc] init];

@@ -27,6 +27,8 @@
     
     [super viewDidLoad];
     
+    [self setupRightButton];
+    
     mainOptionData = @[
                        @[
                            @{
@@ -117,7 +119,9 @@
         
         cell.avatarPhoneLabel.text = @"15820448273";
         
-        cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"limbo"]];
+//        cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"limbo"]];
+        
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         
         return cell;
         
@@ -140,6 +144,8 @@
         cell.textLabel.text = title;
         
         cell.textLabel.font = [UIFont systemFontOfSize:15];
+        
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         
         return cell;
         

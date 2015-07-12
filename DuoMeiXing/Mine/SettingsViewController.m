@@ -30,6 +30,10 @@
                            @{
                                @"title":@"关于哆每星",
                                @"ctrl":@"about"
+                               },
+                           @{
+                               @"title":@"检查更新",
+                               @"ctrl":@"update"
                                }
                            ],
                        @[
@@ -96,11 +100,14 @@
 
     cell.textLabel.font = [UIFont systemFontOfSize:15];
     
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    
     NSString *ctrl = [[[mainOptionData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] objectForKey:@"ctrl"];
     
     if ([ctrl isEqualToString:@"exit"]) {
         cell.textLabel.textAlignment = NSTextAlignmentCenter;
         cell.textLabel.font = [UIFont systemFontOfSize:16];
+        cell.accessoryType = UITableViewCellAccessoryNone;
     }
     
     return cell;

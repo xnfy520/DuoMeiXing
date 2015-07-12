@@ -28,18 +28,18 @@
                        @{
                            @"title":@"上传视频",
                            @"icon":@"plus_video",
-                           @"ctrl":@"1"
+                           @"ctrl":@"video"
                        },
                        @{
                            @"title":@"扫一扫",
                            @"icon":@"plus_scan",
-                           @"ctrl":@"2"
+                           @"ctrl":@"scan"
                            },
                        @
                        {
                            @"title":@"添加朋友",
                            @"icon":@"plus_friend",
-                           @"ctrl":@"3"
+                           @"ctrl":@"friend"
                            }
                        ];
     
@@ -112,26 +112,11 @@
     return cell;
 }
 
-- (UIImage *)imageToSize:(CGSize) size withImg:(UIImage *)img
-{
-    
-    UIGraphicsBeginImageContext(size);
-    
-    [img drawInRect:CGRectMake(0, 0, size.width, size.height)];
-    
-    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
-    
-    UIGraphicsEndImageContext();
-    
-    return newImage;
-    
-}
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [mainTableView deselectRowAtIndexPath:indexPath animated:NO];
     
-    [self.delegate getPopoverClickType:[[mainOptionData objectAtIndex:indexPath.row] objectForKey:@"title"]];
+    [self.delegate getPopoverClickType:[[mainOptionData objectAtIndex:indexPath.row] objectForKey:@"ctrl"]];
 }
 
 @end

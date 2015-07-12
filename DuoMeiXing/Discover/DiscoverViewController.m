@@ -24,6 +24,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self setupRightButton];
+    
     mainTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight) style:UITableViewStyleGrouped];
     mainTableView.delegate = self;
     mainTableView.dataSource = self;
@@ -118,6 +120,8 @@
     cell.textLabel.font = [UIFont systemFontOfSize:15];
     
     cell.imageView.image = [[UIImage imageNamed:icon] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
     return cell;
 }

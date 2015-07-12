@@ -100,7 +100,7 @@ SINGLETON_IMPLEMENTATION(WebViewController);
                                webView.request.URL.host, webView.request.URL.path];
     
     
-    NSLog(@"webViewDidStartLoad:%@",newUrlString);
+//    NSLog(@"webViewDidStartLoad:%@",newUrlString);
     
     [self showHUB];
 }

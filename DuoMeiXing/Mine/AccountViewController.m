@@ -24,7 +24,7 @@
     
     [super viewDidLoad];
     
-    self.title = @"帐户";
+    self.title = @"个人信息";
     
     mainOptionData = @[
                        @[
@@ -102,14 +102,18 @@
         cell.detailTextLabel.text = @"天陨";
         cell.detailTextLabel.font = [UIFont systemFontOfSize:14];
         
+        
     }else if([ctrl isEqualToString:@"avatar"]){
-        UIImageView * avatarImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+        UIImageView * avatarImageView = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetWidth(cell.contentView.frame)-35-30, (CGRectGetHeight(cell.contentView.frame)-30)/2, 30, 30)];
         avatarImageView.image = [UIImage imageNamed:@"avatar"];
-        cell.accessoryView = avatarImageView;
+//        cell.accessoryView = avatarImageView;
+        [cell.contentView addSubview:avatarImageView];
         
     }
     
     cell.textLabel.font = [UIFont systemFontOfSize:15];
+    
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
     return cell;
     

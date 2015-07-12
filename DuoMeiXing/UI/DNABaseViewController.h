@@ -11,6 +11,7 @@
 
 @interface DNABaseViewController : UIViewController
 
+
 // showHUB/hideHUB 要配对使用 如果调用 show必须要 hide 才能消除
 -(void)showHUB;
 -(void)showHUBWithText:(NSString*)text;

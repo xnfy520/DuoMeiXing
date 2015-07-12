@@ -9,15 +9,17 @@
 #import "DNABaseViewController.h"
 #import "DNADef.h"
 #import "WYPopoverController.h"
-#import "MineViewController.h"
 #import "PopoverViewController.h"
+#import "QRCodeReaderViewController.h"
+#import "WebViewController.h"
 
-@interface DNABaseViewController ()<WYPopoverControllerDelegate, popoverClickDelegate>
+@interface DNABaseViewController ()<WYPopoverControllerDelegate, popoverClickDelegate, QRCodeReaderDelegate>
 {
     MBProgressHUD* HUD;
     int staticHUBCounter;
     UIBarButtonItem *rightButton;
     WYPopoverController* popoverController;
+    
 }
 @end
 
@@ -36,7 +38,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    [self setupRightButton];
+    
+    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] init];
+    backItem.title = @"返回";
+    self.navigationItem.backBarButtonItem = backItem;
+    
+//    [self setupRightButton];
 
     WYPopoverTheme *theme = [WYPopoverTheme themeForIOS8];
     [WYPopoverController setDefaultTheme:theme];
@@ -73,15 +80,27 @@
 
 - (void)getPopoverClickType:(NSString *)type
 {
-    [self showTips:[NSString stringWithFormat:@"选择了:%@", type]];
     [popoverController dismissPopoverAnimated:NO];
-}
-
-- (void)animView:(UIView *)view withHidden:(BOOL)isShow
-{
-    [UIView animateWithDuration:0.3 animations:^{
-        view.alpha = isShow ? 0 : 0.9;
-    }];
+    [self showTips:[NSString stringWithFormat:@"选择了:%@", type]];
+    
+    if ([type isEqualToString:@"scan"]) {
+        QRCodeReaderViewController *reader = [[QRCodeReaderViewController alloc] init];
+        reader.title = @"扫一扫";
+//        reader.modalPresentationStyle = UIModalPresentationFormSheet;
+        reader.delegate = self;
+        
+//        __weak typeof (self) wSelf = self;
+//        [reader setCompletionWithBlock:^(NSString *resultAsString) {
+//            NSLog(@"setCompletionWithBlock %@", resultAsString);
+//            [wSelf.navigationController popViewControllerAnimated:YES];
+//            [[[UIAlertView alloc] initWithTitle:@"" message:resultAsString delegate:self cancelButtonTitle:@"好的" otherButtonTitles: nil] show];
+//        }];
+        
+//        [self presentViewController:reader animated:YES completion:NULL];
+        [self.navigationController pushViewController:reader animated:YES];
+    }
+    
+    
 }
 
 -(void)showHUB
@@ -158,10 +177,29 @@
     popoverController = nil;
 }
 
-- (void)popoverController:(WYPopoverController *)popoverController willTranslatePopoverWithYOffset:(float *)value
+//- (void)popoverController:(WYPopoverController *)popoverController willTranslatePopoverWithYOffset:(float *)value
+//{
+//    NSLog(@"hel");
+//    *value = 0;
+//}
+
+#pragma mark - QRCodeReader Delegate Methods
+
+- (void)reader:(QRCodeReaderViewController *)reader didScanResult:(NSString *)result
 {
-    NSLog(@"hel");
-    *value = 0;
+    NSLog(@"didScanResult");
+    NSLog(@"result:%@", result);
+    [WebViewController showWebPageInViewCtrl:self withUrl:result withPostData:nil];
+//    [self dismissViewControllerAnimated:YES completion:^{
+//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"QRCodeReader" message:result delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+//        [alert show];
+//    }];
+}
+
+- (void)readerDidCancel:(QRCodeReaderViewController *)reader
+{
+    NSLog(@"readerDidCancel");
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 @end
