@@ -21,6 +21,12 @@ typedef enum : NSUInteger{
 
 #define appName @"哆每星"
 
+#define statusBarHeight [[UIApplication sharedApplication] statusBarFrame].size.height
+
+#define navigationBarHeight self.navigationController.navigationBar.frame.size.height
+
+#define statusBarWithNavigationBarHeight (statusBarHeight + navigationBarHeight)
+
 #define listCellHeight 50.0f
 
 #define popoverSize CGSizeMake(120, 119)

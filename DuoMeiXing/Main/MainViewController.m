@@ -9,7 +9,7 @@
 #import "MainViewController.h"
 #import "DNADef.h"
 #import "ListCell.h"
-//#import "WYPopoverController.h"
+#import "DisplayViewController.h"
 
 @interface MainViewController ()<UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
@@ -109,6 +109,11 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [mainTableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    DisplayViewController *displayCtrl = [[DisplayViewController alloc] init];
+    
+    [self.navigationController pushViewController:displayCtrl animated:YES];
+    
 }
 
 @end

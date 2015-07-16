@@ -135,6 +135,8 @@
 		72ABD1DD1B3081A80099CB74 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72ABD1DB1B3081A80099CB74 /* MainViewController.m */; };
 		72ABD1E21B3081CD0099CB74 /* DiscoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72ABD1E01B3081CD0099CB74 /* DiscoverViewController.m */; };
 		72ABD1E71B3081DD0099CB74 /* ContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72ABD1E51B3081DD0099CB74 /* ContactsViewController.m */; };
+		72C5F5B31B580B4A0030AA5B /* DisplayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72C5F5B21B580B4A0030AA5B /* DisplayViewController.m */; };
+		72C5F5B91B5822590030AA5B /* PannelTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 72C5F5B81B5822590030AA5B /* PannelTableView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -371,6 +373,10 @@
 		72ABD1E01B3081CD0099CB74 /* DiscoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoverViewController.m; sourceTree = "<group>"; };
 		72ABD1E41B3081DD0099CB74 /* ContactsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsViewController.h; sourceTree = "<group>"; };
 		72ABD1E51B3081DD0099CB74 /* ContactsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsViewController.m; sourceTree = "<group>"; };
+		72C5F5B11B580B4A0030AA5B /* DisplayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DisplayViewController.h; sourceTree = "<group>"; };
+		72C5F5B21B580B4A0030AA5B /* DisplayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DisplayViewController.m; sourceTree = "<group>"; };
+		72C5F5B71B5822590030AA5B /* PannelTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PannelTableView.h; sourceTree = "<group>"; };
+		72C5F5B81B5822590030AA5B /* PannelTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PannelTableView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -714,6 +720,8 @@
 				7240449F1B4AD964008AD6BA /* WebViewController.m */,
 				39CF7E751B4BAE8B00EF8C2D /* PopoverViewController.h */,
 				39CF7E761B4BAE8B00EF8C2D /* PopoverViewController.m */,
+				72C5F5B71B5822590030AA5B /* PannelTableView.h */,
+				72C5F5B81B5822590030AA5B /* PannelTableView.m */,
 			);
 			path = Module;
 			sourceTree = "<group>";
@@ -902,6 +910,8 @@
 			children = (
 				72ABD1DA1B3081A80099CB74 /* MainViewController.h */,
 				72ABD1DB1B3081A80099CB74 /* MainViewController.m */,
+				72C5F5B11B580B4A0030AA5B /* DisplayViewController.h */,
+				72C5F5B21B580B4A0030AA5B /* DisplayViewController.m */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -1104,6 +1114,7 @@
 				722C53071B492F49004CBADA /* XLFormDescriptor.m in Sources */,
 				722C52ED1B492F49004CBADA /* MJRefreshGifHeader.m in Sources */,
 				72ABD1AE1B3065310099CB74 /* main.m in Sources */,
+				72C5F5B91B5822590030AA5B /* PannelTableView.m in Sources */,
 				729386531B3311F0006F3FED /* DNATabBarController.m in Sources */,
 				7293865F1B33149D006F3FED /* DisplayUtil.m in Sources */,
 				729386501B3311F0006F3FED /* DNANavigationViewController.m in Sources */,
@@ -1120,6 +1131,7 @@
 				3944CD401B4E6078008B1AF1 /* Person.m in Sources */,
 				722C530C1B492F49004CBADA /* NSObject+XLFormAdditions.m in Sources */,
 				722C52F71B492F49004CBADA /* XLFormCheckCell.m in Sources */,
+				72C5F5B31B580B4A0030AA5B /* DisplayViewController.m in Sources */,
 				722C53031B492F49004CBADA /* XLFormTextViewCell.m in Sources */,
 				724044A81B4AEBFB008AD6BA /* WYStoryboardPopoverSegue.m in Sources */,
 				722C52F61B492F49004CBADA /* XLFormButtonCell.m in Sources */,
