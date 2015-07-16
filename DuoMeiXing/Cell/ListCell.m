@@ -7,6 +7,12 @@
 //
 
 #import "ListCell.h"
+#import "DisplayUtil.h"
+
+#define TitleFontSize 14
+#define DetailFontSize 12
+#define DateFontSize 11
+#define BadgeFontSize 8
 
 @implementation ListCell
 
@@ -25,61 +31,66 @@
 
 - (void)setupAvatarImageView
 {
-    _avatarImageView = [[UIImageView alloc] init];
-    [self.contentView addSubview:_avatarImageView];
+    _cellImageView = [[UIImageView alloc] init];
+    [self.contentView addSubview:_cellImageView];
 }
 
 - (void)setupAvatarBadgeLabel
 {
-    _avatarBadgeLabel = [[UILabel alloc] init];
-    _avatarBadgeLabel.backgroundColor = [UIColor redColor];
-    _avatarBadgeLabel.layer.masksToBounds = YES;
-    _avatarBadgeLabel.layer.cornerRadius = 7;
-    _avatarBadgeLabel.textAlignment = NSTextAlignmentCenter;
-    _avatarBadgeLabel.font = [UIFont systemFontOfSize:8];
-    _avatarBadgeLabel.textColor = [UIColor whiteColor];
-    [_avatarImageView addSubview:_avatarBadgeLabel];
+    _cellBadgeLabel = [[UILabel alloc] init];
+    _cellBadgeLabel.backgroundColor = [UIColor redColor];
+    _cellBadgeLabel.layer.masksToBounds = YES;
+    _cellBadgeLabel.layer.cornerRadius = 7;
+    _cellBadgeLabel.textAlignment = NSTextAlignmentCenter;
+    _cellBadgeLabel.font = [UIFont systemFontOfSize:BadgeFontSize];
+    _cellBadgeLabel.textColor = [UIColor whiteColor];
+    [_cellImageView addSubview:_cellBadgeLabel];
 }
 
 - (void)setupAvatarDateLabel
 {
-    _avatarDateLabel = [[UILabel alloc] init];
-    _avatarDateLabel.font = [UIFont systemFontOfSize:11];
-    _avatarDateLabel.textColor = [UIColor lightGrayColor] ;
-    _avatarDateLabel.textAlignment = NSTextAlignmentRight;
-    [self.contentView addSubview:_avatarDateLabel];
+    _cellDateLabel = [[UILabel alloc] init];
+    _cellDateLabel.font = [UIFont systemFontOfSize:DateFontSize];
+    _cellDateLabel.textColor = [UIColor lightGrayColor] ;
+    _cellDateLabel.textAlignment = NSTextAlignmentRight;
+    [self.contentView addSubview:_cellDateLabel];
 }
 
 - (void)setupAvatarTitleLabel
 {
-    _avatarTitleLabel = [[UILabel alloc] init];
-    _avatarTitleLabel.font = [UIFont systemFontOfSize:14];
-    [self.contentView addSubview:_avatarTitleLabel];
+    _cellTitleLabel = [[UILabel alloc] init];
+    _cellTitleLabel.font = [UIFont systemFontOfSize:TitleFontSize];
+//    _avatarTitleLabel.backgroundColor = [UIColor yellowColor];
+    [self.contentView addSubview:_cellTitleLabel];
 }
 
 - (void)setupAvatarMessageLabel
 {
-    _avatarMessageLabel = [[UILabel alloc] init];
-    _avatarMessageLabel.font = [UIFont systemFontOfSize:12];
-    _avatarMessageLabel.textColor = [UIColor lightGrayColor];
-    [self.contentView addSubview:_avatarMessageLabel];
+    _cellDetailLabel = [[UILabel alloc] init];
+    _cellDetailLabel.font = [UIFont systemFontOfSize:DetailFontSize];
+    _cellDetailLabel.textColor = [UIColor lightGrayColor];
+//    _avatarMessageLabel.backgroundColor = [UIColor magentaColor];
+    [self.contentView addSubview:_cellDetailLabel];
 }
 
 - (void)layoutSubviews
 {
     [super layoutSubviews];
     
-    _avatarBadgeLabel.hidden = !_showBadge;
+    _cellBadgeLabel.hidden = !_showBadge;
     
-    _avatarImageView.frame = CGRectMake(5, (CGRectGetHeight(self.frame) - (CGRectGetHeight(self.frame) - 10)) / 2, self.imageWidth>0 ? self.imageWidth : CGRectGetHeight(self.frame)-10, CGRectGetHeight(self.frame) - 10);
+    CGFloat pointY = (CGRectGetHeight(self.frame) - (CGRectGetHeight(self.frame) - 10)) / 2;
     
-    _avatarBadgeLabel.frame = CGRectMake(CGRectGetWidth(_avatarImageView.frame)-11, -3, 14, 14);
+    _cellImageView.frame = CGRectMake(5, pointY, self.imageWidth>0 ? self.imageWidth : CGRectGetHeight(self.frame)-10, CGRectGetHeight(self.frame) - 10);
     
-    _avatarDateLabel.frame = CGRectMake(CGRectGetWidth(self.frame) - CGRectGetWidth(self.frame) / 3 - 5, 7, CGRectGetWidth(self.frame) / 3, 10);
+    _cellBadgeLabel.frame = CGRectMake(CGRectGetWidth(_cellImageView.frame)-11, -3, 14, 14);
+
+    _cellTitleLabel.frame = CGRectMake(CGRectGetWidth(_cellImageView.frame) + 10, CGRectGetHeight(self.frame)/2 - [DisplayUtil getSize:12 withString:_cellTitleLabel.text].height, (CGRectGetWidth(self.frame)-CGRectGetWidth(_cellImageView.frame)) / 2, TitleFontSize);
+
+    _cellDetailLabel.frame = CGRectMake(CGRectGetWidth(_cellImageView.frame) + 10, CGRectGetHeight(self.frame)/2 + 4, CGRectGetWidth(self.frame) - CGRectGetWidth(_cellImageView.frame) - 15, DetailFontSize);
     
-    _avatarTitleLabel.frame = CGRectMake(CGRectGetWidth(_avatarImageView.frame) + 10, CGRectGetMinX(_avatarImageView.frame) + CGRectGetHeight(_avatarBadgeLabel.frame) / 2, CGRectGetWidth(self.frame) / 2, 14);
+    _cellDateLabel.frame = CGRectMake(CGRectGetWidth(self.frame) - CGRectGetWidth(self.frame) / 3 - 5, CGRectGetMinY(_cellTitleLabel.frame), CGRectGetWidth(self.frame) / 3, DateFontSize);
     
-    _avatarMessageLabel.frame = CGRectMake(CGRectGetWidth(_avatarImageView.frame) + 10, CGRectGetMaxY(_avatarImageView.frame) - 13, CGRectGetWidth(self.frame) - CGRectGetWidth(_avatarImageView.frame) + 10, 12);
 }
 
 @end

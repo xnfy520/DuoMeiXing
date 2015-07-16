@@ -113,11 +113,11 @@
             
         }
         
-        cell.avatarImageView.image = [UIImage imageNamed:@"avatar"];
+        cell.cellImageView.image = [UIImage imageNamed:@"avatar"];
         
-        cell.avatarTitleLabel.text = @"天陨";
+        cell.cellTitleLabel.text = @"天陨";
         
-        cell.avatarPhoneLabel.text = @"15820448273";
+        cell.cellPhoneLabel.text = @"15820448273";
         
 //        cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"limbo"]];
         
@@ -184,13 +184,9 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    
-    if (section == 0) {
-        return 0.001;
-    }else{
-        return 15;
-    }
-    
+
+    return 15;
+ 
 }
 
 @end

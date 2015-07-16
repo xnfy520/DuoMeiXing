@@ -10,11 +10,11 @@
 
 @interface ListCell : UITableViewCell
 
-@property(nonatomic, retain) UIImageView *avatarImageView;
-@property(nonatomic, retain) UILabel *avatarBadgeLabel;
-@property(nonatomic, retain) UILabel *avatarDateLabel;
-@property(nonatomic, retain) UILabel *avatarTitleLabel;
-@property(nonatomic, retain) UILabel *avatarMessageLabel;
+@property(nonatomic, retain) UIImageView *cellImageView;
+@property(nonatomic, retain) UILabel *cellBadgeLabel;
+@property(nonatomic, retain) UILabel *cellDateLabel;
+@property(nonatomic, retain) UILabel *cellTitleLabel;
+@property(nonatomic, retain) UILabel *cellDetailLabel;
 @property(nonatomic, assign) BOOL showBadge;
 @property(nonatomic, assign) CGFloat imageWidth;
 

@@ -12,6 +12,8 @@
 
 @interface DisplayUtil : NSObject
 
++ (CGSize)getSize:(CGFloat)fontSize withString:(NSString *)fontText;
+
 + (UIColor *) hexStringToColor: (NSString *) stringToConvert;
 
 @end

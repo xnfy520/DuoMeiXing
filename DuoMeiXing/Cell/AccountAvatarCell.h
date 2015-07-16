@@ -10,8 +10,8 @@
 
 @interface AccountAvatarCell : UITableViewCell
 
-@property(nonatomic, retain) UIImageView *avatarImageView;
-@property(nonatomic, retain) UILabel *avatarTitleLabel;
-@property(nonatomic, retain) UILabel *avatarPhoneLabel;
+@property(nonatomic, retain) UIImageView *cellImageView;
+@property(nonatomic, retain) UILabel *cellTitleLabel;
+@property(nonatomic, retain) UILabel *cellPhoneLabel;
 
 @end

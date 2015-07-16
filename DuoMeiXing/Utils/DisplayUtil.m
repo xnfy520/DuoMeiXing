@@ -11,6 +11,13 @@
 
 @implementation DisplayUtil
 
++ (CGSize)getSize:(CGFloat)fontSize withString:(NSString *)fontText
+{
+    NSDictionary *attributes = @{NSFontAttributeName: [UIFont systemFontOfSize:fontSize]};
+    CGSize textSize = [fontText sizeWithAttributes:attributes];
+    return textSize;
+}
+
 + (UIColor *) hexStringToColor: (NSString *) stringToConvert
 {
     NSString *cString = [[stringToConvert stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] uppercaseString];

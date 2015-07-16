@@ -90,15 +90,15 @@
     
     cell.imageWidth = 50;
     
-    cell.avatarImageView.image = [UIImage imageNamed:@"limbo"];
+    cell.cellImageView.image = [UIImage imageNamed:@"xianjian"];
     
-    cell.avatarBadgeLabel.text = @"2";
+    cell.cellBadgeLabel.text = @"2";
     
-    cell.avatarDateLabel.text = @"6月16日";
+    cell.cellDateLabel.text = @"6月16日";
     
-    cell.avatarTitleLabel.text = @"天陨";
+    cell.cellTitleLabel.text = @"天陨";
     
-    cell.avatarMessageLabel.text = @"雪念飞叶";
+    cell.cellDetailLabel.text = @"雪念飞叶";
     
     cell.showBadge = NO;
     
