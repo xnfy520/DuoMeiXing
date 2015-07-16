@@ -84,20 +84,26 @@
     [self showTips:[NSString stringWithFormat:@"选择了:%@", type]];
     
     if ([type isEqualToString:@"scan"]) {
-        QRCodeReaderViewController *reader = [[QRCodeReaderViewController alloc] init];
+
+        QRCodeReaderViewController *reader = [QRCodeReaderViewController new];
         reader.title = @"扫一扫";
-//        reader.modalPresentationStyle = UIModalPresentationFormSheet;
+        reader.modalPresentationStyle = UIModalPresentationFormSheet;
         reader.delegate = self;
         
 //        __weak typeof (self) wSelf = self;
 //        [reader setCompletionWithBlock:^(NSString *resultAsString) {
-//            NSLog(@"setCompletionWithBlock %@", resultAsString);
 //            [wSelf.navigationController popViewControllerAnimated:YES];
 //            [[[UIAlertView alloc] initWithTitle:@"" message:resultAsString delegate:self cancelButtonTitle:@"好的" otherButtonTitles: nil] show];
 //        }];
         
-//        [self presentViewController:reader animated:YES completion:NULL];
+        //[self presentViewController:reader animated:YES completion:NULL];
         [self.navigationController pushViewController:reader animated:YES];
+        
+    }else if([type isEqualToString:@"video"]){
+        
+       
+        
+        
     }
     
     
@@ -187,8 +193,7 @@
 
 - (void)reader:(QRCodeReaderViewController *)reader didScanResult:(NSString *)result
 {
-    NSLog(@"didScanResult");
-    NSLog(@"result:%@", result);
+    
     [WebViewController showWebPageInViewCtrl:self withUrl:result withPostData:nil];
 //    [self dismissViewControllerAnimated:YES completion:^{
 //        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"QRCodeReader" message:result delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
@@ -198,7 +203,6 @@
 
 - (void)readerDidCancel:(QRCodeReaderViewController *)reader
 {
-    NSLog(@"readerDidCancel");
     [self.navigationController popViewControllerAnimated:YES];
 }
 

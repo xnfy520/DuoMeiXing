@@ -91,7 +91,7 @@
 {
     [super viewDidLoad];
     
-     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"相册" style:UIBarButtonItemStylePlain target:self action:@selector(clickRightBarButton:)];
+//     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"相册" style:UIBarButtonItemStylePlain target:self action:@selector(clickRightBarButton:)];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -416,11 +416,10 @@
 -(void)clickRightBarButton:(UIBarButtonItem*)item
 {
     self.detector = [CIDetector detectorOfType:CIDetectorTypeQRCode context:nil options:@{ CIDetectorAccuracy : CIDetectorAccuracyHigh }];
-        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-        picker.delegate = self;
-        picker.allowsEditing = NO;
-        picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-   
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    picker.delegate = self;
+    picker.allowsEditing = NO;
+    picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     [self.navigationController presentViewController:picker animated:YES completion:nil];
 }
 

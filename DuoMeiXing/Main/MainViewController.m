@@ -9,69 +9,40 @@
 #import "MainViewController.h"
 #import "DNADef.h"
 #import "ListCell.h"
-#import "WYPopoverController.h"
+//#import "WYPopoverController.h"
 
-@interface MainViewController ()<UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface MainViewController ()<UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
 @end
 
 @implementation MainViewController
+
 {
     UITableView *mainTableView;
     
 }
 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     [self setupRightButton];
-    //    [self setupMainTableView];
+    [self setupMainTableView];
     
-    UIButton *bu = [UIButton buttonWithType:UIButtonTypeCustom];
-    [bu setTitle:@"open" forState:UIControlStateNormal];
-    [bu setBackgroundColor:[UIColor redColor]];
-    bu.frame = CGRectMake(100, 100, 100, 30);
-    [bu addTarget:self action:@selector(opens) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:bu];
-
-
+    
+//    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+//    [button setTitle:@"open" forState:UIControlStateNormal];
+//    button.frame = CGRectMake((screenWidth-100)/2, 150, 100, 50);
+//    [button setBackgroundColor:[UIColor redColor]];
+//    [button addTarget:self action:@selector(openClick) forControlEvents:UIControlEventTouchUpInside];
+//    [self.view addSubview:button];
+    
 }
 
-- (void)opens
+- (void)openClick
 {
-    NSLog(@"opens");
+    NSLog(@"hello?");
     
-    
-    BOOL isCameraSupport = [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera];
-    
-    NSLog(@"isCameraSupport:%d", isCameraSupport);
-    
-    BOOL isPhotoLibrarySupport = [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary];
-    
-    NSLog(@"isPhotoLibrarySupport:%d", isPhotoLibrarySupport);
-    
-    BOOL isSavedPhotosAlbum = [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeSavedPhotosAlbum];
-    
-    NSLog(@"isSavedPhotosAlbum:%d", isSavedPhotosAlbum);
-    
-    //创建图像选取控制器
-    UIImagePickerController* imagePickerController = [[UIImagePickerController alloc] init];
-    //设置图像选取控制器的来源模式为相机模式
-    imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
-    //设置图像选取控制器的类型为静态图像
-    //允许用户进行编辑
-    imagePickerController.allowsEditing = YES;
-    //设置委托对象
-    imagePickerController.delegate = self;
-    //以模视图控制器的形式显示
-    [self presentViewController:imagePickerController animated:YES completion:nil];
-    [self.navigationController presentViewController:imagePickerController animated:YES completion:^{
-    
-    }];
-}
-
-- ( void )imagePickerController:( UIImagePickerController *)picker didFinishPickingMediaWithInfo:( NSDictionary *)info
-{
     
 }
 
