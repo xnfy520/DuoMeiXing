@@ -7,7 +7,7 @@
 //
 
 #import "ListCell.h"
-#import "DisplayUtil.h"
+#import "DNADef.h"
 
 #define TitleFontSize 14
 #define DetailFontSize 12

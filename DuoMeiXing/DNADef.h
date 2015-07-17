@@ -11,6 +11,8 @@
 
 #import "DisplayUtil.h"
 
+#import "UIView+FrameMethods.h"
+
 typedef enum : NSUInteger{
     kPhotographAlbumTypeDefault,
     kPhotographAlbumTypeNewest,

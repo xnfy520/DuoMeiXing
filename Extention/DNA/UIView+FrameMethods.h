@@ -42,4 +42,6 @@
 - (void)setCornerRadius:(CGFloat)radius borderColor:(UIColor *)borderColor;
 
 - (CGRect)frameInWindow;
+
+
 @end

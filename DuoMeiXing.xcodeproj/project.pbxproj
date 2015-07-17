@@ -30,6 +30,7 @@
 		3944CD3D1B4E2601008B1AF1 /* home_disc_teaching_tgita@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3944CD3C1B4E2601008B1AF1 /* home_disc_teaching_tgita@2x.png */; };
 		3944CD401B4E6078008B1AF1 /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 3944CD3F1B4E6078008B1AF1 /* Person.m */; };
 		39CBE3E51B4EA2FC0084A8D7 /* home_friend_new@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39CBE3E41B4EA2FC0084A8D7 /* home_friend_new@2x.png */; };
+		39CEE7A11B590508001F9D5D /* tmbg.png in Resources */ = {isa = PBXBuildFile; fileRef = 39CEE7A01B590508001F9D5D /* tmbg.png */; };
 		39CF7E771B4BAE8B00EF8C2D /* PopoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39CF7E761B4BAE8B00EF8C2D /* PopoverViewController.m */; };
 		39CF7E7A1B4BCEF700EF8C2D /* PopoverCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 39CF7E791B4BCEF700EF8C2D /* PopoverCell.m */; };
 		39DBA4931B57C3E400633F2C /* xianjian.png in Resources */ = {isa = PBXBuildFile; fileRef = 39DBA4921B57C3E400633F2C /* xianjian.png */; };
@@ -174,6 +175,7 @@
 		3944CD3E1B4E6078008B1AF1 /* Person.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Person.h; sourceTree = "<group>"; };
 		3944CD3F1B4E6078008B1AF1 /* Person.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Person.m; sourceTree = "<group>"; };
 		39CBE3E41B4EA2FC0084A8D7 /* home_friend_new@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home_friend_new@2x.png"; sourceTree = "<group>"; };
+		39CEE7A01B590508001F9D5D /* tmbg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tmbg.png; sourceTree = "<group>"; };
 		39CF7E751B4BAE8B00EF8C2D /* PopoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopoverViewController.h; sourceTree = "<group>"; };
 		39CF7E761B4BAE8B00EF8C2D /* PopoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopoverViewController.m; sourceTree = "<group>"; };
 		39CF7E781B4BCEF700EF8C2D /* PopoverCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopoverCell.h; sourceTree = "<group>"; };
@@ -759,6 +761,7 @@
 		729386541B33122D006F3FED /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				39CEE7A01B590508001F9D5D /* tmbg.png */,
 				39DBA4921B57C3E400633F2C /* xianjian.png */,
 				39DE28821B50C2AC00B9558A /* ScanQR */,
 				3944CCE31B4E22D2008B1AF1 /* Tmp */,
@@ -1017,6 +1020,7 @@
 				3944CD271B4E25C5008B1AF1 /* home_disc_hot@2x.png in Resources */,
 				722C52F01B492F49004CBADA /* MJRefresh.bundle in Resources */,
 				3944CD351B4E25C5008B1AF1 /* home_me_settings@2x.png in Resources */,
+				39CEE7A11B590508001F9D5D /* tmbg.png in Resources */,
 				3944CD341B4E25C5008B1AF1 /* home_me_favor@2x.png in Resources */,
 				3944CD331B4E25C5008B1AF1 /* home_friend_teacher@2x.png in Resources */,
 				3944CD301B4E25C5008B1AF1 /* home_disc_teaching_violin@2x.png in Resources */,

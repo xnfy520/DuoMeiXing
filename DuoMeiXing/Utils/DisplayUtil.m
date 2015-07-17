@@ -7,6 +7,7 @@
 //
 
 #import "DisplayUtil.h"
+#import "UIView+FrameMethods.h"
 
 
 @implementation DisplayUtil
