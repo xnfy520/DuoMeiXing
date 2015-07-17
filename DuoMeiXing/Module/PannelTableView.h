@@ -14,4 +14,6 @@
 
 @property (nonatomic, copy) NSString *identifier;
 
+- (void)setTableScrollEnabled:(BOOL)enabled;
+
 @end

@@ -23,6 +23,7 @@
         [_tableView setDelegate:self];
         [_tableView setDataSource:self];
         [_tableView setScrollsToTop:NO];
+        
         [self setupInsetsTableView:_tableView];
     }
     return self;
@@ -36,6 +37,11 @@
     tableViewFrame.size.width = self.frame.size.width;
     tableViewFrame.size.height = self.frame.size.height;
     [self.tableView setFrame:tableViewFrame];
+}
+
+- (void)setTableScrollEnabled:(BOOL)enabled
+{
+    _tableView.scrollEnabled = enabled;
 }
 
 - (void)setupInsetsTableView :(UITableView *)tableView

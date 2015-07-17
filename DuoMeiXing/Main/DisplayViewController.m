@@ -10,8 +10,13 @@
 #import "DNADef.h"
 #import "PannelTableView.h"
 
-#define displayVideoHeight 150
+
+#define displayVideoHeight 200
 #define segmentedCtrlHeight 35
+
+#define maxContentHeight screenHeight-segmentedCtrlHeight-navigationBarHeight
+
+#define minContentHeight screenHeight-displayVideoHeight-segmentedCtrlHeight-navigationBarHeight
 
 @interface DisplayViewController ()<UIScrollViewDelegate>
 
@@ -21,13 +26,34 @@
 {
     UIView *videoView;
     UISegmentedControl *segmentedCtrl;
+    
+    UIScrollView *mainScrollView;
+    
     UIScrollView *contentScrollView;
     UIView *floatCommentView;
+    
+    PannelTableView *panel1;
+    
+    PannelTableView *panel2;
+    
+    PannelTableView *panel4;
 }
 
 -(void) viewDidLoad
 {
     [super viewDidLoad];
+
+    self.extendedLayoutIncludesOpaqueBars = NO;
+    
+    self.edgesForExtendedLayout = UIRectEdgeBottom | UIRectEdgeLeft | UIRectEdgeRight;
+    
+    self.navigationController.navigationBarHidden = YES;
+    
+//    self.navigationController.navigationBar.barStyle = UIBarStyleBlackOpaque;
+//    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"tmbg"] forBarMetrics:UIBarMetricsDefault];
+//    [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
+    
+    [self setupMainScrollView];
     
     [self setupVideoView];
     
@@ -38,11 +64,22 @@
     [self setupFloatCommentView];
 }
 
+
+-(void) setupMainScrollView
+{
+    mainScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight)];
+//    mainScrollView.backgroundColor = [UIColor blueColor];
+    mainScrollView.delegate = self;
+    mainScrollView.bounces = NO;
+    mainScrollView.contentSize = CGSizeMake(screenWidth, screenHeight+displayVideoHeight);
+    [self.view addSubview:mainScrollView];
+}
+
 -(void) setupVideoView
 {
     videoView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, displayVideoHeight)];
     videoView.backgroundColor = [UIColor darkGrayColor];
-    [self.view addSubview:videoView];
+    [mainScrollView addSubview:videoView];
 }
 
 -(void) setupSegmentedCtrl
@@ -66,7 +103,10 @@
     [segmentedCtrl addTarget:self action:@selector(segmentAction:) forControlEvents:UIControlEventValueChanged];
     
     [segmentedCtrl setFrame:CGRectMake(0, displayVideoHeight, screenWidth, segmentedCtrlHeight)];
-    [self.view addSubview:segmentedCtrl];
+    
+    [mainScrollView addSubview:segmentedCtrl];
+    
+    
 }
 
 - (void)segmentAction:(UISegmentedControl *)Seg
@@ -79,32 +119,67 @@
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
-    if ([scrollView isEqual:contentScrollView]) {
+    if ([scrollView isEqual:mainScrollView]) {
+        [self mainScrollViewOffset];
+    }else if ([scrollView isEqual:contentScrollView]) {
         NSInteger index = scrollView.contentOffset.x/scrollView.frame.size.width;
         segmentedCtrl.selectedSegmentIndex = index;
     }
 }
 
+- (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView
+{
+    if ([scrollView isEqual:mainScrollView]) {
+        [self mainScrollViewOffset];
+    }
+}
+
+-(void) scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset
+{
+    if ([scrollView isEqual:mainScrollView]) {
+        [self mainScrollViewOffset];
+    }
+}
+
+- (void)mainScrollViewOffset
+{
+    if (mainScrollView.contentOffset.y>displayVideoHeight/2) {
+        [mainScrollView setContentOffset:CGPointMake(0, CGRectGetMinY(segmentedCtrl.frame)) animated:YES];
+        [self setPanelWithHeight:maxContentHeight];
+    }else{
+        [mainScrollView setContentOffset:CGPointZero animated:YES];
+        [self setPanelWithHeight:minContentHeight];
+    }
+}
+
+- (void)setPanelWithHeight:(CGFloat)height
+{
+    [contentScrollView setHeight:height];
+    [contentScrollView setContentSize:CGSizeMake(contentScrollView.contentSize.width, height)];
+    [panel1 setHeight:height];
+    [panel2 setHeight:height];
+    [panel4 setHeight:height];
+}
+
 -(void) setupContentScrollView
 {
-    
-    contentScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, displayVideoHeight+segmentedCtrlHeight, screenWidth, screenHeight-displayVideoHeight-statusBarWithNavigationBarHeight-segmentedCtrlHeight-navigationBarHeight)];
+    //CGRectGetHeight(mainScrollView.frame)-segmentedCtrlHeight-navigationBarHeight
+    contentScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, displayVideoHeight+segmentedCtrlHeight, screenWidth, minContentHeight)];
     contentScrollView.contentSize = CGSizeMake(CGRectGetWidth(contentScrollView.frame)*4, CGRectGetHeight(contentScrollView.frame));
     contentScrollView.delegate = self;
-    contentScrollView.backgroundColor = [UIColor yellowColor];
     contentScrollView.pagingEnabled = YES;
     contentScrollView.showsHorizontalScrollIndicator = NO;
-    contentScrollView.bounces = NO;
-    [self.view addSubview:contentScrollView];
+//    contentScrollView.bounces = NO;
+    [mainScrollView addSubview:contentScrollView];
     
     
-    PannelTableView *panel1 = [[PannelTableView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, CGRectGetHeight(contentScrollView.frame))];
+    panel1 = [[PannelTableView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, CGRectGetHeight(contentScrollView.frame))];
     [contentScrollView addSubview:panel1];
     
-    PannelTableView *panel2 = [[PannelTableView alloc] initWithFrame:CGRectMake(screenWidth, 0, screenWidth, CGRectGetHeight(contentScrollView.frame))];
+    panel2 = [[PannelTableView alloc] initWithFrame:CGRectMake(screenWidth, 0, screenWidth, CGRectGetHeight(contentScrollView.frame))];
     [contentScrollView addSubview:panel2];
     
-    PannelTableView *panel4 = [[PannelTableView alloc] initWithFrame:CGRectMake(screenWidth*3, 0, screenWidth, CGRectGetHeight(contentScrollView.frame))];
+    panel4 = [[PannelTableView alloc] initWithFrame:CGRectMake(screenWidth*3, 0, screenWidth, CGRectGetHeight(contentScrollView.frame))];
     panel4.identifier = @"video";
     [contentScrollView addSubview:panel4];
 
@@ -112,7 +187,7 @@
 
 -(void) setupFloatCommentView
 {
-    floatCommentView = [[UIView alloc] initWithFrame:CGRectMake(0, screenHeight-statusBarWithNavigationBarHeight-navigationBarHeight, screenWidth, navigationBarHeight)];
+    floatCommentView = [[UIView alloc] initWithFrame:CGRectMake(0, screenHeight-navigationBarHeight, screenWidth, navigationBarHeight)];
     floatCommentView.backgroundColor = [UIColor cyanColor];
     
     [self.view addSubview:floatCommentView];
