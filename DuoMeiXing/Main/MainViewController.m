@@ -10,6 +10,8 @@
 #import "DNADef.h"
 #import "ListCell.h"
 #import "DisplayViewController.h"
+#import "DNATabBarController.h"
+#import "RegisterViewController.h"
 
 @interface MainViewController ()<UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
@@ -28,22 +30,7 @@
     
     [self setupRightButton];
     [self setupMainTableView];
-    
-    
-//    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-//    [button setTitle:@"open" forState:UIControlStateNormal];
-//    button.frame = CGRectMake((screenWidth-100)/2, 150, 100, 50);
-//    [button setBackgroundColor:[UIColor redColor]];
-//    [button addTarget:self action:@selector(openClick) forControlEvents:UIControlEventTouchUpInside];
-//    [self.view addSubview:button];
-    
-}
 
-- (void)openClick
-{
-    NSLog(@"hello?");
-    
-    
 }
 
 - (void)setupMainTableView

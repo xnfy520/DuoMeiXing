@@ -8,6 +8,8 @@
 
 #import "AppDelegate.h"
 #import "DNATabBarController.h"
+#import "DNADef.h"
+#import "LoginViewController.h"
 
 @interface AppDelegate ()
 
@@ -21,9 +23,9 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
-
-    self.window.rootViewController = [[DNATabBarController alloc] init];
     
+    self.window.rootViewController = [DNATabBarController setCtrl:[[LoginViewController alloc] init]];
+
     return YES;
 }
 

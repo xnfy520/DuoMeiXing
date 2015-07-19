@@ -19,9 +19,22 @@ typedef enum : NSUInteger{
     kPhotographAlbumTypeHot
 } PhotographAlbumType;
 
+#define addObs(a, b)\
+[[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(b:) name:a object:nil];
+
+#define removeObs(eventName)\
+[[NSNotificationCenter defaultCenter]removeObserver:self name:eventName object:nil];
+
+#define postEvent(eventName)\
+[[NSNotificationCenter defaultCenter] postNotificationName:eventName object:nil];
+
 #pragma mark - Global var
 
 #define appName @"哆每星"
+
+#define globalLoginView @"onLoginView"
+#define globalRegisterView @"onRegisterView"
+#define globalMainView @"onMainView"
 
 #define statusBarHeight [[UIApplication sharedApplication] statusBarFrame].size.height
 

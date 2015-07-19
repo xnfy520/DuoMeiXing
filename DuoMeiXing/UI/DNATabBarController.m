@@ -9,12 +9,31 @@
 #import "DNATabBarController.h"
 #import "DNANavigationViewController.h"
 #import "DNADef.h"
+#import "LoginViewController.h"
+#import "RegisterViewController.h"
 
 @interface DNATabBarController ()
 
 @end
 
 @implementation DNATabBarController
+
+- (id)init
+{
+    addObs(globalLoginView, onLoginView);
+    addObs(globalRegisterView, onRegisterView);
+    addObs(globalMainView, onMainView);
+    return [super init];
+}
+
+- (void)dealloc
+{
+    removeObs(globalLoginView);
+    removeObs(globalRegisterView);
+    removeObs(globalMainView);
+}
+
+
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
 {
@@ -121,5 +140,38 @@
     return childVcNav;
 }
 
+-(void)onLoginView:(NSNotification*) notification
+{
+    NSLog(@"onLoginView");
+    
+    [[NSUserDefaults standardUserDefaults] setObject:@"login" forKey:@"dismisstype"];
+    
+    [self dismissViewControllerAnimated:NO completion:^{
+    
+    }];
+}
+
+
+-(void)onRegisterView:(NSNotification*) notification
+{
+    NSLog(@"onRegisterView");
+    
+    [[NSUserDefaults standardUserDefaults] setObject:@"reg" forKey:@"dismisstype"];
+    
+    [self dismissViewControllerAnimated:NO completion:^{
+        
+    }];
+    
+}
+
+-(void)onMainView:(NSNotification*) notification
+{
+    NSLog(@"onMainView");
+    
+    [self presentViewController:[[DNATabBarController alloc] init] animated:NO completion:^{
+    
+    }];
+
+}
 
 @end

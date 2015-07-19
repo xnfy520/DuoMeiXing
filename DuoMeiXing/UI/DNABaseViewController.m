@@ -101,8 +101,11 @@
         
     }else if([type isEqualToString:@"video"]){
         
-       
+        postEvent(globalLoginView);
         
+    }else if ([type isEqualToString:@"friend"]){
+        
+        postEvent(globalRegisterView);
         
     }
     
