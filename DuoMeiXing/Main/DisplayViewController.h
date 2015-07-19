@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "DNABaseViewController.h"
 
-@interface DisplayViewController : DNABaseViewController
+@interface DisplayViewController : DNABaseViewController<UIScrollViewDelegate, UITextFieldDelegate>
+
+@property (nonatomic, assign) BOOL haveViedo;
 
 @end

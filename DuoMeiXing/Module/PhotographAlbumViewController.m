@@ -8,6 +8,7 @@
 
 #import "PhotographAlbumViewController.h"
 #import "DNADef.h"
+#import "DisplayViewController.h"
 #import "ListCell.h"
 
 @interface PhotographAlbumViewController ()<UITableViewDelegate, UITableViewDataSource>
@@ -110,6 +111,9 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [mainTableView deselectRowAtIndexPath:indexPath animated:YES];
+    DisplayViewController *displayCtrl = [[DisplayViewController alloc] init];
+    displayCtrl.haveViedo = YES;
+    [self.navigationController pushViewController:displayCtrl animated:YES];
 }
 
 

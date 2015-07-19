@@ -8,6 +8,7 @@
 
 #import "ContactsViewController.h"
 #import "DNADef.h"
+#import "DisplayViewController.h"
 #import "Person.h"
 
 @interface ContactsViewController ()<UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating, UISearchBarDelegate>
@@ -45,30 +46,6 @@
     keys = [[NSMutableArray alloc] init];
     
     values = [[NSMutableArray alloc] init];
-    
-//    NSArray *headerList = @[
-//                            @{
-//                                @"title":@"新朋友",
-//                                @"icon":@"home_friend_new",
-//                                @"ctrl":@"friend"
-//                                },
-//                            @{
-//                                @"title":@"老师",
-//                                @"icon":@"home_friend_teacher",
-//                                @"ctrl":@"friend"
-//                                }
-//                            ];
-//    
-//    if (self.notHeader && self.notSearchBar) {
-//        [keys addObjectsFromArray:@[@"A", @"B", @"C", @"D", @"E"]];
-//    }else if(!self.notHeader && self.notSearchBar){
-//        [keys addObjectsFromArray:@[@"", @"A", @"B", @"C", @"D", @"E"]];
-//    }else if(self.notHeader && !self.notSearchBar){
-//        [keys addObjectsFromArray:@[UITableViewIndexSearch, @"A", @"B", @"C", @"D", @"E"]];
-//    }else if(!self.notHeader && !self.notSearchBar){
-//        [keys addObjectsFromArray:@[UITableViewIndexSearch, @"", @"A", @"B", @"C", @"D", @"E"]];
-//    }
-    
     
     [keys addObjectsFromArray:@[@"", @"A", @"B", @"C", @"D", @"E"]];
     
@@ -177,7 +154,7 @@
 
 - (void)setupMainTableView
 {
-    mainTableView = [[UITableView alloc] initWithFrame:self.view.bounds];
+    mainTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight)];
     mainTableView.delegate = self;
     mainTableView.dataSource = self;
     mainTableView.tableFooterView = [[UIView alloc] init];
@@ -190,7 +167,7 @@
         mainTableView.sectionIndexColor = [UIColor grayColor];
     }
     
-    [self setupSearchController];
+//    [self setupSearchController];
 }
 - (void)setupSearchController
 {
@@ -340,12 +317,16 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [mainTableView deselectRowAtIndexPath:indexPath animated:YES];
+    DisplayViewController *displayCtrl = [[DisplayViewController alloc] init];
+    displayCtrl.haveViedo = NO;
+    [self.navigationController pushViewController:displayCtrl animated:YES];
 }
 
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar{
     NSLog(@"搜索Begin");
     return YES;
 }
+
 - (BOOL)searchBarShouldEndEditing:(UISearchBar *)searchBar{
     NSLog(@"搜索End");
     return YES;

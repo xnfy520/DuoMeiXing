@@ -111,7 +111,7 @@
     [mainTableView deselectRowAtIndexPath:indexPath animated:YES];
     
     DisplayViewController *displayCtrl = [[DisplayViewController alloc] init];
-    
+    displayCtrl.haveViedo = NO;
     [self.navigationController pushViewController:displayCtrl animated:YES];
     
 }
