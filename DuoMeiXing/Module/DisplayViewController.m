@@ -120,17 +120,22 @@
 -(void) setupVideoView
 {
 
-    NSString *file = [[NSBundle mainBundle] pathForResource:@"mov_bbb" ofType:@"mp4"];
+    NSString *file = [[NSBundle mainBundle] pathForResource:@"movie" ofType:@"mp4"];
     NSURL *url = [NSURL fileURLWithPath:file];
+    
     if (moviePlayer == nil) {
         moviePlayer = [[MPMoviePlayerController alloc] initWithContentURL:url];
     }else {
         [moviePlayer setContentURL:url];
     }
-
+   
     moviePlayer.scalingMode = MPMovieScalingModeAspectFill;
     
     moviePlayer.controlStyle = MPMovieControlStyleNone;
+    
+    moviePlayer.shouldAutoplay = NO;
+    
+    [moviePlayer prepareToPlay];
 
     [moviePlayer.view setFrame:CGRectMake(0, 0, screenWidth, displayVideoHeight)];
     
@@ -146,14 +151,20 @@
     videoImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, statusBarHeight/2, CGRectGetWidth(videoView.frame), displayVideoHeight-statusBarHeight)];
     videoImageView.hidden = _haveViedo;
     videoImageView.image = [UIImage imageNamed:@"video_bg"];
-    videoImageView.contentMode = UIViewContentModeScaleAspectFit;
+    videoImageView.contentMode = UIViewContentModeScaleAspectFill;
     [videoView addSubview:videoImageView];
     
-    if ([videoImageView isHidden]) {
-        [moviePlayer play];
-    }
+//    if ([videoImageView isHidden]) {
+//        [moviePlayer play];
+//    }
     
     
+}
+
+// 重写该方法，控制该视图控制器只支持横屏显示
+- (NSUInteger)supportedInterfaceOrientations
+{
+    return UIInterfaceOrientationMaskLandscape;
 }
 
 -(void) setupVideoStateBar
