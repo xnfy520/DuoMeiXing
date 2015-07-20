@@ -14,9 +14,9 @@
 #import "UIView+FrameMethods.h"
 
 typedef enum : NSUInteger{
-    kPhotographAlbumTypeDefault,
-    kPhotographAlbumTypeNewest,
-    kPhotographAlbumTypeHot
+    kPhotographAlbumTypeDefault,    //我的视频
+    kPhotographAlbumTypeNewest,     //最新视频
+    kPhotographAlbumTypeHot         //最热视频
 } PhotographAlbumType;
 
 #define addObs(a, b)\
@@ -29,6 +29,12 @@ typedef enum : NSUInteger{
 [[NSNotificationCenter defaultCenter] postNotificationName:eventName object:nil];
 
 #pragma mark - Global var
+
+//获取设备物理高度
+#define screenHeight [UIScreen mainScreen].bounds.size.height
+
+//获取设备物理宽度
+#define screenWidth [UIScreen mainScreen].bounds.size.width
 
 #define appName @"哆每星"
 
@@ -46,11 +52,13 @@ typedef enum : NSUInteger{
 
 #define popoverSize CGSizeMake(120, 119)
 
-//获取设备物理高度
-#define screenHeight [UIScreen mainScreen].bounds.size.height
+#define submitButtonWith (screenWidth-20)
 
-//获取设备物理宽度
-#define screenWidth [UIScreen mainScreen].bounds.size.width
+#define submitButtonPadding (screenWidth-submitButtonWith)/2
+
+#define formFieldWith (screenWidth-20)
+
+#define formFieldPadding (screenWidth-formFieldWith)/2
 
 //默认背景色
 #define defaultBackgroundColor [UIColor colorWithRed:0.94 green:0.94 blue:0.94 alpha:1]
@@ -60,11 +68,7 @@ typedef enum : NSUInteger{
 
 #define defaultTabBarTitleColor [DisplayUtil hexStringToColor:@"#1284FF"]
 
-//获取设备物理高度
-#define screenHeight [UIScreen mainScreen].bounds.size.height
 
-//获取设备物理宽度
-#define screenWidth [UIScreen mainScreen].bounds.size.width
 
 //ios系统版本
 #define ios8x [[[UIDevice currentDevice] systemVersion] floatValue] >=8.0f
@@ -76,6 +80,7 @@ typedef enum : NSUInteger{
 #define iphone4x_3_5 ([UIScreen mainScreen].bounds.size.height==480)
 
 #define iphone5x_4_0 ([UIScreen mainScreen].bounds.size.height==568)
+
 #define iphone5x_4_0_height 568
 
 #define iphone6_4_7 ([UIScreen mainScreen].bounds.size.height==667.0f)

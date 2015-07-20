@@ -8,8 +8,13 @@
 
 #import "RegisterViewController.h"
 #import "DNADef.h"
+#import "SubmitButton.h"
+#import "FormTextField.h"
 
 @implementation RegisterViewController
+{
+    UITextField *firstResponderField;
+}
 
 -(void) viewDidLoad
 {
@@ -17,32 +22,42 @@
     
     self.title = @"注册";
     
-    [self setNavigationBar];
+    [self setViewRectEdge];
+    
+    FormTextField *phoneField = [[FormTextField alloc] initWithFrame:CGRectMake(formFieldPadding, 20, formFieldWith, 40) withTitle:@"手机 +86" withPlaceholder:@"请输入手机号码" withLeftViewWidth:80];
+    phoneField.delegate = self;
+    [self.view addSubview:phoneField];
+    
+    SubmitButton *getCodeButton = [[SubmitButton alloc] initWithFrame:CGRectMake(submitButtonPadding, CGRectGetMaxY(phoneField.frame)+20, submitButtonWith, 40) withTitle:@"获取验证码" withTitleColor:[UIColor whiteColor] withBackgroundColor:defaultTabBarTitleColor];
+//    [getCodeButton addTarget:self action:@selector(openClick) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:getCodeButton];
+    
+    FormTextField *verificationField = [[FormTextField alloc] initWithFrame:CGRectMake(formFieldPadding, CGRectGetMaxY(getCodeButton.frame)+20, formFieldWith, 40) withTitle:@"验证码" withPlaceholder:@"请输验证码" withLeftViewWidth:80];
+    verificationField.delegate = self;
+    [self.view addSubview:verificationField];
+    
+    SubmitButton *regButton = [[SubmitButton alloc] initWithFrame:CGRectMake(submitButtonPadding, CGRectGetMaxY(verificationField.frame)+20, submitButtonWith, 40) withTitle:@"注册" withTitleColor:[UIColor whiteColor] withBackgroundColor:defaultTabBarTitleColor];
+//    [loginButton addTarget:self action:@selector(openClick) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:regButton];
+
 }
 
-- (void)setNavigationBar
+- (void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    
-//    UIBarButtonItem *cancelItem = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStylePlain target:self action:@selector(cancelAction)];
-//    self.navigationItem.leftBarButtonItem = cancelItem;
-    
-//    UIBarButtonItem *loginItem = [[UIBarButtonItem alloc] initWithTitle:@"登录" style:UIBarButtonItemStylePlain target:self action:@selector(loginView)];
-//    self.navigationItem.rightBarButtonItem = loginItem;
-    
+    firstResponderField = textField;
+    UILabel *leftButton = (UILabel *)textField.leftView;
+    leftButton.textColor = [UIColor blueColor];
 }
 
-//- (void)cancelAction
-//{
-//    [self.navigationController dismissViewControllerAnimated:NO completion:^{
-//        
-//    }];
-//}
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    UILabel *leftButton = (UILabel *)textField.leftView;
+    leftButton.textColor = [UIColor blackColor];
+}
 
-//- (void)loginView
-//{
-//    [self.navigationController dismissViewControllerAnimated:NO completion:^{
-//        postEvent(globalLoginView);
-//    }];
-//}
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [firstResponderField resignFirstResponder];
+}
 
 @end

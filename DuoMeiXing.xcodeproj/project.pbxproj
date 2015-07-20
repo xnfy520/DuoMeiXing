@@ -141,6 +141,8 @@
 		72D0CEC61B5BFAA40094CB3C /* DisplayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72D0CEC51B5BFAA40094CB3C /* DisplayViewController.m */; };
 		72D0CEC91B5BFB3C0094CB3C /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72D0CEC81B5BFB3C0094CB3C /* LoginViewController.m */; };
 		72D0CECC1B5BFB590094CB3C /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72D0CECB1B5BFB590094CB3C /* RegisterViewController.m */; };
+		72D8F7EE1B5D57C2001F1260 /* SubmitButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 72D8F7ED1B5D57C2001F1260 /* SubmitButton.m */; };
+		72D8F7F11B5D6D6A001F1260 /* FormTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 72D8F7F01B5D6D6A001F1260 /* FormTextField.m */; };
 		72E8B5721B5B6614000F7AF9 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72E8B5711B5B6614000F7AF9 /* MediaPlayer.framework */; };
 		72E8B5761B5B7B40000F7AF9 /* video_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 72E8B5751B5B7B40000F7AF9 /* video_bg.png */; };
 		72E8B5791B5B7E87000F7AF9 /* icon_play.png in Resources */ = {isa = PBXBuildFile; fileRef = 72E8B5771B5B7E87000F7AF9 /* icon_play.png */; };
@@ -391,6 +393,10 @@
 		72D0CEC81B5BFB3C0094CB3C /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		72D0CECA1B5BFB590094CB3C /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
 		72D0CECB1B5BFB590094CB3C /* RegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
+		72D8F7EC1B5D57C2001F1260 /* SubmitButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubmitButton.h; sourceTree = "<group>"; };
+		72D8F7ED1B5D57C2001F1260 /* SubmitButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubmitButton.m; sourceTree = "<group>"; };
+		72D8F7EF1B5D6D6A001F1260 /* FormTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FormTextField.h; sourceTree = "<group>"; };
+		72D8F7F01B5D6D6A001F1260 /* FormTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FormTextField.m; sourceTree = "<group>"; };
 		72E8B5711B5B6614000F7AF9 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		72E8B5751B5B7B40000F7AF9 /* video_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = video_bg.png; sourceTree = "<group>"; };
 		72E8B5771B5B7E87000F7AF9 /* icon_play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_play.png; sourceTree = "<group>"; };
@@ -713,6 +719,10 @@
 			children = (
 				724044871B4ABC34008AD6BA /* UIView+FrameMethods.h */,
 				724044881B4ABC34008AD6BA /* UIView+FrameMethods.m */,
+				72D8F7EC1B5D57C2001F1260 /* SubmitButton.h */,
+				72D8F7ED1B5D57C2001F1260 /* SubmitButton.m */,
+				72D8F7EF1B5D6D6A001F1260 /* FormTextField.h */,
+				72D8F7F01B5D6D6A001F1260 /* FormTextField.m */,
 			);
 			path = DNA;
 			sourceTree = "<group>";
@@ -1172,6 +1182,7 @@
 				722C52F61B492F49004CBADA /* XLFormButtonCell.m in Sources */,
 				39E6FD861B53AC9D000EB89A /* QRCodeReaderView.m in Sources */,
 				722C53091B492F49004CBADA /* XLFormSectionDescriptor.m in Sources */,
+				72D8F7EE1B5D57C2001F1260 /* SubmitButton.m in Sources */,
 				72D0CEC61B5BFAA40094CB3C /* DisplayViewController.m in Sources */,
 				722C52E61B492F49004CBADA /* MJRefreshHeader.m in Sources */,
 				722C52F21B492F49004CBADA /* UIScrollView+MJExtension.m in Sources */,
@@ -1181,6 +1192,7 @@
 				72ABD1DD1B3081A80099CB74 /* MainViewController.m in Sources */,
 				722C53041B492F49004CBADA /* XLFormOptionsObject.m in Sources */,
 				722C53081B492F49004CBADA /* XLFormRowDescriptor.m in Sources */,
+				72D8F7F11B5D6D6A001F1260 /* FormTextField.m in Sources */,
 				39CF7E771B4BAE8B00EF8C2D /* PopoverViewController.m in Sources */,
 				722C52EB1B492F49004CBADA /* MJRefreshBackNormalFooter.m in Sources */,
 				722C53101B492F49004CBADA /* XLFormRightDetailCell.m in Sources */,

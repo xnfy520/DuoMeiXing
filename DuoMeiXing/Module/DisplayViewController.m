@@ -62,9 +62,7 @@
 {
     [super viewDidLoad];
 
-    self.extendedLayoutIncludesOpaqueBars = NO;
-    
-    self.edgesForExtendedLayout = UIRectEdgeBottom | UIRectEdgeLeft | UIRectEdgeRight;
+    [self setViewRectEdge];
     
 //    self.navigationController.navigationBarHidden = YES;
     

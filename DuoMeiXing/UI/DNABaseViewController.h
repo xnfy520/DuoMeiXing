@@ -20,6 +20,8 @@
 //显示 HUB 提示性错误显示，自动消失
 -(void)showTips:(NSString*)msg;
 
+- (void)setViewRectEdge;
+
 - (void)setupRightButton;
 
 - (void)setupInsetsTableView :(UITableView *)tableView;

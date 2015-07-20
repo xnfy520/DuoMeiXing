@@ -119,6 +119,12 @@
     
     [mainTableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    NSString *ctrl = [[[mainOptionData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] objectForKey:@"ctrl"];
+    
+    if ([ctrl isEqualToString:@"exit"]) {
+        [self exitAction];
+    }
+    
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -126,6 +132,20 @@
     
     return 15;
     
+}
+
+- (void)exitAction
+{
+    UIAlertView *exitAlertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"确定退出当前帐号?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+    [exitAlertView show];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if(buttonIndex == 1 ) //确定按钮被点解
+    {
+        postEvent(globalLoginView);
+    }
 }
 
 

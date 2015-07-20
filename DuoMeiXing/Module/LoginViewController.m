@@ -10,9 +10,14 @@
 #import "DNADef.h"
 #import "RegisterViewController.h"
 #import "DNATabBarController.h"
+#import "SubmitButton.h"
+#import "FormTextField.h"
 
 
 @implementation LoginViewController
+{
+    UITextField *firstResponderField;
+}
 
 - (void)viewDidLoad
 {
@@ -22,15 +27,21 @@
     
     [self setNavigationBar];
     
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    [button setTitle:@"open" forState:UIControlStateNormal];
-    button.frame = CGRectMake((screenWidth-100)/2, 150, 100, 50);
-    [button setBackgroundColor:[UIColor redColor]];
-    [button addTarget:self action:@selector(openClick) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:button];
+    [self setViewRectEdge];
+    NSLog(@"%f", formFieldPadding);
+    FormTextField *accountField = [[FormTextField alloc] initWithFrame:CGRectMake(formFieldPadding, 20, formFieldWith, 40) withTitle:@"帐号" withPlaceholder:@"手机号码/用户名/邮箱" withLeftViewWidth:50];
+    accountField.delegate = self;
+    [self.view addSubview:accountField];
     
+    FormTextField *passwordField = [[FormTextField alloc] initWithFrame:CGRectMake(formFieldPadding, CGRectGetMaxY(accountField.frame)+20, formFieldWith, 40) withTitle:@"密码" withPlaceholder:@"密码" withLeftViewWidth:50];
+    passwordField.delegate = self;
+    passwordField.secureTextEntry = YES;
+    [self.view addSubview:passwordField];
+    
+    SubmitButton *loginButton = [[SubmitButton alloc] initWithFrame:CGRectMake(submitButtonPadding, CGRectGetMaxY(passwordField.frame)+20, submitButtonWith, 40) withTitle:@"登录" withTitleColor:[UIColor whiteColor] withBackgroundColor:defaultTabBarTitleColor];
+    [loginButton addTarget:self action:@selector(loginAction) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:loginButton];
 
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -49,9 +60,6 @@
 - (void)setNavigationBar
 {
     
-//    UIBarButtonItem *cancelItem = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStylePlain target:self action:@selector(cancelAction)];
-//    self.navigationItem.leftBarButtonItem = cancelItem;
-    
     UIBarButtonItem *backItem = [[UIBarButtonItem alloc] init];
     backItem.title = @"登录";
     self.navigationItem.backBarButtonItem = backItem;
@@ -61,19 +69,30 @@
 
 }
 
-- (void)openClick
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    firstResponderField = textField;
+    UILabel *leftButton = (UILabel *)textField.leftView;
+    leftButton.textColor = [UIColor blueColor];
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    UILabel *leftButton = (UILabel *)textField.leftView;
+    leftButton.textColor = [UIColor blackColor];
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [firstResponderField resignFirstResponder];
+}
+
+- (void)loginAction
 {
     
     [self.navigationController presentViewController:[[DNATabBarController alloc] init] animated:YES completion:^{
     }];
     
-}
-
-- (void)cancelAction
-{
-    [self.navigationController dismissViewControllerAnimated:NO completion:^{
-        
-    }];
 }
 
 - (void)registerView

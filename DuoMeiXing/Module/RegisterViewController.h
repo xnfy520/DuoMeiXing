@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "DNABaseViewController.h"
 
-@interface RegisterViewController : DNABaseViewController
+@interface RegisterViewController : DNABaseViewController<UITextFieldDelegate>
 
 @end

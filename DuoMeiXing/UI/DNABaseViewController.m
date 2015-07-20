@@ -61,6 +61,13 @@
     }
 }
 
+- (void)setViewRectEdge
+{
+    self.extendedLayoutIncludesOpaqueBars = NO;
+    
+    self.edgesForExtendedLayout = UIRectEdgeBottom | UIRectEdgeLeft | UIRectEdgeRight;
+}
+
 - (void) setupRightButton
 {
     rightButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(popoverAction:)];
@@ -101,11 +108,11 @@
         
     }else if([type isEqualToString:@"video"]){
         
-        postEvent(globalLoginView);
+//        postEvent(globalLoginView);
         
     }else if ([type isEqualToString:@"friend"]){
         
-        postEvent(globalRegisterView);
+//        postEvent(globalRegisterView);
         
     }
     

@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "DNABaseViewController.h"
 
-@interface SettingsViewController : DNABaseViewController
+@interface SettingsViewController : DNABaseViewController<UIAlertViewDelegate>
 
 @end
