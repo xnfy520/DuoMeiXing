@@ -15,5 +15,6 @@
 @property(nonatomic, assign)BOOL notSearchBar;
 @property(nonatomic, assign)BOOL notPopover;
 @property(nonatomic, assign)BOOL hasInvitation;
+@property(nonatomic, assign)BOOL notSelection;
 
 @end

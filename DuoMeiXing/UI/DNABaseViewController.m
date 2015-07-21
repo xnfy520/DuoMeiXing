@@ -12,6 +12,7 @@
 #import "PopoverViewController.h"
 #import "QRCodeReaderViewController.h"
 #import "WebViewController.h"
+#import "ContactsViewController.h"
 
 @interface DNABaseViewController ()<WYPopoverControllerDelegate, popoverClickDelegate, QRCodeReaderDelegate>
 {
@@ -113,7 +114,13 @@
     }else if ([type isEqualToString:@"friend"]){
         
 //        postEvent(globalRegisterView);
-        
+        ContactsViewController *contactsCtrl = [[ContactsViewController alloc] init];
+        contactsCtrl.title = @"新朋友";
+        contactsCtrl.notPopover = YES;
+        contactsCtrl.notHeader = YES;
+        contactsCtrl.hasInvitation = YES;
+        contactsCtrl.notSelection = YES;
+        [self.navigationController pushViewController:contactsCtrl animated:YES];
     }
     
     

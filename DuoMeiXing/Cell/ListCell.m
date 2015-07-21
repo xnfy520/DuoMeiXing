@@ -14,6 +14,8 @@
 #define DateFontSize 11
 #define BadgeFontSize 8
 
+#define BadgeBgColor [UIColor redColor];
+
 @implementation ListCell
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -38,7 +40,7 @@
 - (void)setupAvatarBadgeLabel
 {
     _cellBadgeLabel = [[UILabel alloc] init];
-    _cellBadgeLabel.backgroundColor = [UIColor redColor];
+    _cellBadgeLabel.backgroundColor = BadgeBgColor;
     _cellBadgeLabel.layer.masksToBounds = YES;
     _cellBadgeLabel.layer.cornerRadius = 7;
     _cellBadgeLabel.textAlignment = NSTextAlignmentCenter;
@@ -97,7 +99,7 @@
     [super setSelected:selected animated:animated];
     
     if (selected){
-        _cellBadgeLabel.backgroundColor = [UIColor redColor];
+        _cellBadgeLabel.backgroundColor = BadgeBgColor;
     }
 }
 
@@ -106,7 +108,7 @@
     [super setHighlighted:highlighted animated:animated];
     
     if (highlighted){
-        _cellBadgeLabel.backgroundColor = [UIColor redColor];
+        _cellBadgeLabel.backgroundColor = BadgeBgColor;
     }
 }
 

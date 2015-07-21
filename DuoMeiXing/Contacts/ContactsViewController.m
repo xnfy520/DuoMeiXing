@@ -10,7 +10,7 @@
 #import "DNADef.h"
 #import "DisplayViewController.h"
 #import "Person.h"
-#import "SubmitButton.h"
+#import "ContactsCell.h"
 
 @interface ContactsViewController ()<UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating, UISearchBarDelegate>
 
@@ -246,9 +246,9 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *flag=@"cellFlag";
-    UITableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:flag];
+    ContactsCell *cell=[tableView dequeueReusableCellWithIdentifier:flag];
     if (cell==nil) {
-        cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:flag];
+        cell=[[ContactsCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:flag];
     }
     
     NSString *title = [[values objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
@@ -277,17 +277,17 @@
         
     }
     
-    cell.selectionStyle = UITableViewCellSelectionStyleDefault;
     
     NSString *key = [keys objectAtIndex:indexPath.section];
-    
+
     if ([key isEqualToString:@""]) {
-        cell.accessoryView = nil;
+        cell.showInvitation = NO;
     }else{
         if (self.hasInvitation) {
-            SubmitButton *invitationButton = [[SubmitButton alloc] initWithFrame:CGRectMake(0, 0, 45, 25) withTitle:@"邀请" withBackgroundColor:defaultTabBarTitleColor];
-            invitationButton.titleLabel.font = [UIFont systemFontOfSize:14];
-            cell.accessoryView = invitationButton;
+            cell.showInvitation = YES;
+//            cell.alreadyInvitation = YES;
+        }else{
+            cell.showInvitation = NO;
         }
     }
 
@@ -337,6 +337,10 @@
 {
     [mainTableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    if (_notSelection) {
+        return;
+    }
+    
     NSString *key = [keys objectAtIndex:indexPath.section];
     
     if ([key isEqualToString:@""]) {
@@ -351,6 +355,8 @@
             contactsCtrl.title = @"新朋友";
             contactsCtrl.notPopover = YES;
             contactsCtrl.notHeader = YES;
+            contactsCtrl.hasInvitation = YES;
+            contactsCtrl.notSelection = YES;
         }
         [self.navigationController pushViewController:contactsCtrl animated:YES];
     }else{

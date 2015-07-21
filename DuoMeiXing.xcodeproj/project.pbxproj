@@ -130,6 +130,7 @@
 		7293867D1B331ADA006F3FED /* i301@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 729386751B331ADA006F3FED /* i301@2x.png */; };
 		7293867E1B331ADA006F3FED /* i400@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 729386761B331ADA006F3FED /* i400@2x.png */; };
 		7293867F1B331ADA006F3FED /* i401@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 729386771B331ADA006F3FED /* i401@2x.png */; };
+		72A945A31B5EBCF50089E381 /* ContactsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 72A945A21B5EBCF50089E381 /* ContactsCell.m */; };
 		72ABD1AE1B3065310099CB74 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 72ABD1AD1B3065310099CB74 /* main.m */; };
 		72ABD1B11B3065310099CB74 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 72ABD1B01B3065310099CB74 /* AppDelegate.m */; };
 		72ABD1B91B3065310099CB74 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 72ABD1B81B3065310099CB74 /* Images.xcassets */; };
@@ -370,6 +371,8 @@
 		729386751B331ADA006F3FED /* i301@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "i301@2x.png"; sourceTree = "<group>"; };
 		729386761B331ADA006F3FED /* i400@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "i400@2x.png"; sourceTree = "<group>"; };
 		729386771B331ADA006F3FED /* i401@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "i401@2x.png"; sourceTree = "<group>"; };
+		72A945A11B5EBCF50089E381 /* ContactsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsCell.h; sourceTree = "<group>"; };
+		72A945A21B5EBCF50089E381 /* ContactsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsCell.m; sourceTree = "<group>"; };
 		72ABD1A81B3065310099CB74 /* DuoMeiXing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DuoMeiXing.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		72ABD1AC1B3065310099CB74 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		72ABD1AD1B3065310099CB74 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -748,6 +751,8 @@
 				724044921B4ACA74008AD6BA /* ListCell.m */,
 				39CF7E781B4BCEF700EF8C2D /* PopoverCell.h */,
 				39CF7E791B4BCEF700EF8C2D /* PopoverCell.m */,
+				72A945A11B5EBCF50089E381 /* ContactsCell.h */,
+				72A945A21B5EBCF50089E381 /* ContactsCell.m */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -1160,6 +1165,7 @@
 				722C52E51B492F49004CBADA /* MJRefreshFooter.m in Sources */,
 				722C52FB1B492F49004CBADA /* XLFormLeftRightSelectorCell.m in Sources */,
 				72ABD1B11B3065310099CB74 /* AppDelegate.m in Sources */,
+				72A945A31B5EBCF50089E381 /* ContactsCell.m in Sources */,
 				7240449D1B4AD48C008AD6BA /* AccountViewController.m in Sources */,
 				724044851B4AB361008AD6BA /* SettingsViewController.m in Sources */,
 				722C52EF1B492F49004CBADA /* MJRefreshStateHeader.m in Sources */,
