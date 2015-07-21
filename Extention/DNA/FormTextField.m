@@ -28,7 +28,7 @@
         self.borderStyle = UITextBorderStyleRoundedRect;
         self.clearButtonMode = UITextFieldViewModeWhileEditing;
         
-        UILabel *leftLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, width, CGRectGetHeight(frame))];
+        UILabel *leftLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, width, CGRectGetHeight(frame)-10)];
         leftLabel.textAlignment = NSTextAlignmentCenter;
         leftLabel.text = title;
         leftLabel.font = [UIFont systemFontOfSize:16];

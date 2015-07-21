@@ -93,4 +93,21 @@
     
 }
 
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
+    [super setSelected:selected animated:animated];
+    
+    if (selected){
+        _cellBadgeLabel.backgroundColor = [UIColor redColor];
+    }
+}
+
+-(void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated{
+    
+    [super setHighlighted:highlighted animated:animated];
+    
+    if (highlighted){
+        _cellBadgeLabel.backgroundColor = [UIColor redColor];
+    }
+}
+
 @end

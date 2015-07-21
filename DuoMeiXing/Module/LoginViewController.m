@@ -38,7 +38,7 @@
     passwordField.secureTextEntry = YES;
     [self.view addSubview:passwordField];
     
-    SubmitButton *loginButton = [[SubmitButton alloc] initWithFrame:CGRectMake(submitButtonPadding, CGRectGetMaxY(passwordField.frame)+20, submitButtonWith, 40) withTitle:@"登录" withTitleColor:[UIColor whiteColor] withBackgroundColor:defaultTabBarTitleColor];
+    SubmitButton *loginButton = [[SubmitButton alloc] initWithFrame:CGRectMake(submitButtonPadding, CGRectGetMaxY(passwordField.frame)+20, submitButtonWith, 40) withTitle:@"登录" withBackgroundColor:defaultTabBarTitleColor];
     [loginButton addTarget:self action:@selector(loginAction) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:loginButton];
 
@@ -53,6 +53,18 @@
         if ([dismisstype isEqualToString:@"reg"]) {
             [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:@"dismisstype"];
             [self registerView];
+        }
+    }
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [firstResponderField resignFirstResponder];
+    if (firstResponderField != nil) {
+        for (UITextField *subView in [self.view subviews]) {
+            if ([NSStringFromClass([subView class]) isEqualToString:NSStringFromClass([firstResponderField class]) ]) {
+                [subView setText:@""];
+            }
         }
     }
 }
@@ -90,14 +102,20 @@
 - (void)loginAction
 {
     
-    [self.navigationController presentViewController:[[DNATabBarController alloc] init] animated:YES completion:^{
+    DNATabBarController *tabBarCtrl = [[DNATabBarController alloc] init];
+    tabBarCtrl.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    [self.navigationController presentViewController:tabBarCtrl animated:YES completion:^{
+        
     }];
+    
     
 }
 
 - (void)registerView
 {
-    [self.navigationController pushViewController:[[RegisterViewController alloc] init] animated:YES];
+    
+    RegisterViewController *registerCtrl = [[RegisterViewController alloc] init];
+    [self.navigationController pushViewController:registerCtrl animated:YES];
 }
 
 @end

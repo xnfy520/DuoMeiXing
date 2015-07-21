@@ -13,5 +13,7 @@
 
 @property(nonatomic, assign)BOOL notHeader;
 @property(nonatomic, assign)BOOL notSearchBar;
+@property(nonatomic, assign)BOOL notPopover;
+@property(nonatomic, assign)BOOL hasInvitation;
 
 @end

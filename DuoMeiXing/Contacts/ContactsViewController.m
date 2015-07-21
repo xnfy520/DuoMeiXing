@@ -10,6 +10,7 @@
 #import "DNADef.h"
 #import "DisplayViewController.h"
 #import "Person.h"
+#import "SubmitButton.h"
 
 @interface ContactsViewController ()<UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating, UISearchBarDelegate>
 
@@ -39,7 +40,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    [self setupRightButton];
+    if (!self.notPopover) {
+        [self setupRightButton];
+    }
     
     [self setupMainTableView];
     
@@ -160,7 +163,9 @@
     mainTableView.tableFooterView = [[UIView alloc] init];
     [self.view addSubview:mainTableView];
     [self setupInsetsTableView:mainTableView];
+
     
+    //索引栏颜色
     if ([mainTableView respondsToSelector:@selector(setSectionIndexColor:)]) {
         mainTableView.sectionIndexBackgroundColor = [UIColor clearColor];
         mainTableView.sectionIndexTrackingBackgroundColor = [UIColor clearColor];
@@ -272,6 +277,20 @@
         
     }
     
+    cell.selectionStyle = UITableViewCellSelectionStyleDefault;
+    
+    NSString *key = [keys objectAtIndex:indexPath.section];
+    
+    if ([key isEqualToString:@""]) {
+        cell.accessoryView = nil;
+    }else{
+        if (self.hasInvitation) {
+            SubmitButton *invitationButton = [[SubmitButton alloc] initWithFrame:CGRectMake(0, 0, 45, 25) withTitle:@"邀请" withBackgroundColor:defaultTabBarTitleColor];
+            invitationButton.titleLabel.font = [UIFont systemFontOfSize:14];
+            cell.accessoryView = invitationButton;
+        }
+    }
+
     return cell;
 }
 
@@ -292,8 +311,8 @@
     if(index==0)
     {
         //index是索引条的序号。从0开始，所以第0 个是放大镜。如果是放大镜坐标就移动到搜索框处
-        [tableView scrollRectToVisible:searchCtrl.searchBar.frame animated:NO];
-        return -1;
+//        [tableView scrollRectToVisible:searchCtrl.searchBar.frame animated:NO];
+        return 0;
     }else{
         //因为返回的值是section的值。所以减1就是与section对应的值了
         return index;
@@ -317,9 +336,28 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [mainTableView deselectRowAtIndexPath:indexPath animated:YES];
-    DisplayViewController *displayCtrl = [[DisplayViewController alloc] init];
-    displayCtrl.haveViedo = NO;
-    [self.navigationController pushViewController:displayCtrl animated:YES];
+    
+    NSString *key = [keys objectAtIndex:indexPath.section];
+    
+    if ([key isEqualToString:@""]) {
+        NSString *ctrl = [[values objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+        NSLog(@"%@", ctrl);
+        ContactsViewController *contactsCtrl = [[ContactsViewController alloc] init];
+        if ([ctrl isEqualToString:@"老师"]) {
+            contactsCtrl.title = @"老师";
+            contactsCtrl.notPopover = YES;
+            contactsCtrl.notHeader = YES;
+        }else if([ctrl isEqualToString:@"新朋友"]){
+            contactsCtrl.title = @"新朋友";
+            contactsCtrl.notPopover = YES;
+            contactsCtrl.notHeader = YES;
+        }
+        [self.navigationController pushViewController:contactsCtrl animated:YES];
+    }else{
+        DisplayViewController *displayCtrl = [[DisplayViewController alloc] init];
+        displayCtrl.haveViedo = NO;
+        [self.navigationController pushViewController:displayCtrl animated:YES];
+    }
 }
 
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar{

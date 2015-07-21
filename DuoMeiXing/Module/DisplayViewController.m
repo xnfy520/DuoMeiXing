@@ -9,6 +9,7 @@
 #import "DisplayViewController.h"
 #import "DNADef.h"
 #import "PannelTableView.h"
+#import "SubmitButton.h"
 #import <MediaPlayer/MediaPlayer.h>
 
 #define displayVideoHeight 175
@@ -62,6 +63,8 @@
 {
     [super viewDidLoad];
 
+    self.title = @"天陨";
+    
     [self setViewRectEdge];
     
 //    self.navigationController.navigationBarHidden = YES;
@@ -152,11 +155,6 @@
     videoImageView.contentMode = UIViewContentModeScaleAspectFill;
     [videoView addSubview:videoImageView];
     
-//    if ([videoImageView isHidden]) {
-//        [moviePlayer play];
-//    }
-    
-    
 }
 
 // 重写该方法，控制该视图控制器只支持横屏显示
@@ -184,7 +182,7 @@
 //    [videoStateBar addSubview:plusFunButton];
     
     videoNickname = [[UILabel alloc] initWithFrame:CGRectMake(10, (CGRectGetHeight(videoStateBar.frame)-(playButtonHeight-10))/2, CGRectGetWidth(videoStateBar.frame)/2, playButtonHeight-10)];
-    videoNickname.text = @"天陨";
+    videoNickname.text = @"国产零零七";
     videoNickname.font = [UIFont systemFontOfSize:17];
     videoNickname.textColor = [UIColor whiteColor];
     [videoStateBar addSubview:videoNickname];
@@ -192,9 +190,6 @@
     
     if (![videoImageView isHidden]) {
         [videoStateBar setHidden:YES];
-//        videoView.backgroundColor = [UIColor blackColor];
-    }else{
-//        videoView.backgroundColor = [UIColor clearColor];
     }
     
 }
@@ -204,6 +199,7 @@
     if (moviePlayer.isPreparedToPlay) {
         if (moviePlayer.playbackState == MPMoviePlaybackStatePaused || moviePlayer.playbackState == MPMoviePlaybackStateStopped) {
             [moviePlayer play];
+            videoStateBar.alpha = 0;
         }else if(moviePlayer.playbackState == MPMoviePlaybackStatePlaying){
             [moviePlayer pause];
         }
@@ -340,12 +336,8 @@
     commentField.returnKeyType = UIReturnKeyDefault;
     [floatCommentView addSubview:commentField];
     
-    UIButton *submitButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [submitButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    submitButton.backgroundColor = defaultTabBarTitleColor;
-    submitButton.layer.cornerRadius = 3;
-    submitButton.frame = CGRectMake(CGRectGetWidth(floatCommentView.frame)-62, 3, 58, floatCommentHeight-6);
-    [submitButton setTitle:@"提交" forState:UIControlStateNormal];
+    SubmitButton *submitButton = [[SubmitButton alloc] initWithFrame: CGRectMake(CGRectGetWidth(floatCommentView.frame)-62, 3, 58, floatCommentHeight-6) withTitle:@"提交" withBackgroundColor:defaultTabBarTitleColor];
+    submitButton.titleLabel.font = [UIFont systemFontOfSize:14];
     [floatCommentView addSubview:submitButton];
     
 }

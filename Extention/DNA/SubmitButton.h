@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "JKCountDownButton.h"
 
-@interface SubmitButton : UIButton
+@interface SubmitButton : JKCountDownButton
 
-- (id)initWithFrame:(CGRect )frame withTitle:(NSString *)title withTitleColor:(UIColor *)titleColor withBackgroundColor:(UIColor *)bgcolor;
+- (id)initWithFrame:(CGRect )frame withTitle:(NSString *)title withBackgroundColor:(UIColor *)bgcolor;
 
 @end

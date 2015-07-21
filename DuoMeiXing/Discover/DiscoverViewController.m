@@ -164,6 +164,8 @@
 
         contactsCtrl.title = title;
         contactsCtrl.notHeader = YES;
+        contactsCtrl.notPopover = YES;
+        contactsCtrl.hasInvitation = NO;
         [self.navigationController pushViewController:contactsCtrl animated:YES];
         
     }

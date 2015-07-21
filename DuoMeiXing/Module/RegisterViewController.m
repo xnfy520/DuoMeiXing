@@ -26,9 +26,31 @@
     
     FormTextField *phoneField = [[FormTextField alloc] initWithFrame:CGRectMake(formFieldPadding, 20, formFieldWith, 40) withTitle:@"手机 +86" withPlaceholder:@"请输入手机号码" withLeftViewWidth:80];
     phoneField.delegate = self;
+    phoneField.keyboardType = UIKeyboardTypeNumberPad;
     [self.view addSubview:phoneField];
     
-    SubmitButton *getCodeButton = [[SubmitButton alloc] initWithFrame:CGRectMake(submitButtonPadding, CGRectGetMaxY(phoneField.frame)+20, submitButtonWith, 40) withTitle:@"获取验证码" withTitleColor:[UIColor whiteColor] withBackgroundColor:defaultTabBarTitleColor];
+    SubmitButton *getCodeButton = [[SubmitButton alloc] initWithFrame:CGRectMake(submitButtonPadding, CGRectGetMaxY(phoneField.frame)+20, submitButtonWith, 40) withTitle:@"获取验证码" withBackgroundColor:defaultTabBarTitleColor];
+    
+    [getCodeButton addToucheHandler:^(JKCountDownButton*sender, NSInteger tag) {
+        sender.enabled = NO;
+        
+        [sender startWithSecond:60];
+        
+        [sender didChange:^NSString *(JKCountDownButton *countDownButton,int second) {
+            [countDownButton setBackgroundColor:[UIColor lightGrayColor]];
+            NSString *title = [NSString stringWithFormat:@"%ds重新获取",second];
+            return title;
+        }];
+        
+        [sender didFinished:^NSString *(JKCountDownButton *countDownButton, int second) {
+            [countDownButton setBackgroundColor:defaultTabBarTitleColor];
+            countDownButton.enabled = YES;
+            
+            return @"点击重新获取";
+        }];
+        
+    }];
+    
 //    [getCodeButton addTarget:self action:@selector(openClick) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:getCodeButton];
     
@@ -36,7 +58,7 @@
     verificationField.delegate = self;
     [self.view addSubview:verificationField];
     
-    SubmitButton *regButton = [[SubmitButton alloc] initWithFrame:CGRectMake(submitButtonPadding, CGRectGetMaxY(verificationField.frame)+20, submitButtonWith, 40) withTitle:@"注册" withTitleColor:[UIColor whiteColor] withBackgroundColor:defaultTabBarTitleColor];
+    SubmitButton *regButton = [[SubmitButton alloc] initWithFrame:CGRectMake(submitButtonPadding, CGRectGetMaxY(verificationField.frame)+20, submitButtonWith, 40) withTitle:@"注册" withBackgroundColor:defaultTabBarTitleColor];
 //    [loginButton addTarget:self action:@selector(openClick) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:regButton];
 

@@ -20,12 +20,13 @@
     return self;
 }
 
-- (id)initWithFrame:(CGRect )frame withTitle:(NSString *)title withTitleColor:(UIColor *)titleColor withBackgroundColor:(UIColor *)bgcolor
+- (id)initWithFrame:(CGRect )frame withTitle:(NSString *)title withBackgroundColor:(UIColor *)bgcolor
 {
     self = [super initWithFrame:frame];
     if (self) {
         [self setTitle:title forState:UIControlStateNormal];
-        [self setTitleColor:titleColor forState:UIControlStateNormal];
+        [self setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [self setTitleColor:[UIColor lightGrayColor] forState:UIControlStateHighlighted];
         [self setBackgroundColor:bgcolor];
         [self.titleLabel setFont:[UIFont boldSystemFontOfSize:18]];
         [self.layer setCornerRadius:5];

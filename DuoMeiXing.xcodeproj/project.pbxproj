@@ -42,6 +42,7 @@
 		39DE288D1B50C2AC00B9558A /* cor4.png in Resources */ = {isa = PBXBuildFile; fileRef = 39DE28871B50C2AC00B9558A /* cor4.png */; };
 		39DE288E1B50C2AC00B9558A /* QRCodeScanLine@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39DE28881B50C2AC00B9558A /* QRCodeScanLine@2x.png */; };
 		39DE28901B50FB6400B9558A /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39DE288F1B50FB6400B9558A /* AVFoundation.framework */; };
+		39DF9BFD1B5DEF3A00873A96 /* JKCountDownButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 39DF9BFC1B5DEF3A00873A96 /* JKCountDownButton.m */; };
 		39E6FD851B53AC9D000EB89A /* QRCameraSwitchButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 39E6FD7F1B53AC9D000EB89A /* QRCameraSwitchButton.m */; };
 		39E6FD861B53AC9D000EB89A /* QRCodeReaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 39E6FD821B53AC9D000EB89A /* QRCodeReaderView.m */; };
 		39E6FD871B53AC9D000EB89A /* QRCodeReaderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39E6FD841B53AC9D000EB89A /* QRCodeReaderViewController.m */; };
@@ -198,6 +199,8 @@
 		39DE28871B50C2AC00B9558A /* cor4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cor4.png; sourceTree = "<group>"; };
 		39DE28881B50C2AC00B9558A /* QRCodeScanLine@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "QRCodeScanLine@2x.png"; sourceTree = "<group>"; };
 		39DE288F1B50FB6400B9558A /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		39DF9BFB1B5DEF3A00873A96 /* JKCountDownButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKCountDownButton.h; sourceTree = "<group>"; };
+		39DF9BFC1B5DEF3A00873A96 /* JKCountDownButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKCountDownButton.m; sourceTree = "<group>"; };
 		39E6FD7E1B53AC9D000EB89A /* QRCameraSwitchButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCameraSwitchButton.h; sourceTree = "<group>"; };
 		39E6FD7F1B53AC9D000EB89A /* QRCameraSwitchButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRCameraSwitchButton.m; sourceTree = "<group>"; };
 		39E6FD801B53AC9D000EB89A /* QRCodeReaderDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCodeReaderDelegate.h; sourceTree = "<group>"; };
@@ -466,6 +469,15 @@
 				39DE28881B50C2AC00B9558A /* QRCodeScanLine@2x.png */,
 			);
 			path = ScanQR;
+			sourceTree = "<group>";
+		};
+		39DF9BFA1B5DEF3A00873A96 /* JKCountDownButton */ = {
+			isa = PBXGroup;
+			children = (
+				39DF9BFB1B5DEF3A00873A96 /* JKCountDownButton.h */,
+				39DF9BFC1B5DEF3A00873A96 /* JKCountDownButton.m */,
+			);
+			path = JKCountDownButton;
 			sourceTree = "<group>";
 		};
 		39E6FD7D1B53AC9D000EB89A /* QRCodeReaderViewController */ = {
@@ -826,6 +838,7 @@
 		729386561B33127A006F3FED /* Extention */ = {
 			isa = PBXGroup;
 			children = (
+				39DF9BFA1B5DEF3A00873A96 /* JKCountDownButton */,
 				39E6FD7D1B53AC9D000EB89A /* QRCodeReaderViewController */,
 				724044A21B4AEBFB008AD6BA /* WYPopoverController */,
 				724044861B4ABC34008AD6BA /* DNA */,
@@ -1134,6 +1147,7 @@
 				722C52F41B492F49004CBADA /* UIView+MJExtension.m in Sources */,
 				722C52FE1B492F49004CBADA /* XLFormSelectorCell.m in Sources */,
 				722C52F91B492F49004CBADA /* XLFormDatePickerCell.m in Sources */,
+				39DF9BFD1B5DEF3A00873A96 /* JKCountDownButton.m in Sources */,
 				724044891B4ABC34008AD6BA /* UIView+FrameMethods.m in Sources */,
 				722C530D1B492F49004CBADA /* NSPredicate+XLFormAdditions.m in Sources */,
 				722C52FA1B492F49004CBADA /* XLFormInlineSelectorCell.m in Sources */,

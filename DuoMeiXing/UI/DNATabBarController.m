@@ -77,6 +77,7 @@
     self.main = mainCtrl;
     
     ContactsViewController *contactsCtrl = [[ContactsViewController alloc]init];
+    contactsCtrl.hasInvitation = YES;
     [self addChildViewControl:contactsCtrl title:@"通讯录" imageName:@"i200" selectedImageName:@"i201" selectedTag:1];
 
     DiscoverViewController *discoverCtrl = [[DiscoverViewController alloc]init];
@@ -146,7 +147,7 @@
     
     [[NSUserDefaults standardUserDefaults] setObject:@"login" forKey:@"dismisstype"];
     
-    [self dismissViewControllerAnimated:NO completion:^{
+    [self dismissViewControllerAnimated:YES completion:^{
     
     }];
 }
