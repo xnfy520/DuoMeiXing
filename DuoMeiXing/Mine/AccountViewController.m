@@ -104,7 +104,7 @@
         
         
     }else if([ctrl isEqualToString:@"avatar"]){
-        UIImageView * avatarImageView = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetWidth(cell.contentView.frame)-35-30, (CGRectGetHeight(cell.contentView.frame)-30)/2, 30, 30)];
+        UIImageView * avatarImageView = [[UIImageView alloc] initWithFrame:CGRectMake(screenWidth-35-30, (CGRectGetHeight(cell.contentView.frame)-30)/2, 30, 30)];
         avatarImageView.image = [UIImage imageNamed:@"avatar"];
 //        cell.accessoryView = avatarImageView;
         [cell.contentView addSubview:avatarImageView];

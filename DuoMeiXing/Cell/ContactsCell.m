@@ -26,7 +26,7 @@
 
 - (void)setupInvitationButton
 {
-    invitationButton = [[SubmitButton alloc] initWithFrame:CGRectMake(CGRectGetWidth(self.contentView.frame)-50-15, (CGRectGetHeight(self.contentView.frame)-25)/2, 50, 30) withTitle:@"邀请" withBackgroundColor:defaultTabBarTitleColor];
+    invitationButton = [[SubmitButton alloc] initWithFrame:CGRectMake(screenWidth-50-15, (CGRectGetHeight(self.contentView.frame)-25)/2, 50, 30) withTitle:@"邀请" withBackgroundColor:defaultTabBarTitleColor];
     [invitationButton setTitle:@"已添加" forState:UIControlStateDisabled];
     [invitationButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateDisabled];
     invitationButton.titleLabel.font = [UIFont systemFontOfSize:14];
