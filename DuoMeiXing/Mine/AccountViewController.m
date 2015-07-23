@@ -10,6 +10,10 @@
 
 #import "DNADef.h"
 
+#import "DNATabBarController.h"
+
+#import "FieldsEditViewController.h"
+
 @interface AccountViewController ()<UITableViewDelegate, UITableViewDataSource>
 
 @end
@@ -123,6 +127,15 @@
 {
     
     [mainTableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    NSString *ctrl = [[[mainOptionData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] objectForKey:@"ctrl"];
+    
+    if ([ctrl isEqualToString:@"nickname"]) {
+        FieldsEditViewController *fieldsEditCtrl = [[FieldsEditViewController alloc] init];
+        [self.navigationController presentViewController:[DNATabBarController setCtrl:fieldsEditCtrl] animated:YES completion:^{
+            
+        }];
+    }
     
 }
 

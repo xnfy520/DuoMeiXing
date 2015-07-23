@@ -12,6 +12,8 @@
 #import "DisplayViewController.h"
 #import "DNATabBarController.h"
 #import "RegisterViewController.h"
+#import "AFAppDotNetAPIClient.h"
+#import "AFNetworking.h"
 
 @interface MainViewController ()<UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
@@ -30,7 +32,27 @@
     
     [self setupRightButton];
     [self setupMainTableView];
-
+    
+//    [[AFAppDotNetAPIClient sharedClient] GET:@"stream/0/posts/stream/global" parameters:nil success:^(NSURLSessionDataTask * __unused task, id JSON) {
+//        NSArray *postsFromResponse = [JSON valueForKeyPath:@"data"];
+//        NSLog(@"%@", postsFromResponse);
+//    } failure:^(NSURLSessionDataTask *__unused task, NSError *error) {
+//        
+//    }];
+    [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+        NSLog(@"Reachability: %@", AFStringFromNetworkReachabilityStatus(status));
+    }];
+    
+    [[AFNetworkReachabilityManager sharedManager] startMonitoring];
+    
+//    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+////    NSDictionary *parameters = @{@"foo": @"bar"};
+//    [manager POST:@"http://113.105.85.230:66/getBanner.do" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//        NSLog(@"JSON: %@", responseObject);
+//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//        NSLog(@"Error: %@", error);
+//    }];
+    
 }
 
 - (void)setupMainTableView

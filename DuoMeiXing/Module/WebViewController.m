@@ -46,7 +46,7 @@ SINGLETON_IMPLEMENTATION(WebViewController);
         self.title = title;
     
     if(_webview == nil){
-        _webview = [[UIWebView alloc]initWithFrame:CGRectMake(0, 0, CGRectGetWidth(_parentViewCtrl.view.frame), CGRectGetHeight(_parentViewCtrl.view.frame))];
+        _webview = [[UIWebView alloc]initWithFrame:self.view.frame];
         _webview.delegate = self;
         [self.view addSubview:_webview];
     }
@@ -68,31 +68,22 @@ SINGLETON_IMPLEMENTATION(WebViewController);
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+//    [self setViewRectEdge];
+}
+
+- (void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
+    [self closeWebView];
 }
 
 -(void)closeWebView
 {
+    self.title = @"";
     if(_webview != nil){
         [_webview loadHTMLString:@"" baseURL:nil];
     }
-    if(_parentViewCtrl)
-        [_parentViewCtrl.navigationController popViewControllerAnimated:TRUE]; //这句不能去掉，要不然界面就不能消除
-    
     _parentViewCtrl = nil;
 }
-
-
--(void)closeWebViewAnimated:(BOOL)animated
-{
-    if(_webview != nil){
-        [_webview loadHTMLString:@"" baseURL:nil];
-    }
-    if(_parentViewCtrl)
-        [_parentViewCtrl.navigationController popViewControllerAnimated:animated]; //这句不能去掉，要不然界面就不能消除
-    
-    _parentViewCtrl = nil;
-}
-
 
 - (void)webViewDidStartLoad:(UIWebView *)webView
 {
