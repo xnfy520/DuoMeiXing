@@ -9,14 +9,16 @@
 #import "LoginViewController.h"
 #import "DNADef.h"
 #import "RegisterViewController.h"
-#import "DNATabBarController.h"
 #import "SubmitButton.h"
 #import "FormTextField.h"
-
+#import "LoginApi.h"
+#import "UserDataManager.h"
 
 @implementation LoginViewController
 {
     UITextField *firstResponderField;
+    FormTextField *loginIdField;
+    FormTextField *passwordField;
 }
 
 - (void)viewDidLoad
@@ -28,12 +30,12 @@
     [self setNavigationBar];
     
     [self setViewRectEdge];
-    NSLog(@"%f", formFieldPadding);
-    FormTextField *accountField = [[FormTextField alloc] initWithFrame:CGRectMake(formFieldPadding, 20, formFieldWith, 40) withTitle:@"帐号" withPlaceholder:@"手机号码/用户名/邮箱" withLeftViewWidth:50];
-    accountField.delegate = self;
-    [self.view addSubview:accountField];
     
-    FormTextField *passwordField = [[FormTextField alloc] initWithFrame:CGRectMake(formFieldPadding, CGRectGetMaxY(accountField.frame)+20, formFieldWith, 40) withTitle:@"密码" withPlaceholder:@"密码" withLeftViewWidth:50];
+    loginIdField = [[FormTextField alloc] initWithFrame:CGRectMake(formFieldPadding, 20, formFieldWith, 40) withTitle:@"帐号" withPlaceholder:@"手机号码/用户名/邮箱" withLeftViewWidth:50];
+    loginIdField.delegate = self;
+    [self.view addSubview:loginIdField];
+    
+    passwordField = [[FormTextField alloc] initWithFrame:CGRectMake(formFieldPadding, CGRectGetMaxY(loginIdField.frame)+20, formFieldWith, 40) withTitle:@"密码" withPlaceholder:@"密码" withLeftViewWidth:50];
     passwordField.delegate = self;
     passwordField.secureTextEntry = YES;
     [self.view addSubview:passwordField];
@@ -48,7 +50,7 @@
 {
     [super viewWillAppear:animated];
     NSString *dismisstype = [[NSUserDefaults standardUserDefaults] objectForKey:@"dismisstype"];
-    NSLog(@"%@", dismisstype);
+
     if (dismisstype!=nil) {
         if ([dismisstype isEqualToString:@"reg"]) {
             [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:@"dismisstype"];
@@ -102,13 +104,49 @@
 - (void)loginAction
 {
     
+    UserDataManager *manager = [[UserDataManager alloc] init];
+    
+    if ([manager isNotEmpty]) {
+        NSLog(@"%ld", (long)[manager userCount]);
+        
+        NSArray *a = [manager getUserWithId:@"5576eec2e4b048328d5b929b"];
+        NSLog(@"%@", a);
+        
+    }else{
+        NSString *loginId = loginIdField.text;
+        NSString *password = passwordField.text;
+        if (loginId.length > 0 && password.length > 0) {
+            LoginApi *api = [[LoginApi alloc] initWithLoginId:loginId password:password];
+            
+            [api startWithCompletionBlockWithSuccess:^(YTKBaseRequest *request) {
+                // 你可以直接在这里使用 self
+                NSLog(@"succeed");
+                
+                NSDictionary * dic = [DisplayUtil dictionaryWithJsonString:[request responseString]];
+                
+                //            NSLog(@"%@", dic);
+                
+                
+                
+                [manager initUser:dic];
+                
+            } failure:^(YTKBaseRequest *request) {
+                // 你可以直接在这里使用 self
+                NSLog(@"failed");
+            }];
+        }
+    }
+    
+
+    
+    
+}
+
+- (void)mainView
+{
     DNATabBarController *tabBarCtrl = [[DNATabBarController alloc] init];
     tabBarCtrl.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-    [self.navigationController presentViewController:tabBarCtrl animated:YES completion:^{
-        
-    }];
-    
-    
+    [self.navigationController presentViewController:tabBarCtrl animated:YES completion:^{}];
 }
 
 - (void)registerView

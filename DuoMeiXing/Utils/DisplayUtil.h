@@ -16,4 +16,6 @@
 
 + (UIColor *) hexStringToColor: (NSString *) stringToConvert;
 
++ (NSDictionary *)dictionaryWithJsonString:(NSString *)jsonString;
+
 @end

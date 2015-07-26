@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "DNABaseViewController.h"
-#import "XLFormViewController.h"
 
 @interface DiscoverViewController : DNABaseViewController
 

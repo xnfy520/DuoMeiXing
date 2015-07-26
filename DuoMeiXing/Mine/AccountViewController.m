@@ -10,8 +10,6 @@
 
 #import "DNADef.h"
 
-#import "DNATabBarController.h"
-
 #import "FieldsEditViewController.h"
 
 @interface AccountViewController ()<UITableViewDelegate, UITableViewDataSource>

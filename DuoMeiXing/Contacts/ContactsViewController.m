@@ -345,7 +345,6 @@
     
     if ([key isEqualToString:@""]) {
         NSString *ctrl = [[values objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
-        NSLog(@"%@", ctrl);
         ContactsViewController *contactsCtrl = [[ContactsViewController alloc] init];
         if ([ctrl isEqualToString:@"老师"]) {
             contactsCtrl.title = @"老师";

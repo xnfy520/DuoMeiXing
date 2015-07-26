@@ -10,7 +10,7 @@
 #define DuoMeiXing_DNADef_h
 
 #import "DisplayUtil.h"
-
+#import "DNATabBarController.h"
 #import "UIView+FrameMethods.h"
 
 typedef enum : NSUInteger{
@@ -18,6 +18,10 @@ typedef enum : NSUInteger{
     kPhotographAlbumTypeNewest,     //最新视频
     kPhotographAlbumTypeHot         //最热视频
 } PhotographAlbumType;
+
+#define apiBaseUrl @"http://app.dmxing.cn";
+
+#define companyCode @"dalmatian"
 
 #define addObs(a, b)\
 [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(b:) name:a object:nil];

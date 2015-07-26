@@ -7,10 +7,11 @@
 //
 
 #import "AppDelegate.h"
-#import "DNATabBarController.h"
 #import "DNADef.h"
 #import "LoginViewController.h"
-#import "AFNetworkActivityIndicatorManager.h"
+#import "YTKNetworkAgent.h"
+#import "YTKUrlArgumentsFilter.h"
+
 
 @interface AppDelegate ()
 
@@ -18,16 +19,25 @@
 
 @implementation AppDelegate
 
+- (void)setupRequestFilters
+{
+    NSString *appVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+    YTKNetworkConfig *config = [YTKNetworkConfig sharedInstance];
+    YTKUrlArgumentsFilter *urlFilter = [YTKUrlArgumentsFilter filterWithArguments:@{@"version": appVersion}];
+    [config addUrlFilter:urlFilter];
+    config.baseUrl = apiBaseUrl;
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-    [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     
     self.window.rootViewController = [DNATabBarController setCtrl:[[LoginViewController alloc] init]];
+    
+    [self setupRequestFilters];
 
     return YES;
 }
