@@ -12,6 +12,7 @@
 #import "DisplayUtil.h"
 #import "DNATabBarController.h"
 #import "UIView+FrameMethods.h"
+#import "UserDataManager.h"
 
 typedef enum : NSUInteger{
     kPhotographAlbumTypeDefault,    //我的视频

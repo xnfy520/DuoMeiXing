@@ -120,6 +120,10 @@
 
 - (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController
 {
+    if (viewController.tabBarItem.tag == 3) {
+        [UserDataManager sharedUserDataManager].token = nil;
+        [[UserDataManager sharedUserDataManager] updateUser];
+    }
     return YES;
 }
 

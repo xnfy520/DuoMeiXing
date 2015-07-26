@@ -8,20 +8,38 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+#import "Singleton.h"
 
-@interface UserDataManager : NSObject{
+@interface UserDataManager : NSObject
+{
     NSManagedObjectContext *context;
 }
+
+SINGLETON_INTERFACE(UserDataManager);
+
+@property(strong, nonatomic) NSString* objectId;
+@property(strong, nonatomic) NSString* id;
+@property(strong, nonatomic) NSString* userId;
+@property(strong, nonatomic) NSString* token;
+@property(strong, nonatomic) NSString* username;
+@property(strong, nonatomic) NSString* nickname;
+@property(strong, nonatomic) NSString* avatar;
+@property(strong, nonatomic) NSString* avatarUrl;
+@property(strong, nonatomic) NSString* mobile;
 
 -(void) commitChanges;
 
 //Create
 -(void) initUser:(NSDictionary *)data;
 
+- (void)saveUser;
+
+- (void)updateUser;
+
 //Selection
 -(NSArray *)fetchUser;
 
--(BOOL) isNotEmpty;
+-(BOOL) isLogin;
 
 -(NSInteger) userCount;
 
@@ -30,7 +48,5 @@
 -(void)deleteUser:(NSManagedObject *) user;
 
 -(void)clearAllUser;
-
-- (BOOL)hasChange;
 
 @end

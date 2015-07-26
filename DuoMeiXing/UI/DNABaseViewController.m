@@ -36,6 +36,17 @@
     return self;
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    if ([[UserDataManager sharedUserDataManager] isLogin]) {
+        NSLog(@"is login");
+    }else{
+        NSLog(@"not login");
+        postEvent(globalLoginView);
+    }
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];

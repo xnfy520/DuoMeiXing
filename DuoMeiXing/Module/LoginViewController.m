@@ -27,6 +27,8 @@
     
     self.title = @"登录";
     
+    
+    
     [self setNavigationBar];
     
     [self setViewRectEdge];
@@ -104,38 +106,47 @@
 - (void)loginAction
 {
     
-    UserDataManager *manager = [[UserDataManager alloc] init];
     
-    if ([manager isNotEmpty]) {
-        NSLog(@"%ld", (long)[manager userCount]);
-        
-        NSArray *a = [manager getUserWithId:@"5576eec2e4b048328d5b929b"];
-        NSLog(@"%@", a);
-        
-    }else{
+    
+//    if ([manager isNotEmpty]) {
+//        NSLog(@"%ld", (long)[manager userCount]);
+//        
+//        NSArray *a = [manager getUserWithId:@"5576eec2e4b048328d5b929b"];
+//        NSLog(@"%@", a);
+//        
+//    }else{
         NSString *loginId = loginIdField.text;
         NSString *password = passwordField.text;
         if (loginId.length > 0 && password.length > 0) {
             LoginApi *api = [[LoginApi alloc] initWithLoginId:loginId password:password];
             
+            
             [api startWithCompletionBlockWithSuccess:^(YTKBaseRequest *request) {
                 // 你可以直接在这里使用 self
                 NSLog(@"succeed");
                 
-                NSDictionary * dic = [DisplayUtil dictionaryWithJsonString:[request responseString]];
+                NSDictionary * dic = [request responseJSONObject];
                 
-                //            NSLog(@"%@", dic);
+                            NSLog(@"%@", dic);
                 
-                
+                UserDataManager *manager = [[UserDataManager alloc] init];
                 
                 [manager initUser:dic];
                 
+                [self mainView];
+                
             } failure:^(YTKBaseRequest *request) {
                 // 你可以直接在这里使用 self
+                
                 NSLog(@"failed");
+                
+//                NSDictionary * dic = [DisplayUtil dictionaryWithJsonString:[request responseJSONObject]];
+                
+                NSLog(@"%@", [[request responseJSONObject] objectForKey:@"code"]);
+                
             }];
         }
-    }
+//    }
     
 
     
@@ -144,14 +155,15 @@
 
 - (void)mainView
 {
-    DNATabBarController *tabBarCtrl = [[DNATabBarController alloc] init];
-    tabBarCtrl.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-    [self.navigationController presentViewController:tabBarCtrl animated:YES completion:^{}];
+    if ([[UserDataManager sharedUserDataManager] isLogin]) {
+        DNATabBarController *tabBarCtrl = [[DNATabBarController alloc] init];
+        tabBarCtrl.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+        [self.navigationController presentViewController:tabBarCtrl animated:YES completion:^{}];
+    }
 }
 
 - (void)registerView
 {
-    
     RegisterViewController *registerCtrl = [[RegisterViewController alloc] init];
     [self.navigationController pushViewController:registerCtrl animated:YES];
 }

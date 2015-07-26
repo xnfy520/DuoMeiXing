@@ -11,6 +11,8 @@
 
 @implementation UserDataManager
 
+SINGLETON_IMPLEMENTATION(UserDataManager);
+
 -(id) init
 {
     if (self = [super init]) {
@@ -32,16 +34,56 @@
 
 -(void) initUser:(NSDictionary *)data
 {
+    [self clearAllUser];
+    
+    _id = [data objectForKey:@"id"];
+    _userId = [data objectForKey:@"userId"];
+    _token = [data objectForKey:@"token"];
+    _username = [data objectForKey:@"username"];
+    _nickname = [data objectForKey:@"nickname"];
+    _avatar = [data objectForKey:@"avatar"];
+    _avatarUrl = [data objectForKey:@"avatarUrl"];
+    _mobile = [data objectForKey:@"mobile"];
+    
+    [self saveUser];
+    
+}
+
+- (void)saveUser
+{
     NSManagedObject *user = [NSEntityDescription insertNewObjectForEntityForName:@"User" inManagedObjectContext:context];
-    [user setValue:[data objectForKey:@"id"] forKey:@"id"];
-    [user setValue:[data objectForKey:@"userId"] forKey:@"userId"];
-    [user setValue:[data objectForKey:@"token"] forKey:@"token"];
-    [user setValue:[data objectForKey:@"username"] forKey:@"username"];
-    [user setValue:[data objectForKey:@"nickname"] forKey:@"nickname"];
-    [user setValue:[data objectForKey:@"avatar"] forKey:@"avatar"];
-    [user setValue:[data objectForKey:@"avatarUrl"] forKey:@"avatarUrl"];
-    [user setValue:[data objectForKey:@"mobile"] forKey:@"mobile"];
+
+    [user setValue:_id forKey:@"id"];
+    [user setValue:_userId forKey:@"userId"];
+    [user setValue:_token forKey:@"token"];
+    [user setValue:_username forKey:@"username"];
+    [user setValue:_nickname forKey:@"nickname"];
+    [user setValue:_avatar forKey:@"avatar"];
+    [user setValue:_avatarUrl forKey:@"avatarUrl"];
+    [user setValue:_mobile forKey:@"mobile"];
+    
     NSError *error = nil;
+    if ([context save:&error]) {
+        //更新成功
+        NSLog(@"更新成功");
+    }
+}
+
+- (void)updateUser
+{
+    NSError *error = nil;
+    
+    NSArray *fetchedObjects = [self fetchUser];
+    
+    for (NSManagedObject *user in fetchedObjects) {
+        [user setValue:_token forKey:@"token"];
+        [user setValue:_username forKey:@"username"];
+        [user setValue:_nickname forKey:@"nickname"];
+        [user setValue:_avatar forKey:@"avatar"];
+        [user setValue:_avatarUrl forKey:@"avatarUrl"];
+        [user setValue:_mobile forKey:@"mobile"];
+    }
+    
     if ([context save:&error]) {
         //更新成功
         NSLog(@"更新成功");
@@ -76,11 +118,12 @@
     return result;
 }
 
--(BOOL) isNotEmpty
+-(BOOL) isLogin
 {
-    if ([self fetchUser].count > 0) {
+    if ([self fetchUser].count > 0 && _token!=nil) {
         return YES;
     }else{
+        [self clearAllUser];
         return NO;
     }
 }
@@ -110,15 +153,6 @@
     if ([context save:&error]) {
         //更新成功
         NSLog(@"更新成功");
-    }
-}
-
-- (BOOL)hasChange
-{
-    if ([context hasChanges]) {
-        return YES;
-    }else{
-        return NO;
     }
 }
 

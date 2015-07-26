@@ -113,6 +113,7 @@
 		723B5D401B64F83C00ABF8B9 /* JSONModel+networking.m in Sources */ = {isa = PBXBuildFile; fileRef = 723B5D331B64F83C00ABF8B9 /* JSONModel+networking.m */; };
 		723B5D411B64F83C00ABF8B9 /* JSONKeyMapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 723B5D361B64F83C00ABF8B9 /* JSONKeyMapper.m */; };
 		723B5D421B64F83C00ABF8B9 /* JSONValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 723B5D381B64F83C00ABF8B9 /* JSONValueTransformer.m */; };
+		723B5D481B655F6C00ABF8B9 /* UserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 723B5D471B655F6C00ABF8B9 /* UserInfo.m */; };
 		723F204A1B61463000E312D3 /* FieldsEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 723F20491B61463000E312D3 /* FieldsEditViewController.m */; };
 		724044851B4AB361008AD6BA /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 724044841B4AB361008AD6BA /* SettingsViewController.m */; };
 		724044891B4ABC34008AD6BA /* UIView+FrameMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = 724044881B4ABC34008AD6BA /* UIView+FrameMethods.m */; };
@@ -348,6 +349,8 @@
 		723B5D361B64F83C00ABF8B9 /* JSONKeyMapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKeyMapper.m; sourceTree = "<group>"; };
 		723B5D371B64F83C00ABF8B9 /* JSONValueTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONValueTransformer.h; sourceTree = "<group>"; };
 		723B5D381B64F83C00ABF8B9 /* JSONValueTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONValueTransformer.m; sourceTree = "<group>"; };
+		723B5D461B655F6C00ABF8B9 /* UserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfo.h; sourceTree = "<group>"; };
+		723B5D471B655F6C00ABF8B9 /* UserInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfo.m; sourceTree = "<group>"; };
 		723F20481B61463000E312D3 /* FieldsEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FieldsEditViewController.h; sourceTree = "<group>"; };
 		723F20491B61463000E312D3 /* FieldsEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FieldsEditViewController.m; sourceTree = "<group>"; };
 		724044831B4AB361008AD6BA /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
@@ -770,6 +773,8 @@
 				723B5D011B64C94400ABF8B9 /* dalmatian.xcdatamodeld */,
 				723B5D191B64DBF900ABF8B9 /* UserDataManager.h */,
 				723B5D1A1B64DBF900ABF8B9 /* UserDataManager.m */,
+				723B5D461B655F6C00ABF8B9 /* UserInfo.h */,
+				723B5D471B655F6C00ABF8B9 /* UserInfo.m */,
 			);
 			path = NetEngine;
 			sourceTree = "<group>";
@@ -1200,6 +1205,7 @@
 				724044931B4ACA74008AD6BA /* ListCell.m in Sources */,
 				39F4EB5B1B4FC519009BBDC5 /* AccountAvatarCell.m in Sources */,
 				723B5CF61B649D8200ABF8B9 /* YTKRequest.m in Sources */,
+				723B5D481B655F6C00ABF8B9 /* UserInfo.m in Sources */,
 				722C52F41B492F49004CBADA /* UIView+MJExtension.m in Sources */,
 				723B5CF21B649D8200ABF8B9 /* YTKChainRequestAgent.m in Sources */,
 				723B5CE61B649D8200ABF8B9 /* AFNetworkActivityIndicatorManager.m in Sources */,
