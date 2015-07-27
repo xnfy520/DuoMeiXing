@@ -35,10 +35,13 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
-    
+
     self.window.rootViewController = [DNATabBarController setCtrl:[[LoginViewController alloc] init]];
     
     [self setupRequestFilters];
+    
+    //从数据库查询存不存在用户数据,存在初始化用户信息
+    [[UserDataManager sharedUserDataManager] updateUser];
 
     return YES;
 }

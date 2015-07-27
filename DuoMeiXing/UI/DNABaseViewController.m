@@ -43,7 +43,11 @@
         NSLog(@"is login");
     }else{
         NSLog(@"not login");
-        postEvent(globalLoginView);
+        
+        NSLog(@"%@", [self class]);
+        if (![NSStringFromClass([self class]) isEqualToString:@"LoginViewController"]) {
+            postEvent(globalLoginView);
+        }
     }
 }
 
@@ -257,6 +261,21 @@
 - (void)readerDidCancel:(QRCodeReaderViewController *)reader
 {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+
+//判断用户是否登录,已登录跳转到首页
+- (void)mainViewWithAnimate :(BOOL)animated
+{
+    NSLog(@"mainViewWithAnimate");
+    if ([[UserDataManager sharedUserDataManager] isLogin]) {
+        NSLog(@"mainViewWithAnimate is login");
+        DNATabBarController *tabBarCtrl = [[DNATabBarController alloc] init];
+        tabBarCtrl.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+        [self.navigationController presentViewController:tabBarCtrl animated:animated completion:^{}];
+    }else{
+        NSLog(@"mainViewWithAnimate is not login");
+    }
 }
 
 @end

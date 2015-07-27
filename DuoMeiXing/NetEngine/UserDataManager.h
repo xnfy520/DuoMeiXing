@@ -26,24 +26,12 @@ SINGLETON_INTERFACE(UserDataManager);
 @property(strong, nonatomic) NSString* avatarUrl;
 @property(strong, nonatomic) NSString* mobile;
 
--(void) commitChanges;
+- (BOOL)isLogin;
 
-//Create
--(void) initUser:(NSDictionary *)data;
-
-- (void)addUser;
+- (void)initUser:(NSDictionary *)data;
 
 - (void)updateUser;
 
-//Selection
--(NSArray *)fetchUser;
-
--(BOOL) isLogin;
-
--(NSInteger) userCount;
-
--(void)deleteUser:(NSManagedObject *) user;
-
--(void)clearAllUser;
+- (void)clearUser;
 
 @end

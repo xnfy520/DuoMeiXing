@@ -47,6 +47,9 @@ typedef enum : NSUInteger{
 #define globalRegisterView @"onRegisterView"
 #define globalMainView @"onMainView"
 
+#define globalLoginAction @"onLogin"
+#define globalLogoutAction @"onLogout"
+
 #define statusBarHeight [[UIApplication sharedApplication] statusBarFrame].size.height
 
 #define navigationBarHeight self.navigationController.navigationBar.frame.size.height

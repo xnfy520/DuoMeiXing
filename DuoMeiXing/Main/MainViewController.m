@@ -28,19 +28,6 @@
     
     [self setupRightButton];
     [self setupMainTableView];
-    
-    if ([[UserDataManager sharedUserDataManager] isLogin]) {
-        NSLog(@"%@--------", [UserDataManager sharedUserDataManager].nickname);
-        
-        [UserDataManager sharedUserDataManager].nickname = @"xxx";
-        
-        NSLog(@"%@--------", [UserDataManager sharedUserDataManager].nickname);
-        
-        [[UserDataManager sharedUserDataManager] updateUser];
-    }
-    
-
-    
 
 }
 

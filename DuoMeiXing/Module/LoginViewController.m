@@ -27,8 +27,6 @@
     
     self.title = @"登录";
     
-    
-    
     [self setNavigationBar];
     
     [self setViewRectEdge];
@@ -51,6 +49,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+
     NSString *dismisstype = [[NSUserDefaults standardUserDefaults] objectForKey:@"dismisstype"];
 
     if (dismisstype!=nil) {
@@ -61,8 +60,18 @@
     }
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    //判断用户是否登录,已登录跳转到首页
+    [self mainViewWithAnimate:NO];
+    
+}
+
 - (void)viewDidDisappear:(BOOL)animated
 {
+
     [firstResponderField resignFirstResponder];
     if (firstResponderField != nil) {
         for (UITextField *subView in [self.view subviews]) {
@@ -105,16 +114,6 @@
 
 - (void)loginAction
 {
-    
-    
-    
-//    if ([manager isNotEmpty]) {
-//        NSLog(@"%ld", (long)[manager userCount]);
-//        
-//        NSArray *a = [manager getUserWithId:@"5576eec2e4b048328d5b929b"];
-//        NSLog(@"%@", a);
-//        
-//    }else{
         NSString *loginId = loginIdField.text;
         NSString *password = passwordField.text;
         if (loginId.length > 0 && password.length > 0) {
@@ -125,42 +124,27 @@
                 // 你可以直接在这里使用 self
                 NSLog(@"succeed");
                 
-                NSDictionary * dic = [request responseJSONObject];
-                
-                            NSLog(@"%@", dic);
+                NSDictionary * respData = [request responseJSONObject];
                 
                 UserDataManager *manager = [[UserDataManager alloc] init];
                 
-                [manager initUser:dic];
-                
-                [self mainView];
+                //登录成功,存储用户数据到数据库
+                [manager initUser:respData];
+                //跳转到首页
+                [self mainViewWithAnimate:YES];
                 
             } failure:^(YTKBaseRequest *request) {
                 // 你可以直接在这里使用 self
                 
                 NSLog(@"failed");
                 
-//                NSDictionary * dic = [DisplayUtil dictionaryWithJsonString:[request responseJSONObject]];
-                
                 NSLog(@"%@", [[request responseJSONObject] objectForKey:@"code"]);
                 
             }];
         }
-//    }
-    
-
-    
-    
 }
 
-- (void)mainView
-{
-    if ([[UserDataManager sharedUserDataManager] isLogin]) {
-        DNATabBarController *tabBarCtrl = [[DNATabBarController alloc] init];
-        tabBarCtrl.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-        [self.navigationController presentViewController:tabBarCtrl animated:YES completion:^{}];
-    }
-}
+
 
 - (void)registerView
 {

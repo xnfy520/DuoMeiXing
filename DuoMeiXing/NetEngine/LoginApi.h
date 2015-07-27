@@ -12,6 +12,4 @@
 
 - (id)initWithLoginId:(NSString *)loginId password:(NSString *)password;
 
-- (NSString *)userId;
-
 @end

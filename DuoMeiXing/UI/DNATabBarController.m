@@ -23,6 +23,8 @@
     addObs(globalLoginView, onLoginView);
     addObs(globalRegisterView, onRegisterView);
     addObs(globalMainView, onMainView);
+    addObs(globalLoginAction, onLogin);
+    addObs(globalLogoutAction, onLogout);
     return [super init];
 }
 
@@ -31,6 +33,8 @@
     removeObs(globalLoginView);
     removeObs(globalRegisterView);
     removeObs(globalMainView);
+    removeObs(globalLoginAction);
+    removeObs(globalLogoutAction);
 }
 
 
@@ -146,7 +150,7 @@
     
     [[NSUserDefaults standardUserDefaults] setObject:@"login" forKey:@"dismisstype"];
     
-    [self dismissViewControllerAnimated:YES completion:^{
+    [self dismissViewControllerAnimated:NO completion:^{
     
     }];
 }
@@ -172,6 +176,22 @@
     
     }];
 
+}
+
+- (void)onLogin:(NSNotification*) notification
+{
+    NSLog(@"onLogin");
+    //执行登录操作 跳转到首页
+    postEvent(globalMainView);
+}
+
+- (void)onLogout:(NSNotification*) notification
+{
+    NSLog(@"onLogout");
+    //执行退出操作 清空本地数据库用户信息
+    [[UserDataManager sharedUserDataManager] clearUser];
+    //跳转到登录界面
+    postEvent(globalLoginView)
 }
 
 @end

@@ -144,7 +144,7 @@
 {
     if(buttonIndex == 1 ) //确定按钮被点解
     {
-        postEvent(globalLoginView);
+        postEvent(globalLogoutAction);
     }
 }
 
