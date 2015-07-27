@@ -194,6 +194,8 @@
 		3944CD3C1B4E2601008B1AF1 /* home_disc_teaching_tgita@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home_disc_teaching_tgita@2x.png"; sourceTree = "<group>"; };
 		3944CD3E1B4E6078008B1AF1 /* Person.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Person.h; sourceTree = "<group>"; };
 		3944CD3F1B4E6078008B1AF1 /* Person.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Person.m; sourceTree = "<group>"; };
+		394F9BFF1B60B1EF00B40689 /* libc++abi.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++abi.dylib"; path = "usr/lib/libc++abi.dylib"; sourceTree = SDKROOT; };
+		394F9C011B60B23800B40689 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		3965EEF31B5CEF0C00FCFB6D /* movie.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = movie.mp4; sourceTree = "<group>"; };
 		39CBE3E41B4EA2FC0084A8D7 /* home_friend_new@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home_friend_new@2x.png"; sourceTree = "<group>"; };
 		39CEE7A01B590508001F9D5D /* tmbg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tmbg.png; sourceTree = "<group>"; };
@@ -931,6 +933,7 @@
 			isa = PBXGroup;
 			children = (
 				723B5D071B64CEB200ABF8B9 /* CoreData.framework */,
+
 				72E8B5711B5B6614000F7AF9 /* MediaPlayer.framework */,
 				39E6FDB01B53C4A3000EB89A /* AssetsLibrary.framework */,
 				39DE288F1B50FB6400B9558A /* AVFoundation.framework */,

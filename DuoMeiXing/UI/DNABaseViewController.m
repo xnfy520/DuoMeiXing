@@ -14,7 +14,7 @@
 #import "WebViewController.h"
 #import "ContactsViewController.h"
 
-@interface DNABaseViewController ()<WYPopoverControllerDelegate, popoverClickDelegate, QRCodeReaderDelegate>
+@interface DNABaseViewController ()<WYPopoverControllerDelegate, popoverClickDelegate, QRCodeReaderDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 {
     MBProgressHUD* HUD;
     int staticHUBCounter;
@@ -120,11 +120,11 @@
         
     }else if([type isEqualToString:@"video"]){
         
-//        postEvent(globalLoginView);
+       
+//        [self showImagePickerForSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
         
     }else if ([type isEqualToString:@"friend"]){
         
-//        postEvent(globalRegisterView);
         ContactsViewController *contactsCtrl = [[ContactsViewController alloc] init];
         contactsCtrl.title = @"新朋友";
         contactsCtrl.notPopover = YES;
@@ -135,6 +135,31 @@
     }
     
     
+}
+
+- (void)showImagePickerForSourceType:(UIImagePickerControllerSourceType)sourceType
+{
+    NSLog(@"start of showImagePickerForSourceType");
+    
+    UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+    imagePickerController.modalPresentationStyle = UIModalPresentationCurrentContext;
+    imagePickerController.sourceType = sourceType;
+    imagePickerController.delegate = (id)self;
+    
+    self.imagePickerController = imagePickerController;
+    [self presentViewController:self.imagePickerController animated:YES completion:nil];
+    
+    NSLog(@"end of showImagePickerForSourceType");
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    NSLog(@"1");
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    NSLog(@"2");
 }
 
 -(void)showHUB

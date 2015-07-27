@@ -31,6 +31,7 @@
     SubmitButton *getCodeButton = [[SubmitButton alloc] initWithFrame:CGRectMake(submitButtonPadding, CGRectGetMaxY(phoneField.frame)+20, submitButtonWith, 40) withTitle:@"获取验证码" withBackgroundColor:defaultTabBarTitleColor];
     
     [getCodeButton addToucheHandler:^(JKCountDownButton*sender, NSInteger tag) {
+        
         sender.enabled = NO;
         
         [sender startWithSecond:60];
@@ -58,7 +59,7 @@
     [self.view addSubview:verificationField];
     
     SubmitButton *regButton = [[SubmitButton alloc] initWithFrame:CGRectMake(submitButtonPadding, CGRectGetMaxY(verificationField.frame)+20, submitButtonWith, 40) withTitle:@"注册" withBackgroundColor:defaultTabBarTitleColor];
-//    [loginButton addTarget:self action:@selector(openClick) forControlEvents:UIControlEventTouchUpInside];
+    [regButton addTarget:self action:@selector(registerAction) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:regButton];
 
 }
@@ -77,6 +78,11 @@
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [firstResponderField resignFirstResponder];
+}
+
+- (void)registerAction
 {
     [firstResponderField resignFirstResponder];
 }

@@ -26,4 +26,6 @@
 
 - (void)setupInsetsTableView :(UITableView *)tableView;
 
+@property (nonatomic) UIImagePickerController *imagePickerController;
+
 @end

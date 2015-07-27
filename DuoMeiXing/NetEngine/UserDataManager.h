@@ -17,7 +17,6 @@
 
 SINGLETON_INTERFACE(UserDataManager);
 
-@property(strong, nonatomic) NSString* objectId;
 @property(strong, nonatomic) NSString* id;
 @property(strong, nonatomic) NSString* userId;
 @property(strong, nonatomic) NSString* token;
@@ -32,7 +31,7 @@ SINGLETON_INTERFACE(UserDataManager);
 //Create
 -(void) initUser:(NSDictionary *)data;
 
-- (void)saveUser;
+- (void)addUser;
 
 - (void)updateUser;
 
@@ -42,8 +41,6 @@ SINGLETON_INTERFACE(UserDataManager);
 -(BOOL) isLogin;
 
 -(NSInteger) userCount;
-
-- (NSArray *)getUserWithId:(NSString *)id;
 
 -(void)deleteUser:(NSManagedObject *) user;
 

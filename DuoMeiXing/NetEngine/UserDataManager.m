@@ -34,8 +34,7 @@ SINGLETON_IMPLEMENTATION(UserDataManager);
 
 -(void) initUser:(NSDictionary *)data
 {
-    [self clearAllUser];
-    
+
     _id = [data objectForKey:@"id"];
     _userId = [data objectForKey:@"userId"];
     _token = [data objectForKey:@"token"];
@@ -45,12 +44,17 @@ SINGLETON_IMPLEMENTATION(UserDataManager);
     _avatarUrl = [data objectForKey:@"avatarUrl"];
     _mobile = [data objectForKey:@"mobile"];
     
-    [self saveUser];
-    
+    [self addUser]; //添加用户
+
 }
 
-- (void)saveUser
+//添加用户
+- (void)addUser
 {
+    if ([self userCount] > 0){
+        [self clearAllUser];
+    }
+    
     NSManagedObject *user = [NSEntityDescription insertNewObjectForEntityForName:@"User" inManagedObjectContext:context];
 
     [user setValue:_id forKey:@"id"];
@@ -65,29 +69,45 @@ SINGLETON_IMPLEMENTATION(UserDataManager);
     NSError *error = nil;
     if ([context save:&error]) {
         //更新成功
-        NSLog(@"更新成功");
+        
+        
+        
+        NSLog(@"%@", context);
+        
+        NSLog(@"addUser 更新成功");
     }
+
+    NSLog(@"%@",[user valueForKey:@"pk"]);
 }
 
+//修改用户
 - (void)updateUser
 {
     NSError *error = nil;
     
-    NSArray *fetchedObjects = [self fetchUser];
+//    NSArray *fetchedObjects = [self fetchUser];
     
-    for (NSManagedObject *user in fetchedObjects) {
+    NSManagedObject *user = [self getCurrentUser];
+    
+    if (user != nil){ //存在用户 修改用户信息
+        //    for (NSManagedObject *user in fetchedObjects) {
+        [user setValue:_id forKey:@"id"];
         [user setValue:_token forKey:@"token"];
         [user setValue:_username forKey:@"username"];
         [user setValue:_nickname forKey:@"nickname"];
         [user setValue:_avatar forKey:@"avatar"];
         [user setValue:_avatarUrl forKey:@"avatarUrl"];
         [user setValue:_mobile forKey:@"mobile"];
+        //    }
+        
+        if ([context save:&error]) {
+            //更新成功
+            NSLog(@"updateUser 更新成功");
+        }
+        
     }
     
-    if ([context save:&error]) {
-        //更新成功
-        NSLog(@"更新成功");
-    }
+
 }
 
 -(NSArray *) fetchUser{
@@ -102,20 +122,22 @@ SINGLETON_IMPLEMENTATION(UserDataManager);
     return [context executeFetchRequest:fetchRequest error:&error];
 }
 
-- (NSArray *)getUserWithId:(NSString *)id
+- (NSManagedObject *)getCurrentUser
 {
-    
-    NSPredicate *predicate = [NSPredicate
-                              predicateWithFormat:@"id == %@",id];
-    
-    //首先你需要建立一个request
-    NSFetchRequest * request = [[NSFetchRequest alloc] init];
-    [request setEntity:[NSEntityDescription entityForName:@"User" inManagedObjectContext:context]];
-    [request setPredicate:predicate];//这里相当于sqlite中的查询条件，具体格式参考苹果文档
-    //https://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/Predicates/Articles/pCreating.html
-    NSError *error = nil;
-    NSArray *result = [context executeFetchRequest:request error:&error];//这里获取到的是一个数组，你需要取出你要更新的那个obj
-    return result;
+    if ([self userCount]>0 && _token != nil) {
+        NSPredicate *predicate = [NSPredicate
+                                  predicateWithFormat:@"token == %@",_token];
+        //首先你需要建立一个request
+        NSFetchRequest * request = [[NSFetchRequest alloc] init];
+        [request setEntity:[NSEntityDescription entityForName:@"User" inManagedObjectContext:context]];
+        [request setPredicate:predicate];//这里相当于sqlite中的查询条件，具体格式参考苹果文档
+        //https://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/Predicates/Articles/pCreating.html
+        NSError *error = nil;
+        NSArray *result = [context executeFetchRequest:request error:&error];//这里获取到的是一个数组，你需要取出你要更新的那个obj
+        return [result firstObject];
+    }else{
+        return nil;
+    }
 }
 
 -(BOOL) isLogin
@@ -123,7 +145,9 @@ SINGLETON_IMPLEMENTATION(UserDataManager);
     if ([self fetchUser].count > 0 && _token!=nil) {
         return YES;
     }else{
-        [self clearAllUser];
+        if (_token == nil) {
+            [self clearAllUser];
+        }
         return NO;
     }
 }
@@ -134,26 +158,42 @@ SINGLETON_IMPLEMENTATION(UserDataManager);
 }
 
 -(void)deleteUser:(NSManagedObject *) user {
-    [context deleteObject:user];
-    NSError *error = nil;
-    if ([context save:&error]) {
-        //更新成功
-        NSLog(@"更新成功");
+    
+    if ([self userCount]>0) {
+        
+        [context deleteObject:user];
+        
+        NSError *error = nil;
+        
+        if ([context save:&error]) {
+            //更新成功
+            NSLog(@"deleteUser 更新成功");
+        }
+        
     }
+    
+
 }
 
 -(void)clearAllUser {
-    NSArray *fetchedObjects = [self fetchUser];
     
-    for (NSManagedObject *user in fetchedObjects) {
-        [self deleteUser:user];
+    if ([self userCount]>0){
+        
+        NSArray *fetchedObjects = [self fetchUser];
+        
+        for (NSManagedObject *user in fetchedObjects) {
+            [self deleteUser:user];
+        }
+        
+        NSError *error = nil;
+        
+        if ([context save:&error]) {
+            //更新成功
+            NSLog(@"clearAllUser 更新成功");
+        }
+        
     }
     
-    NSError *error = nil;
-    if ([context save:&error]) {
-        //更新成功
-        NSLog(@"更新成功");
-    }
 }
 
 @end
