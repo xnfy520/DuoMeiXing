@@ -509,9 +509,9 @@
 		3968D29B1B6791950098C0C2 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				3968D29E1B6791950098C0C2 /* dalmatian.xcdatamodeld */,
 				3968D29C1B6791950098C0C2 /* CoreDataManager.h */,
 				3968D29D1B6791950098C0C2 /* CoreDataManager.m */,
-				3968D29E1B6791950098C0C2 /* dalmatian.xcdatamodeld */,
 				3968D2A01B6791950098C0C2 /* YTKUrlArgumentsFilter.h */,
 				3968D2A11B6791950098C0C2 /* YTKUrlArgumentsFilter.m */,
 			);
@@ -1058,10 +1058,10 @@
 			children = (
 				72ABD1D51B3081820099CB74 /* MineViewController.h */,
 				72ABD1D61B3081820099CB74 /* MineViewController.m */,
-				724044831B4AB361008AD6BA /* SettingsViewController.h */,
-				724044841B4AB361008AD6BA /* SettingsViewController.m */,
 				7240449B1B4AD48C008AD6BA /* AccountViewController.h */,
 				7240449C1B4AD48C008AD6BA /* AccountViewController.m */,
+				724044831B4AB361008AD6BA /* SettingsViewController.h */,
+				724044841B4AB361008AD6BA /* SettingsViewController.m */,
 			);
 			path = Mine;
 			sourceTree = "<group>";

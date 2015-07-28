@@ -7,7 +7,6 @@
 //
 
 #import "ListCell.h"
-#import "DNADef.h"
 
 #define TitleFontSize 14
 #define DetailFontSize 12
@@ -17,6 +16,9 @@
 #define BadgeBgColor [UIColor redColor];
 
 @implementation ListCell
+{
+    CGFloat imageWidth;
+}
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -44,8 +46,9 @@
     _cellBadgeLabel.layer.masksToBounds = YES;
     _cellBadgeLabel.layer.cornerRadius = 7;
     _cellBadgeLabel.textAlignment = NSTextAlignmentCenter;
-    _cellBadgeLabel.font = [UIFont systemFontOfSize:BadgeFontSize];
+    _cellBadgeLabel.font = [UIFont boldSystemFontOfSize:BadgeFontSize];
     _cellBadgeLabel.textColor = [UIColor whiteColor];
+    _cellBadgeLabel.hidden = YES;
     [_cellImageView addSubview:_cellBadgeLabel];
 }
 
@@ -53,7 +56,7 @@
 {
     _cellDateLabel = [[UILabel alloc] init];
     _cellDateLabel.font = [UIFont systemFontOfSize:DateFontSize];
-    _cellDateLabel.textColor = [UIColor lightGrayColor] ;
+    _cellDateLabel.textColor = [UIColor lightGrayColor];
     _cellDateLabel.textAlignment = NSTextAlignmentRight;
     [self.contentView addSubview:_cellDateLabel];
 }
@@ -79,19 +82,24 @@
 {
     [super layoutSubviews];
     
-    _cellBadgeLabel.hidden = !_showBadge;
+    if (self.cellListType == kCellListMessage) {
+        _cellBadgeLabel.hidden = NO;
+    }else if(self.cellListType == kCellListVideo){
+        imageWidth = listCellImageWith;
+    }
+//    _cellBadgeLabel.hidden = !_showBadge;
     
-    CGFloat pointY = (CGRectGetHeight(self.frame) - (CGRectGetHeight(self.frame) - 10)) / 2;
+    CGFloat pointY = (CGRectGetHeight(self.frame) - (CGRectGetHeight(self.frame) - 15)) / 2;
     
-    _cellImageView.frame = CGRectMake(5, pointY, self.imageWidth>0 ? self.imageWidth : CGRectGetHeight(self.frame)-10, CGRectGetHeight(self.frame) - 10);
+    _cellImageView.frame = CGRectMake(10, pointY, imageWidth>0 ? imageWidth : CGRectGetHeight(self.frame)-15, CGRectGetHeight(self.frame) - 15);
     
-    _cellBadgeLabel.frame = CGRectMake(CGRectGetWidth(_cellImageView.frame)-11, -3, 14, 14);
+    _cellBadgeLabel.frame = CGRectMake(CGRectGetWidth(_cellImageView.frame)-9, -5, 14, 14);
 
-    _cellTitleLabel.frame = CGRectMake(CGRectGetWidth(_cellImageView.frame) + 10, CGRectGetHeight(self.frame)/2 - [DisplayUtil getSize:12 withString:_cellTitleLabel.text].height, (CGRectGetWidth(self.frame)-CGRectGetWidth(_cellImageView.frame)) / 2, TitleFontSize);
+    _cellTitleLabel.frame = CGRectMake(CGRectGetWidth(_cellImageView.frame) + 20, CGRectGetHeight(self.frame)/2 - [DisplayUtil getSize:12 withString:_cellTitleLabel.text].height, (CGRectGetWidth(self.frame)-CGRectGetWidth(_cellImageView.frame)) / 2, TitleFontSize);
 
-    _cellDetailLabel.frame = CGRectMake(CGRectGetWidth(_cellImageView.frame) + 10, CGRectGetHeight(self.frame)/2 + 4, CGRectGetWidth(self.frame) - CGRectGetWidth(_cellImageView.frame) - 15, DetailFontSize);
+    _cellDetailLabel.frame = CGRectMake(CGRectGetWidth(_cellImageView.frame) + 20, CGRectGetHeight(self.frame)/2 + 4, CGRectGetWidth(self.frame) - CGRectGetWidth(_cellImageView.frame) - 15, DetailFontSize);
     
-    _cellDateLabel.frame = CGRectMake(CGRectGetWidth(self.frame) - CGRectGetWidth(self.frame) / 3 - 5, CGRectGetMinY(_cellTitleLabel.frame), CGRectGetWidth(self.frame) / 3, DateFontSize);
+    _cellDateLabel.frame = CGRectMake(CGRectGetWidth(self.frame) - CGRectGetWidth(self.frame) / 3 - 10, CGRectGetMinY(_cellTitleLabel.frame), CGRectGetWidth(self.frame) / 3, DateFontSize);
     
 }
 

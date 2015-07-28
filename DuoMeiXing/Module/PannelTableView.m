@@ -96,22 +96,20 @@
         
     }
     
+    cell.cellListType = kCellListComment;
+    
     cell.cellImageView.image = [UIImage imageNamed:@"limbo"];
     
     if ([_identifier isEqualToString:@"video"]) {
-        cell.imageWidth = 50;
+        cell.cellListType = kCellListVideo;
         cell.cellImageView.image = [UIImage imageNamed:@"xianjian"];
     }
-    
-    
-    
+
     cell.cellDateLabel.text = @"6月16日";
     
     cell.cellTitleLabel.text = @"天陨";
     
     cell.cellDetailLabel.text = @"雪念飞叶";
-    
-    cell.showBadge = NO;
     
     return cell;
     

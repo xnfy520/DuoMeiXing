@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DNADef.h"
 
 @interface ListCell : UITableViewCell
 
@@ -15,7 +16,6 @@
 @property(nonatomic, retain) UILabel *cellDateLabel;
 @property(nonatomic, retain) UILabel *cellTitleLabel;
 @property(nonatomic, retain) UILabel *cellDetailLabel;
-@property(nonatomic, assign) BOOL showBadge;
-@property(nonatomic, assign) CGFloat imageWidth;
+@property(nonatomic, assign) CellListType cellListType;
 
 @end

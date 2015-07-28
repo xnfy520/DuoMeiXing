@@ -52,7 +52,6 @@
              @"token": [NSString class],
              @"username": [NSString class],
              @"nickname": [NSString class],
-             @"avatar": [NSString class],
              @"avatarUrl": [NSString class],
              @"mobile": [NSString class]
              };

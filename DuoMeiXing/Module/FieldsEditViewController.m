@@ -9,7 +9,7 @@
 #import "FieldsEditViewController.h"
 #import "DNADef.h"
 
-#define PHOTO_TAG 1
+#define EDIT_FIELD_TAG 1
 
 @implementation FieldsEditViewController
 {
@@ -101,13 +101,13 @@
         editField = [[UITextField alloc] initWithFrame:CGRectMake(10, 0, screenWidth-10, CGRectGetHeight(cell.frame))];
         editField.clearButtonMode = UITextFieldViewModeWhileEditing;
         editField.delegate = self;
-        editField.tag = PHOTO_TAG;
+        editField.tag = EDIT_FIELD_TAG;
         [cell.contentView addSubview:editField];
     }else{
-        editField = (UITextField *)[cell.contentView viewWithTag:PHOTO_TAG];
+        editField = (UITextField *)[cell.contentView viewWithTag:EDIT_FIELD_TAG];
     }
     
-    editField.text = @"天陨";
+    editField.text = [UserDataManager sharedUserDataManager].nickname;
     
     
     

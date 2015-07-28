@@ -101,14 +101,14 @@
     
     if ([ctrl isEqualToString:@"nickname"]) {
         
-        cell.detailTextLabel.text = @"天陨";
+        cell.detailTextLabel.text = [UserDataManager sharedUserDataManager].nickname;
         cell.detailTextLabel.font = [UIFont systemFontOfSize:14];
         
         
     }else if([ctrl isEqualToString:@"avatar"]){
+        
         UIImageView * avatarImageView = [[UIImageView alloc] initWithFrame:CGRectMake(screenWidth-35-30, (CGRectGetHeight(cell.contentView.frame)-30)/2, 30, 30)];
-        avatarImageView.image = [UIImage imageNamed:@"avatar"];
-//        cell.accessoryView = avatarImageView;
+        avatarImageView.image = [DisplayUtil getImageFromURL:[UserDataManager sharedUserDataManager].avatarUrl];
         [cell.contentView addSubview:avatarImageView];
         
     }

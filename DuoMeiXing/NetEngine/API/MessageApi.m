@@ -54,4 +54,9 @@
              };
 }
 
+- (NSInteger)cacheTimeInSeconds {
+    // 3分钟 = 180 秒
+    return 180;
+}
+
 @end

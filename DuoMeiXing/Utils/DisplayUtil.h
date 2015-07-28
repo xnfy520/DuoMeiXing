@@ -18,4 +18,8 @@
 
 + (NSDictionary *)dictionaryWithJsonString:(NSString *)jsonString;
 
++ (UIImage *)getImageFromURL:(NSString *)fileURL;
+
++ (NSString *)getDateStringWithDate:(NSDate *)date DateFormat:(NSString *)formatString;
+
 @end

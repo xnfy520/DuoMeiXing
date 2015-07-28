@@ -20,6 +20,12 @@ typedef enum : NSUInteger{
     kPhotographAlbumTypeHot         //最热视频
 } PhotographAlbumType;
 
+typedef enum : NSUInteger{
+    kCellListMessage,    //消息列表类型
+    kCellListComment,    //评论列表类型
+    kCellListVideo       //视频列表类型
+} CellListType;
+
 #define apiBaseUrl @"http://app.dmxing.cn";
 
 #define companyCode @"dalmatian"
@@ -56,7 +62,9 @@ typedef enum : NSUInteger{
 
 #define statusBarWithNavigationBarHeight (statusBarHeight + navigationBarHeight)
 
-#define listCellHeight 50.0f
+#define listCellHeight 55.0f
+
+#define listCellImageWith 60.0f
 
 #define popoverSize CGSizeMake(120, 119)
 

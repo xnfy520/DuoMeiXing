@@ -20,6 +20,7 @@
 
 {
     UITableView *mainTableView;
+    NSMutableArray *tableData;
     
 }
 
@@ -29,6 +30,8 @@
     
     [self setupRightButton];
     [self setupMainTableView];
+    
+    tableData = [[NSMutableArray alloc] init];
 
 }
 
@@ -42,17 +45,35 @@
 {
     MessageApi *api = [[MessageApi alloc] initWithPageNo:@"1" pageSize:@"10"];
     
+    if ([api cacheJson]) {
+        
+        NSLog(@"cacheJson");
+        
+        NSDictionary *cacheData = [api cacheJson];
+        
+        NSArray * cacheResult = [cacheData objectForKey:@"result"];
+        
+        [tableData setArray:cacheResult];
+        
+        [mainTableView reloadData];
+    }
+    
+    [self showHUB];
     [api startWithCompletionBlockWithSuccess:^(YTKBaseRequest *request) {
-
+        [self hideHUB];
         NSLog(@"succeed");
         
         NSDictionary * respData = [request responseJSONObject];
-
-        NSLog(@"%@", respData);
+        
+        NSArray * respResult = [respData objectForKey:@"result"];
+        
+        [tableData setArray:respResult];
+        
+        [mainTableView reloadData];
         
     } failure:^(YTKBaseRequest *request) {
         // 你可以直接在这里使用 self
-        
+        [self hideHUB];
         NSLog(@"failed");
         
         NSLog(@"%@", [[request responseJSONObject] objectForKey:@"code"]);
@@ -93,7 +114,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 5;
+    return tableData.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -106,17 +127,19 @@
         cell = [[ListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
     }
     
-    cell.cellImageView.image = [UIImage imageNamed:@"limbo"];
+    cell.cellImageView.image = [DisplayUtil getImageFromURL:[[tableData objectAtIndex:indexPath.row] objectForKey:@"fromLogoUrl"]];
     
-    cell.cellBadgeLabel.text = @"2";
+    cell.cellBadgeLabel.text = [NSString stringWithFormat:@"%@", [[tableData objectAtIndex:indexPath.row] objectForKey:@"msgNumbers"]];
+
+    NSDate * date = [NSDate dateWithTimeIntervalSince1970:([[[tableData objectAtIndex:indexPath.row] objectForKey:@"createTime"] doubleValue]/1000)];
     
-    cell.cellDateLabel.text = @"6月16日";
+    cell.cellDateLabel.text = [DisplayUtil getDateStringWithDate:date DateFormat:@"MM-dd"];
     
-    cell.cellTitleLabel.text = @"天陨";
+    cell.cellTitleLabel.text = [[tableData objectAtIndex:indexPath.row] objectForKey:@"fromNickName"];
     
-    cell.cellDetailLabel.text = @"雪念飞叶";
+    cell.cellDetailLabel.text = [[tableData objectAtIndex:indexPath.row] objectForKey:@"content"];
     
-    cell.showBadge = YES;
+    cell.cellListType = kCellListMessage;
     
     return cell;
 }

@@ -113,11 +113,11 @@
             
         }
         
-        cell.cellImageView.image = [UIImage imageNamed:@"avatar"];
+        cell.cellImageView.image = [DisplayUtil getImageFromURL:[UserDataManager sharedUserDataManager].avatarUrl];
         
-        cell.cellTitleLabel.text = @"天陨";
+        cell.cellTitleLabel.text = [UserDataManager sharedUserDataManager].nickname;
         
-        cell.cellPhoneLabel.text = @"15820448273";
+        cell.cellPhoneLabel.text = [UserDataManager sharedUserDataManager].mobile;
         
 //        cell.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"limbo"]];
         

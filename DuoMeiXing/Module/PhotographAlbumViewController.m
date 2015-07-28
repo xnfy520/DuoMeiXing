@@ -89,7 +89,7 @@
         
     }
     
-    cell.imageWidth = 50;
+    cell.cellListType = kCellListVideo;
     
     cell.cellImageView.image = [UIImage imageNamed:@"xianjian"];
     
@@ -100,11 +100,7 @@
     cell.cellTitleLabel.text = @"天陨";
     
     cell.cellDetailLabel.text = @"雪念飞叶";
-    
-    cell.showBadge = NO;
-    
-    
-    
+
     return cell;
 }
 

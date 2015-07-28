@@ -66,4 +66,33 @@
     return dic;
 }
 
++ (UIImage *)getImageFromURL:(NSString *)fileURL {
+    
+    UIImage * result;
+    
+    if (fileURL != nil && ![fileURL isEqualToString:@""]) {
+        NSData * data = [NSData dataWithContentsOfURL:[NSURL URLWithString:fileURL]];
+        if (data) {
+            result = [UIImage imageWithData:data];
+        }else{
+            result = [UIImage imageNamed:@"avatar"];
+        }
+    }else{
+        result = [UIImage imageNamed:@"avatar"];
+    }
+    
+    return result;
+    
+}
+
++ (NSString *)getDateStringWithDate:(NSDate *)date DateFormat:(NSString *)formatString
+{
+    
+    ////yyyy-MM-dd HH:mm:ss
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:formatString];
+    NSString *dateString = [dateFormat stringFromDate:date];
+    return dateString;
+}
+
 @end
