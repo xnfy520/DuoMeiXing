@@ -30,6 +30,12 @@
 		3944CD3D1B4E2601008B1AF1 /* home_disc_teaching_tgita@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3944CD3C1B4E2601008B1AF1 /* home_disc_teaching_tgita@2x.png */; };
 		3944CD401B4E6078008B1AF1 /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 3944CD3F1B4E6078008B1AF1 /* Person.m */; };
 		3965EEF41B5CEF0C00FCFB6D /* movie.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 3965EEF31B5CEF0C00FCFB6D /* movie.mp4 */; };
+		3968D2961B6791250098C0C2 /* LoginApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 3968D2951B6791250098C0C2 /* LoginApi.m */; };
+		3968D29A1B67912C0098C0C2 /* UserDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3968D2991B67912C0098C0C2 /* UserDataManager.m */; };
+		3968D2A21B6791950098C0C2 /* CoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3968D29D1B6791950098C0C2 /* CoreDataManager.m */; };
+		3968D2A31B6791950098C0C2 /* dalmatian.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3968D29E1B6791950098C0C2 /* dalmatian.xcdatamodeld */; };
+		3968D2A41B6791950098C0C2 /* YTKUrlArgumentsFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3968D2A11B6791950098C0C2 /* YTKUrlArgumentsFilter.m */; };
+		3968D2A71B6792100098C0C2 /* MessageApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 3968D2A61B6792100098C0C2 /* MessageApi.m */; };
 		39CBE3E51B4EA2FC0084A8D7 /* home_friend_new@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39CBE3E41B4EA2FC0084A8D7 /* home_friend_new@2x.png */; };
 		39CEE7A11B590508001F9D5D /* tmbg.png in Resources */ = {isa = PBXBuildFile; fileRef = 39CEE7A01B590508001F9D5D /* tmbg.png */; };
 		39CF7E771B4BAE8B00EF8C2D /* PopoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39CF7E761B4BAE8B00EF8C2D /* PopoverViewController.m */; };
@@ -97,12 +103,7 @@
 		723B5CF41B649D8200ABF8B9 /* YTKNetworkConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 723B5CD71B649D8200ABF8B9 /* YTKNetworkConfig.m */; };
 		723B5CF51B649D8200ABF8B9 /* YTKNetworkPrivate.m in Sources */ = {isa = PBXBuildFile; fileRef = 723B5CD91B649D8200ABF8B9 /* YTKNetworkPrivate.m */; };
 		723B5CF61B649D8200ABF8B9 /* YTKRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 723B5CDB1B649D8200ABF8B9 /* YTKRequest.m */; };
-		723B5CF91B649FFC00ABF8B9 /* YTKUrlArgumentsFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 723B5CF81B649FFC00ABF8B9 /* YTKUrlArgumentsFilter.m */; };
-		723B5D001B64A1C100ABF8B9 /* LoginApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 723B5CFF1B64A1C100ABF8B9 /* LoginApi.m */; };
-		723B5D031B64C94400ABF8B9 /* dalmatian.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 723B5D011B64C94400ABF8B9 /* dalmatian.xcdatamodeld */; };
 		723B5D081B64CEB200ABF8B9 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 723B5D071B64CEB200ABF8B9 /* CoreData.framework */; };
-		723B5D1B1B64DBF900ABF8B9 /* UserDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 723B5D1A1B64DBF900ABF8B9 /* UserDataManager.m */; };
-		723B5D1E1B64DEEC00ABF8B9 /* CoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 723B5D1D1B64DEEC00ABF8B9 /* CoreDataManager.m */; };
 		723B5D391B64F83C00ABF8B9 /* JSONModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 723B5D221B64F83C00ABF8B9 /* JSONModel.m */; };
 		723B5D3A1B64F83C00ABF8B9 /* JSONModelArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 723B5D241B64F83C00ABF8B9 /* JSONModelArray.m */; };
 		723B5D3B1B64F83C00ABF8B9 /* JSONModelClassProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = 723B5D261B64F83C00ABF8B9 /* JSONModelClassProperty.m */; };
@@ -113,7 +114,6 @@
 		723B5D401B64F83C00ABF8B9 /* JSONModel+networking.m in Sources */ = {isa = PBXBuildFile; fileRef = 723B5D331B64F83C00ABF8B9 /* JSONModel+networking.m */; };
 		723B5D411B64F83C00ABF8B9 /* JSONKeyMapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 723B5D361B64F83C00ABF8B9 /* JSONKeyMapper.m */; };
 		723B5D421B64F83C00ABF8B9 /* JSONValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 723B5D381B64F83C00ABF8B9 /* JSONValueTransformer.m */; };
-		723B5D481B655F6C00ABF8B9 /* UserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 723B5D471B655F6C00ABF8B9 /* UserInfo.m */; };
 		723F204A1B61463000E312D3 /* FieldsEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 723F20491B61463000E312D3 /* FieldsEditViewController.m */; };
 		724044851B4AB361008AD6BA /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 724044841B4AB361008AD6BA /* SettingsViewController.m */; };
 		724044891B4ABC34008AD6BA /* UIView+FrameMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = 724044881B4ABC34008AD6BA /* UIView+FrameMethods.m */; };
@@ -194,9 +194,18 @@
 		3944CD3C1B4E2601008B1AF1 /* home_disc_teaching_tgita@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home_disc_teaching_tgita@2x.png"; sourceTree = "<group>"; };
 		3944CD3E1B4E6078008B1AF1 /* Person.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Person.h; sourceTree = "<group>"; };
 		3944CD3F1B4E6078008B1AF1 /* Person.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Person.m; sourceTree = "<group>"; };
-		394F9BFF1B60B1EF00B40689 /* libc++abi.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++abi.dylib"; path = "usr/lib/libc++abi.dylib"; sourceTree = SDKROOT; };
-		394F9C011B60B23800B40689 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		3965EEF31B5CEF0C00FCFB6D /* movie.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = movie.mp4; sourceTree = "<group>"; };
+		3968D2941B6791250098C0C2 /* LoginApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginApi.h; sourceTree = "<group>"; };
+		3968D2951B6791250098C0C2 /* LoginApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginApi.m; sourceTree = "<group>"; };
+		3968D2981B67912C0098C0C2 /* UserDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDataManager.h; sourceTree = "<group>"; };
+		3968D2991B67912C0098C0C2 /* UserDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDataManager.m; sourceTree = "<group>"; };
+		3968D29C1B6791950098C0C2 /* CoreDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataManager.h; sourceTree = "<group>"; };
+		3968D29D1B6791950098C0C2 /* CoreDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataManager.m; sourceTree = "<group>"; };
+		3968D29F1B6791950098C0C2 /* dalmatian.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = dalmatian.xcdatamodel; sourceTree = "<group>"; };
+		3968D2A01B6791950098C0C2 /* YTKUrlArgumentsFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTKUrlArgumentsFilter.h; sourceTree = "<group>"; };
+		3968D2A11B6791950098C0C2 /* YTKUrlArgumentsFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTKUrlArgumentsFilter.m; sourceTree = "<group>"; };
+		3968D2A51B6792100098C0C2 /* MessageApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageApi.h; sourceTree = "<group>"; };
+		3968D2A61B6792100098C0C2 /* MessageApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageApi.m; sourceTree = "<group>"; };
 		39CBE3E41B4EA2FC0084A8D7 /* home_friend_new@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home_friend_new@2x.png"; sourceTree = "<group>"; };
 		39CEE7A01B590508001F9D5D /* tmbg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tmbg.png; sourceTree = "<group>"; };
 		39CF7E751B4BAE8B00EF8C2D /* PopoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopoverViewController.h; sourceTree = "<group>"; };
@@ -320,16 +329,7 @@
 		723B5CD91B649D8200ABF8B9 /* YTKNetworkPrivate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTKNetworkPrivate.m; sourceTree = "<group>"; };
 		723B5CDA1B649D8200ABF8B9 /* YTKRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTKRequest.h; sourceTree = "<group>"; };
 		723B5CDB1B649D8200ABF8B9 /* YTKRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTKRequest.m; sourceTree = "<group>"; };
-		723B5CF71B649FFC00ABF8B9 /* YTKUrlArgumentsFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTKUrlArgumentsFilter.h; sourceTree = "<group>"; };
-		723B5CF81B649FFC00ABF8B9 /* YTKUrlArgumentsFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTKUrlArgumentsFilter.m; sourceTree = "<group>"; };
-		723B5CFE1B64A1C100ABF8B9 /* LoginApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginApi.h; sourceTree = "<group>"; };
-		723B5CFF1B64A1C100ABF8B9 /* LoginApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginApi.m; sourceTree = "<group>"; };
-		723B5D021B64C94400ABF8B9 /* dalmatian.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = dalmatian.xcdatamodel; sourceTree = "<group>"; };
 		723B5D071B64CEB200ABF8B9 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		723B5D191B64DBF900ABF8B9 /* UserDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDataManager.h; sourceTree = "<group>"; };
-		723B5D1A1B64DBF900ABF8B9 /* UserDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDataManager.m; sourceTree = "<group>"; };
-		723B5D1C1B64DEEC00ABF8B9 /* CoreDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataManager.h; sourceTree = "<group>"; };
-		723B5D1D1B64DEEC00ABF8B9 /* CoreDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataManager.m; sourceTree = "<group>"; };
 		723B5D211B64F83C00ABF8B9 /* JSONModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONModel.h; sourceTree = "<group>"; };
 		723B5D221B64F83C00ABF8B9 /* JSONModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONModel.m; sourceTree = "<group>"; };
 		723B5D231B64F83C00ABF8B9 /* JSONModelArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONModelArray.h; sourceTree = "<group>"; };
@@ -351,8 +351,6 @@
 		723B5D361B64F83C00ABF8B9 /* JSONKeyMapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKeyMapper.m; sourceTree = "<group>"; };
 		723B5D371B64F83C00ABF8B9 /* JSONValueTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONValueTransformer.h; sourceTree = "<group>"; };
 		723B5D381B64F83C00ABF8B9 /* JSONValueTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONValueTransformer.m; sourceTree = "<group>"; };
-		723B5D461B655F6C00ABF8B9 /* UserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfo.h; sourceTree = "<group>"; };
-		723B5D471B655F6C00ABF8B9 /* UserInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfo.m; sourceTree = "<group>"; };
 		723F20481B61463000E312D3 /* FieldsEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FieldsEditViewController.h; sourceTree = "<group>"; };
 		723F20491B61463000E312D3 /* FieldsEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FieldsEditViewController.m; sourceTree = "<group>"; };
 		724044831B4AB361008AD6BA /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
@@ -486,6 +484,38 @@
 				3944CD261B4E25C5008B1AF1 /* plus_video@3x.png */,
 			);
 			path = Tmp;
+			sourceTree = "<group>";
+		};
+		3968D2931B67908A0098C0C2 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				3968D2941B6791250098C0C2 /* LoginApi.h */,
+				3968D2951B6791250098C0C2 /* LoginApi.m */,
+				3968D2A51B6792100098C0C2 /* MessageApi.h */,
+				3968D2A61B6792100098C0C2 /* MessageApi.m */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		3968D2971B67912C0098C0C2 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				3968D2981B67912C0098C0C2 /* UserDataManager.h */,
+				3968D2991B67912C0098C0C2 /* UserDataManager.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		3968D29B1B6791950098C0C2 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				3968D29C1B6791950098C0C2 /* CoreDataManager.h */,
+				3968D29D1B6791950098C0C2 /* CoreDataManager.m */,
+				3968D29E1B6791950098C0C2 /* dalmatian.xcdatamodeld */,
+				3968D2A01B6791950098C0C2 /* YTKUrlArgumentsFilter.h */,
+				3968D2A11B6791950098C0C2 /* YTKUrlArgumentsFilter.m */,
+			);
+			path = Common;
 			sourceTree = "<group>";
 		};
 		39DE28821B50C2AC00B9558A /* ScanQR */ = {
@@ -766,17 +796,9 @@
 		723F20971B61656C00E312D3 /* NetEngine */ = {
 			isa = PBXGroup;
 			children = (
-				723B5D1C1B64DEEC00ABF8B9 /* CoreDataManager.h */,
-				723B5D1D1B64DEEC00ABF8B9 /* CoreDataManager.m */,
-				723B5CF71B649FFC00ABF8B9 /* YTKUrlArgumentsFilter.h */,
-				723B5CF81B649FFC00ABF8B9 /* YTKUrlArgumentsFilter.m */,
-				723B5CFE1B64A1C100ABF8B9 /* LoginApi.h */,
-				723B5CFF1B64A1C100ABF8B9 /* LoginApi.m */,
-				723B5D011B64C94400ABF8B9 /* dalmatian.xcdatamodeld */,
-				723B5D191B64DBF900ABF8B9 /* UserDataManager.h */,
-				723B5D1A1B64DBF900ABF8B9 /* UserDataManager.m */,
-				723B5D461B655F6C00ABF8B9 /* UserInfo.h */,
-				723B5D471B655F6C00ABF8B9 /* UserInfo.m */,
+				3968D29B1B6791950098C0C2 /* Common */,
+				3968D2971B67912C0098C0C2 /* Model */,
+				3968D2931B67908A0098C0C2 /* API */,
 			);
 			path = NetEngine;
 			sourceTree = "<group>";
@@ -933,7 +955,6 @@
 			isa = PBXGroup;
 			children = (
 				723B5D071B64CEB200ABF8B9 /* CoreData.framework */,
-
 				72E8B5711B5B6614000F7AF9 /* MediaPlayer.framework */,
 				39E6FDB01B53C4A3000EB89A /* AssetsLibrary.framework */,
 				39DE288F1B50FB6400B9558A /* AVFoundation.framework */,
@@ -1193,8 +1214,8 @@
 				724044A01B4AD964008AD6BA /* WebViewController.m in Sources */,
 				723B5CEC1B649D8200ABF8B9 /* UIRefreshControl+AFNetworking.m in Sources */,
 				722C52E41B492F49004CBADA /* MJRefreshComponent.m in Sources */,
+				3968D2A31B6791950098C0C2 /* dalmatian.xcdatamodeld in Sources */,
 				72D0CECC1B5BFB590094CB3C /* RegisterViewController.m in Sources */,
-				723B5D031B64C94400ABF8B9 /* dalmatian.xcdatamodeld in Sources */,
 				72ABD1E21B3081CD0099CB74 /* DiscoverViewController.m in Sources */,
 				722C52F31B492F49004CBADA /* UIScrollView+MJRefresh.m in Sources */,
 				723B5CE81B649D8200ABF8B9 /* UIAlertView+AFNetworking.m in Sources */,
@@ -1208,7 +1229,7 @@
 				724044931B4ACA74008AD6BA /* ListCell.m in Sources */,
 				39F4EB5B1B4FC519009BBDC5 /* AccountAvatarCell.m in Sources */,
 				723B5CF61B649D8200ABF8B9 /* YTKRequest.m in Sources */,
-				723B5D481B655F6C00ABF8B9 /* UserInfo.m in Sources */,
+				3968D2A41B6791950098C0C2 /* YTKUrlArgumentsFilter.m in Sources */,
 				722C52F41B492F49004CBADA /* UIView+MJExtension.m in Sources */,
 				723B5CF21B649D8200ABF8B9 /* YTKChainRequestAgent.m in Sources */,
 				723B5CE61B649D8200ABF8B9 /* AFNetworkActivityIndicatorManager.m in Sources */,
@@ -1229,19 +1250,18 @@
 				7240449D1B4AD48C008AD6BA /* AccountViewController.m in Sources */,
 				724044851B4AB361008AD6BA /* SettingsViewController.m in Sources */,
 				722C52EF1B492F49004CBADA /* MJRefreshStateHeader.m in Sources */,
-				723B5D1E1B64DEEC00ABF8B9 /* CoreDataManager.m in Sources */,
+				3968D2A71B6792100098C0C2 /* MessageApi.m in Sources */,
 				723B5D3C1B64F83C00ABF8B9 /* JSONModelError.m in Sources */,
 				722C52E71B492F49004CBADA /* MJRefreshAutoGifFooter.m in Sources */,
 				723B5D3E1B64F83C00ABF8B9 /* JSONAPI.m in Sources */,
 				72ABD1E71B3081DD0099CB74 /* ContactsViewController.m in Sources */,
+				3968D2A21B6791950098C0C2 /* CoreDataManager.m in Sources */,
 				722C52E31B492F49004CBADA /* MJRefreshBackFooter.m in Sources */,
-				723B5D001B64A1C100ABF8B9 /* LoginApi.m in Sources */,
 				722C52EC1B492F49004CBADA /* MJRefreshBackStateFooter.m in Sources */,
 				722C52ED1B492F49004CBADA /* MJRefreshGifHeader.m in Sources */,
 				723B5CE51B649D8200ABF8B9 /* AFURLSessionManager.m in Sources */,
 				72ABD1AE1B3065310099CB74 /* main.m in Sources */,
 				72C5F5B91B5822590030AA5B /* PannelTableView.m in Sources */,
-				723B5D1B1B64DBF900ABF8B9 /* UserDataManager.m in Sources */,
 				729386531B3311F0006F3FED /* DNATabBarController.m in Sources */,
 				7293865F1B33149D006F3FED /* DisplayUtil.m in Sources */,
 				723B5CF01B649D8200ABF8B9 /* YTKBatchRequestAgent.m in Sources */,
@@ -1264,7 +1284,6 @@
 				723B5CF11B649D8200ABF8B9 /* YTKChainRequest.m in Sources */,
 				723B5CE11B649D8200ABF8B9 /* AFSecurityPolicy.m in Sources */,
 				723B5CED1B649D8200ABF8B9 /* UIWebView+AFNetworking.m in Sources */,
-				723B5CF91B649FFC00ABF8B9 /* YTKUrlArgumentsFilter.m in Sources */,
 				724044A81B4AEBFB008AD6BA /* WYStoryboardPopoverSegue.m in Sources */,
 				39E6FD861B53AC9D000EB89A /* QRCodeReaderView.m in Sources */,
 				72D8F7EE1B5D57C2001F1260 /* SubmitButton.m in Sources */,
@@ -1283,9 +1302,11 @@
 				723B5D401B64F83C00ABF8B9 /* JSONModel+networking.m in Sources */,
 				72ABD1D81B3081820099CB74 /* MineViewController.m in Sources */,
 				723B5CF31B649D8200ABF8B9 /* YTKNetworkAgent.m in Sources */,
+				3968D2961B6791250098C0C2 /* LoginApi.m in Sources */,
 				723B5D3B1B64F83C00ABF8B9 /* JSONModelClassProperty.m in Sources */,
 				723B5CEA1B649D8200ABF8B9 /* UIImageView+AFNetworking.m in Sources */,
 				723B5D391B64F83C00ABF8B9 /* JSONModel.m in Sources */,
+				3968D29A1B67912C0098C0C2 /* UserDataManager.m in Sources */,
 				7293864F1B3311F0006F3FED /* DNABaseViewController.m in Sources */,
 				723B5CEF1B649D8200ABF8B9 /* YTKBatchRequest.m in Sources */,
 			);
@@ -1496,12 +1517,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		723B5D011B64C94400ABF8B9 /* dalmatian.xcdatamodeld */ = {
+		3968D29E1B6791950098C0C2 /* dalmatian.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				723B5D021B64C94400ABF8B9 /* dalmatian.xcdatamodel */,
+				3968D29F1B6791950098C0C2 /* dalmatian.xcdatamodel */,
 			);
-			currentVersion = 723B5D021B64C94400ABF8B9 /* dalmatian.xcdatamodel */;
+			currentVersion = 3968D29F1B6791950098C0C2 /* dalmatian.xcdatamodel */;
 			path = dalmatian.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

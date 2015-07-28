@@ -9,12 +9,14 @@
 #import "LoginApi.h"
 #import "DNADef.h"
 
-@implementation LoginApi {
+@implementation LoginApi
+{
     NSString *_loginId;
     NSString *_password;
 }
 
-- (id)initWithLoginId:(NSString *)loginId password:(NSString *)password {
+- (id)initWithLoginId:(NSString *)loginId password:(NSString *)password
+{
     self = [super init];
     if (self) {
         _loginId = loginId;
@@ -23,15 +25,18 @@
     return self;
 }
 
-- (NSString *)requestUrl {
+- (NSString *)requestUrl
+{
     return @"/dmx/app/ajax/login.dmx";
 }
 
-- (YTKRequestMethod)requestMethod {
+- (YTKRequestMethod)requestMethod
+{
     return YTKRequestMethodPost;
 }
 
-- (id)requestArgument {
+- (id)requestArgument
+{
     return @{
              @"loginId": _loginId,
              @"password": _password,
@@ -39,7 +44,8 @@
              };
 }
 
-- (id)jsonValidator {
+- (id)jsonValidator
+{
     return @{
              @"id": [NSString class],
              @"userId": [NSString class],

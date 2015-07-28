@@ -10,6 +10,7 @@
 #import "DNADef.h"
 #import "ListCell.h"
 #import "DisplayViewController.h"
+#import "MessageApi.h"
 
 @interface MainViewController ()<UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
@@ -28,6 +29,35 @@
     
     [self setupRightButton];
     [self setupMainTableView];
+
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [self requstApi];
+}
+
+- (void)requstApi
+{
+    MessageApi *api = [[MessageApi alloc] initWithPageNo:@"1" pageSize:@"10"];
+    
+    [api startWithCompletionBlockWithSuccess:^(YTKBaseRequest *request) {
+
+        NSLog(@"succeed");
+        
+        NSDictionary * respData = [request responseJSONObject];
+
+        NSLog(@"%@", respData);
+        
+    } failure:^(YTKBaseRequest *request) {
+        // 你可以直接在这里使用 self
+        
+        NSLog(@"failed");
+        
+        NSLog(@"%@", [[request responseJSONObject] objectForKey:@"code"]);
+        
+    }];
 
 }
 
