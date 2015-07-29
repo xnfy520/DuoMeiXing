@@ -50,6 +50,13 @@
                                @"ctrl":@"Settings",
                                @"icon":@"home_me_settings"
                                }
+                           ],
+                       @[
+                           @{
+                               @"title":@"订单",
+                               @"ctrl":@"Order",
+                               @"icon":@"home_me_center"
+                               }
                            ]
                        ];
     

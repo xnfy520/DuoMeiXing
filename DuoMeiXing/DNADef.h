@@ -12,12 +12,17 @@
 #import "DisplayUtil.h"
 #import "DNATabBarController.h"
 #import "UIView+FrameMethods.h"
+#import "UIImage+DNA.h"
 #import "UserDataManager.h"
 
 typedef enum : NSUInteger{
     kPhotographAlbumTypeDefault,    //我的视频
     kPhotographAlbumTypeNewest,     //最新视频
-    kPhotographAlbumTypeHot         //最热视频
+    kPhotographAlbumTypeHot,        //最热视频
+    kPhotographAlbumTypePiano,      //钢琴视频
+    kPhotographAlbumTypeTguita,     //吉他视频
+    kPhotographAlbumTypeEguita,     //电吉他视频
+    kPhotographAlbumTypeViolin,     //小提琴视频
 } PhotographAlbumType;
 
 typedef enum : NSUInteger{

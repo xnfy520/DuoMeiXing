@@ -9,7 +9,6 @@
 #import "DisplayUtil.h"
 #import "UIView+FrameMethods.h"
 
-
 @implementation DisplayUtil
 
 + (CGSize)getSize:(CGFloat)fontSize withString:(NSString *)fontText

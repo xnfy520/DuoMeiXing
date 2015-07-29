@@ -32,15 +32,14 @@
     [self setupMainTableView];
     
     tableData = [[NSMutableArray alloc] init];
-
+    [self requstApi];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    [self requstApi];
 }
-
+//
 - (void)requstApi
 {
     MessageApi *api = [[MessageApi alloc] initWithPageNo:@"1" pageSize:@"10"];
@@ -56,6 +55,7 @@
         [tableData setArray:cacheResult];
         
         [mainTableView reloadData];
+        return;
     }
     
     [self showHUB];

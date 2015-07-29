@@ -65,8 +65,7 @@
     [super viewDidAppear:animated];
     
     //判断用户是否登录,已登录跳转到首页
-    [self mainViewWithAnimate:NO];
-    
+    [self mainViewWithAnimate:YES];
 }
 
 - (void)viewDidDisappear:(BOOL)animated

@@ -9,6 +9,7 @@
 #import "DiscoverViewController.h"
 #import "DNADef.h"
 #import "PhotographAlbumViewController.h"
+#import "PhotographAlbumCategoryViewController.h"
 #import "WebViewController.h"
 #import "ContactsViewController.h"
 
@@ -65,11 +66,13 @@
                                @"title":@"乐器",
                                @"icon":@"home_disc_teaching_tgita",
                                @"ctrl":@"master"
-                               },
+                               }
+                           ],
+                       @[
                            @{
-                               @"title":@"琴行",
-                               @"icon":@"home_disc_teaching_piano",
-                               @"ctrl":@"specialty"
+                               @"title":@"教材",
+                               @"icon":@"home_disc_teaching",
+                               @"ctrl":@"teaching"
                                }
                            ]
                        ];
@@ -138,7 +141,7 @@
     
     PhotographAlbumViewController *photographAlbumCtrl = [[PhotographAlbumViewController alloc] init];
     
-    ContactsViewController *contactsCtrl = [[ContactsViewController alloc] init];
+    
     
     if([ctrl isEqualToString:@"newest"]){
         
@@ -152,21 +155,24 @@
         
         [self.navigationController pushViewController:photographAlbumCtrl animated:YES];
         
-    }else if([ctrl isEqualToString:@"master"]){
-        
-        [WebViewController showWebPageInViewCtrl:self withUrl:@"http://www.163.com" withPostData:nil withViewTitle:appName];
-    
-    }else if([ctrl isEqualToString:@"specialty"]){
-    
-        [WebViewController showWebPageInViewCtrl:self withUrl:@"http://www.qq.com" withPostData:nil withViewTitle:appName];
-        
     }else if([ctrl isEqualToString:@"contacts"]){
-
+        
+        ContactsViewController *contactsCtrl = [[ContactsViewController alloc] init];
         contactsCtrl.title = title;
         contactsCtrl.notHeader = YES;
         contactsCtrl.notPopover = YES;
         contactsCtrl.hasInvitation = NO;
         [self.navigationController pushViewController:contactsCtrl animated:YES];
+        
+    }else if([ctrl isEqualToString:@"master"]){
+        
+        [WebViewController showWebPageInViewCtrl:self withUrl:@"http://www.163.com" withPostData:nil withViewTitle:appName];
+        
+    }else if([ctrl isEqualToString:@"teaching"]){
+        
+        PhotographAlbumCategoryViewController *photographAlbumCategoryCtrl = [[PhotographAlbumCategoryViewController alloc] init];
+        
+        [self.navigationController pushViewController:photographAlbumCategoryCtrl animated:YES];
         
     }
     

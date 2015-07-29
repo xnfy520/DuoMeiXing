@@ -7,7 +7,7 @@
 //
 
 #import "PhotographAlbumViewController.h"
-#import "DNADef.h"
+
 #import "DisplayViewController.h"
 #import "ListCell.h"
 
@@ -34,6 +34,18 @@
             break;
         case kPhotographAlbumTypeHot:
             self.title = @"最热视频";
+            break;
+        case kPhotographAlbumTypeTguita:
+            self.title = @"民谣吉他教材";
+            break;
+        case kPhotographAlbumTypePiano:
+            self.title = @"钢琴教材";
+            break;
+        case kPhotographAlbumTypeEguita:
+            self.title = @"电吉他教材";
+            break;
+        case kPhotographAlbumTypeViolin:
+            self.title = @"小提琴教材";
             break;
         default:
             self.title = @"我的视频";
