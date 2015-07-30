@@ -87,7 +87,6 @@
     }else if(self.cellListType == kCellListVideo){
         imageWidth = listCellImageWith;
     }
-//    _cellBadgeLabel.hidden = !_showBadge;
     
     CGFloat pointY = (CGRectGetHeight(self.frame) - (CGRectGetHeight(self.frame) - 15)) / 2;
     

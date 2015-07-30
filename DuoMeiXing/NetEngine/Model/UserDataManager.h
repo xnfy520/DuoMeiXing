@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <CoreData/CoreData.h>
+#import "CoreDataManager.h"
 #import "Singleton.h"
 
 @interface UserDataManager : NSObject

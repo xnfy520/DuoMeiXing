@@ -7,7 +7,6 @@
 //
 
 #import "UserDataManager.h"
-#import "CoreDataManager.h"
 
 @implementation UserDataManager
 
@@ -37,6 +36,7 @@ SINGLETON_IMPLEMENTATION(UserDataManager);
 
 - (void)initUser:(NSDictionary *)data
 {
+    
     _id = [data objectForKey:@"id"];
     _userId = [data objectForKey:@"userId"];
     _token = [data objectForKey:@"token"];
@@ -45,6 +45,7 @@ SINGLETON_IMPLEMENTATION(UserDataManager);
     _avatar = [data objectForKey:@"avatar"];
     _avatarUrl = [data objectForKey:@"avatarUrl"];
     _mobile = [data objectForKey:@"mobile"];
+
     [self addUser]; //添加用户
 }
 

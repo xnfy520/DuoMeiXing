@@ -10,7 +10,7 @@
 #import "DNADef.h"
 #import "ListCell.h"
 #import "DisplayViewController.h"
-#import "MessageApi.h"
+
 
 @interface MainViewController ()<UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
@@ -39,41 +39,33 @@
 {
     [super viewDidAppear:animated];
 }
-//
+
 - (void)requstApi
 {
-    MessageApi *api = [[MessageApi alloc] initWithPageNo:@"1" pageSize:@"10"];
-    
-    if ([api cacheJson]) {
-        
-        NSLog(@"cacheJson");
-        
-        NSDictionary *cacheData = [api cacheJson];
-        
-        NSArray * cacheResult = [cacheData objectForKey:@"result"];
-        
-        [tableData setArray:cacheResult];
-        
-        [mainTableView reloadData];
-        return;
-    }
-    
+    RequstPage *requstPage = [[RequstPage alloc] init];
+    requstPage.pageNo = @"1";
+    requstPage.pageSize = @"10";
+
+    RequestService *api = [[RequestService alloc] initReqeustUrl:apiMessage withPostData:requstPage withResponseValidator:[ResponseMessageData responseValidator]];
+
     [self showHUB];
+    
     [api startWithCompletionBlockWithSuccess:^(YTKBaseRequest *request) {
+        
         [self hideHUB];
+        
         NSLog(@"succeed");
         
-        NSDictionary * respData = [request responseJSONObject];
+        ResponseMessageData *messageData = [ResponseMessageData objectWithKeyValues:[request responseJSONObject]];
         
-        NSArray * respResult = [respData objectForKey:@"result"];
-        
-        [tableData setArray:respResult];
+        [tableData setArray:messageData.result];
         
         [mainTableView reloadData];
         
     } failure:^(YTKBaseRequest *request) {
-        // 你可以直接在这里使用 self
+        
         [self hideHUB];
+        
         NSLog(@"failed");
         
         NSLog(@"%@", [[request responseJSONObject] objectForKey:@"code"]);
@@ -127,17 +119,25 @@
         cell = [[ListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
     }
     
-    cell.cellImageView.image = [DisplayUtil getImageFromURL:[[tableData objectAtIndex:indexPath.row] objectForKey:@"fromLogoUrl"]];
+    ResponseMessageResultData * messageResultData = [tableData objectAtIndex:indexPath.row];
     
-    cell.cellBadgeLabel.text = [NSString stringWithFormat:@"%@", [[tableData objectAtIndex:indexPath.row] objectForKey:@"msgNumbers"]];
+    cell.cellImageView.image = [DisplayUtil getImageFromURL:messageResultData.fromLogoUrl];
 
-    NSDate * date = [NSDate dateWithTimeIntervalSince1970:([[[tableData objectAtIndex:indexPath.row] objectForKey:@"createTime"] doubleValue]/1000)];
+    NSString *badgeNum = [NSString stringWithFormat:@"%@", messageResultData.msgNumbers];
     
+    cell.cellBadgeLabel.text = badgeNum;
+    
+    if ([badgeNum isEqualToString:@""] || badgeNum == nil || [badgeNum integerValue] == 0) {
+        cell.cellBadgeLabel.hidden = YES;
+    }
+    
+    NSDate * date = [NSDate dateWithTimeIntervalSince1970:([messageResultData.createTime doubleValue]/1000)];
+
     cell.cellDateLabel.text = [DisplayUtil getDateStringWithDate:date DateFormat:@"MM-dd"];
+
+    cell.cellTitleLabel.text = messageResultData.fromNickName;
     
-    cell.cellTitleLabel.text = [[tableData objectAtIndex:indexPath.row] objectForKey:@"fromNickName"];
-    
-    cell.cellDetailLabel.text = [[tableData objectAtIndex:indexPath.row] objectForKey:@"content"];
+    cell.cellDetailLabel.text = messageResultData.content;
     
     cell.cellListType = kCellListMessage;
     

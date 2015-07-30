@@ -11,8 +11,6 @@
 #import "RegisterViewController.h"
 #import "SubmitButton.h"
 #import "FormTextField.h"
-#import "LoginApi.h"
-#import "UserDataManager.h"
 
 @implementation LoginViewController
 {
@@ -116,19 +114,22 @@
         NSString *loginId = loginIdField.text;
         NSString *password = passwordField.text;
         if (loginId.length > 0 && password.length > 0) {
-            LoginApi *api = [[LoginApi alloc] initWithLoginId:loginId password:password];
             
+            RequestLogin *reqLogin = [[RequestLogin alloc] init];
+            reqLogin.loginId = loginId;
+            reqLogin.password = password;
+            reqLogin.loginCode = companyCode;
+            
+            RequestService *api = [[RequestService alloc] initReqeustUrl:apiLogin withPostData:reqLogin withResponseValidator:[ResponseLoginData responseValidator]];
             
             [api startWithCompletionBlockWithSuccess:^(YTKBaseRequest *request) {
-                // 你可以直接在这里使用 self
-                NSLog(@"succeed");
-                
-                NSDictionary * respData = [request responseJSONObject];
-                
+
+                ResponseLoginData * loginData = [ResponseLoginData objectWithKeyValues:[request responseJSONObject]];
                 UserDataManager *manager = [[UserDataManager alloc] init];
-                
+
                 //登录成功,存储用户数据到数据库
-                [manager initUser:respData];
+                [manager initUser:[loginData JSONObject]];
+//                [manager initUser:[request responseJSONObject]];
                 //跳转到首页
                 [self mainViewWithAnimate:YES];
                 

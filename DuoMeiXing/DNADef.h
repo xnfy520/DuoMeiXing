@@ -13,6 +13,11 @@
 #import "DNATabBarController.h"
 #import "UIView+FrameMethods.h"
 #import "UIImage+DNA.h"
+#import "MJExtension.h"
+#import "MJExtensionConfig.h"
+#import "RequstData.h"
+#import "ResponseData.h"
+#import "RequestService.h"
 #import "UserDataManager.h"
 
 typedef enum : NSUInteger{
@@ -31,7 +36,10 @@ typedef enum : NSUInteger{
     kCellListVideo       //视频列表类型
 } CellListType;
 
-#define apiBaseUrl @"http://app.dmxing.cn";
+#define apiBaseUrl @"http://app.dmxing.cn"
+
+#define apiLogin @"/dmx/app/ajax/login.dmx"
+#define apiMessage @"/dmx/app/ajax/video/message/get.dmx"
 
 #define companyCode @"dalmatian"
 
