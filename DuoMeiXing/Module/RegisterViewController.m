@@ -10,6 +10,7 @@
 #import "DNADef.h"
 #import "SubmitButton.h"
 #import "FormTextField.h"
+#import "RegisterNextViewController.h"
 
 @implementation RegisterViewController
 {
@@ -24,13 +25,16 @@
     
     [self setViewRectEdge];
     
-    FormTextField *phoneField = [[FormTextField alloc] initWithFrame:CGRectMake(formFieldPadding, 20, formFieldWith, 40) withTitle:@"手机 +86" withPlaceholder:@"请输入手机号码" withLeftViewWidth:80];
+    FormTextField *phoneField = [[FormTextField alloc] initWithFrame:CGRectMake(formFieldPadding, 20, formFieldWith, 40) withTitle:@"手机 +86" withPlaceholder:@"请输入手机号码" withLeftViewWidth:65];
     phoneField.delegate = self;
     [self.view addSubview:phoneField];
     
     SubmitButton *getCodeButton = [[SubmitButton alloc] initWithFrame:CGRectMake(submitButtonPadding, CGRectGetMaxY(phoneField.frame)+20, submitButtonWith, 40) withTitle:@"获取验证码" withBackgroundColor:defaultTabBarTitleColor];
+    [self.view addSubview:getCodeButton];
     
     [getCodeButton addToucheHandler:^(JKCountDownButton*sender, NSInteger tag) {
+        
+        [self requestSMSCode];
         
         sender.enabled = NO;
         
@@ -38,7 +42,7 @@
         
         [sender didChange:^NSString *(JKCountDownButton *countDownButton,int second) {
             [countDownButton setBackgroundColor:[UIColor lightGrayColor]];
-            NSString *title = [NSString stringWithFormat:@"%ds重新获取",second];
+            NSString *title = [NSString stringWithFormat:@"%ds后重新获取",second];
             return title;
         }];
         
@@ -51,17 +55,48 @@
         
     }];
     
-//    [getCodeButton addTarget:self action:@selector(openClick) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:getCodeButton];
-    
-    FormTextField *verificationField = [[FormTextField alloc] initWithFrame:CGRectMake(formFieldPadding, CGRectGetMaxY(getCodeButton.frame)+20, formFieldWith, 40) withTitle:@"验证码" withPlaceholder:@"请输验证码" withLeftViewWidth:80];
+    FormTextField *verificationField = [[FormTextField alloc] initWithFrame:CGRectMake(formFieldPadding, CGRectGetMaxY(getCodeButton.frame)+20, formFieldWith, 40) withTitle:@"验证码" withPlaceholder:@"请输验证码" withLeftViewWidth:65];
     verificationField.delegate = self;
     [self.view addSubview:verificationField];
     
-    SubmitButton *regButton = [[SubmitButton alloc] initWithFrame:CGRectMake(submitButtonPadding, CGRectGetMaxY(verificationField.frame)+20, submitButtonWith, 40) withTitle:@"注册" withBackgroundColor:defaultTabBarTitleColor];
-    [regButton addTarget:self action:@selector(registerAction) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:regButton];
+    SubmitButton *nextButton = [[SubmitButton alloc] initWithFrame:CGRectMake(submitButtonPadding, CGRectGetMaxY(verificationField.frame)+20, submitButtonWith, 40) withTitle:@"下一步" withBackgroundColor:defaultTabBarTitleColor];
+    [nextButton addTarget:self action:@selector(registerNextAction) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:nextButton];
 
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    [firstResponderField resignFirstResponder];
+}
+
+- (void)requestSMSCode
+{
+    RequestSMS *requestData = [[RequestSMS alloc] init];
+    requestData.mobile = @"15820448273";
+    
+    RequestService *api = [[RequestService alloc] initReqeustUrl:appAPISMS withPostData:requestData withResponseValidator:[ResponseSMS responseValidator]];
+    
+    [api startWithCompletionBlockWithSuccess:^(YTKBaseRequest *request) {
+        
+        ResponseSMS * responseData = [ResponseSMS objectWithKeyValues:[request responseJSONObject]];
+        
+        if ([responseData.result integerValue] == 0)
+        {
+            NSLog(@"获取成功");
+        }else{
+            NSLog(@"获取失败");
+        }
+        
+    } failure:^(YTKBaseRequest *request) {
+        // 你可以直接在这里使用 self
+        
+        NSLog(@"failed");
+        
+        NSLog(@"%@", [[request responseJSONObject] objectForKey:@"code"]);
+        
+    }];
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
@@ -82,9 +117,12 @@
     [firstResponderField resignFirstResponder];
 }
 
-- (void)registerAction
+- (void)registerNextAction
 {
-    [firstResponderField resignFirstResponder];
+
+    RegisterNextViewController *registerNextCtrl = [[RegisterNextViewController alloc] init];
+    [self.navigationController pushViewController:registerNextCtrl animated:YES];
+    
 }
 
 @end

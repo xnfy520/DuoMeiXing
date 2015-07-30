@@ -9,6 +9,9 @@
 #import "FormTextField.h"
 
 @implementation FormTextField
+{
+    UILabel *leftLabel;
+}
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -28,15 +31,21 @@
         self.borderStyle = UITextBorderStyleRoundedRect;
         self.clearButtonMode = UITextFieldViewModeWhileEditing;
         
-        UILabel *leftLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, width, CGRectGetHeight(frame)-10)];
-        leftLabel.textAlignment = NSTextAlignmentCenter;
+        leftLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, width, CGRectGetHeight(frame)-10)];
+        leftLabel.textAlignment = NSTextAlignmentLeft;
         leftLabel.text = title;
         leftLabel.font = [UIFont systemFontOfSize:16];
-        
         self.leftView = leftLabel;
         self.leftViewMode = UITextFieldViewModeAlways;
     }
     return self;
+}
+
+- (CGRect)leftViewRectForBounds:(CGRect)bounds
+{
+    CGRect leftRect = [super leftViewRectForBounds:bounds];
+    leftRect.origin.x += 10;// 右偏10
+    return leftRect;
 }
 
 @end

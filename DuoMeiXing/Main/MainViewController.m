@@ -42,11 +42,11 @@
 
 - (void)requstApi
 {
-    RequstPage *requstPage = [[RequstPage alloc] init];
-    requstPage.pageNo = @"1";
-    requstPage.pageSize = @"10";
+    RequstPage *requestData = [[RequstPage alloc] init];
+    requestData.pageNo = @"1";
+    requestData.pageSize = @"10";
 
-    RequestService *api = [[RequestService alloc] initReqeustUrl:apiMessage withPostData:requstPage withResponseValidator:[ResponseMessageData responseValidator]];
+    RequestService *api = [[RequestService alloc] initReqeustUrl:appAPIMessage withPostData:requestData withResponseValidator:[ResponseMessage responseValidator]];
 
     [self showHUB];
     
@@ -56,9 +56,9 @@
         
         NSLog(@"succeed");
         
-        ResponseMessageData *messageData = [ResponseMessageData objectWithKeyValues:[request responseJSONObject]];
+        ResponseMessage *responseData = [ResponseMessage objectWithKeyValues:[request responseJSONObject]];
         
-        [tableData setArray:messageData.result];
+        [tableData setArray:responseData.result];
         
         [mainTableView reloadData];
         
@@ -119,11 +119,11 @@
         cell = [[ListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
     }
     
-    ResponseMessageResultData * messageResultData = [tableData objectAtIndex:indexPath.row];
+    ResponseMessageResult * messageResult = [tableData objectAtIndex:indexPath.row];
     
-    cell.cellImageView.image = [DisplayUtil getImageFromURL:messageResultData.fromLogoUrl];
+    cell.cellImageView.image = [DisplayUtil getImageFromURL:messageResult.fromLogoUrl];
 
-    NSString *badgeNum = [NSString stringWithFormat:@"%@", messageResultData.msgNumbers];
+    NSString *badgeNum = [NSString stringWithFormat:@"%@", messageResult.msgNumbers];
     
     cell.cellBadgeLabel.text = badgeNum;
     
@@ -131,13 +131,13 @@
         cell.cellBadgeLabel.hidden = YES;
     }
     
-    NSDate * date = [NSDate dateWithTimeIntervalSince1970:([messageResultData.createTime doubleValue]/1000)];
+    NSDate * date = [NSDate dateWithTimeIntervalSince1970:([messageResult.createTime doubleValue]/1000)];
 
     cell.cellDateLabel.text = [DisplayUtil getDateStringWithDate:date DateFormat:@"MM-dd"];
 
-    cell.cellTitleLabel.text = messageResultData.fromNickName;
+    cell.cellTitleLabel.text = messageResult.fromNickName;
     
-    cell.cellDetailLabel.text = messageResultData.content;
+    cell.cellDetailLabel.text = messageResult.content;
     
     cell.cellListType = kCellListMessage;
     

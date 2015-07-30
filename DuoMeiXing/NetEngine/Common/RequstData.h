@@ -12,13 +12,26 @@
 @property (nonatomic, copy) NSString *token;
 @end
 
-@interface RequstPage : RequstData
-@property (nonatomic, copy) NSString *pageNo;
-@property (nonatomic, copy) NSString *pageSize;
-@end
-
 @interface RequestLogin : RequstData
 @property (nonatomic, copy) NSString *loginId;
 @property (nonatomic, copy) NSString *password;
 @property (nonatomic, copy) NSString *loginCode;
+@end
+
+@interface RequestRegister : RequstData
+@property (nonatomic, copy) NSString *mobile;
+@property (nonatomic, copy) NSString *password;
+@property (nonatomic, copy) NSString *smsCode;
+@property (nonatomic, copy) NSString *nickname;
+@property (nonatomic, copy) NSString *avatar;
+@property (nonatomic, copy) NSString *companyCode;
+@end
+
+@interface RequestSMS : RequstData
+@property (nonatomic, copy) NSString *mobile;
+@end
+
+@interface RequstPage : RequstData
+@property (nonatomic, copy) NSString *pageNo;
+@property (nonatomic, copy) NSString *pageSize;
 @end

@@ -10,7 +10,7 @@
 #import "DNADef.h"
 #import "AccountAvatarCell.h"
 #import "AccountViewController.h"
-#import "PhotographAlbumViewController.h"
+#import "PhotographAlbumCategoryViewController.h"
 #import "SettingsViewController.h"
 
 @interface MineViewController ()<UITableViewDelegate, UITableViewDataSource>
@@ -40,7 +40,7 @@
                        @[
                            @{
                                @"title":@"影集",
-                               @"ctrl":@"PhotographAlbum",
+                               @"ctrl":@"PhotographAlbumCategory",
                                @"icon":@"home_me_video"
                                }
                            ],
@@ -173,11 +173,11 @@
         
         [self.navigationController pushViewController:accountCtrl animated:YES];
         
-    }else if([ctrl isEqualToString:@"PhotographAlbum"]){
+    }else if([ctrl isEqualToString:@"PhotographAlbumCategory"]){
         
-        PhotographAlbumViewController *photographAlbumCtrl = [[PhotographAlbumViewController alloc] init];
-        
-        [self.navigationController pushViewController:photographAlbumCtrl animated:YES];
+        PhotographAlbumCategoryViewController *photographAlbumCategoryCtrl = [[PhotographAlbumCategoryViewController alloc] init];
+        photographAlbumCategoryCtrl.category = kPhotographAlbumCategoryMyVideo;
+        [self.navigationController pushViewController:photographAlbumCategoryCtrl animated:YES];
         
     }else if ([ctrl isEqualToString:@"Settings"]) {
         

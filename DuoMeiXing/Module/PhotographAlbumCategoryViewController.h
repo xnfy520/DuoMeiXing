@@ -7,7 +7,10 @@
 //
 
 #import "DNABaseViewController.h"
+#import "DNADef.h"
 
 @interface PhotographAlbumCategoryViewController : DNABaseViewController
+
+@property (nonatomic, assign)PhotographAlbumCategory category;
 
 @end

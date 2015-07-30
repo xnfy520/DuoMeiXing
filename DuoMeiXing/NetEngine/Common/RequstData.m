@@ -7,7 +7,7 @@
 //
 
 #import "RequstData.h"
-#import "UserDataManager.h"
+#import "DNADef.h"
 
 @implementation RequstData
 -(id)init
@@ -19,10 +19,30 @@
 }
 @end
 
-@implementation RequstPage
+@implementation RequestLogin
+-(id)init
+{
+    if (self = [super init]) {
+        self.loginCode = appCompanyCode;
+    }
+    return self;
+}
+@end
+
+@implementation RequestRegister
+-(id)init
+{
+    if (self = [super init]) {
+        self.companyCode = appCompanyCode;
+    }
+    return self;
+}
+@end
+
+@implementation RequestSMS
 
 @end
 
-@implementation RequestLogin
+@implementation RequstPage
 
 @end

@@ -14,7 +14,7 @@
 @end
 
 //登录
-@implementation ResponseLoginData
+@implementation ResponseLogin
 
 + (NSDictionary *)responseValidator
 {
@@ -31,9 +31,20 @@
 
 @end
 
+@implementation ResponseSMS
+
++ (NSDictionary *)responseValidator
+{
+    return @{
+             @"result": [NSNumber class]
+             };
+}
+
+@end
+
 //消息结果
 
-@implementation ResponseMessageResultData
+@implementation ResponseMessageResult
 
 +(NSArray *)allowedPropertyNames
 {
@@ -43,7 +54,7 @@
 @end
 
 //消息
-@implementation ResponseMessageData
+@implementation ResponseMessage
 
 + (NSDictionary *)responseValidator
 {

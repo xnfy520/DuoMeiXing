@@ -29,11 +29,11 @@
     
     [self setViewRectEdge];
     
-    loginIdField = [[FormTextField alloc] initWithFrame:CGRectMake(formFieldPadding, 20, formFieldWith, 40) withTitle:@"帐号" withPlaceholder:@"手机号码/用户名/邮箱" withLeftViewWidth:50];
+    loginIdField = [[FormTextField alloc] initWithFrame:CGRectMake(formFieldPadding, 20, formFieldWith, 40) withTitle:@"帐号" withPlaceholder:@"手机号码/用户名/邮箱" withLeftViewWidth:35];
     loginIdField.delegate = self;
     [self.view addSubview:loginIdField];
     
-    passwordField = [[FormTextField alloc] initWithFrame:CGRectMake(formFieldPadding, CGRectGetMaxY(loginIdField.frame)+20, formFieldWith, 40) withTitle:@"密码" withPlaceholder:@"密码" withLeftViewWidth:50];
+    passwordField = [[FormTextField alloc] initWithFrame:CGRectMake(formFieldPadding, CGRectGetMaxY(loginIdField.frame)+20, formFieldWith, 40) withTitle:@"密码" withPlaceholder:@"密码" withLeftViewWidth:35];
     passwordField.delegate = self;
     passwordField.secureTextEntry = YES;
     [self.view addSubview:passwordField];
@@ -115,20 +115,19 @@
         NSString *password = passwordField.text;
         if (loginId.length > 0 && password.length > 0) {
             
-            RequestLogin *reqLogin = [[RequestLogin alloc] init];
-            reqLogin.loginId = loginId;
-            reqLogin.password = password;
-            reqLogin.loginCode = companyCode;
+            RequestLogin *requestData = [[RequestLogin alloc] init];
+            requestData.loginId = loginId;
+            requestData.password = password;
             
-            RequestService *api = [[RequestService alloc] initReqeustUrl:apiLogin withPostData:reqLogin withResponseValidator:[ResponseLoginData responseValidator]];
+            RequestService *api = [[RequestService alloc] initReqeustUrl:appAPILogin withPostData:requestData withResponseValidator:[ResponseLogin responseValidator]];
             
             [api startWithCompletionBlockWithSuccess:^(YTKBaseRequest *request) {
 
-                ResponseLoginData * loginData = [ResponseLoginData objectWithKeyValues:[request responseJSONObject]];
+                ResponseLogin * responseData = [ResponseLogin objectWithKeyValues:[request responseJSONObject]];
                 UserDataManager *manager = [[UserDataManager alloc] init];
 
                 //登录成功,存储用户数据到数据库
-                [manager initUser:[loginData JSONObject]];
+                [manager initUser:[responseData JSONObject]];
 //                [manager initUser:[request responseJSONObject]];
                 //跳转到首页
                 [self mainViewWithAnimate:YES];

@@ -15,7 +15,7 @@
 @interface PhotographAlbumCategoryViewController ()<UITableViewDelegate, UITableViewDataSource>
 {
     UITableView *mainTableView;
-    NSArray *mainOptionData;
+    NSArray *mainTableData;
 }
 @end
 
@@ -35,7 +35,7 @@
     
     [self setupInsetsTableView:mainTableView];
     
-    mainOptionData = @[
+    NSArray *teachingArrary = @[
                        @{
                            @"title":@"民谣吉他教材",
                            @"icon":@"home_disc_teaching_tgita",
@@ -61,6 +61,33 @@
                            @"list":@[]
                            }
                        ];
+    
+    NSArray *myVideoArray = @[
+                       @{
+                           @"title":@"发布成功",
+                           @"icon":@"video_my_published",
+                           @"ctrl":@"published",
+                           @"list":@[]
+                           },
+                       @{
+                           @"title":@"等待审核",
+                           @"icon":@"video_my_checking",
+                           @"ctrl":@"checking",
+                           @"list":@[]
+                           },
+                       @{
+                           @"title":@"正在上传",
+                           @"icon":@"video_my_uploading",
+                           @"ctrl":@"uploading",
+                           @"list":@[]
+                           }
+                       ];
+    
+    if (self.category == kPhotographAlbumCategoryTeaching) {
+        mainTableData = [[NSArray alloc] initWithArray:teachingArrary];
+    }else if(self.category == kPhotographAlbumCategoryMyVideo){
+        mainTableData = [[NSArray alloc] initWithArray:myVideoArray];
+    }
 
 }
 
@@ -96,35 +123,19 @@
     headerView.backgroundColor = [UIColor whiteColor];
     
     UIImageView *headerIcon = [[UIImageView alloc] initWithFrame:CGRectMake(5, (35-25)/2, 25, 25)];
-    NSString *icon = [[mainOptionData objectAtIndex:section] objectForKey:@"icon"];
+    NSString *icon = [[mainTableData objectAtIndex:section] objectForKey:@"icon"];
     headerIcon.image = [UIImage imageNamed:icon];
     [headerView addSubview:headerIcon];
     
     UILabel *headerTitle = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(headerIcon.frame)+5, (35-15)/2, screenWidth-40*2, 15)];
     headerTitle.font = [UIFont boldSystemFontOfSize:14];
-    headerTitle.text = [[mainOptionData objectAtIndex:section] objectForKey:@"title"];
+    headerTitle.text = [[mainTableData objectAtIndex:section] objectForKey:@"title"];
     [headerView addSubview:headerTitle];
     
     UIButton *headerButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [headerButton setImage:[[[UIImage imageNamed:@"iosArrowRight"] imageToSize:CGSizeMake(8, 21)] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] forState:UIControlStateNormal];
     headerButton.contentMode = UIViewContentModeCenter;
-    switch (section) {
-        case 0:
-            headerButton.tag = kPhotographAlbumTypeTguita;
-            break;
-        case 1:
-            headerButton.tag = kPhotographAlbumTypePiano;
-            break;
-        case 2:
-            headerButton.tag = kPhotographAlbumTypeEguita;
-            break;
-        case 3:
-            headerButton.tag = kPhotographAlbumTypeViolin;
-            break;
-        default:
-            headerButton.tag = kPhotographAlbumTypeTguita;
-            break;
-    }
+
     [headerButton addTarget:self action:@selector(toCategory:) forControlEvents:UIControlEventTouchUpInside];
     headerButton.frame  = CGRectMake(screenWidth-25-5, (35-25)/2, 25, 25);
     [headerView addSubview:headerButton];
@@ -146,12 +157,12 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return mainOptionData.count;
+    return mainTableData.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return mainOptionData.count;
+    return 3;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -195,8 +206,7 @@
     UIButton *button = (UIButton *)sender;
     
     PhotographAlbumViewController *photographAlbumCtrl = [[PhotographAlbumViewController alloc] init];
-    NSLog(@"%ld", (long)button.tag);
-    photographAlbumCtrl.listType = button.tag;
+
     [self.navigationController pushViewController:photographAlbumCtrl animated:YES];
 }
 

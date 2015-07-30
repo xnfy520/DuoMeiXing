@@ -171,7 +171,7 @@
     }else if([ctrl isEqualToString:@"teaching"]){
         
         PhotographAlbumCategoryViewController *photographAlbumCategoryCtrl = [[PhotographAlbumCategoryViewController alloc] init];
-        
+        photographAlbumCategoryCtrl.category = kPhotographAlbumCategoryTeaching;
         [self.navigationController pushViewController:photographAlbumCategoryCtrl animated:YES];
         
     }

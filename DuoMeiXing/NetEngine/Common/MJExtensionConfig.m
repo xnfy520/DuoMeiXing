@@ -14,9 +14,9 @@
 
 + (void)load
 {
-    [ResponseMessageData setupObjectClassInArray:^NSDictionary *{
+    [ResponseMessage setupObjectClassInArray:^NSDictionary *{
         return @{
-                 @"result" : @"ResponseMessageResultData"
+                 @"result" : @"ResponseMessageResult"
                  };
     }];
 }

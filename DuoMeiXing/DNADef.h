@@ -28,6 +28,9 @@ typedef enum : NSUInteger{
     kPhotographAlbumTypeTguita,     //吉他视频
     kPhotographAlbumTypeEguita,     //电吉他视频
     kPhotographAlbumTypeViolin,     //小提琴视频
+    kPhotographAlbumTypePublished,  //发布成功
+    kPhotographAlbumTypeChecking,   //等待审核
+    kPhotographAlbumTypeUploading   //正在上传
 } PhotographAlbumType;
 
 typedef enum : NSUInteger{
@@ -36,12 +39,19 @@ typedef enum : NSUInteger{
     kCellListVideo       //视频列表类型
 } CellListType;
 
+typedef enum : NSUInteger{
+    kPhotographAlbumCategoryTeaching,   //教材
+    kPhotographAlbumCategoryMyVideo    //我的视频
+} PhotographAlbumCategory;
+
 #define apiBaseUrl @"http://app.dmxing.cn"
 
-#define apiLogin @"/dmx/app/ajax/login.dmx"
-#define apiMessage @"/dmx/app/ajax/video/message/get.dmx"
+#define appAPILogin        @"/dmx/app/ajax/login.dmx"                      //登录
+#define appAPIRegister     @"/dmx/app/ajax/member_register.dmx"            //注册
+#define appAPISMS          @"/dmx/app/ajax/send_smscode.dmx"               //验证码
+#define appAPIMessage      @"/dmx/app/ajax/video/message/get.dmx"          //消息
 
-#define companyCode @"dalmatian"
+#define appCompanyCode @"dalmatian"
 
 #define addObs(a, b)\
 [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(b:) name:a object:nil];

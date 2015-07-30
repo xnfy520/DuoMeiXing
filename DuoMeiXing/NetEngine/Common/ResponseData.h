@@ -12,8 +12,9 @@
 
 @end
 
+
 //登录
-@interface ResponseLoginData : ResponseData
+@interface ResponseLogin : ResponseData
 
 @property (nonatomic, copy) NSString *id;
 @property (nonatomic, copy) NSString *userId;
@@ -28,8 +29,19 @@
 @end
 
 
+//验证码
+@interface ResponseSMS : ResponseData
+
+@property (nonatomic, copy) NSNumber *result;
+@property (nonatomic, copy) NSString *tips;
+
++ (NSDictionary *)responseValidator;
+
+@end
+
+
 //消息结果
-@interface ResponseMessageResultData : ResponseData
+@interface ResponseMessageResult : ResponseData
 
 @property (nonatomic, copy) NSString *id;
 @property (nonatomic, copy) NSString *content;
@@ -46,7 +58,7 @@
 
 
 //消息
-@interface ResponseMessageData : ResponseData
+@interface ResponseMessage : ResponseData
 
 @property (nonatomic, copy) NSNumber *pageNo;
 @property (nonatomic, copy) NSNumber *pageSize;
