@@ -113,11 +113,11 @@
         reader.modalPresentationStyle = UIModalPresentationFormSheet;
         reader.delegate = self;
         
-//        __weak typeof (self) wSelf = self;
-//        [reader setCompletionWithBlock:^(NSString *resultAsString) {
-//            [wSelf.navigationController popViewControllerAnimated:YES];
-//            [[[UIAlertView alloc] initWithTitle:@"" message:resultAsString delegate:self cancelButtonTitle:@"好的" otherButtonTitles: nil] show];
-//        }];
+        __weak typeof (self) wSelf = self;
+        [reader setCompletionWithBlock:^(NSString *resultAsString) {
+            [wSelf.navigationController popViewControllerAnimated:YES];
+            [[[UIAlertView alloc] initWithTitle:@"" message:resultAsString delegate:self cancelButtonTitle:@"好的" otherButtonTitles: nil] show];
+        }];
         
         //[self presentViewController:reader animated:YES completion:NULL];
         [self.navigationController pushViewController:reader animated:YES];

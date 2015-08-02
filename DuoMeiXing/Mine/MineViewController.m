@@ -12,6 +12,7 @@
 #import "AccountViewController.h"
 #import "PhotographAlbumCategoryViewController.h"
 #import "SettingsViewController.h"
+#import "WebViewController.h"
 
 @interface MineViewController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -184,6 +185,10 @@
         SettingsViewController *settingsCtrl = [[SettingsViewController alloc] init];
         
         [self.navigationController pushViewController:settingsCtrl animated:YES];
+        
+    }else if([ctrl isEqualToString:@"Order"]){
+        
+        [WebViewController showWebPageInViewCtrl:self withUrl:@"http://www.baidu.com" withPostData:nil withViewTitle:appName];
         
     }
     

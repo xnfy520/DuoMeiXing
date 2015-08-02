@@ -106,7 +106,7 @@
     }else{
         editField = (UITextField *)[cell.contentView viewWithTag:EDIT_FIELD_TAG];
     }
-    
+    editField.font = [UIFont systemFontOfSize:14];
     editField.text = [UserDataManager sharedUserDataManager].nickname;
     
     

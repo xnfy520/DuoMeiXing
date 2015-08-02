@@ -9,6 +9,8 @@
 #import "RequstData.h"
 #import "DNADef.h"
 
+#pragma mark - 全局请求
+
 @implementation RequstData
 -(id)init
 {
@@ -18,6 +20,9 @@
     return self;
 }
 @end
+
+
+#pragma mark - 登录请求
 
 @implementation RequestLogin
 -(id)init
@@ -29,6 +34,9 @@
 }
 @end
 
+
+#pragma mark - 注册请求
+
 @implementation RequestRegister
 -(id)init
 {
@@ -39,9 +47,15 @@
 }
 @end
 
+
+#pragma mark - 短信验证码请求
+
 @implementation RequestSMS
 
 @end
+
+
+#pragma mark - 分页请求
 
 @implementation RequstPage
 

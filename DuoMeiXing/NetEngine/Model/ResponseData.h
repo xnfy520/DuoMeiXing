@@ -8,12 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
+#pragma mark - 全局响应
+
 @interface ResponseData : NSObject
 
 @end
 
 
-//登录
+#pragma mark - 登录响应数据
+
 @interface ResponseLogin : ResponseData
 
 @property (nonatomic, copy) NSString *id;
@@ -29,7 +32,8 @@
 @end
 
 
-//验证码
+#pragma mark - 短信验证码响应数据
+
 @interface ResponseSMS : ResponseData
 
 @property (nonatomic, copy) NSNumber *result;
@@ -39,9 +43,22 @@
 
 @end
 
+#pragma mark - 分页响应基类
 
-//消息结果
-@interface ResponseMessageResult : ResponseData
+@interface ResponseBasePage : ResponseData
+
+@property (nonatomic, copy) NSNumber *pageNo;
+@property (nonatomic, copy) NSNumber *pageSize;
+@property (nonatomic, copy) NSNumber *prePage;
+@property (nonatomic, copy) NSNumber *nextPage;
+@property (nonatomic, copy) NSNumber *totalCount;
+@property (nonatomic, copy) NSNumber *totalPages;
+
+@end
+
+#pragma mark - 消息结果
+
+@interface ResponseMessageResult : NSObject
 
 @property (nonatomic, copy) NSString *id;
 @property (nonatomic, copy) NSString *content;
@@ -56,18 +73,13 @@
 
 @end
 
+#pragma mark - 消息响应数据
 
-//消息
-@interface ResponseMessage : ResponseData
+@interface ResponseMessage : ResponseBasePage
 
-@property (nonatomic, copy) NSNumber *pageNo;
-@property (nonatomic, copy) NSNumber *pageSize;
-@property (nonatomic, copy) NSNumber *prePage;
-@property (nonatomic, copy) NSNumber *nextPage;
-@property (nonatomic, copy) NSNumber *totalCount;
-@property (nonatomic, copy) NSNumber *totalPages;
 @property (nonatomic, copy) NSArray *result;
 
 + (NSDictionary *)responseValidator;
 
 @end
+

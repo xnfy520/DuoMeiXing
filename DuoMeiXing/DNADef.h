@@ -20,6 +20,7 @@
 #import "RequestService.h"
 #import "UserDataManager.h"
 
+//视频列表
 typedef enum : NSUInteger{
     kPhotographAlbumTypeDefault,    //我的视频
     kPhotographAlbumTypeNewest,     //最新视频

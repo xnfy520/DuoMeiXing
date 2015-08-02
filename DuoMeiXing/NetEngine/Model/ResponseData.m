@@ -9,11 +9,15 @@
 #import "ResponseData.h"
 #import "DNADef.h"
 
+#pragma mark - 全局响应
+
 @implementation ResponseData
 
 @end
 
-//登录
+
+#pragma mark - 登录响应
+
 @implementation ResponseLogin
 
 + (NSDictionary *)responseValidator
@@ -31,6 +35,9 @@
 
 @end
 
+
+#pragma mark - 短信验证码响应
+
 @implementation ResponseSMS
 
 + (NSDictionary *)responseValidator
@@ -42,7 +49,8 @@
 
 @end
 
-//消息结果
+
+#pragma mark - 消息结果
 
 @implementation ResponseMessageResult
 
@@ -53,8 +61,25 @@
 
 @end
 
-//消息
+
+#pragma mark - 分页响应基类
+
+@implementation ResponseBasePage
+
+
+@end
+
+
+#pragma mark - 消息响应
+
 @implementation ResponseMessage
+
++ (NSDictionary *)objectClassInArray
+{
+    return @{
+             @"result" : @"ResponseMessageResult"
+             };
+}
 
 + (NSDictionary *)responseValidator
 {

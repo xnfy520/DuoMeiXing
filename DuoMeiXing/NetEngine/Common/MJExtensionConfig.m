@@ -12,13 +12,13 @@
 
 @implementation MJExtensionConfig
 
-+ (void)load
-{
-    [ResponseMessage setupObjectClassInArray:^NSDictionary *{
-        return @{
-                 @"result" : @"ResponseMessageResult"
-                 };
-    }];
-}
+//+ (void)load
+//{
+//    [ResponseMessage setupObjectClassInArray:^NSDictionary *{
+//        return @{
+//                 @"result" : @"ResponseMessageResult"
+//                 };
+//    }];
+//}
 
 @end
