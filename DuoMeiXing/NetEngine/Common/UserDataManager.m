@@ -156,7 +156,7 @@ SINGLETON_IMPLEMENTATION(UserDataManager);
     _username = @"";
     _nickname = @"";
     _avatar = @"";
-    _avatarUrl = @"";
+    _avatarUrl = nil;
     _mobile = @"";
 }
 

@@ -89,7 +89,7 @@
             
         }
         
-        cell.cellImageView.image = [DisplayUtil getImageFromURL:[UserDataManager sharedUserDataManager].avatarUrl];
+        [cell.cellImageView sd_setImageWithURL:[UserDataManager sharedUserDataManager].avatarUrl];
         
         cell.cellTitleLabel.text = [UserDataManager sharedUserDataManager].nickname;
         

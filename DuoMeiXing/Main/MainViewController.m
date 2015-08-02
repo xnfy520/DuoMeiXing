@@ -119,11 +119,11 @@
         cell = [[ListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
     }
     
-    ResponseMessageResult * messageResult = [tableData objectAtIndex:indexPath.row];
+    ResponseMessageResult * result = [tableData objectAtIndex:indexPath.row];
     
-    cell.cellImageView.image = [DisplayUtil getImageFromURL:messageResult.fromLogoUrl];
+    [cell.cellImageView sd_setImageWithURL:result.fromLogoUrl];
 
-    NSString *badgeNum = [NSString stringWithFormat:@"%@", messageResult.msgNumbers];
+    NSString *badgeNum = [NSString stringWithFormat:@"%@", result.msgNumbers];
     
     cell.cellBadgeLabel.text = badgeNum;
     
@@ -131,13 +131,13 @@
         cell.cellBadgeLabel.hidden = YES;
     }
     
-    NSDate * date = [NSDate dateWithTimeIntervalSince1970:([messageResult.createTime doubleValue]/1000)];
+    NSDate * date = [NSDate dateWithTimeIntervalSince1970:([result.createTime doubleValue]/1000)];
 
     cell.cellDateLabel.text = [DisplayUtil getDateStringWithDate:date DateFormat:@"MM-dd"];
 
-    cell.cellTitleLabel.text = messageResult.fromNickName;
+    cell.cellTitleLabel.text = result.fromNickName;
     
-    cell.cellDetailLabel.text = messageResult.content;
+    cell.cellDetailLabel.text = result.content;
     
     cell.cellListType = kCellListMessage;
     

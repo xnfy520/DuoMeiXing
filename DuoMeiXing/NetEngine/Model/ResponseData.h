@@ -19,7 +19,7 @@
 @property (nonatomic, copy) NSString *userId;
 @property (nonatomic, copy) NSString *username;
 @property (nonatomic, copy) NSString *nickname;
-@property (nonatomic, copy) NSString *avatarUrl;
+@property (nonatomic, copy) NSURL *avatarUrl;
 @property (nonatomic, copy) NSString *mobile;
 @end
 
@@ -65,7 +65,7 @@
 @property (nonatomic, copy) NSString *content;
 @property (nonatomic, copy) NSNumber *msgNumbers;
 @property (nonatomic, copy) NSString *fromId;
-@property (nonatomic, copy) NSString *fromLogoUrl;
+@property (nonatomic, copy) NSURL *fromLogoUrl;
 @property (nonatomic, copy) NSString *videoId;
 @property (nonatomic, copy) NSString *chatType;
 @property (nonatomic, copy) NSString *messageType;
@@ -90,8 +90,8 @@
 @property (nonatomic, copy) NSString *id;
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, copy) NSString *desc;
-@property (nonatomic, copy) NSString *picUrl;
-@property (nonatomic, copy) NSString *videoUrl;
+@property (nonatomic, copy) NSURL *picUrl;
+@property (nonatomic, copy) NSURL *videoUrl;
 @property (nonatomic, copy) NSString *memberId;
 @property (nonatomic, copy) NSNumber *createTime;
 

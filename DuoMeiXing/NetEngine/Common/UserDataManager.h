@@ -17,14 +17,14 @@
 
 SINGLETON_INTERFACE(UserDataManager);
 
-@property(strong, nonatomic) NSString* id;
-@property(strong, nonatomic) NSString* userId;
-@property(strong, nonatomic) NSString* token;
-@property(strong, nonatomic) NSString* username;
-@property(strong, nonatomic) NSString* nickname;
-@property(strong, nonatomic) NSString* avatar;
-@property(strong, nonatomic) NSString* avatarUrl;
-@property(strong, nonatomic) NSString* mobile;
+@property(strong, nonatomic) NSString *id;
+@property(strong, nonatomic) NSString *userId;
+@property(strong, nonatomic) NSString *token;
+@property(strong, nonatomic) NSString *username;
+@property(strong, nonatomic) NSString *nickname;
+@property(strong, nonatomic) NSString *avatar;
+@property(strong, nonatomic) NSURL  *avatarUrl;
+@property(strong, nonatomic) NSString *mobile;
 
 - (BOOL)isLogin;
 

@@ -193,7 +193,7 @@
         
         cell.cellListType = kCellListVideo;
         
-        cell.cellImageView.image = [DisplayUtil getImageFromURL:result.picUrl];
+        [cell.cellImageView sd_setImageWithURL:result.picUrl];
         
         NSDate * date = [NSDate dateWithTimeIntervalSince1970:([result.createTime doubleValue]/1000)];
         

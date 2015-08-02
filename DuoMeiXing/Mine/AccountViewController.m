@@ -101,7 +101,7 @@
     }else if(option.ctrl == kOptionCtrlTypeAvatar){
         
         avatarImageView.hidden = NO;
-        avatarImageView.image = [DisplayUtil getImageFromURL:[UserDataManager sharedUserDataManager].avatarUrl];
+        [avatarImageView sd_setImageWithURL:[UserDataManager sharedUserDataManager].avatarUrl];
         
     }
     

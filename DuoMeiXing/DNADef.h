@@ -20,6 +20,7 @@
 #import "RequestService.h"
 #import "UserDataManager.h"
 #import "Model.h"
+#import "UIImageView+WebCache.h"
 
 //视频列表
 typedef enum : NSUInteger{
