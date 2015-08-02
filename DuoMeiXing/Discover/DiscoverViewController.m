@@ -16,7 +16,6 @@
 @interface DiscoverViewController ()<UITableViewDelegate, UITableViewDataSource>
 {
     UITableView *mainTableView;
-    NSArray *mainOptionData;
 }
 @end
 
@@ -34,48 +33,6 @@
     [self.view addSubview:mainTableView];
     
     [self setupInsetsTableView:mainTableView];
-    
-    mainOptionData = @[
-                       @[
-                           @{
-                               @"title":@"最新",
-                               @"icon":@"home_disc_last",
-                               @"ctrl":@"newest"
-                               },
-                           @{
-                               @"title":@"最热",
-                               @"icon":@"home_disc_hot",
-                               @"ctrl":@"hot"
-                               }
-                           ],
-                       @[
-                           @{
-                               @"title":@"大师",
-                               @"icon":@"home_disc_mentor",
-                               @"ctrl":@"contacts"
-                               },
-                           @{
-                               @"title":@"专业老师",
-                               @"icon":@"home_disc_teacher",
-                               @"ctrl":@"contacts"
-                               
-                               }
-                           ],
-                       @[
-                           @{
-                               @"title":@"乐器",
-                               @"icon":@"home_disc_teaching_tgita",
-                               @"ctrl":@"master"
-                               }
-                           ],
-                       @[
-                           @{
-                               @"title":@"教材",
-                               @"icon":@"home_disc_teaching",
-                               @"ctrl":@"teaching"
-                               }
-                           ]
-                       ];
 }
 
 
@@ -97,12 +54,12 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return mainOptionData.count;
+    return [DiscoverOptionModel resultOption].count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [[mainOptionData objectAtIndex:section] count];
+    return [[[DiscoverOptionModel resultOption] objectAtIndex:section] count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -113,16 +70,13 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
     }
     
-    
-    NSString *title = [[[mainOptionData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] objectForKey:@"title"];
-    
-    NSString *icon = [[[mainOptionData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] objectForKey:@"icon"];
-    
-    cell.textLabel.text = title;
+    BaseOptionModel * option = [[[DiscoverOptionModel resultOption] objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+
+    cell.textLabel.text = option.title;
     
     cell.textLabel.font = [UIFont systemFontOfSize:15];
     
-    cell.imageView.image = [[UIImage imageNamed:icon] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    cell.imageView.image = [[UIImage imageNamed:option.icon] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 
@@ -135,40 +89,36 @@
     
     [mainTableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    NSString *title = [[[mainOptionData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] objectForKey:@"title"];
-    
-    NSString *ctrl = [[[mainOptionData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] objectForKey:@"ctrl"];
+    BaseOptionModel * option = [[[DiscoverOptionModel resultOption] objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
     
     PhotographAlbumViewController *photographAlbumCtrl = [[PhotographAlbumViewController alloc] init];
     
-    
-    
-    if([ctrl isEqualToString:@"newest"]){
+    if(option.ctrl == kOptionCtrlTypeNewest){
         
-        photographAlbumCtrl.listType = kPhotographAlbumTypeNewest;
+        photographAlbumCtrl.listType = kOptionCtrlTypeNewest;
         
         [self.navigationController pushViewController:photographAlbumCtrl animated:YES];
         
-    }else if ([ctrl isEqualToString:@"hot"]) {
+    }else if (option.ctrl == kOptionCtrlTypeHot) {
         
-        photographAlbumCtrl.listType = kPhotographAlbumTypeHot;
+        PhotographAlbumCategoryViewController *photographAlbumCategoryCtrl = [[PhotographAlbumCategoryViewController alloc] init];
+        photographAlbumCategoryCtrl.category = kPhotographAlbumCategoryHot;
+        [self.navigationController pushViewController:photographAlbumCategoryCtrl animated:YES];
         
-        [self.navigationController pushViewController:photographAlbumCtrl animated:YES];
-        
-    }else if([ctrl isEqualToString:@"contacts"]){
+    }else if(option.ctrl == kOptionCtrlTypeContacts){
         
         ContactsViewController *contactsCtrl = [[ContactsViewController alloc] init];
-        contactsCtrl.title = title;
+        contactsCtrl.title = option.title;
         contactsCtrl.notHeader = YES;
         contactsCtrl.notPopover = YES;
         contactsCtrl.hasInvitation = NO;
         [self.navigationController pushViewController:contactsCtrl animated:YES];
         
-    }else if([ctrl isEqualToString:@"master"]){
+    }else if(option.ctrl == kOptionCtrlTypeInstrument){
         
         [WebViewController showWebPageInViewCtrl:self withUrl:@"http://www.163.com" withPostData:nil withViewTitle:appName];
         
-    }else if([ctrl isEqualToString:@"teaching"]){
+    }else if(option.ctrl == kOptionCtrlTypeTeaching){
         
         PhotographAlbumCategoryViewController *photographAlbumCategoryCtrl = [[PhotographAlbumCategoryViewController alloc] init];
         photographAlbumCategoryCtrl.category = kPhotographAlbumCategoryTeaching;

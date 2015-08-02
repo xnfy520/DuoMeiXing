@@ -7,15 +7,16 @@
 //
 
 #import "PhotographAlbumCategoryViewController.h"
-#import "DNADef.h"
 #import "PhotographAlbumViewController.h"
 #import "ListCell.h"
 #import "DisplayViewController.h"
+#import "YTKBatchRequest.h"
 
 @interface PhotographAlbumCategoryViewController ()<UITableViewDelegate, UITableViewDataSource>
 {
     UITableView *mainTableView;
-    NSArray *mainTableData;
+    NSArray *mainTableHeaderData;
+    NSMutableArray *mainTableData;
 }
 @end
 
@@ -34,63 +35,73 @@
     [self.view addSubview:mainTableView];
     
     [self setupInsetsTableView:mainTableView];
-    
-    NSArray *teachingArrary = @[
-                       @{
-                           @"title":@"民谣吉他教材",
-                           @"icon":@"home_disc_teaching_tgita",
-                           @"ctrl":@"tgita",
-                           @"list":@[]
-                           },
-                       @{
-                           @"title":@"钢琴教材",
-                           @"icon":@"home_disc_teaching_piano",
-                           @"ctrl":@"piano",
-                           @"list":@[]
-                           },
-                       @{
-                           @"title":@"电吉他教材",
-                           @"icon":@"home_disc_teaching_egita",
-                           @"ctrl":@"egita",
-                           @"list":@[]
-                           },
-                       @{
-                           @"title":@"小提琴教材",
-                           @"icon":@"home_disc_teaching_violin",
-                           @"ctrl":@"violin",
-                           @"list":@[]
-                           }
-                       ];
-    
-    NSArray *myVideoArray = @[
-                       @{
-                           @"title":@"发布成功",
-                           @"icon":@"video_my_published",
-                           @"ctrl":@"published",
-                           @"list":@[]
-                           },
-                       @{
-                           @"title":@"等待审核",
-                           @"icon":@"video_my_checking",
-                           @"ctrl":@"checking",
-                           @"list":@[]
-                           },
-                       @{
-                           @"title":@"正在上传",
-                           @"icon":@"video_my_uploading",
-                           @"ctrl":@"uploading",
-                           @"list":@[]
-                           }
-                       ];
-    
-    if (self.category == kPhotographAlbumCategoryTeaching) {
-        mainTableData = [[NSArray alloc] initWithArray:teachingArrary];
-    }else if(self.category == kPhotographAlbumCategoryMyVideo){
-        mainTableData = [[NSArray alloc] initWithArray:myVideoArray];
-    }
 
+    if(self.category == kPhotographAlbumCategoryHot){
+        mainTableData = [NSMutableArray arrayWithCapacity:2];
+        [self sendHotBatchRequest];
+    }else if (self.category == kPhotographAlbumCategoryTeaching) {
+        mainTableData = [NSMutableArray arrayWithCapacity:4];
+        [self sendTeachingBatchRequest];
+    }else if(self.category == kPhotographAlbumCategoryMyVideo){
+        mainTableData = [NSMutableArray arrayWithCapacity:3];
+        [self sendMyVideoBatchRequest];
+    }
 }
 
+- (void)sendHotBatchRequest
+{
+    RequestService *api1 = [[RequestService alloc] initReqeustUrl:appAPIVideo withPostData:[RequstVideo requstTopPlay] withResponseValidator:[ResponseVideo responseValidator]];
+    RequestService *api2 = [[RequestService alloc] initReqeustUrl:appAPIVideo withPostData:[RequstVideo requstTopComment] withResponseValidator:[ResponseVideo responseValidator]];
+    
+    [self sendBatchRequestWith:@[api1, api2]];
+}
+
+- (void)sendTeachingBatchRequest
+{
+    RequestService *api1 = [[RequestService alloc] initReqeustUrl:appAPIVideo withPostData:[RequstVideo requstTeachingTguita] withResponseValidator:[ResponseVideo responseValidator]];
+    RequestService *api2 = [[RequestService alloc] initReqeustUrl:appAPIVideo withPostData:[RequstVideo requstTeachingPiano] withResponseValidator:[ResponseVideo responseValidator]];
+    RequestService *api3 = [[RequestService alloc] initReqeustUrl:appAPIVideo withPostData:[RequstVideo requstTeachingEguita] withResponseValidator:[ResponseVideo responseValidator]];
+    RequestService *api4 = [[RequestService alloc] initReqeustUrl:appAPIVideo withPostData:[RequstVideo requstTeachingViolin] withResponseValidator:[ResponseVideo responseValidator]];
+    
+    [self sendBatchRequestWith:@[api1, api2, api3, api4]];
+}
+
+- (void)sendMyVideoBatchRequest
+{
+    RequestService *api1 = [[RequestService alloc] initReqeustUrl:appAPIVideo withPostData:[RequstVideo requstMePublished] withResponseValidator:[ResponseVideo responseValidator]];
+    RequestService *api2 = [[RequestService alloc] initReqeustUrl:appAPIVideo withPostData:[RequstVideo requstMeChecking] withResponseValidator:[ResponseVideo responseValidator]];
+    RequestService *api3 = [[RequestService alloc] initReqeustUrl:appAPIVideo withPostData:[RequstVideo requstMeUploading] withResponseValidator:[ResponseVideo responseValidator]];
+
+    [self sendBatchRequestWith:@[api1, api2, api3]];
+}
+
+- (void)sendBatchRequestWith:(NSArray *)apis
+{
+    [self showHUB];
+    YTKBatchRequest *batchRequest = [[YTKBatchRequest alloc] initWithRequestArray:apis];
+    [batchRequest startWithCompletionBlockWithSuccess:^(YTKBatchRequest *batchRequest) {
+        
+        if(self.category == kPhotographAlbumCategoryHot){
+            mainTableHeaderData = [PACHotOptionModel resultOption];
+        }else if (self.category == kPhotographAlbumCategoryTeaching) {
+            mainTableHeaderData = [PACTeachingOptionModel resultOption];
+        }else if(self.category == kPhotographAlbumCategoryMyVideo){
+            mainTableHeaderData = [PACMyVideoOptionModel resultOption];
+        }
+        
+        [self hideHUB];
+        NSLog(@"succeed");
+        NSArray *requests = batchRequest.requestArray;
+        for (int i = 0; i<requests.count; i++) {
+            RequestService *result = (RequestService *)requests[i];
+            ResponseVideo *responseData = [ResponseVideo objectWithKeyValues:[result responseJSONObject]];
+            [mainTableData addObject:responseData.result];
+        }
+        [mainTableView reloadData];
+    } failure:^(YTKBatchRequest *batchRequest) {
+        NSLog(@"failed");
+    }];
+}
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -121,25 +132,27 @@
 {
     UIView *headerView = [[UIView alloc] init];
     headerView.backgroundColor = [UIColor whiteColor];
-    
-    UIImageView *headerIcon = [[UIImageView alloc] initWithFrame:CGRectMake(5, (35-25)/2, 25, 25)];
-    NSString *icon = [[mainTableData objectAtIndex:section] objectForKey:@"icon"];
-    headerIcon.image = [UIImage imageNamed:icon];
-    [headerView addSubview:headerIcon];
-    
-    UILabel *headerTitle = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(headerIcon.frame)+5, (35-15)/2, screenWidth-40*2, 15)];
-    headerTitle.font = [UIFont boldSystemFontOfSize:14];
-    headerTitle.text = [[mainTableData objectAtIndex:section] objectForKey:@"title"];
-    [headerView addSubview:headerTitle];
-    
-    UIButton *headerButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [headerButton setImage:[[[UIImage imageNamed:@"iosArrowRight"] imageToSize:CGSizeMake(8, 21)] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] forState:UIControlStateNormal];
-    headerButton.contentMode = UIViewContentModeCenter;
-
-    [headerButton addTarget:self action:@selector(toCategory:) forControlEvents:UIControlEventTouchUpInside];
-    headerButton.frame  = CGRectMake(screenWidth-25-5, (35-25)/2, 25, 25);
-    [headerView addSubview:headerButton];
-
+    if (mainTableHeaderData.count > 0) {
+        BaseOptionModel * option = [mainTableHeaderData objectAtIndex:section];
+        
+        UIImageView *headerIcon = [[UIImageView alloc] initWithFrame:CGRectMake(10, (35-25)/2, 25, 25)];
+        NSString *icon = option.icon;
+        headerIcon.image = [UIImage imageNamed:icon];
+        [headerView addSubview:headerIcon];
+        
+        UILabel *headerTitle = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(headerIcon.frame)+5, (35-15)/2, screenWidth-40*2, 15)];
+        headerTitle.font = [UIFont boldSystemFontOfSize:14];
+        headerTitle.text = option.title;
+        [headerView addSubview:headerTitle];
+        
+        UIButton *headerButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        [headerButton setImage:[[[UIImage imageNamed:@"iosArrowRight"] imageToSize:CGSizeMake(8, 21)] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] forState:UIControlStateNormal];
+        headerButton.contentMode = UIViewContentModeCenter;
+        
+        [headerButton addTarget:self action:@selector(toCategory:) forControlEvents:UIControlEventTouchUpInside];
+        headerButton.frame  = CGRectMake(screenWidth-25-5, (35-25)/2, 25, 25);
+        [headerView addSubview:headerButton];
+    }
     return headerView;
 }
 
@@ -157,12 +170,12 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return mainTableData.count;
+    return mainTableHeaderData.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 3;
+    return mainTableData.count > 0 ? [[mainTableData objectAtIndex:section] count] : 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -174,17 +187,24 @@
         
     }
     
-    cell.cellListType = kCellListVideo;
+    if (mainTableData.count>0) {
+        
+        ResponseVideoResult * result = [[mainTableData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+        
+        cell.cellListType = kCellListVideo;
+        
+        cell.cellImageView.image = [DisplayUtil getImageFromURL:result.picUrl];
+        
+        NSDate * date = [NSDate dateWithTimeIntervalSince1970:([result.createTime doubleValue]/1000)];
+        
+        cell.cellDateLabel.text = [DisplayUtil getDateStringWithDate:date DateFormat:@"MM-dd"];;
+        
+        cell.cellTitleLabel.text = result.name;
+        
+        cell.cellDetailLabel.text = result.desc;
+    }
     
-    cell.cellImageView.image = [UIImage imageNamed:@"xianjian"];
-    
-    cell.cellBadgeLabel.text = @"2";
-    
-    cell.cellDateLabel.text = @"6月16日";
-    
-    cell.cellTitleLabel.text = @"天陨";
-    
-    cell.cellDetailLabel.text = @"雪念飞叶";
+
     
     return cell;
 }
@@ -203,7 +223,6 @@
 
 - (void)toCategory:(id)sender
 {
-    UIButton *button = (UIButton *)sender;
     
     PhotographAlbumViewController *photographAlbumCtrl = [[PhotographAlbumViewController alloc] init];
 

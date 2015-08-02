@@ -16,7 +16,6 @@
 @implementation SettingsViewController
 {
     UITableView *mainTableView;
-    NSArray *mainOptionData;
 }
 
 - (void)viewDidLoad {
@@ -24,25 +23,6 @@
     [super viewDidLoad];
     
     self.title = @"设置";
-    
-    mainOptionData = @[
-                       @[
-                           @{
-                               @"title":@"关于哆每星",
-                               @"ctrl":@"about"
-                               },
-                           @{
-                               @"title":@"检查更新",
-                               @"ctrl":@"update"
-                               }
-                           ],
-                       @[
-                           @{
-                               @"title":@"退出登录",
-                               @"ctrl":@"exit"
-                               }
-                           ]
-                       ];
     
     [self setupMainTableView];
     
@@ -76,12 +56,12 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return mainOptionData.count;
+    return [[SettingOptionModel resultOption] count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [[mainOptionData objectAtIndex:section] count];
+    return [[[SettingOptionModel resultOption] objectAtIndex:section] count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -96,15 +76,15 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIds];
     }
     
-    cell.textLabel.text = [[[mainOptionData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] objectForKey:@"title"];
+    BaseOptionModel * option = [[[SettingOptionModel resultOption] objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+    
+    cell.textLabel.text = option.title;
 
     cell.textLabel.font = [UIFont systemFontOfSize:15];
     
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    
-    NSString *ctrl = [[[mainOptionData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] objectForKey:@"ctrl"];
-    
-    if ([ctrl isEqualToString:@"exit"]) {
+ 
+    if (option.ctrl == kOptionCtrlTypeExit) {
         cell.textLabel.textAlignment = NSTextAlignmentCenter;
         cell.textLabel.font = [UIFont systemFontOfSize:16];
         cell.accessoryType = UITableViewCellAccessoryNone;
@@ -119,9 +99,9 @@
     
     [mainTableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    NSString *ctrl = [[[mainOptionData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] objectForKey:@"ctrl"];
-    
-    if ([ctrl isEqualToString:@"exit"]) {
+    BaseOptionModel * option = [[[SettingOptionModel resultOption] objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+  
+    if (option.ctrl == kOptionCtrlTypeExit) {
         [self exitAction];
     }
     

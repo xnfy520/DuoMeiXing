@@ -14,18 +14,19 @@
 
 @end
 
-
-#pragma mark - 登录响应数据
-
-@interface ResponseLogin : ResponseData
-
+@interface ResponseUser : ResponseData
 @property (nonatomic, copy) NSString *id;
 @property (nonatomic, copy) NSString *userId;
-@property (nonatomic, copy) NSString *token;
 @property (nonatomic, copy) NSString *username;
 @property (nonatomic, copy) NSString *nickname;
 @property (nonatomic, copy) NSString *avatarUrl;
 @property (nonatomic, copy) NSString *mobile;
+@end
+
+//登录
+@interface ResponseLogin : ResponseUser
+
+@property (nonatomic, copy) NSString *token;
 
 + (NSDictionary *)responseValidator;
 
@@ -76,6 +77,29 @@
 #pragma mark - 消息响应数据
 
 @interface ResponseMessage : ResponseBasePage
+
+@property (nonatomic, copy) NSArray *result;
+
++ (NSDictionary *)responseValidator;
+
+@end
+
+
+@interface ResponseVideoResult : NSObject
+
+@property (nonatomic, copy) NSString *id;
+@property (nonatomic, copy) NSString *name;
+@property (nonatomic, copy) NSString *desc;
+@property (nonatomic, copy) NSString *picUrl;
+@property (nonatomic, copy) NSString *videoUrl;
+@property (nonatomic, copy) NSString *memberId;
+@property (nonatomic, copy) NSNumber *createTime;
+
+@end
+
+#pragma mark - 视频响应数据
+
+@interface ResponseVideo : ResponseBasePage
 
 @property (nonatomic, copy) NSArray *result;
 

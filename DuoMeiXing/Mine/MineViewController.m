@@ -21,7 +21,6 @@
 @implementation MineViewController
 {
     UITableView *mainTableView;
-    NSArray *mainOptionData;
 }
 
 - (void)viewDidLoad {
@@ -29,37 +28,6 @@
     [super viewDidLoad];
     
     [self setupRightButton];
-    
-    mainOptionData = @[
-                       @[
-                           @{
-                               @"title":@"帐户",
-                               @"ctrl":@"Account",
-                               @"icon":@""
-                               }
-                           ],
-                       @[
-                           @{
-                               @"title":@"影集",
-                               @"ctrl":@"PhotographAlbumCategory",
-                               @"icon":@"home_me_video"
-                               }
-                           ],
-                       @[
-                           @{
-                               @"title":@"设置",
-                               @"ctrl":@"Settings",
-                               @"icon":@"home_me_settings"
-                               }
-                           ],
-                       @[
-                           @{
-                               @"title":@"订单",
-                               @"ctrl":@"Order",
-                               @"icon":@"home_me_center"
-                               }
-                           ]
-                       ];
     
     [self setupMainTableView];
     
@@ -92,12 +60,12 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return mainOptionData.count;
+    return [[MineOptionModel resultOption] count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [[mainOptionData objectAtIndex:section] count];
+    return [[[MineOptionModel resultOption] objectAtIndex:section] count];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -143,13 +111,11 @@
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIds];
         }
         
-        NSString *title = [[[mainOptionData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] objectForKey:@"title"];
+        BaseOptionModel * option = [[[MineOptionModel resultOption] objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
         
-        NSString *icon = [[[mainOptionData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] objectForKey:@"icon"];
+        cell.textLabel.text = option.title;
         
-        cell.imageView.image = [[UIImage imageNamed:icon] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-        
-        cell.textLabel.text = title;
+        cell.imageView.image = [[UIImage imageNamed:option.icon] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
         
         cell.textLabel.font = [UIFont systemFontOfSize:15];
         
@@ -165,28 +131,30 @@
 {
     
     [mainTableView deselectRowAtIndexPath:indexPath animated:YES];
+
+    BaseOptionModel * option = [[[MineOptionModel resultOption] objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
     
-    NSString *ctrl = [[[mainOptionData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] objectForKey:@"ctrl"];
+    NSLog(@"%ld", option.ctrl);
     
-    if ([ctrl isEqualToString:@"Account"]) {
+    if (option.ctrl == kOptionCtrlTypeAccount) {
         
         AccountViewController *accountCtrl = [[AccountViewController alloc] init];
         
         [self.navigationController pushViewController:accountCtrl animated:YES];
         
-    }else if([ctrl isEqualToString:@"PhotographAlbumCategory"]){
+    }else if(option.ctrl == kOptionCtrlTypePhotographAlbum){
         
         PhotographAlbumCategoryViewController *photographAlbumCategoryCtrl = [[PhotographAlbumCategoryViewController alloc] init];
         photographAlbumCategoryCtrl.category = kPhotographAlbumCategoryMyVideo;
         [self.navigationController pushViewController:photographAlbumCategoryCtrl animated:YES];
         
-    }else if ([ctrl isEqualToString:@"Settings"]) {
+    }else if (option.ctrl == kOptionCtrlTypeSettings) {
         
         SettingsViewController *settingsCtrl = [[SettingsViewController alloc] init];
         
         [self.navigationController pushViewController:settingsCtrl animated:YES];
         
-    }else if([ctrl isEqualToString:@"Order"]){
+    }else if(option.ctrl == kOptionCtrlTypeOrder){
         
         [WebViewController showWebPageInViewCtrl:self withUrl:@"http://www.baidu.com" withPostData:nil withViewTitle:appName];
         

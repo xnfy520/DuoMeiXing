@@ -17,31 +17,11 @@
 @implementation PopoverViewController
 {
     UITableView *mainTableView;
-    NSArray *mainOptionData;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = defaultNavigationBar;
-    
-    mainOptionData = @[
-                       @{
-                           @"title":@"上传视频",
-                           @"icon":@"plus_video",
-                           @"ctrl":@"video"
-                       },
-                       @{
-                           @"title":@"扫一扫",
-                           @"icon":@"plus_scan",
-                           @"ctrl":@"scan"
-                           },
-                       @
-                       {
-                           @"title":@"添加朋友",
-                           @"icon":@"plus_friend",
-                           @"ctrl":@"friend"
-                           }
-                       ];
     
     [self setupTableView];
 }
@@ -81,7 +61,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return mainOptionData.count;
+    return [[PopoverOptionModel resultOption] count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -93,9 +73,11 @@
         cell = [[PopoverCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
     }
     
-    NSString *title = [[mainOptionData objectAtIndex:indexPath.row] objectForKey:@"title"];
+    BaseOptionModel * option = [[PopoverOptionModel resultOption] objectAtIndex:indexPath.row];
     
-    NSString *icon = [[mainOptionData objectAtIndex:indexPath.row] objectForKey:@"icon"];
+    NSString *title = option.title;
+    
+    NSString *icon = option.icon;
     
     cell.backgroundColor = [UIColor colorWithRed:55./255. green:63./255. blue:71./255. alpha:1.0];
     
@@ -115,8 +97,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [mainTableView deselectRowAtIndexPath:indexPath animated:NO];
-    
-    [self.delegate getPopoverClickType:[[mainOptionData objectAtIndex:indexPath.row] objectForKey:@"ctrl"]];
+    BaseOptionModel * option = [[PopoverOptionModel resultOption] objectAtIndex:indexPath.row];
+    [self.delegate getPopoverClickType:option.ctrl];
 }
 
 @end

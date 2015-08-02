@@ -11,7 +11,7 @@
 
 @protocol popoverClickDelegate <NSObject>
 
-- (void)getPopoverClickType:(NSString *)type;
+- (void)getPopoverClickType:(NSUInteger) type;
 
 @end
 

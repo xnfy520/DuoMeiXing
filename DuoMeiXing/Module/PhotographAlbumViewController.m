@@ -9,6 +9,7 @@
 #import "PhotographAlbumViewController.h"
 
 #import "DisplayViewController.h"
+#import "DNADef.h"
 #import "ListCell.h"
 
 @interface PhotographAlbumViewController ()<UITableViewDelegate, UITableViewDataSource>
@@ -18,6 +19,7 @@
 @implementation PhotographAlbumViewController
 {
     UITableView *mainTableView;
+    NSMutableArray *tableData;
 }
 
 - (void)viewDidLoad {
@@ -26,6 +28,44 @@
 
     [self setupMainTableView];
     
+    tableData = [[NSMutableArray alloc] init];
+    
+    [self requstApi];
+    
+}
+
+- (void)requstApi
+{
+    RequstVideo *requestData = [[RequstVideo alloc] init];
+    requestData.pageNo = @"1";
+    requestData.pageSize = @"10";
+    requestData.action = @"top_play";
+    
+    RequestService *api = [[RequestService alloc] initReqeustUrl:appAPIVideo withPostData:requestData withResponseValidator:[ResponseVideo responseValidator]];
+    
+    [self showHUB];
+    
+    [api startWithCompletionBlockWithSuccess:^(YTKBaseRequest *request) {
+        
+        [self hideHUB];
+        
+        NSLog(@"succeed");
+        
+        ResponseVideo *responseData = [ResponseVideo objectWithKeyValues:[request responseJSONObject]];
+        
+        [tableData setArray:responseData.result];
+        
+        [mainTableView reloadData];
+        
+    } failure:^(YTKBaseRequest *request) {
+        
+        [self hideHUB];
+        
+        NSLog(@"failed");
+        
+        NSLog(@"%@", [[request responseJSONObject] objectForKey:@"code"]);
+        
+    }];
 }
 
 - (void)setupMainTableView
@@ -60,7 +100,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 20;
+    return tableData.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -73,17 +113,19 @@
         
     }
     
+    ResponseVideoResult * result = [tableData objectAtIndex:indexPath.row];
+    
     cell.cellListType = kCellListVideo;
     
-    cell.cellImageView.image = [UIImage imageNamed:@"xianjian"];
+    cell.cellImageView.image = [DisplayUtil getImageFromURL:result.picUrl];
     
-    cell.cellBadgeLabel.text = @"2";
+     NSDate * date = [NSDate dateWithTimeIntervalSince1970:([result.createTime doubleValue]/1000)];
     
-    cell.cellDateLabel.text = @"6月16日";
+    cell.cellDateLabel.text = [DisplayUtil getDateStringWithDate:date DateFormat:@"MM-dd"];;
     
-    cell.cellTitleLabel.text = @"天陨";
+    cell.cellTitleLabel.text = result.name;
     
-    cell.cellDetailLabel.text = @"雪念飞叶";
+    cell.cellDetailLabel.text = result.desc;
 
     return cell;
 }

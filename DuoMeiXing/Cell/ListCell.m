@@ -94,11 +94,15 @@
     
     _cellBadgeLabel.frame = CGRectMake(CGRectGetWidth(_cellImageView.frame)-9, -5, 14, 14);
 
-    _cellTitleLabel.frame = CGRectMake(CGRectGetWidth(_cellImageView.frame) + 20, CGRectGetHeight(self.frame)/2 - [DisplayUtil getSize:12 withString:_cellTitleLabel.text].height, (CGRectGetWidth(self.frame)-CGRectGetWidth(_cellImageView.frame)) / 2, TitleFontSize);
+    _cellTitleLabel.frame = CGRectMake(
+                                       CGRectGetWidth(_cellImageView.frame) + 20,
+                                       CGRectGetHeight(self.frame)/2 - [DisplayUtil getSize:12 withString:_cellTitleLabel.text].height,
+                                       (CGRectGetWidth(self.frame)-CGRectGetMaxX(_cellImageView.frame) - 50 -30),
+                                       TitleFontSize);
 
-    _cellDetailLabel.frame = CGRectMake(CGRectGetWidth(_cellImageView.frame) + 20, CGRectGetHeight(self.frame)/2 + 4, CGRectGetWidth(self.frame) - CGRectGetWidth(_cellImageView.frame) - 15, DetailFontSize);
+    _cellDetailLabel.frame = CGRectMake(CGRectGetWidth(_cellImageView.frame) + 20, CGRectGetHeight(self.frame)/2 + 4, CGRectGetWidth(self.frame) - CGRectGetWidth(_cellImageView.frame) - 30, DetailFontSize);
     
-    _cellDateLabel.frame = CGRectMake(CGRectGetWidth(self.frame) - CGRectGetWidth(self.frame) / 3 - 10, CGRectGetMinY(_cellTitleLabel.frame), CGRectGetWidth(self.frame) / 3, DateFontSize);
+    _cellDateLabel.frame = CGRectMake(CGRectGetWidth(self.frame) - 50 - 10, CGRectGetMinY(_cellTitleLabel.frame), 50, DateFontSize);
     
 }
 

@@ -15,9 +15,12 @@
 
 @end
 
+@implementation ResponseUser
 
-#pragma mark - 登录响应
 
+@end
+
+//登录
 @implementation ResponseLogin
 
 + (NSDictionary *)responseValidator
@@ -78,6 +81,38 @@
 {
     return @{
              @"result" : @"ResponseMessageResult"
+             };
+}
+
++ (NSDictionary *)responseValidator
+{
+    return @{
+             @"pageNo": [NSNumber class],
+             @"pageSize": [NSNumber class],
+             @"prePage": [NSNumber class],
+             @"nextPage": [NSNumber class],
+             @"totalCount": [NSNumber class],
+             @"totalPages": [NSNumber class],
+             @"result": [NSArray class]
+             };
+}
+
+@end
+
+
+
+@implementation ResponseVideoResult
+
+
+@end
+
+
+@implementation ResponseVideo
+
++ (NSDictionary *)objectClassInArray
+{
+    return @{
+             @"result" : @"ResponseVideoResult"
              };
 }
 

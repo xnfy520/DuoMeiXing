@@ -174,6 +174,8 @@
 		72E8B5761B5B7B40000F7AF9 /* video_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 72E8B5751B5B7B40000F7AF9 /* video_bg.png */; };
 		72E8B5791B5B7E87000F7AF9 /* icon_play.png in Resources */ = {isa = PBXBuildFile; fileRef = 72E8B5771B5B7E87000F7AF9 /* icon_play.png */; };
 		72E8B57A1B5B7E87000F7AF9 /* icon_plus_fan.png in Resources */ = {isa = PBXBuildFile; fileRef = 72E8B5781B5B7E87000F7AF9 /* icon_plus_fan.png */; };
+		72EB89B01B6DDC5C0067AF5A /* home_me_order@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 72EB89AF1B6DDC5C0067AF5A /* home_me_order@2x.png */; };
+		72EB89B71B6DED530067AF5A /* Model.m in Sources */ = {isa = PBXBuildFile; fileRef = 72EB89B61B6DED530067AF5A /* Model.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -466,6 +468,9 @@
 		72E8B5751B5B7B40000F7AF9 /* video_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = video_bg.png; sourceTree = "<group>"; };
 		72E8B5771B5B7E87000F7AF9 /* icon_play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_play.png; sourceTree = "<group>"; };
 		72E8B5781B5B7E87000F7AF9 /* icon_plus_fan.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_plus_fan.png; sourceTree = "<group>"; };
+		72EB89AF1B6DDC5C0067AF5A /* home_me_order@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home_me_order@2x.png"; sourceTree = "<group>"; };
+		72EB89B51B6DED530067AF5A /* Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Model.h; sourceTree = "<group>"; };
+		72EB89B61B6DED530067AF5A /* Model.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Model.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -639,6 +644,7 @@
 		39EBAD9B1B688807002140C7 /* Me */ = {
 			isa = PBXGroup;
 			children = (
+				72EB89AF1B6DDC5C0067AF5A /* home_me_order@2x.png */,
 				39EBAD9C1B688807002140C7 /* home_me_center@2x.png */,
 				39EBAD9D1B688807002140C7 /* home_me_settings@2x.png */,
 				39EBAD9E1B688807002140C7 /* home_me_video@2x.png */,
@@ -872,6 +878,7 @@
 		724044971B4AD1CC008AD6BA /* Module */ = {
 			isa = PBXGroup;
 			children = (
+				72EB89B41B6DED3E0067AF5A /* ObjectModel */,
 				39AD39C71B6B76E7001E3094 /* Login */,
 				39AD39CA1B6B76E7001E3094 /* Register */,
 				72D0CEC41B5BFAA40094CB3C /* DisplayViewController.h */,
@@ -1113,6 +1120,15 @@
 			path = Mine;
 			sourceTree = "<group>";
 		};
+		72EB89B41B6DED3E0067AF5A /* ObjectModel */ = {
+			isa = PBXGroup;
+			children = (
+				72EB89B51B6DED530067AF5A /* Model.h */,
+				72EB89B61B6DED530067AF5A /* Model.m */,
+			);
+			path = ObjectModel;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1206,6 +1222,7 @@
 				3944CD341B4E25C5008B1AF1 /* home_me_favor@2x.png in Resources */,
 				39EBADA61B688807002140C7 /* home_me_settings@2x.png in Resources */,
 				39EBAD931B6886A0002140C7 /* home_disc_last@2x.png in Resources */,
+				72EB89B01B6DDC5C0067AF5A /* home_me_order@2x.png in Resources */,
 				3944CD331B4E25C5008B1AF1 /* home_friend_teacher@2x.png in Resources */,
 				39DE288D1B50C2AC00B9558A /* cor4.png in Resources */,
 				39EBAD981B6886A0002140C7 /* home_disc_teaching_piano@2x.png in Resources */,
@@ -1299,6 +1316,7 @@
 				39DF9BFD1B5DEF3A00873A96 /* JKCountDownButton.m in Sources */,
 				724044891B4ABC34008AD6BA /* UIView+FrameMethods.m in Sources */,
 				723B5CF41B649D8200ABF8B9 /* YTKNetworkConfig.m in Sources */,
+				72EB89B71B6DED530067AF5A /* Model.m in Sources */,
 				722C52E81B492F49004CBADA /* MJRefreshAutoNormalFooter.m in Sources */,
 				3951EF0F1B69BB3200DDF11A /* MJType.m in Sources */,
 				39E6FD851B53AC9D000EB89A /* QRCameraSwitchButton.m in Sources */,

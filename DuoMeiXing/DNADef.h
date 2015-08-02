@@ -19,6 +19,7 @@
 #import "ResponseData.h"
 #import "RequestService.h"
 #import "UserDataManager.h"
+#import "Model.h"
 
 //视频列表
 typedef enum : NSUInteger{
@@ -35,15 +36,46 @@ typedef enum : NSUInteger{
 } PhotographAlbumType;
 
 typedef enum : NSUInteger{
+    kOptionCtrlTypeNewest,          //最新
+    kOptionCtrlTypeHot,             //最热
+    kOptionCtrlTypeContacts,        //大师,专家
+    kOptionCtrlTypeInstrument,      //乐器
+    kOptionCtrlTypeTeaching,        //教材
+    kOptionCtrlTypeAccount,         //帐户
+    kOptionCtrlTypePhotographAlbum, //影集
+    kOptionCtrlTypeSettings,        //设置
+    kOptionCtrlTypeOrder,           //订单
+    kOptionCtrlTypeAbout,           //关于
+    kOptionCtrlTypeUpdate,          //更新
+    kOptionCtrlTypeExit,            //退出
+    kOptionCtrlTypeAvatar,          //头像
+    kOptionCtrlTypeNickname,        //昵称
+    kOptionCtrlTypePopoverScan,     //扫一扫
+    kOptionCtrlTypePopoverVideo,    //上传视频
+    kOptionCtrlTypePopoverFriend,   //新朋友
+    kOptionCtrlTypeTopPaly,         //最多播放
+    kOptionCtrlTypeTopComment,      //最多评论
+    kOptionCtrlTypeTeachingTgita,   //吉他教材
+    kOptionCtrlTypeTeachingPiano,   //钢琴教材
+    kOptionCtrlTypeTeachingEgita,   //电吉他教材
+    kOptionCtrlTypeTeachingViolin,  //小提琴教材
+    kOptionCtrlTypeMyPublished,     //发布成功
+    kOptionCtrlTypeMyChecking,      //等待审核
+    kOptionCtrlTypeMyUploading      //正在上传
+} OptionCtrlType;
+
+typedef enum : NSUInteger{
     kCellListMessage,    //消息列表类型
     kCellListComment,    //评论列表类型
     kCellListVideo       //视频列表类型
 } CellListType;
 
 typedef enum : NSUInteger{
+    kPhotographAlbumCategoryHot,        //最热
     kPhotographAlbumCategoryTeaching,   //教材
     kPhotographAlbumCategoryMyVideo    //我的视频
 } PhotographAlbumCategory;
+
 
 #define apiBaseUrl @"http://app.dmxing.cn"
 
@@ -51,6 +83,7 @@ typedef enum : NSUInteger{
 #define appAPIRegister     @"/dmx/app/ajax/member_register.dmx"            //注册
 #define appAPISMS          @"/dmx/app/ajax/send_smscode.dmx"               //验证码
 #define appAPIMessage      @"/dmx/app/ajax/video/message/get.dmx"          //消息
+#define appAPIVideo      @"/dmx/app/ajax/video/type/get.dmx"             //获取各类视频
 
 #define appCompanyCode @"dalmatian"
 

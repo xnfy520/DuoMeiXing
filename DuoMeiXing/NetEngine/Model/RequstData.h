@@ -43,10 +43,28 @@
 @end
 
 
-#pragma mark - 分页请求参数
-
 @interface RequstPage : RequstData
 @property (nonatomic, copy) NSString *pageNo;
 @property (nonatomic, copy) NSString *pageSize;
+@end
+
+#pragma mark - 分页请求参数
+
+@interface RequstVideo : RequstPage
+@property (nonatomic, copy) NSString *action;
+@property (nonatomic, copy) NSString *type;
+
++ (id)requstTopPlay;
++ (id)requstTopComment;
+
++ (id)requstTeachingTguita;
++ (id)requstTeachingPiano;
++ (id)requstTeachingEguita;
++ (id)requstTeachingViolin;
+
++ (id)requstMePublished;
++ (id)requstMeChecking;
++ (id)requstMeUploading;
+
 @end
 

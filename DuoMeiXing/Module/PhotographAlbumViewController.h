@@ -8,11 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "DNABaseViewController.h"
-#import "DNADef.h"
 
 @interface PhotographAlbumViewController : DNABaseViewController
 
 @property(nonatomic, strong)NSString *listTitle;
-@property(nonatomic, assign)PhotographAlbumType listType;
+@property(nonatomic, assign)NSUInteger listType;
 
 @end

@@ -60,7 +60,6 @@
     self.navigationItem.backBarButtonItem = backItem;
     
 //    [self setupRightButton];
-
     WYPopoverTheme *theme = [WYPopoverTheme themeForIOS8];
     [WYPopoverController setDefaultTheme:theme];
 
@@ -101,12 +100,12 @@
     
 }
 
-- (void)getPopoverClickType:(NSString *)type
+- (void)getPopoverClickType:(NSUInteger) type
 {
     [popoverController dismissPopoverAnimated:NO];
-    [self showTips:[NSString stringWithFormat:@"选择了:%@", type]];
+    [self showTips:[NSString stringWithFormat:@"选择了:%ld", type]];
     
-    if ([type isEqualToString:@"scan"]) {
+    if (type == kOptionCtrlTypePopoverScan) {
 
         QRCodeReaderViewController *reader = [QRCodeReaderViewController new];
         reader.title = @"扫一扫";
@@ -122,12 +121,12 @@
         //[self presentViewController:reader animated:YES completion:NULL];
         [self.navigationController pushViewController:reader animated:YES];
         
-    }else if([type isEqualToString:@"video"]){
+    }else if(type == kOptionCtrlTypePopoverVideo){
         
        
 //        [self showImagePickerForSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
         
-    }else if ([type isEqualToString:@"friend"]){
+    }else if (type == kOptionCtrlTypePopoverFriend){
         
         ContactsViewController *contactsCtrl = [[ContactsViewController alloc] init];
         contactsCtrl.title = @"新朋友";

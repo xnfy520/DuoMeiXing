@@ -60,3 +60,65 @@
 @implementation RequstPage
 
 @end
+
+
+
+@implementation RequstVideo
+
++ (id)requstTopPlay
+{
+    return [self requstAction:@"top_play" withType:@""];
+}
+
++ (id)requstTopComment
+{
+    return [self requstAction:@"top_comment" withType:@""];
+}
+
++ (id)requstTeachingTguita
+{
+    return [self requstAction:@"teaching" withType:@"tguita"];
+}
+
++ (id)requstTeachingPiano
+{
+    return [self requstAction:@"teaching" withType:@"piano"];
+}
+
++ (id)requstTeachingEguita
+{
+    return [self requstAction:@"teaching" withType:@"eguita"];
+}
+
++ (id)requstTeachingViolin
+{
+    return [self requstAction:@"teaching" withType:@"violin"];
+}
+
++ (id)requstMePublished
+{
+    return [self requstAction:@"me" withType:@"published"];
+}
+
++ (id)requstMeChecking
+{
+    return [self requstAction:@"me" withType:@"checking"];
+}
+
++ (id)requstMeUploading
+{
+    return [self requstAction:@"me" withType:@"uploading"];
+}
+
++ (id)requstAction:(NSString *)action withType:(NSString *)type
+{
+    NSDictionary *dic = @{
+                          @"pageNo":@1,
+                          @"pageSize":@3,
+                          @"action":action,
+                          @"type": type
+                          };
+    return [self objectWithKeyValues:dic];
+}
+
+@end

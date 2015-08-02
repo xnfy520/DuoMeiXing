@@ -12,6 +12,8 @@
 
 #import "FieldsEditViewController.h"
 
+#define AVATAR_VIEW_TAG 1
+
 @interface AccountViewController ()<UITableViewDelegate, UITableViewDataSource>
 
 @end
@@ -19,7 +21,6 @@
 @implementation AccountViewController
 {
     UITableView *mainTableView;
-    NSArray *mainOptionData;
 }
 
 - (void)viewDidLoad {
@@ -27,21 +28,6 @@
     [super viewDidLoad];
     
     self.title = @"个人信息";
-    
-    mainOptionData = @[
-                       @[
-                           @{
-                               @"title":@"头像",
-                               @"ctrl":@"avatar"
-                               }
-                           ],
-                       @[
-                           @{
-                               @"title":@"昵称",
-                               @"ctrl":@"nickname"
-                               }
-                           ]
-                       ];
     
     [self setupMainTableView];
     
@@ -75,17 +61,18 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return mainOptionData.count;
+    return [[AccountOptionModel resultOption] count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [[mainOptionData objectAtIndex:section] count];
+    return [[[AccountOptionModel resultOption] objectAtIndex:section] count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
+    UIImageView *avatarImageView;
     
     static NSString *cellIds = @"cellIds";
     
@@ -93,23 +80,28 @@
     
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIds];
+        avatarImageView = [[UIImageView alloc] initWithFrame:CGRectMake(screenWidth-35-30, (CGRectGetHeight(cell.contentView.frame)-30)/2, 30, 30)];
+        avatarImageView.tag = AVATAR_VIEW_TAG;
+        avatarImageView.hidden = YES;
+        [cell.contentView addSubview:avatarImageView];
+    }else{
+        avatarImageView = (UIImageView *)[cell.contentView viewWithTag:AVATAR_VIEW_TAG];
     }
     
-    cell.textLabel.text = [[[mainOptionData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] objectForKey:@"title"];
+    BaseOptionModel * option = [[[AccountOptionModel resultOption] objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
     
-    NSString *ctrl = [[[mainOptionData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] objectForKey:@"ctrl"];
+    cell.textLabel.text = option.title;
     
-    if ([ctrl isEqualToString:@"nickname"]) {
+    if (option.ctrl == kOptionCtrlTypeNickname) {
         
         cell.detailTextLabel.text = [UserDataManager sharedUserDataManager].nickname;
         cell.detailTextLabel.font = [UIFont systemFontOfSize:14];
         
         
-    }else if([ctrl isEqualToString:@"avatar"]){
+    }else if(option.ctrl == kOptionCtrlTypeAvatar){
         
-        UIImageView * avatarImageView = [[UIImageView alloc] initWithFrame:CGRectMake(screenWidth-35-30, (CGRectGetHeight(cell.contentView.frame)-30)/2, 30, 30)];
+        avatarImageView.hidden = NO;
         avatarImageView.image = [DisplayUtil getImageFromURL:[UserDataManager sharedUserDataManager].avatarUrl];
-        [cell.contentView addSubview:avatarImageView];
         
     }
     
@@ -126,9 +118,9 @@
     
     [mainTableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    NSString *ctrl = [[[mainOptionData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] objectForKey:@"ctrl"];
+    BaseOptionModel * option = [[[AccountOptionModel resultOption] objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
     
-    if ([ctrl isEqualToString:@"nickname"]) {
+    if (option.ctrl == kOptionCtrlTypeNickname) {
         FieldsEditViewController *fieldsEditCtrl = [[FieldsEditViewController alloc] init];
         [self.navigationController presentViewController:[DNATabBarController setCtrl:fieldsEditCtrl] animated:YES completion:^{
             
