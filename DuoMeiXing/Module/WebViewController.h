@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "DNABaseViewController.h"
+#import "DNADef.h"
 #import "Singleton.h"
 
-@interface WebViewController : DNABaseViewController<UIWebViewDelegate>
+@interface WebViewController : DNABaseViewController<UIWebViewDelegate, DZNEmptyDataSetDelegate, DZNEmptyDataSetSource>
 
 SINGLETON_INTERFACE(WebViewController);
 

@@ -12,7 +12,7 @@
 #import "DisplayViewController.h"
 #import "YTKBatchRequest.h"
 
-@interface PhotographAlbumCategoryViewController ()<UITableViewDelegate, UITableViewDataSource>
+@interface PhotographAlbumCategoryViewController ()<UITableViewDelegate, UITableViewDataSource, DZNEmptyDataSetDelegate, DZNEmptyDataSetSource>
 {
     UITableView *mainTableView;
     NSArray *mainTableHeaderData;
@@ -27,14 +27,7 @@
     
     [self setupRightButton];
     
-    mainTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight)];
-    mainTableView.delegate = self;
-    mainTableView.dataSource = self;
-    mainTableView.backgroundColor = [UIColor groupTableViewBackgroundColor];
-    mainTableView.tableFooterView = [[UIView alloc] init];
-    [self.view addSubview:mainTableView];
-    
-    [self setupInsetsTableView:mainTableView];
+    [self setupMainTableView];
 
     if(self.category == kPhotographAlbumCategoryHot){
         mainTableData = [NSMutableArray arrayWithCapacity:2];
@@ -46,6 +39,21 @@
         mainTableData = [NSMutableArray arrayWithCapacity:3];
         [self sendMyVideoBatchRequest];
     }
+}
+
+- (void)setupMainTableView
+{
+    mainTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight)];
+    mainTableView.delegate = self;
+    mainTableView.dataSource = self;
+    mainTableView.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    mainTableView.tableFooterView = [[UIView alloc] init];
+    [self.view addSubview:mainTableView];
+    
+    [self setupInsetsTableView:mainTableView];
+    
+    mainTableView.emptyDataSetDelegate = self;
+    mainTableView.emptyDataSetSource = self;
 }
 
 - (void)sendHotBatchRequest
@@ -227,6 +235,29 @@
     PhotographAlbumViewController *photographAlbumCtrl = [[PhotographAlbumViewController alloc] init];
 
     [self.navigationController pushViewController:photographAlbumCtrl animated:YES];
+}
+
+- (UIColor *)backgroundColorForEmptyDataSet:(UIScrollView *)scrollView
+{
+    return [UIColor whiteColor];
+}
+
+- (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView
+{
+    return [UIImage imageNamed:@"placeholder_instagram"];
+}
+
+- (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView
+{
+    NSString *text = @"没有数据";
+    NSMutableParagraphStyle *paragraph = [NSMutableParagraphStyle new];
+    paragraph.lineBreakMode = NSLineBreakByWordWrapping;
+    paragraph.alignment = NSTextAlignmentCenter;
+    NSDictionary *attributes = @{NSFontAttributeName: [UIFont systemFontOfSize:18.0],
+                                 NSForegroundColorAttributeName: [UIColor lightGrayColor],
+                                 NSParagraphStyleAttributeName: paragraph};
+    
+    return [[NSAttributedString alloc] initWithString:text attributes:attributes];
 }
 
 @end

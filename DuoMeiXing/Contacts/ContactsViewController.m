@@ -12,7 +12,7 @@
 #import "Person.h"
 #import "ContactsCell.h"
 
-@interface ContactsViewController ()<UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating, UISearchBarDelegate>
+@interface ContactsViewController ()<UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating, UISearchBarDelegate, DZNEmptyDataSetDelegate, DZNEmptyDataSetSource>
 
 @end
 
@@ -163,6 +163,9 @@
     mainTableView.tableFooterView = [[UIView alloc] init];
     [self.view addSubview:mainTableView];
     [self setupInsetsTableView:mainTableView];
+    
+    mainTableView.emptyDataSetDelegate = self;
+    mainTableView.emptyDataSetSource = self;
 
     
     //索引栏颜色
@@ -451,6 +454,24 @@
     
     NSLog(@"%@", sectionsArray);
     
+}
+
+- (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView
+{
+    return [UIImage imageNamed:@"placeholder_instagram"];
+}
+
+- (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView
+{
+    NSString *text = @"没有数据";
+    NSMutableParagraphStyle *paragraph = [NSMutableParagraphStyle new];
+    paragraph.lineBreakMode = NSLineBreakByWordWrapping;
+    paragraph.alignment = NSTextAlignmentCenter;
+    NSDictionary *attributes = @{NSFontAttributeName: [UIFont systemFontOfSize:18.0],
+                                 NSForegroundColorAttributeName: [UIColor lightGrayColor],
+                                 NSParagraphStyleAttributeName: paragraph};
+    
+    return [[NSAttributedString alloc] initWithString:text attributes:attributes];
 }
 
 @end

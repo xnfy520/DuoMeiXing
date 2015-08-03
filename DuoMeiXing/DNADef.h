@@ -21,6 +21,7 @@
 #import "UserDataManager.h"
 #import "Model.h"
 #import "UIImageView+WebCache.h"
+#import "UIScrollView+EmptyDataSet.h"
 
 //视频列表
 typedef enum : NSUInteger{

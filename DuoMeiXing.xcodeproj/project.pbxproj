@@ -166,6 +166,8 @@
 		72ABD1DD1B3081A80099CB74 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72ABD1DB1B3081A80099CB74 /* MainViewController.m */; };
 		72ABD1E21B3081CD0099CB74 /* DiscoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72ABD1E01B3081CD0099CB74 /* DiscoverViewController.m */; };
 		72ABD1E71B3081DD0099CB74 /* ContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72ABD1E51B3081DD0099CB74 /* ContactsViewController.m */; };
+		72B1C8FF1B6FD785008FF23F /* UIScrollView+EmptyDataSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 72B1C8FE1B6FD785008FF23F /* UIScrollView+EmptyDataSet.m */; };
+		72B1C9011B6FD91E008FF23F /* placeholder_airbnb@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 72B1C9001B6FD91E008FF23F /* placeholder_airbnb@2x.png */; };
 		72C5F5B91B5822590030AA5B /* PannelTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 72C5F5B81B5822590030AA5B /* PannelTableView.m */; };
 		72D0CEC61B5BFAA40094CB3C /* DisplayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72D0CEC51B5BFAA40094CB3C /* DisplayViewController.m */; };
 		72D8F7EE1B5D57C2001F1260 /* SubmitButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 72D8F7ED1B5D57C2001F1260 /* SubmitButton.m */; };
@@ -472,6 +474,9 @@
 		72ABD1E01B3081CD0099CB74 /* DiscoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoverViewController.m; sourceTree = "<group>"; };
 		72ABD1E41B3081DD0099CB74 /* ContactsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsViewController.h; sourceTree = "<group>"; };
 		72ABD1E51B3081DD0099CB74 /* ContactsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsViewController.m; sourceTree = "<group>"; };
+		72B1C8FD1B6FD785008FF23F /* UIScrollView+EmptyDataSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+EmptyDataSet.h"; sourceTree = "<group>"; };
+		72B1C8FE1B6FD785008FF23F /* UIScrollView+EmptyDataSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+EmptyDataSet.m"; sourceTree = "<group>"; };
+		72B1C9001B6FD91E008FF23F /* placeholder_airbnb@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "placeholder_airbnb@2x.png"; sourceTree = "<group>"; };
 		72C5F5B71B5822590030AA5B /* PannelTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PannelTableView.h; sourceTree = "<group>"; };
 		72C5F5B81B5822590030AA5B /* PannelTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PannelTableView.m; sourceTree = "<group>"; };
 		72D0CEC41B5BFAA40094CB3C /* DisplayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DisplayViewController.h; sourceTree = "<group>"; };
@@ -981,6 +986,7 @@
 		729386541B33122D006F3FED /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				72B1C9001B6FD91E008FF23F /* placeholder_airbnb@2x.png */,
 				39EBADCB1B68DCB1002140C7 /* iosArrowRight@3x.png */,
 				39EBADBF1B68D89F002140C7 /* iosArrowForward.png */,
 				39EBADC01B68D89F002140C7 /* iosArrowForward@2x.png */,
@@ -1021,6 +1027,7 @@
 		729386561B33127A006F3FED /* Extention */ = {
 			isa = PBXGroup;
 			children = (
+				72B1C8FC1B6FD785008FF23F /* DZNEmptyDataSet */,
 				72EB89B91B6E83C60067AF5A /* SDWebImage */,
 				723B5CA01B649D8200ABF8B9 /* AFNetworking */,
 				723B5CC91B649D8200ABF8B9 /* YTKNetwork */,
@@ -1168,6 +1175,15 @@
 				724044841B4AB361008AD6BA /* SettingsViewController.m */,
 			);
 			path = Mine;
+			sourceTree = "<group>";
+		};
+		72B1C8FC1B6FD785008FF23F /* DZNEmptyDataSet */ = {
+			isa = PBXGroup;
+			children = (
+				72B1C8FD1B6FD785008FF23F /* UIScrollView+EmptyDataSet.h */,
+				72B1C8FE1B6FD785008FF23F /* UIScrollView+EmptyDataSet.m */,
+			);
+			path = DZNEmptyDataSet;
 			sourceTree = "<group>";
 		};
 		72EB89B41B6DED3E0067AF5A /* ObjectModel */ = {
@@ -1318,6 +1334,7 @@
 				39EBAD981B6886A0002140C7 /* home_disc_teaching_piano@2x.png in Resources */,
 				3944CD371B4E25C5008B1AF1 /* home_me_wallet@2x.png in Resources */,
 				39EBAD951B6886A0002140C7 /* home_disc_teacher@2x.png in Resources */,
+				72B1C9011B6FD91E008FF23F /* placeholder_airbnb@2x.png in Resources */,
 				39DE288E1B50C2AC00B9558A /* QRCodeScanLine@2x.png in Resources */,
 				7293867A1B331ADA006F3FED /* i200@2x.png in Resources */,
 				7293867E1B331ADA006F3FED /* i400@2x.png in Resources */,
@@ -1470,6 +1487,7 @@
 				723B5CED1B649D8200ABF8B9 /* UIWebView+AFNetworking.m in Sources */,
 				72EB89E81B6E83C60067AF5A /* UIImageView+HighlightedWebCache.m in Sources */,
 				724044A81B4AEBFB008AD6BA /* WYStoryboardPopoverSegue.m in Sources */,
+				72B1C8FF1B6FD785008FF23F /* UIScrollView+EmptyDataSet.m in Sources */,
 				39E6FD861B53AC9D000EB89A /* QRCodeReaderView.m in Sources */,
 				39AD39D01B6B76E7001E3094 /* RegisterNextViewController.m in Sources */,
 				72D8F7EE1B5D57C2001F1260 /* SubmitButton.m in Sources */,

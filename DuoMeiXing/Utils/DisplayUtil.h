@@ -14,6 +14,8 @@
 
 + (CGSize)getSize:(CGFloat)fontSize withString:(NSString *)fontText;
 
++ (UIColor *)colorWithHex:(NSString *)string;
+
 + (UIColor *) hexStringToColor: (NSString *) stringToConvert;
 
 + (NSDictionary *)dictionaryWithJsonString:(NSString *)jsonString;

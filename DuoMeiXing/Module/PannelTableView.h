@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface PannelTableView : UIView<UITableViewDelegate, UITableViewDataSource>
+#import "DNADef.h"
+@interface PannelTableView : UIView<UITableViewDelegate, UITableViewDataSource, DZNEmptyDataSetDelegate, DZNEmptyDataSetSource>
 
 @property (nonatomic, strong) UITableView *tableView;
 

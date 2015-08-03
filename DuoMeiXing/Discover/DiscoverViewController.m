@@ -116,7 +116,7 @@
         
     }else if(option.ctrl == kOptionCtrlTypeInstrument){
         
-        [WebViewController showWebPageInViewCtrl:self withUrl:@"http://www.163.com" withPostData:nil withViewTitle:appName];
+        [WebViewController showWebPageInViewCtrl:self withUrl:@"http://www.hao123.com" withPostData:nil withViewTitle:appName];
         
     }else if(option.ctrl == kOptionCtrlTypeTeaching){
         

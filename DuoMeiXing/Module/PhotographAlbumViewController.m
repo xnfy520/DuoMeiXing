@@ -12,7 +12,7 @@
 #import "DNADef.h"
 #import "ListCell.h"
 
-@interface PhotographAlbumViewController ()<UITableViewDelegate, UITableViewDataSource>
+@interface PhotographAlbumViewController ()<UITableViewDelegate, UITableViewDataSource, DZNEmptyDataSetDelegate, DZNEmptyDataSetSource>
 
 @end
 
@@ -76,6 +76,9 @@
     mainTableView.tableFooterView = [[UIView alloc] init];
     [self.view addSubview:mainTableView];
     [self setupInsetsTableView:mainTableView];
+    
+    mainTableView.emptyDataSetDelegate = self;
+    mainTableView.emptyDataSetSource = self;
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
@@ -138,5 +141,23 @@
     [self.navigationController pushViewController:displayCtrl animated:YES];
 }
 
+
+- (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView
+{
+    return [UIImage imageNamed:@"placeholder_instagram"];
+}
+
+- (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView
+{
+    NSString *text = @"没有数据";
+    NSMutableParagraphStyle *paragraph = [NSMutableParagraphStyle new];
+    paragraph.lineBreakMode = NSLineBreakByWordWrapping;
+    paragraph.alignment = NSTextAlignmentCenter;
+    NSDictionary *attributes = @{NSFontAttributeName: [UIFont systemFontOfSize:18.0],
+                                 NSForegroundColorAttributeName: [UIColor lightGrayColor],
+                                 NSParagraphStyleAttributeName: paragraph};
+    
+    return [[NSAttributedString alloc] initWithString:text attributes:attributes];
+}
 
 @end

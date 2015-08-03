@@ -157,12 +157,6 @@
     
 }
 
-// 重写该方法，控制该视图控制器只支持横屏显示
-- (NSUInteger)supportedInterfaceOrientations
-{
-    return UIInterfaceOrientationMaskLandscape;
-}
-
 -(void) setupVideoStateBar
 {
     
@@ -451,6 +445,25 @@
 - (void)keyboardWillBeHidden:(NSNotification*)aNotification
 {
     //do something
+}
+
+#pragma mark - View Auto-Rotation
+
+// 重写该方法，控制该视图控制器只支持横屏显示
+//- (NSUInteger)supportedInterfaceOrientations
+//{
+//    return UIInterfaceOrientationMaskLandscape;
+//}
+
+
+- (NSUInteger)supportedInterfaceOrientations
+{
+    return UIInterfaceOrientationMaskAll;
+}
+
+- (BOOL)shouldAutorotate
+{
+    return YES;
 }
 
 @end

@@ -7,13 +7,13 @@
 //
 
 #import "WebViewController.h"
-#import "DNADef.h"
+
 
 @interface WebViewController ()
 
 @property(strong,nonatomic)UIWebView* webview;
 @property(weak,nonatomic)UIViewController* parentViewCtrl;
-
+@property (nonatomic, getter=didFailLoading) BOOL failedLoading;
 @end
 
 @implementation WebViewController
@@ -46,8 +46,11 @@ SINGLETON_IMPLEMENTATION(WebViewController);
         self.title = title;
     
     if(_webview == nil){
-        _webview = [[UIWebView alloc]initWithFrame:self.view.frame];
+        _webview = [[UIWebView alloc]initWithFrame:self.view.bounds];
         _webview.delegate = self;
+        _webview.scrollView.emptyDataSetSource = self;
+        _webview.scrollView.emptyDataSetDelegate = self;
+//        _webview.backgroundColor=[UIColor whiteColor];
         [self.view addSubview:_webview];
     }
     
@@ -85,24 +88,102 @@ SINGLETON_IMPLEMENTATION(WebViewController);
     _parentViewCtrl = nil;
 }
 
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
+{
+    NSString *newUrlString =  [NSString stringWithFormat:@"%@%@",
+                               webView.request.URL.host, webView.request.URL.path];
+    
+    if ([newUrlString isEqualToString:@""]) {
+        self.failedLoading = YES;
+    }else{
+        self.failedLoading = NO;
+    }
+    return YES;
+}
+
 - (void)webViewDidStartLoad:(UIWebView *)webView
 {
     NSString *newUrlString =  [NSString stringWithFormat:@"%@%@",
                                webView.request.URL.host, webView.request.URL.path];
     
+    if ([newUrlString isEqualToString:@""]) {
+        self.failedLoading = YES;
+    }else{
+        self.failedLoading = NO;
+    }
     
 //    NSLog(@"webViewDidStartLoad:%@",newUrlString);
-    
     [self showHUB];
 }
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
-    [self hideHUB];
-}
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
-{
+    NSString *newUrlString =  [NSString stringWithFormat:@"%@%@",
+                               webView.request.URL.host, webView.request.URL.path];
+    
+    if ([newUrlString isEqualToString:@""]) {
+        self.failedLoading = YES;
+    }else{
+        self.failedLoading = NO;
+    }
     [self hideHUB];
 }
 
+
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
+{
+    [self hideHUB];
+    
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"about:blank"]];
+    [_webview loadRequest:request];
+    
+    self.failedLoading = YES;
+    
+    
+    [_webview.scrollView reloadEmptyDataSet];
+    
+
+    
+
+    
+}
+
+
+#pragma mark - DZNEmptyDataSetSource
+
+- (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView
+{
+    if (_webview.isLoading || !self.didFailLoading) {
+        return nil;
+    }
+    return [UIImage imageNamed:@"placeholder_remote"];
+}
+
+- (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView
+{
+    if (_webview.isLoading || !self.didFailLoading) {
+        return nil;
+    }
+    NSString *text = @"无法连接";
+    NSMutableParagraphStyle *paragraph = [NSMutableParagraphStyle new];
+    paragraph.lineBreakMode = NSLineBreakByWordWrapping;
+    paragraph.alignment = NSTextAlignmentCenter;
+    NSDictionary *attributes = @{NSFontAttributeName: [UIFont systemFontOfSize:18.0],
+                                 NSForegroundColorAttributeName: [UIColor lightGrayColor],
+                                 NSParagraphStyleAttributeName: paragraph};
+    
+    return [[NSAttributedString alloc] initWithString:text attributes:attributes];
+}
+
+#pragma mark - DZNEmptyDataSetDelegate
+
+- (BOOL)emptyDataSetShouldDisplay:(UIScrollView *)scrollView
+{
+    return YES;
+}
+
+- (BOOL)emptyDataSetShouldAllowScroll:(UIScrollView *)scrollView
+{
+    return YES;
+}
 
 @end
