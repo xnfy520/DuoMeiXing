@@ -117,4 +117,62 @@
     return dateString;
 }
 
++ (NSString *)stringWithOptionCtrlType:(NSUInteger)type
+{
+    NSString *typeString;
+    switch (type) {
+        case kOptionCtrlTypeTopPaly:
+            typeString = @"最热播放";
+            break;
+        case kOptionCtrlTypeTopComment:
+            typeString = @"最热评论";
+            break;
+        case kOptionCtrlTypeTeachingTgita:
+            typeString = @"吉他教材";
+            break;
+        case kOptionCtrlTypeTeachingPiano:
+            typeString = @"钢琴教材";
+            break;
+        case kOptionCtrlTypeTeachingEgita:
+            typeString = @"电吉他教材";
+            break;
+        case kOptionCtrlTypeTeachingViolin:
+            typeString = @"小提琴教材";
+            break;
+        case kOptionCtrlTypeMyPublished:
+            typeString = @"发布成功";
+            break;
+        case kOptionCtrlTypeMyChecking:
+            typeString = @"等待审核";
+            break;
+        case kOptionCtrlTypeMyUploading:
+            typeString = @"正在上传";
+            break;
+        default:
+            typeString = @"";
+            break;
+    }
+    return typeString;
+}
+
++ (NSString *)stringWithPhotographAlbumCategory:(NSUInteger)type
+{
+    NSString *typeString;
+    switch (type) {
+        case kPhotographAlbumCategoryHot:
+            typeString = @"最热";
+            break;
+        case kPhotographAlbumCategoryTeaching:
+            typeString = @"教材";
+            break;
+        case kPhotographAlbumCategoryMyVideo:
+            typeString = @"我的视频";
+            break;
+        default:
+            typeString = @"";
+            break;
+    }
+    return typeString;
+}
+
 @end

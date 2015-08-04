@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>717D1E78-43B4-4EBB-A976-F3125F2FAD2F</string>
 	<key>IDESourceControlProjectName</key>
-	<string>DuoMeiXing</string>
+	<string>project</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>5D511210DDA677B0C46419BBEA0D1692D91BE5D6</key>
 		<string>https://github.com/xnfy520/DuoMeiXing.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>DuoMeiXing.xcodeproj</string>
+	<string>DuoMeiXing.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>5D511210DDA677B0C46419BBEA0D1692D91BE5D6</key>

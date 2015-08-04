@@ -17,6 +17,7 @@
     UITableView *mainTableView;
     NSArray *mainTableHeaderData;
     NSMutableArray *mainTableData;
+    BOOL isEmpty;
 }
 @end
 
@@ -30,12 +31,16 @@
     [self setupMainTableView];
 
     if(self.category == kPhotographAlbumCategoryHot){
+        
+        self.title = [DisplayUtil stringWithPhotographAlbumCategory:kPhotographAlbumCategoryHot];
         mainTableData = [NSMutableArray arrayWithCapacity:2];
         [self sendHotBatchRequest];
     }else if (self.category == kPhotographAlbumCategoryTeaching) {
+        self.title = [DisplayUtil stringWithPhotographAlbumCategory:kPhotographAlbumCategoryTeaching];
         mainTableData = [NSMutableArray arrayWithCapacity:4];
         [self sendTeachingBatchRequest];
     }else if(self.category == kPhotographAlbumCategoryMyVideo){
+        self.title = [DisplayUtil stringWithPhotographAlbumCategory:kPhotographAlbumCategoryMyVideo];
         mainTableData = [NSMutableArray arrayWithCapacity:3];
         [self sendMyVideoBatchRequest];
     }
@@ -100,11 +105,22 @@
         [self hideHUB];
         NSLog(@"succeed");
         NSArray *requests = batchRequest.requestArray;
+        int emptyCount = 0;
         for (int i = 0; i<requests.count; i++) {
             RequestService *result = (RequestService *)requests[i];
             ResponseVideo *responseData = [ResponseVideo objectWithKeyValues:[result responseJSONObject]];
+            
+            if (responseData.result.count<=0) {
+                emptyCount++;
+            }
+            
             [mainTableData addObject:responseData.result];
         }
+        if (emptyCount == requests.count) {
+            isEmpty = YES;
+        }
+        
+        NSLog(@"%@", mainTableData);
         [mainTableView reloadData];
     } failure:^(YTKBatchRequest *batchRequest) {
         NSLog(@"failed");
@@ -142,7 +158,6 @@
     headerView.backgroundColor = [UIColor whiteColor];
     if (mainTableHeaderData.count > 0) {
         BaseOptionModel * option = [mainTableHeaderData objectAtIndex:section];
-        
         UIImageView *headerIcon = [[UIImageView alloc] initWithFrame:CGRectMake(10, (35-25)/2, 25, 25)];
         NSString *icon = option.icon;
         headerIcon.image = [UIImage imageNamed:icon];
@@ -159,6 +174,7 @@
         
         [headerButton addTarget:self action:@selector(toCategory:) forControlEvents:UIControlEventTouchUpInside];
         headerButton.frame  = CGRectMake(screenWidth-25-5, (35-25)/2, 25, 25);
+        headerButton.tag = option.ctrl;
         [headerView addSubview:headerButton];
     }
     return headerView;
@@ -178,7 +194,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return mainTableHeaderData.count;
+    return isEmpty ? 0 : mainTableHeaderData.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -231,9 +247,9 @@
 
 - (void)toCategory:(id)sender
 {
-    
+    UIButton *headerButton = (UIButton *)sender;
     PhotographAlbumViewController *photographAlbumCtrl = [[PhotographAlbumViewController alloc] init];
-
+    photographAlbumCtrl.listType = headerButton.tag;
     [self.navigationController pushViewController:photographAlbumCtrl animated:YES];
 }
 

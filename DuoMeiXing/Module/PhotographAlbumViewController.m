@@ -25,6 +25,8 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+    
+    self.title = [DisplayUtil stringWithOptionCtrlType:self.listType];
 
     [self setupMainTableView];
     

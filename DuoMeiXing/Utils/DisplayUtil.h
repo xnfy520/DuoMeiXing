@@ -24,6 +24,8 @@
 
 + (NSString *)getDateStringWithDate:(NSDate *)date DateFormat:(NSString *)formatString;
 
++ (NSString *)stringWithOptionCtrlType:(NSUInteger)type;
 
++ (NSString *)stringWithPhotographAlbumCategory:(NSUInteger)type;
 
 @end
