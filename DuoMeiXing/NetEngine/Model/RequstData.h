@@ -54,17 +54,19 @@
 @property (nonatomic, copy) NSString *action;
 @property (nonatomic, copy) NSString *type;
 
-+ (id)requstTopPlay;
-+ (id)requstTopComment;
++ (id)requstNewestWithPageNo:(NSInteger)pageNo withPageSize:(NSInteger)pageSize;
 
-+ (id)requstTeachingTguita;
-+ (id)requstTeachingPiano;
-+ (id)requstTeachingEguita;
-+ (id)requstTeachingViolin;
++ (id)requstTopPlayWithPageNo:(NSInteger)pageNo withPageSize:(NSInteger)pageSize;
++ (id)requstTopCommentWithPageNo:(NSInteger)pageNo withPageSize:(NSInteger)pageSize;
 
-+ (id)requstMePublished;
-+ (id)requstMeChecking;
-+ (id)requstMeUploading;
++ (id)requstTeachingTguitaWithPageNo:(NSInteger)pageNo withPageSize:(NSInteger)pageSize;
++ (id)requstTeachingPianoWithPageNo:(NSInteger)pageNo withPageSize:(NSInteger)pageSize;
++ (id)requstTeachingEguitaWithPageNo:(NSInteger)pageNo withPageSize:(NSInteger)pageSize;
++ (id)requstTeachingViolinWithPageNo:(NSInteger)pageNo withPageSize:(NSInteger)pageSize;
+
++ (id)requstMePublishedWithPageNo:(NSInteger)pageNo withPageSize:(NSInteger)pageSize;
++ (id)requstMeCheckingWithPageNo:(NSInteger)pageNo withPageSize:(NSInteger)pageSize;
++ (id)requstMeUploadingWithPageNo:(NSInteger)pageNo withPageSize:(NSInteger)pageSize;
 
 @end
 

@@ -63,27 +63,27 @@
 
 - (void)sendHotBatchRequest
 {
-    RequestService *api1 = [[RequestService alloc] initReqeustUrl:appAPIVideo withPostData:[RequstVideo requstTopPlay] withResponseValidator:[ResponseVideo responseValidator]];
-    RequestService *api2 = [[RequestService alloc] initReqeustUrl:appAPIVideo withPostData:[RequstVideo requstTopComment] withResponseValidator:[ResponseVideo responseValidator]];
+    RequestService *api1 = [[RequestService alloc] initReqeustUrl:appAPIVideo withPostData:[RequstVideo requstTopPlayWithPageNo:1 withPageSize:5] withResponseValidator:[ResponseVideo responseValidator]];
+    RequestService *api2 = [[RequestService alloc] initReqeustUrl:appAPIVideo withPostData:[RequstVideo requstTopCommentWithPageNo:1 withPageSize:5] withResponseValidator:[ResponseVideo responseValidator]];
     
     [self sendBatchRequestWith:@[api1, api2]];
 }
 
 - (void)sendTeachingBatchRequest
 {
-    RequestService *api1 = [[RequestService alloc] initReqeustUrl:appAPIVideo withPostData:[RequstVideo requstTeachingTguita] withResponseValidator:[ResponseVideo responseValidator]];
-    RequestService *api2 = [[RequestService alloc] initReqeustUrl:appAPIVideo withPostData:[RequstVideo requstTeachingPiano] withResponseValidator:[ResponseVideo responseValidator]];
-    RequestService *api3 = [[RequestService alloc] initReqeustUrl:appAPIVideo withPostData:[RequstVideo requstTeachingEguita] withResponseValidator:[ResponseVideo responseValidator]];
-    RequestService *api4 = [[RequestService alloc] initReqeustUrl:appAPIVideo withPostData:[RequstVideo requstTeachingViolin] withResponseValidator:[ResponseVideo responseValidator]];
+    RequestService *api1 = [[RequestService alloc] initReqeustUrl:appAPIVideo withPostData:[RequstVideo requstTeachingTguitaWithPageNo:1 withPageSize:5] withResponseValidator:[ResponseVideo responseValidator]];
+    RequestService *api2 = [[RequestService alloc] initReqeustUrl:appAPIVideo withPostData:[RequstVideo requstTeachingPianoWithPageNo:1 withPageSize:5] withResponseValidator:[ResponseVideo responseValidator]];
+    RequestService *api3 = [[RequestService alloc] initReqeustUrl:appAPIVideo withPostData:[RequstVideo requstTeachingEguitaWithPageNo:1 withPageSize:5] withResponseValidator:[ResponseVideo responseValidator]];
+    RequestService *api4 = [[RequestService alloc] initReqeustUrl:appAPIVideo withPostData:[RequstVideo requstTeachingViolinWithPageNo:1 withPageSize:5] withResponseValidator:[ResponseVideo responseValidator]];
     
     [self sendBatchRequestWith:@[api1, api2, api3, api4]];
 }
 
 - (void)sendMyVideoBatchRequest
 {
-    RequestService *api1 = [[RequestService alloc] initReqeustUrl:appAPIVideo withPostData:[RequstVideo requstMePublished] withResponseValidator:[ResponseVideo responseValidator]];
-    RequestService *api2 = [[RequestService alloc] initReqeustUrl:appAPIVideo withPostData:[RequstVideo requstMeChecking] withResponseValidator:[ResponseVideo responseValidator]];
-    RequestService *api3 = [[RequestService alloc] initReqeustUrl:appAPIVideo withPostData:[RequstVideo requstMeUploading] withResponseValidator:[ResponseVideo responseValidator]];
+    RequestService *api1 = [[RequestService alloc] initReqeustUrl:appAPIVideo withPostData:[RequstVideo requstMePublishedWithPageNo:1 withPageSize:5] withResponseValidator:[ResponseVideo responseValidator]];
+    RequestService *api2 = [[RequestService alloc] initReqeustUrl:appAPIVideo withPostData:[RequstVideo requstMeCheckingWithPageNo:1 withPageSize:5] withResponseValidator:[ResponseVideo responseValidator]];
+    RequestService *api3 = [[RequestService alloc] initReqeustUrl:appAPIVideo withPostData:[RequstVideo requstMeUploadingWithPageNo:1 withPageSize:5] withResponseValidator:[ResponseVideo responseValidator]];
 
     [self sendBatchRequestWith:@[api1, api2, api3]];
 }

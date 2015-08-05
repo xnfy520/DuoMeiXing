@@ -65,56 +65,61 @@
 
 @implementation RequstVideo
 
-+ (id)requstTopPlay
++ (id)requstNewestWithPageNo:(NSInteger)pageNo withPageSize:(NSInteger)pageSize
 {
-    return [self requstAction:@"top_play" withType:@""];
+    return [self requstAction:@"" withType:@"" withPageNo:pageNo withPageSize:pageSize];
 }
 
-+ (id)requstTopComment
++ (id)requstTopPlayWithPageNo:(NSInteger)pageNo withPageSize:(NSInteger)pageSize
 {
-    return [self requstAction:@"top_comment" withType:@""];
+    return [self requstAction:@"top_play" withType:@"" withPageNo:pageNo withPageSize:pageSize];
 }
 
-+ (id)requstTeachingTguita
++ (id)requstTopCommentWithPageNo:(NSInteger)pageNo withPageSize:(NSInteger)pageSize
 {
-    return [self requstAction:@"teaching" withType:@"tguita"];
+    return [self requstAction:@"top_comment" withType:@"" withPageNo:pageNo withPageSize:pageSize];
 }
 
-+ (id)requstTeachingPiano
++ (id)requstTeachingTguitaWithPageNo:(NSInteger)pageNo withPageSize:(NSInteger)pageSize
 {
-    return [self requstAction:@"teaching" withType:@"piano"];
+    return [self requstAction:@"teaching" withType:@"tguita" withPageNo:pageNo withPageSize:pageSize];
 }
 
-+ (id)requstTeachingEguita
++ (id)requstTeachingPianoWithPageNo:(NSInteger)pageNo withPageSize:(NSInteger)pageSize
 {
-    return [self requstAction:@"teaching" withType:@"eguita"];
+    return [self requstAction:@"teaching" withType:@"piano" withPageNo:pageNo withPageSize:pageSize];
 }
 
-+ (id)requstTeachingViolin
++ (id)requstTeachingEguitaWithPageNo:(NSInteger)pageNo withPageSize:(NSInteger)pageSize
 {
-    return [self requstAction:@"teaching" withType:@"violin"];
+    return [self requstAction:@"teaching" withType:@"eguita" withPageNo:pageNo withPageSize:pageSize];
 }
 
-+ (id)requstMePublished
++ (id)requstTeachingViolinWithPageNo:(NSInteger)pageNo withPageSize:(NSInteger)pageSize
 {
-    return [self requstAction:@"me" withType:@"published"];
+    return [self requstAction:@"teaching" withType:@"violin" withPageNo:pageNo withPageSize:pageSize];
 }
 
-+ (id)requstMeChecking
++ (id)requstMePublishedWithPageNo:(NSInteger)pageNo withPageSize:(NSInteger)pageSize
 {
-    return [self requstAction:@"me" withType:@"checking"];
+    return [self requstAction:@"me" withType:@"published" withPageNo:pageNo withPageSize:pageSize];
 }
 
-+ (id)requstMeUploading
++ (id)requstMeCheckingWithPageNo:(NSInteger)pageNo withPageSize:(NSInteger)pageSize
 {
-    return [self requstAction:@"me" withType:@"uploading"];
+    return [self requstAction:@"me" withType:@"checking" withPageNo:pageNo withPageSize:pageSize];
 }
 
-+ (id)requstAction:(NSString *)action withType:(NSString *)type
++ (id)requstMeUploadingWithPageNo:(NSInteger)pageNo withPageSize:(NSInteger)pageSize
+{
+    return [self requstAction:@"me" withType:@"uploading" withPageNo:pageNo withPageSize:pageSize];
+}
+
++ (id)requstAction:(NSString *)action withType:(NSString *)type withPageNo:(NSInteger)pageNo withPageSize:(NSInteger)pageSize
 {
     NSDictionary *dic = @{
-                          @"pageNo":@1,
-                          @"pageSize":@3,
+                          @"pageNo":@(pageNo),
+                          @"pageSize":@(pageSize),
                           @"action":action,
                           @"type": type
                           };

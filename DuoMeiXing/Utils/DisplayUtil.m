@@ -121,6 +121,9 @@
 {
     NSString *typeString;
     switch (type) {
+        case kOptionCtrlTypeNewest:
+            typeString = @"最新";
+            break;
         case kOptionCtrlTypeTopPaly:
             typeString = @"最热播放";
             break;
