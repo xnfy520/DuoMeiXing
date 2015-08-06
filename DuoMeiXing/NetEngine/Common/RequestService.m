@@ -21,6 +21,28 @@
     return self;
 }
 
++ (id)messageReqeust
+{
+    RequstPage *requestData = [[RequstPage alloc] init];
+    requestData.pageNo = @"1";
+    requestData.pageSize = @"10";
+    
+    RequestService *request = [[RequestService alloc] initReqeustUrl:appAPIMessage withPostData:requestData withResponseValidator:[ResponseMessage responseValidator]];
+    return request;
+}
+
++ (id)videoLastReqeustPostData:(RequstData *)requestData
+{
+    RequestService *request = [[RequestService alloc] initReqeustUrl:appAPIVideoLast withPostData:requestData withResponseValidator:[ResponseVideo responseValidator]];
+    return request;
+}
+
++ (id)videoReqeustPostData:(RequstData *)requestData
+{
+    RequestService *request = [[RequestService alloc] initReqeustUrl:appAPIVideo withPostData:requestData withResponseValidator:[ResponseVideo responseValidator]];
+    return request;
+}
+
 - (YTKRequestMethod)requestMethod
 {
     return YTKRequestMethodPost;

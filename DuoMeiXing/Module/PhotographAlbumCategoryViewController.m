@@ -63,27 +63,35 @@
 
 - (void)sendHotBatchRequest
 {
-    RequestService *api1 = [[RequestService alloc] initReqeustUrl:appAPIVideo withPostData:[RequstVideo requstTopPlayWithPageNo:1 withPageSize:5] withResponseValidator:[ResponseVideo responseValidator]];
-    RequestService *api2 = [[RequestService alloc] initReqeustUrl:appAPIVideo withPostData:[RequstVideo requstTopCommentWithPageNo:1 withPageSize:5] withResponseValidator:[ResponseVideo responseValidator]];
+    RequestService *api1 = [RequestService videoReqeustPostData:[RequstVideo requstTopPlayWithPageNo:1 withPageSize:5]];
+    
+    RequestService *api2 = [RequestService videoReqeustPostData:[RequstVideo requstTopCommentWithPageNo:1 withPageSize:5]];
     
     [self sendBatchRequestWith:@[api1, api2]];
 }
 
 - (void)sendTeachingBatchRequest
 {
-    RequestService *api1 = [[RequestService alloc] initReqeustUrl:appAPIVideo withPostData:[RequstVideo requstTeachingTguitaWithPageNo:1 withPageSize:5] withResponseValidator:[ResponseVideo responseValidator]];
-    RequestService *api2 = [[RequestService alloc] initReqeustUrl:appAPIVideo withPostData:[RequstVideo requstTeachingPianoWithPageNo:1 withPageSize:5] withResponseValidator:[ResponseVideo responseValidator]];
-    RequestService *api3 = [[RequestService alloc] initReqeustUrl:appAPIVideo withPostData:[RequstVideo requstTeachingEguitaWithPageNo:1 withPageSize:5] withResponseValidator:[ResponseVideo responseValidator]];
-    RequestService *api4 = [[RequestService alloc] initReqeustUrl:appAPIVideo withPostData:[RequstVideo requstTeachingViolinWithPageNo:1 withPageSize:5] withResponseValidator:[ResponseVideo responseValidator]];
+    
+    RequestService *api1 = [RequestService videoReqeustPostData:[RequstVideo requstTeachingTguitaWithPageNo:1 withPageSize:5]];
+    
+    RequestService *api2 = [RequestService videoReqeustPostData:[RequstVideo requstTeachingPianoWithPageNo:1 withPageSize:5]];
+    
+    RequestService *api3 = [RequestService videoReqeustPostData:[RequstVideo requstTeachingEguitaWithPageNo:1 withPageSize:5]];
+    
+    RequestService *api4 = [RequestService videoReqeustPostData:[RequstVideo requstTeachingViolinWithPageNo:1 withPageSize:5]];
     
     [self sendBatchRequestWith:@[api1, api2, api3, api4]];
 }
 
 - (void)sendMyVideoBatchRequest
 {
-    RequestService *api1 = [[RequestService alloc] initReqeustUrl:appAPIVideo withPostData:[RequstVideo requstMePublishedWithPageNo:1 withPageSize:5] withResponseValidator:[ResponseVideo responseValidator]];
-    RequestService *api2 = [[RequestService alloc] initReqeustUrl:appAPIVideo withPostData:[RequstVideo requstMeCheckingWithPageNo:1 withPageSize:5] withResponseValidator:[ResponseVideo responseValidator]];
-    RequestService *api3 = [[RequestService alloc] initReqeustUrl:appAPIVideo withPostData:[RequstVideo requstMeUploadingWithPageNo:1 withPageSize:5] withResponseValidator:[ResponseVideo responseValidator]];
+    
+    RequestService *api1 = [RequestService videoReqeustPostData:[RequstVideo requstMePublishedWithPageNo:1 withPageSize:5]];
+    
+    RequestService *api2 = [RequestService videoReqeustPostData:[RequstVideo requstMeCheckingWithPageNo:1 withPageSize:5]];
+    
+    RequestService *api3 = [RequestService videoReqeustPostData:[RequstVideo requstMeUploadingWithPageNo:1 withPageSize:5]];
 
     [self sendBatchRequestWith:@[api1, api2, api3]];
 }
@@ -120,8 +128,8 @@
             isEmpty = YES;
         }
         
-        NSLog(@"%@", mainTableData);
         [mainTableView reloadData];
+        
     } failure:^(YTKBatchRequest *batchRequest) {
         NSLog(@"failed");
     }];

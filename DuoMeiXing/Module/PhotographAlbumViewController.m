@@ -31,19 +31,105 @@
     [self setupMainTableView];
     
     tableData = [[NSMutableArray alloc] init];
-    
-    [self requstApi];
-    
+
+    switch (self.listType) {
+        case kOptionCtrlTypeNewest:
+            [self sendNewestRequest];
+            break;
+        case kOptionCtrlTypeTopPaly:
+            [self sendTopPalyRequest];
+            break;
+        case kOptionCtrlTypeTopComment:
+            [self sendTopCommentRequest];
+            break;
+        case kOptionCtrlTypeTeachingTgita:
+            [self sendTeachingTgitaRequest];
+            break;
+        case kOptionCtrlTypeTeachingPiano:
+            [self sendTeachingPianoRequest];
+            break;
+        case kOptionCtrlTypeTeachingEgita:
+            [self sendTeachingEgitaRequest];
+            break;
+        case kOptionCtrlTypeTeachingViolin:
+            [self sendTeachingViolinRequest];
+            break;
+        case kOptionCtrlTypeMyPublished:
+            [self sendMyPublishedRequest];
+            break;
+        case kOptionCtrlTypeMyChecking:
+            [self sendMyCheckingRequest];
+            break;
+        case kOptionCtrlTypeMyUploading:
+            [self sendMyUploadingRequest];
+            break;
+        default:
+            break;
+    }
 }
 
-- (void)requstApi
+- (void)sendNewestRequest
 {
-    RequstVideo *requestData = [[RequstVideo alloc] init];
-    requestData.pageNo = @"1";
-    requestData.pageSize = @"10";
-    requestData.action = @"top_play";
-    
-    RequestService *api = [[RequestService alloc] initReqeustUrl:appAPIVideo withPostData:requestData withResponseValidator:[ResponseVideo responseValidator]];
+    RequestService *api = [RequestService videoLastReqeustPostData:[RequstVideo requstNewestWithPageNo:1 withPageSize:20]];
+    [self sendRequestWith:api];
+}
+
+- (void)sendTopPalyRequest
+{
+    RequestService *api = [RequestService videoReqeustPostData:[RequstVideo requstTopPlayWithPageNo:1 withPageSize:20]];
+    [self sendRequestWith:api];
+}
+
+- (void)sendTopCommentRequest
+{
+    RequestService *api = [RequestService videoReqeustPostData:[RequstVideo requstTopCommentWithPageNo:1 withPageSize:20]];
+    [self sendRequestWith:api];
+}
+
+- (void)sendTeachingTgitaRequest
+{
+    RequestService *api = [RequestService videoReqeustPostData:[RequstVideo requstTeachingTguitaWithPageNo:1 withPageSize:20]];
+    [self sendRequestWith:api];
+}
+
+- (void)sendTeachingPianoRequest
+{
+    RequestService *api = [RequestService videoReqeustPostData:[RequstVideo requstTeachingPianoWithPageNo:1 withPageSize:20]];
+    [self sendRequestWith:api];
+}
+
+- (void)sendTeachingEgitaRequest
+{
+    RequestService *api = [RequestService videoReqeustPostData:[RequstVideo requstTeachingEguitaWithPageNo:1 withPageSize:20]];
+    [self sendRequestWith:api];
+}
+
+- (void)sendTeachingViolinRequest
+{
+    RequestService *api = [RequestService videoReqeustPostData:[RequstVideo requstTeachingViolinWithPageNo:1 withPageSize:20]];
+    [self sendRequestWith:api];
+}
+
+- (void)sendMyPublishedRequest
+{
+    RequestService *api = [RequestService videoReqeustPostData:[RequstVideo requstMePublishedWithPageNo:1 withPageSize:20]];
+    [self sendRequestWith:api];
+}
+
+- (void)sendMyCheckingRequest
+{
+    RequestService *api = [RequestService videoReqeustPostData:[RequstVideo requstMeCheckingWithPageNo:1 withPageSize:10]];
+    [self sendRequestWith:api];
+}
+
+- (void)sendMyUploadingRequest
+{
+    RequestService *api = [RequestService videoReqeustPostData:[RequstVideo requstMeUploadingWithPageNo:1 withPageSize:20]];
+    [self sendRequestWith:api];
+}
+
+- (void)sendRequestWith:(RequestService *)api
+{
     
     [self showHUB];
     

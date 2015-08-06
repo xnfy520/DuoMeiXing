@@ -42,15 +42,12 @@
 
 - (void)requstApi
 {
-    RequstPage *requestData = [[RequstPage alloc] init];
-    requestData.pageNo = @"1";
-    requestData.pageSize = @"10";
 
-    RequestService *api = [[RequestService alloc] initReqeustUrl:appAPIMessage withPostData:requestData withResponseValidator:[ResponseMessage responseValidator]];
+    RequestService *request = [RequestService messageReqeust];
 
     [self showHUB];
     
-    [api startWithCompletionBlockWithSuccess:^(YTKBaseRequest *request) {
+    [request startWithCompletionBlockWithSuccess:^(YTKBaseRequest *request) {
         
         [self hideHUB];
         

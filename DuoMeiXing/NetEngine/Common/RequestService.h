@@ -17,4 +17,10 @@
 
 - (id)initReqeustUrl:(NSString*) requestUrl withPostData:(RequstData *)requestData withResponseValidator :(NSDictionary *)responseValidator;
 
++ (id)messageReqeust;
+
++ (id)videoLastReqeustPostData:(RequstData *)requestData;
+
++ (id)videoReqeustPostData:(RequstData *)requestData;
+
 @end

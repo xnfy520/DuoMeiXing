@@ -85,7 +85,8 @@ typedef enum : NSUInteger{
 #define appAPIRegister     @"/dmx/app/ajax/member_register.dmx"            //注册
 #define appAPISMS          @"/dmx/app/ajax/send_smscode.dmx"               //验证码
 #define appAPIMessage      @"/dmx/app/ajax/video/message/get.dmx"          //消息
-#define appAPIVideo      @"/dmx/app/ajax/video/type/get.dmx"             //获取各类视频
+#define appAPIVideo        @"/dmx/app/ajax/video/type/get.dmx"             //获取各类视频
+#define appAPIVideoLast    @"/dmx/app/ajax/video/get_last.dmx"             //获取最新视频
 
 #define appCompanyCode @"dalmatian"
 
