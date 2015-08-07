@@ -27,6 +27,7 @@
     
     [config addUrlFilter:urlFilter];
     config.baseUrl = apiBaseUrl;
+    
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {

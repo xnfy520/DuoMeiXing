@@ -12,7 +12,7 @@
 #import "DisplayViewController.h"
 
 
-@interface MainViewController ()<UITableViewDelegate, UITableViewDataSource, DZNEmptyDataSetDelegate, DZNEmptyDataSetSource>
+@interface MainViewController ()<UITableViewDelegate, UITableViewDataSource, DZNEmptyDataSetDelegate, DZNEmptyDataSetSource, YTKRequestAccessory>
 
 @end
 
@@ -33,6 +33,11 @@
     
     tableData = [[NSMutableArray alloc] init];
     [self requstApi];
+    
+
+    
+               
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -44,6 +49,11 @@
 {
 
     RequestService *request = [RequestService messageReqeust];
+
+    if ([request cacheJson]) {
+        NSLog(@"%@", [request cacheJson]);
+        
+    }
 
     [self showHUB];
     
@@ -62,6 +72,8 @@
     } failure:^(YTKBaseRequest *request) {
         
         [self hideHUB];
+        
+        NSLog(@"%@", [request responseJSONObject]);
         
         NSLog(@"failed");
         

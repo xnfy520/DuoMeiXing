@@ -30,7 +30,7 @@
 {
     if (![super init])
         return nil;
-
+    
     staticHUBCounter = 0;
     
     return self;
@@ -64,7 +64,6 @@
     [WYPopoverController setDefaultTheme:theme];
 
 }
-
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];

@@ -10,15 +10,66 @@
 
 @implementation RequestService
 
+
+- (id)init
+{
+    if (self = [super init]) {
+        addObs(AFNetworkingReachabilityDidChangeNotification, didChangeRea);
+    }
+    return self;
+}
+
+- (void)dealloc
+{
+    removeObs(AFNetworkingReachabilityDidChangeNotification);
+}
+
+
+- (void)didChangeRea:(NSNotification*)notification
+{
+    NSLog(@"notifacation");
+}
+
 - (id)initReqeustUrl:(NSString*) requestUrl withPostData:(RequstData *)requestData withResponseValidator :(NSDictionary *)responseValidator
 {
+    NSLog(@"==========================");
+    NSLog(@"requestUrl:%@", requestUrl);
+    NSLog(@"==========================");
     self = [super init];
     if (self) {
         _requestUrl = requestUrl;
         _requstData = requestData;
         _responseValidator = responseValidator;
+
+        [self sese];
     }
     return self;
+}
+
+- (void)sese
+{
+    AFHTTPSessionManager *aef = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:self.baseUrl]];
+    aef.securityPolicy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeNone];
+    [aef.reachabilityManager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+        switch (status) {
+                
+                
+            case AFNetworkReachabilityStatusReachableViaWWAN:
+                NSLog(@"-------AFNetworkReachabilityStatusReachableViaWWAN------");
+                break;
+                
+            case AFNetworkReachabilityStatusReachableViaWiFi:
+                NSLog(@"-------AFNetworkReachabilityStatusReachableViaWiFi------");
+                break;
+            case AFNetworkReachabilityStatusNotReachable:
+                postEvent(AFNetworkingReachabilityDidChangeNotification);
+                NSLog(@"-------AFNetworkReachabilityStatusNotReachable------");
+                break;
+            default:
+                break;
+        }
+    }];
+    [aef.reachabilityManager startMonitoring];
 }
 
 + (id)messageReqeust
@@ -61,6 +112,11 @@
 - (id)jsonValidator
 {
     return _responseValidator;
+}
+
+- (NSInteger)cacheTimeInSeconds
+{
+    return 60 * 3;
 }
 
 @end
