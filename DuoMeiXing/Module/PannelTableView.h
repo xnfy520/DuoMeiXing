@@ -14,12 +14,16 @@
 
 @property (nonatomic, copy) NSString *memberId;
 
+@property (nonatomic, copy) NSString *videoId;
+
 @property (nonatomic, assign) NSInteger cellType;
 
 @property (nonatomic, assign) NSInteger pannelType;
 
 - (void)setTableScrollEnabled:(BOOL)enabled;
 
-- (void)sendRequest;
+- (void)sendWorksRequest;
+
+- (void)sendCommentsRequest;
 
 @end

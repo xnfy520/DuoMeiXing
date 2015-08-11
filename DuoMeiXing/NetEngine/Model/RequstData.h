@@ -50,6 +50,12 @@
 
 @interface RequstVideoMember : RequstPage
 @property (nonatomic, copy) NSString *memberId;
++ (id)requstVideoMemberWithMemberId:(NSString *)memberId PageNo:(NSInteger)pageNo withPageSize:(NSInteger)pageSize;
+@end
+
+@interface RequstVideoComment : RequstPage
+@property (nonatomic, copy) NSString *videoId;
++ (id)requstVideoCommentWithVideoId:(NSString *)videoId PageNo:(NSInteger)pageNo withPageSize:(NSInteger)pageSize;
 @end
 
 @interface RequstVideo : RequstPage

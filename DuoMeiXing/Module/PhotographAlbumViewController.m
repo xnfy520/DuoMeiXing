@@ -208,10 +208,8 @@
     cell.cellListType = kCellListVideo;
     
     [cell.cellImageView sd_setImageWithURL:result.picUrl];
-    
-     NSDate * date = [NSDate dateWithTimeIntervalSince1970:([result.createTime doubleValue]/1000)];
-    
-    cell.cellDateLabel.text = [DisplayUtil getDateStringWithDate:date DateFormat:@"MM-dd"];;
+
+    cell.cellDateLabel.text = [DisplayUtil getDateStringWithDate:result.createTime];
     
     cell.cellTitleLabel.text = result.name;
     

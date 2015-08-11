@@ -107,3 +107,27 @@
 
 @end
 
+
+@interface ResponseVideoComment : NSObject
+
+@property (nonatomic, copy) NSString *id;
+@property (nonatomic, copy) NSString *nickName;
+@property (nonatomic, copy) NSString *content;
+@property (nonatomic, copy) NSURL *logoUrl;
+@property (nonatomic, copy) NSString *videoId;
+@property (nonatomic, copy) NSString *memberId;
+@property (nonatomic, copy) NSString *type;
+@property (nonatomic, copy) NSNumber *createTime;
+
+@end
+
+#pragma mark - 视频响应数据
+
+@interface ResponseVideoCommentResult : ResponseBasePage
+
+@property (nonatomic, copy) NSArray *result;
+
++ (NSDictionary *)responseValidator;
+
+@end
+

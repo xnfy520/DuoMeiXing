@@ -130,3 +130,34 @@
 }
 
 @end
+
+
+@implementation ResponseVideoComment
+
+
+@end
+
+
+@implementation ResponseVideoCommentResult
+
++ (NSDictionary *)objectClassInArray
+{
+    return @{
+             @"result" : @"ResponseVideoComment"
+             };
+}
+
++ (NSDictionary *)responseValidator
+{
+    return @{
+             @"pageNo": [NSNumber class],
+             @"pageSize": [NSNumber class],
+             @"prePage": [NSNumber class],
+             @"nextPage": [NSNumber class],
+             @"totalCount": [NSNumber class],
+             @"totalPages": [NSNumber class],
+             @"result": [NSArray class]
+             };
+}
+
+@end

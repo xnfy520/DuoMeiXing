@@ -315,20 +315,25 @@
     panel1.cellType = kCellListComment;
     panel1.pannelType = kDisplayPannelReview;
     panel1.memberId = _videoData.memberId;
-    
+    panel1.videoId = _videoData.id;
+    [panel1 sendCommentsRequest];
     [contentScrollView addSubview:panel1];
     
     panel2 = [[PannelTableView alloc] initWithFrame:CGRectMake(screenWidth, 0, screenWidth, CGRectGetHeight(contentScrollView.frame))];
     panel2.cellType = kCellListComment;
     panel2.pannelType = kDisplayPannelComments;
     panel2.memberId = _videoData.memberId;
+    panel2.videoId = _videoData.id;
+    [panel2 sendCommentsRequest];
     [contentScrollView addSubview:panel2];
     
     panel4 = [[PannelTableView alloc] initWithFrame:CGRectMake(screenWidth*3, 0, screenWidth, CGRectGetHeight(contentScrollView.frame))];
     panel4.cellType = kCellListVideo;
     panel4.pannelType = kDisplayPannelWorks;
     panel4.memberId = _videoData.memberId;
-    [panel4 sendRequest];
+    panel4.videoId = _videoData.id;
+//    [panel4 sendRequest];
+    [panel4 sendWorksRequest];
     [contentScrollView addSubview:panel4];
 
 }

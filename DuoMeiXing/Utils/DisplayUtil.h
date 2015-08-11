@@ -22,6 +22,8 @@
 
 + (UIImage *)getImageFromURL:(NSString *)fileURL;
 
++ (NSString *)getDateStringWithDate:(NSNumber*)time;
+
 + (NSString *)getDateStringWithDate:(NSDate *)date DateFormat:(NSString *)formatString;
 
 + (NSString *)stringWithOptionCtrlType:(NSUInteger)type;

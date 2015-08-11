@@ -85,6 +85,8 @@ typedef enum : NSUInteger{
     kDisplayPannelWorks              //作品
 } DisplayPanleType;
 
+#define commentTypeNormal   @"NORMAL"
+
 #define apiBaseUrl @"http://app.dmxing.cn"
 
 #define appAPILogin        @"/dmx/app/ajax/login.dmx"                      //登录
@@ -94,6 +96,7 @@ typedef enum : NSUInteger{
 #define appAPIVideo        @"/dmx/app/ajax/video/type/get.dmx"             //获取各类视频
 #define appAPIVideoLast    @"/dmx/app/ajax/video/get_last.dmx"             //获取最新视频
 #define appAPIVideoMember  @"/dmx/app/ajax/video/person/get.dmx"           //获取某个用户的视频
+#define appAPIVideoComment @"/dmx/app/ajax/video/comment/get_list.dmx"     //获取视频的评论
 
 #define appCompanyCode @"dalmatian"
 

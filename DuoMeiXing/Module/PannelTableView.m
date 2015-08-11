@@ -38,28 +38,70 @@
     return self;
 }
 
-
-- (void)sendRequest
+- (void)sendWorksRequest
 {
-    RequstVideoMember *requestData = [[RequstVideoMember alloc] init];
-    requestData.pageNo = @"1";
-    requestData.pageSize = @"10";
-    requestData.memberId = _memberId;
-    NSLog(@"%@", _memberId);
-    RequestService *request = [[RequestService alloc] initReqeustUrl:appAPIVideoMember withPostData:requestData withResponseValidator:nil];
+    RequestService *api = [RequestService videoMemberReqeustPostData:[RequstVideoMember requstVideoMemberWithMemberId:_memberId PageNo:1 withPageSize:10]];
+    [self sendRequestWith:api];
+}
+
+- (void)sendCommentsRequest
+{
+    RequestService *api = [RequestService videoCommentReqeustPostData:[RequstVideoComment requstVideoCommentWithVideoId:_videoId PageNo:1 withPageSize:10]];
+    [self sendRequestWith:api];
+}
+
+//- (void)sendWorksRequest
+//{
+//    RequestService *api = [RequestService videoMemberReqeustPostData:[RequstVideoMember requstVideoMemberWithMemberId:_memberId PageNo:1 withPageSize:10]];
+//    [self sendRequestWith:api];
+//}
+
+- (void)sendRequestWith:(RequestService *)api
+{
     
-    
-    [request startWithCompletionBlockWithSuccess:^(YTKBaseRequest *request) {
+    [api startWithCompletionBlockWithSuccess:^(YTKBaseRequest *request) {
         
         
         NSLog(@"succeed");
+        
+        
 
-        ResponseVideo *responseData = [ResponseVideo objectWithKeyValues:[request responseJSONObject]];
+        NSMutableArray *resultArray = [[NSMutableArray alloc] init];
         
-        [tableData setArray:responseData.result];
+        if (_pannelType == kDisplayPannelWorks) {
+            ResponseVideo *responseData = [ResponseVideo objectWithKeyValues:[request responseJSONObject]];
+            [resultArray setArray:responseData.result];
+            
+        }else if (_pannelType == kDisplayPannelReview || _pannelType == kDisplayPannelComments){
+            ResponseVideoCommentResult *responseData = [ResponseVideoCommentResult objectWithKeyValues:[request responseJSONObject]];
+
+            NSMutableArray *reviewArray = [[NSMutableArray alloc] init];
+            
+            NSMutableArray *commentArray = [[NSMutableArray alloc] init];
+            
+            for (ResponseVideoComment *comment in responseData.result) {
+                if ([comment.type isEqualToString:commentTypeNormal]) {
+                    [commentArray addObject:comment];
+                }else{
+                    [reviewArray addObject:comment];
+                }
+            }
+            
+            if (_pannelType == kDisplayPannelReview){
+                resultArray = reviewArray;
+            }else if(_pannelType == kDisplayPannelComments){
+                resultArray = commentArray;
+            }
+
+        }
         
-        NSLog(@"%@", tableData);
-        
+        if (tableData != nil) {
+            tableData = resultArray;
+//            [tableData setArray:resultArray];
+        }else{
+            tableData = [NSMutableArray arrayWithArray:resultArray];
+        }
+
         [self.tableView reloadData];
         
         
@@ -119,7 +161,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 10;
+    return tableData.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -129,7 +171,6 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-            NSLog(@"%ld", (long)self.cellType);
     
     static NSString *cellId = @"cellId";
     
@@ -139,27 +180,34 @@
         
     }
     
-    ResponseVideoResult * result = [tableData objectAtIndex:indexPath.row];
-
-    
-    NSLog(@"%@", result.name);
-
     cell.cellListType = _cellType;
     
-    
-    
-    cell.cellImageView.image = [UIImage imageNamed:@"limbo"];
-    
     if (cell.cellListType == kCellListVideo) {
-        cell.cellImageView.image = [UIImage imageNamed:@"xianjian"];
+        
+        ResponseVideoResult * result = [tableData objectAtIndex:indexPath.row];
+        
+        [cell.cellImageView sd_setImageWithURL:result.picUrl];
+        
+        cell.cellDateLabel.text = [DisplayUtil getDateStringWithDate:result.createTime];
+        
+        cell.cellTitleLabel.text =  result.name;
+        
+        cell.cellDetailLabel.text = result.desc;
+        
+    }else{
+        
+        ResponseVideoComment * result = [tableData objectAtIndex:indexPath.row];
+        
+        [cell.cellImageView sd_setImageWithURL:result.logoUrl];
+        
+        cell.cellDateLabel.text = [DisplayUtil getDateStringWithDate:result.createTime];
+        
+        cell.cellTitleLabel.text =  result.nickName;
+        
+        cell.cellDetailLabel.text = result.content;
+        
     }
 
-    cell.cellDateLabel.text = @"6月16日";
-    
-    cell.cellTitleLabel.text = result.name;
-    
-    cell.cellDetailLabel.text = result.desc;
-    
     return cell;
     
 }

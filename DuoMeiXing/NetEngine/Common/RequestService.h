@@ -19,6 +19,10 @@
 
 + (id)messageReqeust;
 
++ (id)videoMemberReqeustPostData:(RequstData *)requestData;
+
++ (id)videoCommentReqeustPostData:(RequstData *)requestData;
+
 + (id)videoLastReqeustPostData:(RequstData *)requestData;
 
 + (id)videoReqeustPostData:(RequstData *)requestData;

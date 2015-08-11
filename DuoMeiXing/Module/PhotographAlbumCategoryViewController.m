@@ -227,9 +227,7 @@
         
         [cell.cellImageView sd_setImageWithURL:result.picUrl];
         
-        NSDate * date = [NSDate dateWithTimeIntervalSince1970:([result.createTime doubleValue]/1000)];
-        
-        cell.cellDateLabel.text = [DisplayUtil getDateStringWithDate:date DateFormat:@"MM-dd"];;
+        cell.cellDateLabel.text = [DisplayUtil getDateStringWithDate:result.createTime];
         
         cell.cellTitleLabel.text = result.name;
         
@@ -246,9 +244,13 @@
 {
     
     [mainTableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    ResponseVideoResult * result = [[mainTableData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
 
     DisplayViewController *displayCtrl = [[DisplayViewController alloc] init];
     displayCtrl.haveViedo = YES;
+    displayCtrl.videoData = result;
+    displayCtrl.pannelIndex = kDisplayPannelReview;
     [self.navigationController pushViewController:displayCtrl animated:YES];
 
 }

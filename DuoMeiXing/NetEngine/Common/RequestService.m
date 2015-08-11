@@ -67,6 +67,18 @@
     return request;
 }
 
++ (id)videoMemberReqeustPostData:(RequstData *)requestData
+{
+    RequestService *request = [[RequestService alloc] initReqeustUrl:appAPIVideoMember withPostData:requestData withResponseValidator:[ResponseVideo responseValidator]];
+    return request;
+}
+
++ (id)videoCommentReqeustPostData:(RequstData *)requestData
+{
+    RequestService *request = [[RequestService alloc] initReqeustUrl:appAPIVideoComment withPostData:requestData withResponseValidator:[ResponseVideoCommentResult responseValidator]];
+    return request;
+}
+
 + (id)videoLastReqeustPostData:(RequstData *)requestData
 {
     RequestService *request = [[RequestService alloc] initReqeustUrl:appAPIVideoLast withPostData:requestData withResponseValidator:[ResponseVideo responseValidator]];

@@ -143,10 +143,8 @@
     if ([badgeNum isEqualToString:@""] || badgeNum == nil || [badgeNum integerValue] == 0) {
         cell.cellBadgeLabel.hidden = YES;
     }
-    
-    NSDate * date = [NSDate dateWithTimeIntervalSince1970:([result.createTime doubleValue]/1000)];
 
-    cell.cellDateLabel.text = [DisplayUtil getDateStringWithDate:date DateFormat:@"MM-dd"];
+    cell.cellDateLabel.text = [DisplayUtil getDateStringWithDate:result.createTime];
 
     cell.cellTitleLabel.text = result.fromNickName;
     

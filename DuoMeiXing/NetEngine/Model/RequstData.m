@@ -62,9 +62,28 @@
 @end
 
 @implementation RequstVideoMember
-
++ (id)requstVideoMemberWithMemberId:(NSString *)memberId PageNo:(NSInteger)pageNo withPageSize:(NSInteger)pageSize
+{
+    NSDictionary *dic = @{
+                          @"memberId":memberId,
+                          @"pageNo":@(pageNo),
+                          @"pageSize":@(pageSize)
+                          };
+    return [self objectWithKeyValues:dic];
+}
 @end
 
+@implementation RequstVideoComment
++ (id)requstVideoCommentWithVideoId:(NSString *)videoId PageNo:(NSInteger)pageNo withPageSize:(NSInteger)pageSize
+{
+    NSDictionary *dic = @{
+                          @"videoId":videoId,
+                          @"pageNo":@(pageNo),
+                          @"pageSize":@(pageSize)
+                          };
+    return [self objectWithKeyValues:dic];
+}
+@end
 
 @implementation RequstVideo
 

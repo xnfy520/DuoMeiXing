@@ -107,6 +107,13 @@
     
 }
 
++ (NSString *)getDateStringWithDate:(NSNumber*)time
+{
+    NSDate * date = [NSDate dateWithTimeIntervalSince1970:([time doubleValue]/1000)];
+    
+    return [DisplayUtil getDateStringWithDate:date DateFormat:@"MM-dd"];
+}
+
 + (NSString *)getDateStringWithDate:(NSDate *)date DateFormat:(NSString *)formatString
 {
     
