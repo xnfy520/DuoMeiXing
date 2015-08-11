@@ -7,7 +7,7 @@
 //
 
 #import "DisplayViewController.h"
-#import "DNADef.h"
+
 #import "PannelTableView.h"
 #import "SubmitButton.h"
 #import <MediaPlayer/MediaPlayer.h>
@@ -57,6 +57,7 @@
     PannelTableView *panel2;
     
     PannelTableView *panel4;
+    
 }
 
 -(void) viewDidLoad
@@ -86,6 +87,7 @@
     [self setupContentScrollView];
     
     [self setupFloatCommentView];
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -102,6 +104,11 @@
         [moviePlayer stop];
         moviePlayer = nil;
     }
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
 }
 
 
@@ -121,13 +128,12 @@
 -(void) setupVideoView
 {
 
-    NSString *file = [[NSBundle mainBundle] pathForResource:@"movie" ofType:@"mp4"];
-    NSURL *url = [NSURL fileURLWithPath:file];
-    
+//    NSString *file = [[NSBundle mainBundle] pathForResource:@"movie" ofType:@"mp4"];
+//    NSURL *url = [NSURL fileURLWithPath:file];
     if (moviePlayer == nil) {
-        moviePlayer = [[MPMoviePlayerController alloc] initWithContentURL:url];
+        moviePlayer = [[MPMoviePlayerController alloc] initWithContentURL:_videoData.videoUrl];
     }else {
-        [moviePlayer setContentURL:url];
+        [moviePlayer setContentURL:_videoData.videoUrl];
     }
    
     moviePlayer.scalingMode = MPMovieScalingModeAspectFill;
@@ -146,12 +152,12 @@
     [mainScrollView addSubview:moviePlayer.view];
     
     videoView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, displayVideoHeight)];
-//    videoView.backgroundColor = [UIColor yellowColor];
+//    videoView.backgroundColor = [UIColor blackColor];
     [moviePlayer.view addSubview:videoView];
     
     videoImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, statusBarHeight/2, CGRectGetWidth(videoView.frame), displayVideoHeight-statusBarHeight)];
-    videoImageView.hidden = _haveViedo;
-    videoImageView.image = [UIImage imageNamed:@"video_bg"];
+//    videoImageView.hidden = _haveViedo;
+    [videoImageView sd_setImageWithURL:_videoData.picUrl placeholderImage:[UIImage imageNamed:@"video_bg"]];
     videoImageView.contentMode = UIViewContentModeScaleAspectFill;
     [videoView addSubview:videoImageView];
     
@@ -176,15 +182,15 @@
 //    [videoStateBar addSubview:plusFunButton];
     
     videoNickname = [[UILabel alloc] initWithFrame:CGRectMake(10, (CGRectGetHeight(videoStateBar.frame)-(playButtonHeight-10))/2, CGRectGetWidth(videoStateBar.frame)/2, playButtonHeight-10)];
-    videoNickname.text = @"国产零零七";
+    videoNickname.text = _videoData.name;
     videoNickname.font = [UIFont systemFontOfSize:17];
     videoNickname.textColor = [UIColor whiteColor];
     [videoStateBar addSubview:videoNickname];
     
     
-    if (![videoImageView isHidden]) {
-        [videoStateBar setHidden:YES];
-    }
+//    if (![videoImageView isHidden]) {
+//        [videoStateBar setHidden:YES];
+//    }
     
 }
 
@@ -194,6 +200,7 @@
         if (moviePlayer.playbackState == MPMoviePlaybackStatePaused || moviePlayer.playbackState == MPMoviePlaybackStateStopped) {
             [moviePlayer play];
             videoStateBar.alpha = 0;
+            videoImageView.alpha = 0;
         }else if(moviePlayer.playbackState == MPMoviePlaybackStatePlaying){
             [moviePlayer pause];
         }
@@ -206,7 +213,7 @@
     segmentedCtrl = [[UISegmentedControl alloc] initWithItems:segmentList];
     segmentedCtrl.tintColor = [UIColor clearColor];
     segmentedCtrl.backgroundColor = [UIColor groupTableViewBackgroundColor];
-    segmentedCtrl.selectedSegmentIndex = 0;
+    segmentedCtrl.selectedSegmentIndex = _pannelIndex;
     
     NSDictionary* selectedTextAttributes = @{NSFontAttributeName:[UIFont systemFontOfSize:13],
                                              NSForegroundColorAttributeName: defaultTabBarTitleColor};
@@ -305,13 +312,23 @@
     
     
     panel1 = [[PannelTableView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, CGRectGetHeight(contentScrollView.frame))];
+    panel1.cellType = kCellListComment;
+    panel1.pannelType = kDisplayPannelReview;
+    panel1.memberId = _videoData.memberId;
+    
     [contentScrollView addSubview:panel1];
     
     panel2 = [[PannelTableView alloc] initWithFrame:CGRectMake(screenWidth, 0, screenWidth, CGRectGetHeight(contentScrollView.frame))];
+    panel2.cellType = kCellListComment;
+    panel2.pannelType = kDisplayPannelComments;
+    panel2.memberId = _videoData.memberId;
     [contentScrollView addSubview:panel2];
     
     panel4 = [[PannelTableView alloc] initWithFrame:CGRectMake(screenWidth*3, 0, screenWidth, CGRectGetHeight(contentScrollView.frame))];
-    panel4.identifier = @"video";
+    panel4.cellType = kCellListVideo;
+    panel4.pannelType = kDisplayPannelWorks;
+    panel4.memberId = _videoData.memberId;
+    [panel4 sendRequest];
     [contentScrollView addSubview:panel4];
 
 }
@@ -343,23 +360,22 @@
 
 - (void)touchMoviePlayerView
 {
-    NSLog(@"%ld", (long)[firstResponderField isEditing]);
 
     [UIView animateWithDuration:0.1 animations:^{
         
-        if (![firstResponderField isEditing] && [videoImageView isHidden]) {
+//        if (![firstResponderField isEditing] && [videoImageView isHidden]) {
             if (videoStateBar.alpha > 0) {
                 videoStateBar.alpha = 0;
             }else{
                 videoStateBar.alpha = 1;
             }
-        }
+//        }
         
         
     } completion:^(BOOL finished) {
         //finished判断动画是否完成
         if (finished) {
-            NSLog(@"finished");
+//            NSLog(@"finished");
         }
     }];
     

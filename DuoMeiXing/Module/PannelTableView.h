@@ -12,8 +12,14 @@
 
 @property (nonatomic, strong) UITableView *tableView;
 
-@property (nonatomic, copy) NSString *identifier;
+@property (nonatomic, copy) NSString *memberId;
+
+@property (nonatomic, assign) NSInteger cellType;
+
+@property (nonatomic, assign) NSInteger pannelType;
 
 - (void)setTableScrollEnabled:(BOOL)enabled;
+
+- (void)sendRequest;
 
 @end

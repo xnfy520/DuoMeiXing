@@ -11,6 +11,9 @@
 #import "ListCell.h"
 
 @implementation PannelTableView
+{
+    NSMutableArray *tableData;
+}
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -23,7 +26,7 @@
         [_tableView setDelegate:self];
         [_tableView setDataSource:self];
         [_tableView setScrollsToTop:NO];
-        
+
         _tableView.tableFooterView = [UIView new];;
         
         [self setupInsetsTableView:_tableView];
@@ -33,6 +36,40 @@
         
     }
     return self;
+}
+
+
+- (void)sendRequest
+{
+    RequstVideoMember *requestData = [[RequstVideoMember alloc] init];
+    requestData.pageNo = @"1";
+    requestData.pageSize = @"10";
+    requestData.memberId = _memberId;
+    NSLog(@"%@", _memberId);
+    RequestService *request = [[RequestService alloc] initReqeustUrl:appAPIVideoMember withPostData:requestData withResponseValidator:nil];
+    
+    
+    [request startWithCompletionBlockWithSuccess:^(YTKBaseRequest *request) {
+        
+        
+        NSLog(@"succeed");
+
+        ResponseVideo *responseData = [ResponseVideo objectWithKeyValues:[request responseJSONObject]];
+        
+        [tableData setArray:responseData.result];
+        
+        NSLog(@"%@", tableData);
+        
+        [self.tableView reloadData];
+        
+        
+    } failure:^(YTKBaseRequest *request) {
+
+        NSLog(@"failed");
+        
+        NSLog(@"%@", [[request responseJSONObject] objectForKey:@"code"]);
+        
+    }];
 }
 
 - (void)setFrame:(CGRect)frame
@@ -92,7 +129,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+            NSLog(@"%ld", (long)self.cellType);
     
     static NSString *cellId = @"cellId";
     
@@ -102,20 +139,26 @@
         
     }
     
-    cell.cellListType = kCellListComment;
+    ResponseVideoResult * result = [tableData objectAtIndex:indexPath.row];
+
+    
+    NSLog(@"%@", result.name);
+
+    cell.cellListType = _cellType;
+    
+    
     
     cell.cellImageView.image = [UIImage imageNamed:@"limbo"];
     
-    if ([_identifier isEqualToString:@"video"]) {
-        cell.cellListType = kCellListVideo;
+    if (cell.cellListType == kCellListVideo) {
         cell.cellImageView.image = [UIImage imageNamed:@"xianjian"];
     }
 
     cell.cellDateLabel.text = @"6月16日";
     
-    cell.cellTitleLabel.text = @"天陨";
+    cell.cellTitleLabel.text = result.name;
     
-    cell.cellDetailLabel.text = @"雪念飞叶";
+    cell.cellDetailLabel.text = result.desc;
     
     return cell;
     

@@ -78,6 +78,12 @@ typedef enum : NSUInteger{
     kPhotographAlbumCategoryMyVideo    //我的视频
 } PhotographAlbumCategory;
 
+typedef enum : NSUInteger{
+    kDisplayPannelReview,            //点评
+    kDisplayPannelComments,          //评论
+    kDisplayPannelInformation,       //信息
+    kDisplayPannelWorks              //作品
+} DisplayPanleType;
 
 #define apiBaseUrl @"http://app.dmxing.cn"
 
@@ -87,6 +93,7 @@ typedef enum : NSUInteger{
 #define appAPIMessage      @"/dmx/app/ajax/video/message/get.dmx"          //消息
 #define appAPIVideo        @"/dmx/app/ajax/video/type/get.dmx"             //获取各类视频
 #define appAPIVideoLast    @"/dmx/app/ajax/video/get_last.dmx"             //获取最新视频
+#define appAPIVideoMember  @"/dmx/app/ajax/video/person/get.dmx"           //获取某个用户的视频
 
 #define appCompanyCode @"dalmatian"
 

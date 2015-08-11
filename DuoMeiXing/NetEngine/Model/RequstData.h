@@ -48,7 +48,9 @@
 @property (nonatomic, copy) NSString *pageSize;
 @end
 
-#pragma mark - 分页请求参数
+@interface RequstVideoMember : RequstPage
+@property (nonatomic, copy) NSString *memberId;
+@end
 
 @interface RequstVideo : RequstPage
 @property (nonatomic, copy) NSString *action;

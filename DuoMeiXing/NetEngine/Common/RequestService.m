@@ -10,21 +10,6 @@
 
 @implementation RequestService
 
-
-- (id)init
-{
-    if (self = [super init]) {
-        addObs(AFNetworkingReachabilityDidChangeNotification, didChangeRea);
-    }
-    return self;
-}
-
-- (void)dealloc
-{
-    removeObs(AFNetworkingReachabilityDidChangeNotification);
-}
-
-
 - (void)didChangeRea:(NSNotification*)notification
 {
     NSLog(@"notifacation");
@@ -41,36 +26,36 @@
         _requstData = requestData;
         _responseValidator = responseValidator;
 
-        [self sese];
+//        [self sese];
     }
     return self;
 }
 
-- (void)sese
-{
-    AFHTTPSessionManager *aef = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:self.baseUrl]];
-    aef.securityPolicy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeNone];
-    [aef.reachabilityManager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
-        switch (status) {
-                
-                
-            case AFNetworkReachabilityStatusReachableViaWWAN:
-                NSLog(@"-------AFNetworkReachabilityStatusReachableViaWWAN------");
-                break;
-                
-            case AFNetworkReachabilityStatusReachableViaWiFi:
-                NSLog(@"-------AFNetworkReachabilityStatusReachableViaWiFi------");
-                break;
-            case AFNetworkReachabilityStatusNotReachable:
-                postEvent(AFNetworkingReachabilityDidChangeNotification);
-                NSLog(@"-------AFNetworkReachabilityStatusNotReachable------");
-                break;
-            default:
-                break;
-        }
-    }];
-    [aef.reachabilityManager startMonitoring];
-}
+//- (void)sese
+//{
+//    AFHTTPSessionManager *aef = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:self.baseUrl]];
+//    aef.securityPolicy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeNone];
+//    [aef.reachabilityManager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+//        switch (status) {
+//                
+//                
+//            case AFNetworkReachabilityStatusReachableViaWWAN:
+//                NSLog(@"-------AFNetworkReachabilityStatusReachableViaWWAN------");
+//                break;
+//                
+//            case AFNetworkReachabilityStatusReachableViaWiFi:
+//                NSLog(@"-------AFNetworkReachabilityStatusReachableViaWiFi------");
+//                break;
+//            case AFNetworkReachabilityStatusNotReachable:
+//                postEvent(AFNetworkingReachabilityDidChangeNotification);
+//                NSLog(@"-------AFNetworkReachabilityStatusNotReachable------");
+//                break;
+//            default:
+//                break;
+//        }
+//    }];
+//    [aef.reachabilityManager startMonitoring];
+//}
 
 + (id)messageReqeust
 {

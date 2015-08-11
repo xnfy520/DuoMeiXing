@@ -140,7 +140,6 @@
         NSLog(@"succeed");
         
         ResponseVideo *responseData = [ResponseVideo objectWithKeyValues:[request responseJSONObject]];
-        
         [tableData setArray:responseData.result];
         
         [mainTableView reloadData];
@@ -224,8 +223,13 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [mainTableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    ResponseVideoResult * result = [tableData objectAtIndex:indexPath.row];
+    
     DisplayViewController *displayCtrl = [[DisplayViewController alloc] init];
     displayCtrl.haveViedo = YES;
+    displayCtrl.videoData = result;
+    displayCtrl.pannelIndex = kDisplayPannelReview;
     [self.navigationController pushViewController:displayCtrl animated:YES];
 }
 

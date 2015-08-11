@@ -8,9 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import "DNABaseViewController.h"
+#import "DNADef.h"
 
 @interface DisplayViewController : DNABaseViewController<UIScrollViewDelegate, UITextFieldDelegate>
 
 @property (nonatomic, assign) BOOL haveViedo;
+
+@property (nonatomic, strong) ResponseVideoResult *videoData;
+
+@property (nonatomic, assign) NSInteger pannelIndex;
 
 @end

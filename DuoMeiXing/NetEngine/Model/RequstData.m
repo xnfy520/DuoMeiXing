@@ -61,6 +61,9 @@
 
 @end
 
+@implementation RequstVideoMember
+
+@end
 
 
 @implementation RequstVideo

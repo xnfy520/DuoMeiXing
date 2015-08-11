@@ -51,7 +51,7 @@
     RequestService *request = [RequestService messageReqeust];
 
     if ([request cacheJson]) {
-        NSLog(@"%@", [request cacheJson]);
+//        NSLog(@"%@", [request cacheJson]);
         
     }
 
