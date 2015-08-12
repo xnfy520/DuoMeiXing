@@ -219,23 +219,10 @@
         
     }
     
-    if (mainTableData.count>0) {
+    cell.cellListType = kCellListVideo;
         
-        ResponseVideoResult * result = [[mainTableData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
-        
-        cell.cellListType = kCellListVideo;
-        
-        [cell.cellImageView sd_setImageWithURL:result.picUrl];
-        
-        cell.cellDateLabel.text = [DisplayUtil getDateStringWithDate:result.createTime];
-        
-        cell.cellTitleLabel.text = result.name;
-        
-        cell.cellDetailLabel.text = result.desc;
-    }
-    
+    cell.cellData = [[mainTableData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
 
-    
     return cell;
 }
 
@@ -248,9 +235,7 @@
     ResponseVideoResult * result = [[mainTableData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
 
     DisplayViewController *displayCtrl = [[DisplayViewController alloc] init];
-    displayCtrl.haveViedo = YES;
     displayCtrl.videoData = result;
-    displayCtrl.pannelIndex = kDisplayPannelReview;
     [self.navigationController pushViewController:displayCtrl animated:YES];
 
 }

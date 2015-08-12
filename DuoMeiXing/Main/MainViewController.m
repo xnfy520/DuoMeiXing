@@ -132,25 +132,9 @@
         cell = [[ListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
     }
     
-    ResponseMessageResult * result = [tableData objectAtIndex:indexPath.row];
-    
-    [cell.cellImageView sd_setImageWithURL:result.fromLogoUrl];
-
-    NSString *badgeNum = [NSString stringWithFormat:@"%@", result.msgNumbers];
-    
-    cell.cellBadgeLabel.text = badgeNum;
-    
-    if ([badgeNum isEqualToString:@""] || badgeNum == nil || [badgeNum integerValue] == 0) {
-        cell.cellBadgeLabel.hidden = YES;
-    }
-
-    cell.cellDateLabel.text = [DisplayUtil getDateStringWithDate:result.createTime];
-
-    cell.cellTitleLabel.text = result.fromNickName;
-    
-    cell.cellDetailLabel.text = result.content;
-    
     cell.cellListType = kCellListMessage;
+    
+    cell.cellData = [tableData objectAtIndex:indexPath.row];
     
     return cell;
 }
@@ -159,8 +143,10 @@
 {
     [mainTableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    ResponseMessageResult *result = [tableData objectAtIndex:indexPath.row];
+    
     DisplayViewController *displayCtrl = [[DisplayViewController alloc] init];
-    displayCtrl.haveViedo = NO;
+    displayCtrl.videoId = result.videoId;
     [self.navigationController pushViewController:displayCtrl animated:YES];
     
 }

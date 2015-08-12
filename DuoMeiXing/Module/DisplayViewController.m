@@ -88,6 +88,12 @@
     
     [self setupFloatCommentView];
     
+    if (_videoData != nil) {
+        [self refreshData];
+    }else if(![_videoId isEqualToString:@""]){
+        NSLog(@"hohoh");
+    }
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -128,14 +134,8 @@
 -(void) setupVideoView
 {
 
-//    NSString *file = [[NSBundle mainBundle] pathForResource:@"movie" ofType:@"mp4"];
-//    NSURL *url = [NSURL fileURLWithPath:file];
-    if (moviePlayer == nil) {
-        moviePlayer = [[MPMoviePlayerController alloc] initWithContentURL:_videoData.videoUrl];
-    }else {
-        [moviePlayer setContentURL:_videoData.videoUrl];
-    }
-   
+    moviePlayer = [[MPMoviePlayerController alloc] init];
+    
     moviePlayer.scalingMode = MPMovieScalingModeAspectFill;
     
     moviePlayer.controlStyle = MPMovieControlStyleNone;
@@ -156,8 +156,7 @@
     [moviePlayer.view addSubview:videoView];
     
     videoImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, statusBarHeight/2, CGRectGetWidth(videoView.frame), displayVideoHeight-statusBarHeight)];
-//    videoImageView.hidden = _haveViedo;
-    [videoImageView sd_setImageWithURL:_videoData.picUrl placeholderImage:[UIImage imageNamed:@"video_bg"]];
+    videoImageView.image = [UIImage imageNamed:@"video_bg"];
     videoImageView.contentMode = UIViewContentModeScaleAspectFill;
     [videoView addSubview:videoImageView];
     
@@ -182,15 +181,9 @@
 //    [videoStateBar addSubview:plusFunButton];
     
     videoNickname = [[UILabel alloc] initWithFrame:CGRectMake(10, (CGRectGetHeight(videoStateBar.frame)-(playButtonHeight-10))/2, CGRectGetWidth(videoStateBar.frame)/2, playButtonHeight-10)];
-    videoNickname.text = _videoData.name;
     videoNickname.font = [UIFont systemFontOfSize:17];
     videoNickname.textColor = [UIColor whiteColor];
     [videoStateBar addSubview:videoNickname];
-    
-    
-//    if (![videoImageView isHidden]) {
-//        [videoStateBar setHidden:YES];
-//    }
     
 }
 
@@ -293,7 +286,6 @@
     } completion:^(BOOL finished) {
         //finished判断动画是否完成
         if (finished) {
-            NSLog(@"finished");
         }
     }];
 
@@ -314,26 +306,17 @@
     panel1 = [[PannelTableView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, CGRectGetHeight(contentScrollView.frame))];
     panel1.cellType = kCellListComment;
     panel1.pannelType = kDisplayPannelReview;
-    panel1.memberId = _videoData.memberId;
-    panel1.videoId = _videoData.id;
-    [panel1 sendCommentsRequest];
     [contentScrollView addSubview:panel1];
     
     panel2 = [[PannelTableView alloc] initWithFrame:CGRectMake(screenWidth, 0, screenWidth, CGRectGetHeight(contentScrollView.frame))];
     panel2.cellType = kCellListComment;
     panel2.pannelType = kDisplayPannelComments;
-    panel2.memberId = _videoData.memberId;
-    panel2.videoId = _videoData.id;
-    [panel2 sendCommentsRequest];
     [contentScrollView addSubview:panel2];
     
     panel4 = [[PannelTableView alloc] initWithFrame:CGRectMake(screenWidth*3, 0, screenWidth, CGRectGetHeight(contentScrollView.frame))];
     panel4.cellType = kCellListVideo;
     panel4.pannelType = kDisplayPannelWorks;
-    panel4.memberId = _videoData.memberId;
-    panel4.videoId = _videoData.id;
     panel4.delegate = self;
-    [panel4 sendWorksRequest];
     [contentScrollView addSubview:panel4];
 
 }
@@ -395,7 +378,6 @@
     } completion:^(BOOL finished) {
         //finished判断动画是否完成
         if (finished) {
-            NSLog(@"finished");
         }
     }];
 }
@@ -407,7 +389,6 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    NSLog(@"textFieldShouldReturn");
     return YES;
 }
 
@@ -438,6 +419,10 @@
     panel2.memberId = _videoData.memberId;
     panel2.videoId = _videoData.id;
     [panel2 sendCommentsRequest];
+    
+    panel4.memberId = _videoData.memberId;
+    panel4.videoId = _videoData.id;
+    [panel4 sendWorksRequest];
     
 }
 

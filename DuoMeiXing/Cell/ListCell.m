@@ -82,29 +82,45 @@
 - (void)setCellData:(id)cellData
 {
     if (self.cellListType == kCellListComment) {
+        
         ResponseVideoComment *data = (ResponseVideoComment *)cellData;
-        NSLog(@"%@", [data JSONObject]);
         _cellTitleLabel.text = data.nickName;
         _cellDetailLabel.text = data.content;
         [_cellImageView sd_setImageWithURL:data.logoUrl];
         _cellDateLabel.text = [DisplayUtil getDateStringWithDate:data.createTime];
         
     }else if(self.cellListType == kCellListVideo){
+        
         ResponseVideoResult *data = (ResponseVideoResult *)cellData;
         _cellTitleLabel.text = data.name;
         _cellDetailLabel.text = data.desc;
         [_cellImageView sd_setImageWithURL:data.picUrl];
         _cellDateLabel.text = [DisplayUtil getDateStringWithDate:data.createTime];
+        
+    }else if(self.cellListType == kCellListMessage){
+        
+        ResponseMessageResult *data = (ResponseMessageResult *)cellData;
+        _cellTitleLabel.text = data.fromNickName;
+        _cellDetailLabel.text = data.content;
+        [_cellImageView sd_setImageWithURL:data.fromLogoUrl];
+        _cellDateLabel.text = [DisplayUtil getDateStringWithDate:data.createTime];
+        _cellBadgeLabel.text = [NSString stringWithFormat:@"%@", data.msgNumbers];
+        
     }
-    [self sslayoutSubviews];
+    [self relayoutSubviews];
 }
 
-- (void)sslayoutSubviews
+- (void)relayoutSubviews
 {
-//    [super layoutSubviews];
 
     if (self.cellListType == kCellListMessage) {
-        _cellBadgeLabel.hidden = NO;
+        
+        if ([_cellBadgeLabel.text isEqualToString:@""] || _cellBadgeLabel.text == nil || [_cellBadgeLabel.text integerValue] == 0) {
+            _cellBadgeLabel.hidden = YES;
+        }else{
+            _cellBadgeLabel.hidden = NO;
+        }
+        
     }else if(self.cellListType == kCellListVideo){
         imageWidth = listCellImageWith;
     }
@@ -142,18 +158,11 @@
             _height = listCellHeight;
         }
         
-    }else if(self.cellListType == kCellListVideo){
+    }else if(self.cellListType == kCellListVideo || self.cellListType == kCellListMessage){
         _cellDetailLabel.numberOfLines = 1;
             _cellDetailLabel.frame = CGRectMake(CGRectGetWidth(_cellImageView.frame) + 20, listCellHeight/2 + 4, CGRectGetWidth(self.frame) - CGRectGetWidth(_cellImageView.frame) - 30, DetailFontSize);
         _height = listCellHeight;
     }
-    
-
-    
-
-    
-    NSLog(@"%f", _height);
-//    _cellDetailLabel.frame = CGRectMake(CGRectGetWidth(_cellImageView.frame) + 20, CGRectGetHeight(self.frame)/2 + 4, CGRectGetWidth(self.frame) - CGRectGetWidth(_cellImageView.frame) - 30, DetailFontSize);
 
 }
 

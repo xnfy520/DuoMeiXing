@@ -14,6 +14,8 @@
 
 @property (nonatomic, assign) BOOL haveViedo;
 
+@property (nonatomic, strong) NSString *videoId;
+
 @property (nonatomic, strong) ResponseVideoResult *videoData;
 
 @property (nonatomic, assign) NSInteger pannelIndex;

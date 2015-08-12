@@ -65,11 +65,6 @@
     
     [api startWithCompletionBlockWithSuccess:^(YTKBaseRequest *request) {
         
-        
-        NSLog(@"succeed");
-        
-        
-
         NSMutableArray *resultArray = [[NSMutableArray alloc] init];
         
         if (_pannelType == kDisplayPannelWorks) {
@@ -106,7 +101,6 @@
         
         if (tableData != nil) {
             tableData = resultArray;
-//            [tableData setArray:resultArray];
         }else{
             tableData = [NSMutableArray arrayWithArray:resultArray];
         }
@@ -178,7 +172,7 @@
     ListCell *listCell = [tableCells objectAtIndex:indexPath.row];
     listCell.cellListType = _cellType;
     listCell.cellData = [tableData objectAtIndex:indexPath.row];
-    return (listCell.height < listCellHeight) ? listCellHeight : listCell.height;
+    return listCell.height;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
