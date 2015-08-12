@@ -24,7 +24,7 @@
 
 #define minContentHeight screenHeight-displayVideoHeight-segmentedCtrlHeight-floatCommentHeight-statusBarWithNavigationBarHeight
 
-@interface DisplayViewController ()
+@interface DisplayViewController ()<clickCellDelegate>
 
 @end
 
@@ -121,7 +121,7 @@
     [self.view addSubview:mainScrollView];
     
     UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(touchScrollView)];
-    [mainScrollView addGestureRecognizer:recognizer];
+//    [mainScrollView addGestureRecognizer:recognizer];
     
 }
 
@@ -332,7 +332,7 @@
     panel4.pannelType = kDisplayPannelWorks;
     panel4.memberId = _videoData.memberId;
     panel4.videoId = _videoData.id;
-//    [panel4 sendRequest];
+    panel4.delegate = self;
     [panel4 sendWorksRequest];
     [contentScrollView addSubview:panel4];
 
@@ -414,6 +414,31 @@
 -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
     return YES;
+}
+
+- (void)getCellData:(id)data
+{
+    ResponseVideoResult *videoData = (ResponseVideoResult *)data;
+    _videoData = videoData;
+    [self refreshData];
+}
+
+- (void)refreshData
+{
+    [videoImageView sd_setImageWithURL:_videoData.picUrl placeholderImage:[UIImage imageNamed:@"video_bg"]];
+ 
+    [moviePlayer setContentURL:_videoData.videoUrl];
+
+    videoNickname.text = _videoData.name;
+    
+    panel1.memberId = _videoData.memberId;
+    panel1.videoId = _videoData.id;
+    [panel1 sendCommentsRequest];
+    
+    panel2.memberId = _videoData.memberId;
+    panel2.videoId = _videoData.id;
+    [panel2 sendCommentsRequest];
+    
 }
 
 - (void)registerForKeyboardNotifications

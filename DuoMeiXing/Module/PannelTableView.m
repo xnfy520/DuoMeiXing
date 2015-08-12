@@ -13,6 +13,7 @@
 @implementation PannelTableView
 {
     NSMutableArray *tableData;
+    NSMutableArray *tableCells;
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -21,11 +22,14 @@
     {
         [self setBackgroundColor:[UIColor whiteColor]];
         
+        tableCells = [[NSMutableArray alloc] init];
+        
         _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0,0,frame.size.width,frame.size.height)];
         [self addSubview:_tableView];
         [_tableView setDelegate:self];
         [_tableView setDataSource:self];
         [_tableView setScrollsToTop:NO];
+        
 
         _tableView.tableFooterView = [UIView new];;
         
@@ -94,6 +98,11 @@
             }
 
         }
+        
+        [resultArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            ListCell *cell=[[ListCell alloc]init];
+            [tableCells addObject:cell];
+        }];
         
         if (tableData != nil) {
             tableData = resultArray;
@@ -166,7 +175,10 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return listCellHeight;
+    ListCell *listCell = [tableCells objectAtIndex:indexPath.row];
+    listCell.cellListType = _cellType;
+    listCell.cellData = [tableData objectAtIndex:indexPath.row];
+    return (listCell.height < listCellHeight) ? listCellHeight : listCell.height;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -182,31 +194,7 @@
     
     cell.cellListType = _cellType;
     
-    if (cell.cellListType == kCellListVideo) {
-        
-        ResponseVideoResult * result = [tableData objectAtIndex:indexPath.row];
-        
-        [cell.cellImageView sd_setImageWithURL:result.picUrl];
-        
-        cell.cellDateLabel.text = [DisplayUtil getDateStringWithDate:result.createTime];
-        
-        cell.cellTitleLabel.text =  result.name;
-        
-        cell.cellDetailLabel.text = result.desc;
-        
-    }else{
-        
-        ResponseVideoComment * result = [tableData objectAtIndex:indexPath.row];
-        
-        [cell.cellImageView sd_setImageWithURL:result.logoUrl];
-        
-        cell.cellDateLabel.text = [DisplayUtil getDateStringWithDate:result.createTime];
-        
-        cell.cellTitleLabel.text =  result.nickName;
-        
-        cell.cellDetailLabel.text = result.content;
-        
-    }
+    cell.cellData = [tableData objectAtIndex:indexPath.row];
 
     return cell;
     
@@ -216,6 +204,14 @@
 {
     
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    if (_cellType == kCellListVideo) {
+        
+        ResponseVideoResult * result = [tableData objectAtIndex:indexPath.row];
+        
+        [self.delegate getCellData:result];
+        
+    }
     
 }
 

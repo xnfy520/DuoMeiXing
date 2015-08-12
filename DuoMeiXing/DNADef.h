@@ -132,7 +132,7 @@ typedef enum : NSUInteger{
 
 #define statusBarWithNavigationBarHeight (statusBarHeight + navigationBarHeight)
 
-#define listCellHeight 55.0f
+#define listCellHeight 56.0f
 
 #define listCellImageWith 60.0f
 

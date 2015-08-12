@@ -18,4 +18,8 @@
 @property(nonatomic, retain) UILabel *cellDetailLabel;
 @property(nonatomic, assign) CellListType cellListType;
 
+@property (nonatomic, assign) id cellData;
+
+@property(nonatomic, assign) CGFloat height;
+
 @end

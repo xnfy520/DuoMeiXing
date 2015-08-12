@@ -8,6 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "DNADef.h"
+
+@protocol clickCellDelegate
+
+- (void)getCellData:(id)data;
+
+@end
+
 @interface PannelTableView : UIView<UITableViewDelegate, UITableViewDataSource, DZNEmptyDataSetDelegate, DZNEmptyDataSetSource>
 
 @property (nonatomic, strong) UITableView *tableView;
@@ -19,6 +26,8 @@
 @property (nonatomic, assign) NSInteger cellType;
 
 @property (nonatomic, assign) NSInteger pannelType;
+
+@property (nonatomic, weak) id<clickCellDelegate>delegate;
 
 - (void)setTableScrollEnabled:(BOOL)enabled;
 
