@@ -55,7 +55,7 @@
 
 #pragma mark - 消息结果
 
-@implementation ResponseMessageResult
+@implementation ResponseMessage
 
 +(NSArray *)allowedPropertyNames
 {
@@ -75,12 +75,12 @@
 
 #pragma mark - 消息响应
 
-@implementation ResponseMessage
+@implementation ResponseMessageResult
 
 + (NSDictionary *)objectClassInArray
 {
     return @{
-             @"result" : @"ResponseMessageResult"
+             @"result" : @"ResponseMessage"
              };
 }
 
@@ -101,18 +101,30 @@
 
 
 
-@implementation ResponseVideoResult
+@implementation ResponseVideo
 
++ (NSDictionary *)responseValidator
+{
+    return @{
+             @"id": [NSString class],
+             @"name": [NSString class],
+             @"desc": [NSString class],
+             @"picUrl": [NSString class],
+             @"videoUrl": [NSString class],
+             @"memberId": [NSString class],
+             @"createTime": [NSNumber class]
+             };
+}
 
 @end
 
 
-@implementation ResponseVideo
+@implementation ResponseVideoResult
 
 + (NSDictionary *)objectClassInArray
 {
     return @{
-             @"result" : @"ResponseVideoResult"
+             @"result" : @"ResponseVideo"
              };
 }
 

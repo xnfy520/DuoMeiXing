@@ -116,7 +116,7 @@
         int emptyCount = 0;
         for (int i = 0; i<requests.count; i++) {
             RequestService *result = (RequestService *)requests[i];
-            ResponseVideo *responseData = [ResponseVideo objectWithKeyValues:[result responseJSONObject]];
+            ResponseVideoResult *responseData = [ResponseVideoResult objectWithKeyValues:[result responseJSONObject]];
             
             if (responseData.result.count<=0) {
                 emptyCount++;
@@ -232,10 +232,11 @@
     
     [mainTableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    ResponseVideoResult * result = [[mainTableData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+    ResponseVideo * result = [[mainTableData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
 
     DisplayViewController *displayCtrl = [[DisplayViewController alloc] init];
     displayCtrl.videoData = result;
+    displayCtrl.videoId = result.id;
     [self.navigationController pushViewController:displayCtrl animated:YES];
 
 }

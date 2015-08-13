@@ -85,6 +85,16 @@
 }
 @end
 
+@implementation RequstVideoId
++ (id)requstVideoWithVideoId:(NSString *)videoId
+{
+    NSDictionary *dic = @{
+                          @"videoId":videoId
+                          };
+    return [self objectWithKeyValues:dic];
+}
+@end
+
 @implementation RequstVideo
 
 + (id)requstNewestWithPageNo:(NSInteger)pageNo withPageSize:(NSInteger)pageSize

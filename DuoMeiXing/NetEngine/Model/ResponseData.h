@@ -59,7 +59,7 @@
 
 #pragma mark - 消息结果
 
-@interface ResponseMessageResult : NSObject
+@interface ResponseMessage : NSObject
 
 @property (nonatomic, copy) NSString *id;
 @property (nonatomic, copy) NSString *content;
@@ -76,7 +76,7 @@
 
 #pragma mark - 消息响应数据
 
-@interface ResponseMessage : ResponseBasePage
+@interface ResponseMessageResult : ResponseBasePage
 
 @property (nonatomic, copy) NSArray *result;
 
@@ -85,7 +85,7 @@
 @end
 
 
-@interface ResponseVideoResult : NSObject
+@interface ResponseVideo : NSObject
 
 @property (nonatomic, copy) NSString *id;
 @property (nonatomic, copy) NSString *name;
@@ -95,11 +95,15 @@
 @property (nonatomic, copy) NSString *memberId;
 @property (nonatomic, copy) NSNumber *createTime;
 
++ (NSDictionary *)responseValidator;
+
 @end
+
+
 
 #pragma mark - 视频响应数据
 
-@interface ResponseVideo : ResponseBasePage
+@interface ResponseVideoResult : ResponseBasePage
 
 @property (nonatomic, copy) NSArray *result;
 

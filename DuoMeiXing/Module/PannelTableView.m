@@ -44,13 +44,13 @@
 
 - (void)sendWorksRequest
 {
-    RequestService *api = [RequestService videoMemberReqeustPostData:[RequstVideoMember requstVideoMemberWithMemberId:_memberId PageNo:1 withPageSize:10]];
+    RequestService *api = [RequestService videoMemberReqeustPostData:[RequstVideoMember requstVideoMemberWithMemberId:_memberId PageNo:1 withPageSize:100]];
     [self sendRequestWith:api];
 }
 
 - (void)sendCommentsRequest
 {
-    RequestService *api = [RequestService videoCommentReqeustPostData:[RequstVideoComment requstVideoCommentWithVideoId:_videoId PageNo:1 withPageSize:10]];
+    RequestService *api = [RequestService videoCommentReqeustPostData:[RequstVideoComment requstVideoCommentWithVideoId:_videoId PageNo:1 withPageSize:100]];
     [self sendRequestWith:api];
 }
 
@@ -68,7 +68,7 @@
         NSMutableArray *resultArray = [[NSMutableArray alloc] init];
         
         if (_pannelType == kDisplayPannelWorks) {
-            ResponseVideo *responseData = [ResponseVideo objectWithKeyValues:[request responseJSONObject]];
+            ResponseVideoResult *responseData = [ResponseVideoResult objectWithKeyValues:[request responseJSONObject]];
             [resultArray setArray:responseData.result];
             
         }else if (_pannelType == kDisplayPannelReview || _pannelType == kDisplayPannelComments){
@@ -200,9 +200,8 @@
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     if (_cellType == kCellListVideo) {
-        
-        ResponseVideoResult * result = [tableData objectAtIndex:indexPath.row];
-        
+
+        ResponseVideo * result = [tableData objectAtIndex:indexPath.row];
         [self.delegate getCellData:result];
         
     }

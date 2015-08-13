@@ -58,6 +58,11 @@
 + (id)requstVideoCommentWithVideoId:(NSString *)videoId PageNo:(NSInteger)pageNo withPageSize:(NSInteger)pageSize;
 @end
 
+@interface RequstVideoId : RequstPage
+@property (nonatomic, copy) NSString *videoId;
++ (id)requstVideoWithVideoId:(NSString *)videoId;
+@end
+
 @interface RequstVideo : RequstPage
 @property (nonatomic, copy) NSString *action;
 @property (nonatomic, copy) NSString *type;

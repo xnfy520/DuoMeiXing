@@ -63,13 +63,13 @@
     requestData.pageNo = @"1";
     requestData.pageSize = @"10";
     
-    RequestService *request = [[RequestService alloc] initReqeustUrl:appAPIMessage withPostData:requestData withResponseValidator:[ResponseMessage responseValidator]];
+    RequestService *request = [[RequestService alloc] initReqeustUrl:appAPIMessage withPostData:requestData withResponseValidator:[ResponseMessageResult responseValidator]];
     return request;
 }
 
 + (id)videoMemberReqeustPostData:(RequstData *)requestData
 {
-    RequestService *request = [[RequestService alloc] initReqeustUrl:appAPIVideoMember withPostData:requestData withResponseValidator:[ResponseVideo responseValidator]];
+    RequestService *request = [[RequestService alloc] initReqeustUrl:appAPIVideoMember withPostData:requestData withResponseValidator:[ResponseVideoResult responseValidator]];
     return request;
 }
 
@@ -81,13 +81,20 @@
 
 + (id)videoLastReqeustPostData:(RequstData *)requestData
 {
-    RequestService *request = [[RequestService alloc] initReqeustUrl:appAPIVideoLast withPostData:requestData withResponseValidator:[ResponseVideo responseValidator]];
+    RequestService *request = [[RequestService alloc] initReqeustUrl:appAPIVideoLast withPostData:requestData withResponseValidator:[ResponseVideoResult responseValidator]];
     return request;
 }
 
 + (id)videoReqeustPostData:(RequstData *)requestData
 {
-    RequestService *request = [[RequestService alloc] initReqeustUrl:appAPIVideo withPostData:requestData withResponseValidator:[ResponseVideo responseValidator]];
+    RequestService *request = [[RequestService alloc] initReqeustUrl:appAPIVideo withPostData:requestData withResponseValidator:[ResponseVideoResult responseValidator]];
+    return request;
+}
+
+
++ (id)videoIdRequestPostData:(RequstData *)requestData
+{
+    RequestService *request = [[RequestService alloc] initReqeustUrl:appAPIVideoId withPostData:requestData withResponseValidator:[ResponseVideo responseValidator]];
     return request;
 }
 

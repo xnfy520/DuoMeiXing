@@ -14,7 +14,6 @@
 #import "UIView+FrameMethods.h"
 #import "UIImage+DNA.h"
 #import "MJExtension.h"
-#import "MJExtensionConfig.h"
 #import "RequstData.h"
 #import "ResponseData.h"
 #import "RequestService.h"
@@ -95,8 +94,9 @@ typedef enum : NSUInteger{
 #define appAPIMessage      @"/dmx/app/ajax/video/message/get.dmx"          //消息
 #define appAPIVideo        @"/dmx/app/ajax/video/type/get.dmx"             //获取各类视频
 #define appAPIVideoLast    @"/dmx/app/ajax/video/get_last.dmx"             //获取最新视频
-#define appAPIVideoMember  @"/dmx/app/ajax/video/person/get.dmx"           //获取某个用户的视频
+#define appAPIVideoMember  @"/dmx/app/ajax/video/person/get.dmx"           //获取某个用户的所有视频
 #define appAPIVideoComment @"/dmx/app/ajax/video/comment/get_list.dmx"     //获取视频的评论
+#define appAPIVideoId      @"/dmx/app/ajax/video/get.dmx"                  //通过视频ID获取视频信息
 
 #define appCompanyCode @"dalmatian"
 

@@ -91,7 +91,7 @@
         
     }else if(self.cellListType == kCellListVideo){
         
-        ResponseVideoResult *data = (ResponseVideoResult *)cellData;
+        ResponseVideo *data = (ResponseVideo *)cellData;
         _cellTitleLabel.text = data.name;
         _cellDetailLabel.text = data.desc;
         [_cellImageView sd_setImageWithURL:data.picUrl];
@@ -99,7 +99,7 @@
         
     }else if(self.cellListType == kCellListMessage){
         
-        ResponseMessageResult *data = (ResponseMessageResult *)cellData;
+        ResponseMessage *data = (ResponseMessage *)cellData;
         _cellTitleLabel.text = data.fromNickName;
         _cellDetailLabel.text = data.content;
         [_cellImageView sd_setImageWithURL:data.fromLogoUrl];

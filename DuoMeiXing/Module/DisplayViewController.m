@@ -91,7 +91,7 @@
     if (_videoData != nil) {
         [self refreshData];
     }else if(![_videoId isEqualToString:@""]){
-        NSLog(@"hohoh");
+        [self requstApi];
     }
     
 }
@@ -117,6 +117,27 @@
     [super viewDidAppear:animated];
 }
 
+- (void)requstApi
+{
+    
+    RequestService *request = [RequestService videoIdRequestPostData:[RequstVideoId requstVideoWithVideoId:_videoId]];
+
+    [request startWithCompletionBlockWithSuccess:^(YTKBaseRequest *request) {
+        
+        ResponseVideo *responseData = [ResponseVideo objectWithKeyValues:[request responseJSONObject]];
+        NSLog(@"success");
+        
+        _videoData = responseData;
+        
+        [self refreshData];
+        
+    } failure:^(YTKBaseRequest *request) {
+        NSLog(@"failure");
+        NSLog(@"%@", [[request responseJSONObject] objectForKey:@"code"]);
+        
+    }];
+    
+}
 
 -(void) setupMainScrollView
 {
@@ -399,9 +420,15 @@
 
 - (void)getCellData:(id)data
 {
-    ResponseVideoResult *videoData = (ResponseVideoResult *)data;
-    _videoData = videoData;
-    [self refreshData];
+    ResponseVideo *videoData = (ResponseVideo *)data;
+    NSLog(@"%@====", _videoId);
+    NSLog(@"%@----", videoData.id);
+    if (![_videoId isEqualToString:videoData.id]) {
+        _videoData = videoData;
+        NSLog(@"sefsefs");
+        [self refreshData];
+    }
+
 }
 
 - (void)refreshData

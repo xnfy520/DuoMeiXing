@@ -139,7 +139,7 @@
         
         NSLog(@"succeed");
         
-        ResponseVideo *responseData = [ResponseVideo objectWithKeyValues:[request responseJSONObject]];
+        ResponseVideoResult *responseData = [ResponseVideoResult objectWithKeyValues:[request responseJSONObject]];
         [tableData setArray:responseData.result];
         
         [mainTableView reloadData];
@@ -214,8 +214,9 @@
 {
     [mainTableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    ResponseVideoResult * result = [tableData objectAtIndex:indexPath.row];
+    ResponseVideo * result = [tableData objectAtIndex:indexPath.row];
     DisplayViewController *displayCtrl = [[DisplayViewController alloc] init];
+    displayCtrl.videoId = result.id;
     displayCtrl.videoData = result;
     [self.navigationController pushViewController:displayCtrl animated:YES];
 }

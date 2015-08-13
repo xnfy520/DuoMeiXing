@@ -27,4 +27,6 @@
 
 + (id)videoReqeustPostData:(RequstData *)requestData;
 
++ (id)videoIdRequestPostData:(RequstData *)requestData;
+
 @end

@@ -26,7 +26,6 @@
 		3951EF111B69BB3200DDF11A /* NSObject+MJKeyValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 3951EF071B69BB3200DDF11A /* NSObject+MJKeyValue.m */; };
 		3951EF121B69BB3200DDF11A /* NSObject+MJProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = 3951EF091B69BB3200DDF11A /* NSObject+MJProperty.m */; };
 		3951EF131B69BB3200DDF11A /* NSString+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 3951EF0B1B69BB3200DDF11A /* NSString+MJExtension.m */; };
-		3951EF1C1B6A08DE00DDF11A /* MJExtensionConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 3951EF1B1B6A08DE00DDF11A /* MJExtensionConfig.m */; };
 		3965EEF41B5CEF0C00FCFB6D /* movie.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 3965EEF31B5CEF0C00FCFB6D /* movie.mp4 */; };
 		3968D2A21B6791950098C0C2 /* CoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3968D29D1B6791950098C0C2 /* CoreDataManager.m */; };
 		3968D2A31B6791950098C0C2 /* dalmatian.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3968D29E1B6791950098C0C2 /* dalmatian.xcdatamodeld */; };
@@ -236,8 +235,6 @@
 		3951EF091B69BB3200DDF11A /* NSObject+MJProperty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+MJProperty.m"; sourceTree = "<group>"; };
 		3951EF0A1B69BB3200DDF11A /* NSString+MJExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MJExtension.h"; sourceTree = "<group>"; };
 		3951EF0B1B69BB3200DDF11A /* NSString+MJExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MJExtension.m"; sourceTree = "<group>"; };
-		3951EF1A1B6A08DE00DDF11A /* MJExtensionConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJExtensionConfig.h; sourceTree = "<group>"; };
-		3951EF1B1B6A08DE00DDF11A /* MJExtensionConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJExtensionConfig.m; sourceTree = "<group>"; };
 		3965EEF31B5CEF0C00FCFB6D /* movie.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = movie.mp4; sourceTree = "<group>"; };
 		3968D29C1B6791950098C0C2 /* CoreDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataManager.h; sourceTree = "<group>"; };
 		3968D29D1B6791950098C0C2 /* CoreDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataManager.m; sourceTree = "<group>"; };
@@ -601,8 +598,6 @@
 				3968D29D1B6791950098C0C2 /* CoreDataManager.m */,
 				3968D2A01B6791950098C0C2 /* YTKUrlArgumentsFilter.h */,
 				3968D2A11B6791950098C0C2 /* YTKUrlArgumentsFilter.m */,
-				3951EF1A1B6A08DE00DDF11A /* MJExtensionConfig.h */,
-				3951EF1B1B6A08DE00DDF11A /* MJExtensionConfig.m */,
 				39AD39D21B6B7901001E3094 /* RequestService.h */,
 				39AD39D31B6B7901001E3094 /* RequestService.m */,
 				39AD39D41B6B7901001E3094 /* UserDataManager.h */,
@@ -1482,7 +1477,6 @@
 				72EB89E61B6E83C60067AF5A /* UIImage+MultiFormat.m in Sources */,
 				723B5CEB1B649D8200ABF8B9 /* UIProgressView+AFNetworking.m in Sources */,
 				723B5CE41B649D8200ABF8B9 /* AFURLResponseSerialization.m in Sources */,
-				3951EF1C1B6A08DE00DDF11A /* MJExtensionConfig.m in Sources */,
 				723B5CF11B649D8200ABF8B9 /* YTKChainRequest.m in Sources */,
 				723B5CE11B649D8200ABF8B9 /* AFSecurityPolicy.m in Sources */,
 				723B5CED1B649D8200ABF8B9 /* UIWebView+AFNetworking.m in Sources */,

@@ -63,7 +63,7 @@
         
         NSLog(@"succeed");
         
-        ResponseMessage *responseData = [ResponseMessage objectWithKeyValues:[request responseJSONObject]];
+        ResponseMessageResult *responseData = [ResponseMessageResult objectWithKeyValues:[request responseJSONObject]];
         
         [tableData setArray:responseData.result];
         
@@ -143,7 +143,7 @@
 {
     [mainTableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    ResponseMessageResult *result = [tableData objectAtIndex:indexPath.row];
+    ResponseMessage *result = [tableData objectAtIndex:indexPath.row];
     
     DisplayViewController *displayCtrl = [[DisplayViewController alloc] init];
     displayCtrl.videoId = result.videoId;
