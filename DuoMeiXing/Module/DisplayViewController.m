@@ -42,6 +42,8 @@
     
     MPMoviePlayerController *moviePlayer;
     
+    UIActivityIndicatorView *movieActivityIndicator;
+    
     UILabel *videoNickname;
     
     UIButton *videoPlayButton;
@@ -80,8 +82,6 @@
     
     [self setupVideoView];
     
-    [self setupVideoStateBar];
-    
     [self setupSegmentedCtrl];
     
     [self setupContentScrollView];
@@ -100,6 +100,7 @@
 {
     [super viewWillAppear:animated];
     [self registerForKeyboardNotifications];
+    [self registerForMovieNotifacations];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -107,6 +108,7 @@
     [super viewWillDisappear:animated];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     if (moviePlayer!=nil && moviePlayer.playbackState == MPMoviePlaybackStatePlaying) {
+        NSLog(@"moviePlayer nil");
         [moviePlayer stop];
         moviePlayer = nil;
     }
@@ -115,6 +117,11 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
 }
 
 - (void)requstApi
@@ -157,23 +164,18 @@
 
     moviePlayer = [[MPMoviePlayerController alloc] init];
     
+    [mainScrollView addSubview:moviePlayer.view];
+    
     moviePlayer.scalingMode = MPMovieScalingModeAspectFill;
     
     moviePlayer.controlStyle = MPMovieControlStyleNone;
-    
-    moviePlayer.shouldAutoplay = NO;
-    
-    [moviePlayer prepareToPlay];
 
     [moviePlayer.view setFrame:CGRectMake(0, 0, screenWidth, displayVideoHeight)];
     
     UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(touchMoviePlayerView)];
     [moviePlayer.view addGestureRecognizer:recognizer];
-    
-    [mainScrollView addSubview:moviePlayer.view];
-    
+
     videoView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, displayVideoHeight)];
-//    videoView.backgroundColor = [UIColor blackColor];
     [moviePlayer.view addSubview:videoView];
     
     videoImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, statusBarHeight/2, CGRectGetWidth(videoView.frame), displayVideoHeight-statusBarHeight)];
@@ -181,14 +183,21 @@
     videoImageView.contentMode = UIViewContentModeScaleAspectFill;
     [videoView addSubview:videoImageView];
     
+    movieActivityIndicator = [[UIActivityIndicatorView alloc] initWithFrame:videoImageView.frame];
+    movieActivityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhiteLarge;
+    [moviePlayer.view addSubview:movieActivityIndicator];
+
+    [self setupVideoStateBar];
+    
 }
+
 
 -(void) setupVideoStateBar
 {
     
     videoStateBar = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(videoView.frame)-displayVideoStateBarHeight, CGRectGetWidth(videoView.frame), displayVideoStateBarHeight)];
     videoStateBar.backgroundColor = [UIColor colorWithWhite:0.000 alpha:0.500];
-    [videoView addSubview:videoStateBar];
+    [moviePlayer.view addSubview:videoStateBar];
 
     videoPlayButton = [UIButton buttonWithType:UIButtonTypeCustom];
     videoPlayButton.frame = CGRectMake(CGRectGetWidth(videoStateBar.frame)-playButtonHeight-playButtonMargin, (CGRectGetHeight(videoStateBar.frame)-playButtonHeight)/2, playButtonHeight, playButtonHeight);
@@ -210,14 +219,22 @@
 
 - (void)videoPlay
 {
-    if (moviePlayer.isPreparedToPlay) {
+    [movieActivityIndicator startAnimating];
+    if (moviePlayer.isPreparedToPlay || moviePlayer.loadState == MPMovieLoadStatePlayable || moviePlayer.loadState == MPMovieLoadStatePlaythroughOK) {
         if (moviePlayer.playbackState == MPMoviePlaybackStatePaused || moviePlayer.playbackState == MPMoviePlaybackStateStopped) {
+
             [moviePlayer play];
-            videoStateBar.alpha = 0;
-            videoImageView.alpha = 0;
+            [UIView animateWithDuration:0.3 animations:^{
+                videoStateBar.alpha = 0;
+                videoImageView.alpha = 0;
+            }];
         }else if(moviePlayer.playbackState == MPMoviePlaybackStatePlaying){
             [moviePlayer pause];
+        }else{
+            [moviePlayer stop];
         }
+    }else{
+        [moviePlayer prepareToPlay];
     }
 }
 
@@ -295,26 +312,17 @@
 
 - (void)setPanelWithHeight:(CGFloat)height
 {
-
     [UIView animateWithDuration:0.3 animations:^{
         [contentScrollView setHeight:height];
         [contentScrollView setContentSize:CGSizeMake(contentScrollView.contentSize.width, height)];
         [panel1 setHeight:height];
         [panel2 setHeight:height];
         [panel4 setHeight:height];
-        
-        
-    } completion:^(BOOL finished) {
-        //finished判断动画是否完成
-        if (finished) {
-        }
     }];
-
 }
 
 -(void) setupContentScrollView
 {
-    //CGRectGetHeight(mainScrollView.frame)-segmentedCtrlHeight-navigationBarHeight
     contentScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, displayVideoHeight+segmentedCtrlHeight, screenWidth, minContentHeight)];
     contentScrollView.contentSize = CGSizeMake(CGRectGetWidth(contentScrollView.frame)*4, CGRectGetHeight(contentScrollView.frame));
     contentScrollView.delegate = self;
@@ -369,25 +377,13 @@
 
 - (void)touchMoviePlayerView
 {
-
-    [UIView animateWithDuration:0.1 animations:^{
-        
-//        if (![firstResponderField isEditing] && [videoImageView isHidden]) {
-            if (videoStateBar.alpha > 0) {
-                videoStateBar.alpha = 0;
-            }else{
-                videoStateBar.alpha = 1;
-            }
-//        }
-        
-        
-    } completion:^(BOOL finished) {
-        //finished判断动画是否完成
-        if (finished) {
-//            NSLog(@"finished");
+    [UIView animateWithDuration:0.3 animations:^{
+        if (videoStateBar.alpha > 0) {
+            videoStateBar.alpha = 0;
+        }else{
+            videoStateBar.alpha = 1;
         }
     }];
-    
     [firstResponderField resignFirstResponder];
 }
 
@@ -396,10 +392,6 @@
     firstResponderField = textField;
     [UIView animateWithDuration:0.3 animations:^{
         [floatCommentView moveToHorizontal:0 toVertical:screenHeight-statusBarWithNavigationBarHeight-252-floatCommentHeight];
-    } completion:^(BOOL finished) {
-        //finished判断动画是否完成
-        if (finished) {
-        }
     }];
 }
 
@@ -421,11 +413,9 @@
 - (void)getCellData:(id)data
 {
     ResponseVideo *videoData = (ResponseVideo *)data;
-    NSLog(@"%@====", _videoId);
-    NSLog(@"%@----", videoData.id);
     if (![_videoId isEqualToString:videoData.id]) {
         _videoData = videoData;
-        NSLog(@"sefsefs");
+        _videoId = videoData.id;
         [self refreshData];
     }
 
@@ -433,19 +423,25 @@
 
 - (void)refreshData
 {
+    NSLog(@"refreshData");
+    
+    if (moviePlayer.playbackState != MPMoviePlaybackStateStopped) {
+        [moviePlayer stop];
+    }
+    
     [videoImageView sd_setImageWithURL:_videoData.picUrl placeholderImage:[UIImage imageNamed:@"video_bg"]];
  
     [moviePlayer setContentURL:_videoData.videoUrl];
-
+    
     videoNickname.text = _videoData.name;
     
     panel1.memberId = _videoData.memberId;
     panel1.videoId = _videoData.id;
-    [panel1 sendCommentsRequest];
+//    [panel1 sendCommentsRequest];
     
     panel2.memberId = _videoData.memberId;
     panel2.videoId = _videoData.id;
-    [panel2 sendCommentsRequest];
+//    [panel2 sendCommentsRequest];
     
     panel4.memberId = _videoData.memberId;
     panel4.videoId = _videoData.id;
@@ -470,6 +466,29 @@
                                                  name:UIKeyboardWillHideNotification object:nil];
     
     
+}
+
+- (void)registerForMovieNotifacations
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(movieFinishedCallback:)  //媒体播放完成或用户手动退出
+                                                 name:MPMoviePlayerPlaybackDidFinishNotification
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(movieDidChangeCallback:)    //当前播放的媒体内容发生改变
+                                                 name:MPMoviePlayerNowPlayingMovieDidChangeNotification
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(movieStateDidChangeCallback:)    //播放状态改变，可配合playbakcState属性获取具体状态
+                                                 name:MPMoviePlayerPlaybackStateDidChangeNotification
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(movieLoadStateDidChangeCallback:)    //媒体网络加载状态改变体状态
+                                                 name:MPMoviePlayerLoadStateDidChangeNotification
+                                               object:nil];
 }
 
 //实现当键盘出现的时候计算键盘的高度大小。用于输入框显示位置
@@ -505,23 +524,92 @@
     //do something
 }
 
-#pragma mark - View Auto-Rotation
-
-// 重写该方法，控制该视图控制器只支持横屏显示
-//- (NSUInteger)supportedInterfaceOrientations
-//{
-//    return UIInterfaceOrientationMaskLandscape;
-//}
-
-
-- (NSUInteger)supportedInterfaceOrientations
+- (void)movieFinishedCallback:(NSNotification *) notification
 {
-    return UIInterfaceOrientationMaskAll;
+    NSLog(@"视频播放完成");
+    
+    [UIView animateWithDuration:0.3 animations:^{
+        videoImageView.alpha = 1;
+        videoStateBar.alpha = 1;
+    } completion:^(BOOL finished) {
+        [moviePlayer stop];
+    }];
+    
 }
 
-- (BOOL)shouldAutorotate
+- (void)movieDidChangeCallback:(NSNotification *) notification
 {
-    return YES;
+    NSLog(@"内容有修改");
+    [movieActivityIndicator startAnimating];
 }
 
+- (void)movieStateDidChangeCallback:(NSNotification *) notification
+{
+    [movieActivityIndicator stopAnimating];
+    switch (moviePlayer.playbackState) {
+        case MPMoviePlaybackStateInterrupted:
+            //中断
+            NSLog(@"视频中断");
+            break;
+        case MPMoviePlaybackStatePaused:
+            //暂停
+            NSLog(@"视频暂停");
+            break;
+        case MPMoviePlaybackStatePlaying:
+            //播放中
+            NSLog(@"视频播放中");
+            break;
+        case MPMoviePlaybackStateSeekingBackward:
+            //后退
+            NSLog(@"视频后退");
+            break;
+        case MPMoviePlaybackStateSeekingForward:
+            //快进
+            NSLog(@"视频快进");
+            break;
+        case MPMoviePlaybackStateStopped:
+            //停止
+            NSLog(@"视频停止");
+            break;
+        default:
+            break;
+    }
+    
+}
+
+- (void)movieLoadStateDidChangeCallback:(NSNotification *) notification
+{
+    switch (moviePlayer.loadState) {
+        case MPMovieLoadStateUnknown:
+            //未知状态
+            NSLog(@"未知状态");
+            [movieActivityIndicator stopAnimating];
+            break;
+        case MPMovieLoadStatePlayable:
+            //可播状态
+            NSLog(@"可播状态");
+            [movieActivityIndicator startAnimating];
+            break;
+        case MPMovieLoadStatePlaythroughOK:
+            //这种状态如果shouldAutoPlay为YES将自动播放
+            //加载完成状态
+            NSLog(@"这种状态如果shouldAutoPlay为YES将自动播放");
+            [movieActivityIndicator startAnimating];
+            break;
+        case MPMovieLoadStateStalled:
+            //停滞状态  还在加载状态
+            NSLog(@"停滞状态");
+            [movieActivityIndicator startAnimating];
+            break;
+        default:
+            NSLog(@"ok");
+            [UIView animateWithDuration:0.3 animations:^{
+                videoImageView.alpha = 0;
+                videoStateBar.alpha = 0;
+            } completion:^(BOOL finished) {
+                [movieActivityIndicator stopAnimating];
+            }];
+            break;
+    }
+}
 @end
