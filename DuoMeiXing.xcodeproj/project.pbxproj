@@ -593,13 +593,13 @@
 		3968D29B1B6791950098C0C2 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				3968D29E1B6791950098C0C2 /* dalmatian.xcdatamodeld */,
-				3968D29C1B6791950098C0C2 /* CoreDataManager.h */,
-				3968D29D1B6791950098C0C2 /* CoreDataManager.m */,
 				3968D2A01B6791950098C0C2 /* YTKUrlArgumentsFilter.h */,
 				3968D2A11B6791950098C0C2 /* YTKUrlArgumentsFilter.m */,
 				39AD39D21B6B7901001E3094 /* RequestService.h */,
 				39AD39D31B6B7901001E3094 /* RequestService.m */,
+				3968D29E1B6791950098C0C2 /* dalmatian.xcdatamodeld */,
+				3968D29C1B6791950098C0C2 /* CoreDataManager.h */,
+				3968D29D1B6791950098C0C2 /* CoreDataManager.m */,
 				39AD39D41B6B7901001E3094 /* UserDataManager.h */,
 				39AD39D51B6B7901001E3094 /* UserDataManager.m */,
 			);

@@ -134,7 +134,7 @@
     _cellTitleLabel.frame = CGRectMake(
                                        CGRectGetWidth(_cellImageView.frame) + 20,
                                        listCellHeight/2 - 16,
-                                       (CGRectGetWidth(self.frame)-CGRectGetMaxX(_cellImageView.frame) - 50 -30),
+                                       (screenWidth-CGRectGetMaxX(_cellImageView.frame) - 50 -30),
                                        TitleFontSize);
     
     _cellDateLabel.frame = CGRectMake(screenWidth - 50 - 10, CGRectGetMinY(_cellTitleLabel.frame), 50, DateFontSize);
@@ -144,7 +144,7 @@
         
         CGFloat textY = listCellHeight/2+2;
         
-        CGFloat textWidth = CGRectGetWidth(self.frame) - CGRectGetWidth(_cellImageView.frame) - 30;
+        CGFloat textWidth = screenWidth - CGRectGetWidth(_cellImageView.frame) - 30;
         
         CGSize textSize = [_cellDetailLabel.text boundingRectWithSize:CGSizeMake(textWidth, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:DetailFontSize]} context:nil].size;
         
@@ -160,7 +160,7 @@
         
     }else if(self.cellListType == kCellListVideo || self.cellListType == kCellListMessage){
         _cellDetailLabel.numberOfLines = 1;
-            _cellDetailLabel.frame = CGRectMake(CGRectGetWidth(_cellImageView.frame) + 20, listCellHeight/2 + 4, CGRectGetWidth(self.frame) - CGRectGetWidth(_cellImageView.frame) - 30, DetailFontSize);
+            _cellDetailLabel.frame = CGRectMake(CGRectGetWidth(_cellImageView.frame) + 20, listCellHeight/2 + 4, screenWidth - CGRectGetWidth(_cellImageView.frame) - 30, DetailFontSize);
         _height = listCellHeight;
     }
 

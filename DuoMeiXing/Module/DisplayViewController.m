@@ -680,7 +680,7 @@
         case MPMoviePlaybackStatePaused:
             //暂停
             NSLog(@"视频暂停");
-            [movieActivityIndicator startAnimating];
+//            [movieActivityIndicator startAnimating];
             break;
         case MPMoviePlaybackStatePlaying:
             //播放中
