@@ -48,7 +48,7 @@
 - (void)requstApi
 {
 
-    RequestService *request = [RequestService messageReqeust];
+    RequestService *request = [RequestService messageSummaryReqeust];
 
     if ([request cacheJson]) {
 //        NSLog(@"%@", [request cacheJson]);
@@ -64,7 +64,7 @@
         NSLog(@"succeed");
         
         ResponseMessageResult *responseData = [ResponseMessageResult objectWithKeyValues:[request responseJSONObject]];
-        
+//        NSLog(@"%@", [request responseJSONObject]);
         [tableData setArray:responseData.result];
         
         [mainTableView reloadData];
@@ -144,9 +144,14 @@
     [mainTableView deselectRowAtIndexPath:indexPath animated:YES];
     
     ResponseMessage *result = [tableData objectAtIndex:indexPath.row];
-    
     DisplayViewController *displayCtrl = [[DisplayViewController alloc] init];
     displayCtrl.videoId = result.videoId;
+    if ([result.chatType isEqualToString:@"VIDEOFILE"]) {
+        displayCtrl.pannelIndex = kDisplayPannelInformation;
+    }else{
+        displayCtrl.pannelIndex = kDisplayPannelReview;
+    }
+    
     [self.navigationController pushViewController:displayCtrl animated:YES];
     
 }

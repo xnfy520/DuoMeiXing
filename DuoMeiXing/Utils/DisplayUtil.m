@@ -18,6 +18,27 @@
     return textSize;
 }
 
++ (CGSize)getSize:(CGFloat)fontSize withString:(NSString *)fontText withWidth:(CGFloat)width
+{
+    CGSize textSize = [fontText boundingRectWithSize:CGSizeMake(width, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:fontSize]} context:nil].size;
+    return textSize;
+}
+
++ (NSString *)convertWithBytes:(CGFloat)bytes
+{
+     NSString *filesize;
+    if(bytes >= 1073741824) {
+        filesize = [NSString stringWithFormat:@"%.2fGB", round(bytes / 1073741824 * 100) / 100];
+    }else if(bytes >= 1048576){
+        filesize = [NSString stringWithFormat:@"%.2fMB", round(bytes / 1048576 * 100) / 100];
+    }else if(bytes >= 1024){
+        filesize = [NSString stringWithFormat:@"%.2fKB", round(bytes / 1024 * 100) / 100];
+    }else{
+        filesize = [NSString stringWithFormat:@"%.2fB", bytes];
+    }
+    return filesize;
+}
+
 + (UIColor *)colorWithHex:(NSString *)string
 {
     NSString *cleanString = [string stringByReplacingOccurrencesOfString:@"#" withString:@""];
@@ -107,11 +128,11 @@
     
 }
 
-+ (NSString *)getDateStringWithDate:(NSNumber*)time
++ (NSString *)getDateStringWithDate:(NSNumber*)time withDateFormat:(NSString *)formatString
 {
     NSDate * date = [NSDate dateWithTimeIntervalSince1970:([time doubleValue]/1000)];
     
-    return [DisplayUtil getDateStringWithDate:date DateFormat:@"MM-dd"];
+    return [DisplayUtil getDateStringWithDate:date DateFormat:formatString];
 }
 
 + (NSString *)getDateStringWithDate:(NSDate *)date DateFormat:(NSString *)formatString

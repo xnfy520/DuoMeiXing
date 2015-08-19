@@ -237,6 +237,7 @@
     DisplayViewController *displayCtrl = [[DisplayViewController alloc] init];
     displayCtrl.videoData = result;
     displayCtrl.videoId = result.id;
+    displayCtrl.pannelIndex = kDisplayPannelInformation;
     [self.navigationController pushViewController:displayCtrl animated:YES];
 
 }

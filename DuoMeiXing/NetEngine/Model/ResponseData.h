@@ -94,6 +94,11 @@
 @property (nonatomic, copy) NSURL *videoUrl;
 @property (nonatomic, copy) NSString *memberId;
 @property (nonatomic, copy) NSNumber *createTime;
+@property (nonatomic, copy) NSNumber *publishTime;
+@property (nonatomic, copy) NSNumber *totalBytes;
+@property (nonatomic, copy) NSNumber *likeTimes;
+@property (nonatomic, copy) NSNumber *playTimes;
+
 
 + (NSDictionary *)responseValidator;
 

@@ -14,6 +14,10 @@
 
 + (CGSize)getSize:(CGFloat)fontSize withString:(NSString *)fontText;
 
++ (CGSize)getSize:(CGFloat)fontSize withString:(NSString *)fontText withWidth:(CGFloat)width;
+
++ (NSString *)convertWithBytes:(CGFloat)bytes;
+
 + (UIColor *)colorWithHex:(NSString *)string;
 
 + (UIColor *) hexStringToColor: (NSString *) stringToConvert;
@@ -22,7 +26,7 @@
 
 + (UIImage *)getImageFromURL:(NSString *)fileURL;
 
-+ (NSString *)getDateStringWithDate:(NSNumber*)time;
++ (NSString *)getDateStringWithDate:(NSNumber*)time withDateFormat:(NSString *)formatString;
 
 + (NSString *)getDateStringWithDate:(NSDate *)date DateFormat:(NSString *)formatString;
 

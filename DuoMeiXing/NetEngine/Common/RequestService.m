@@ -57,13 +57,13 @@
 //    [aef.reachabilityManager startMonitoring];
 //}
 
-+ (id)messageReqeust
++ (id)messageSummaryReqeust
 {
     RequstPage *requestData = [[RequstPage alloc] init];
     requestData.pageNo = @"1";
     requestData.pageSize = @"10";
     
-    RequestService *request = [[RequestService alloc] initReqeustUrl:appAPIMessage withPostData:requestData withResponseValidator:[ResponseMessageResult responseValidator]];
+    RequestService *request = [[RequestService alloc] initReqeustUrl:appAPIMessageSummary withPostData:requestData withResponseValidator:[ResponseMessageResult responseValidator]];
     return request;
 }
 
@@ -75,7 +75,7 @@
 
 + (id)videoCommentReqeustPostData:(RequstData *)requestData
 {
-    RequestService *request = [[RequestService alloc] initReqeustUrl:appAPIVideoComment withPostData:requestData withResponseValidator:[ResponseVideoCommentResult responseValidator]];
+    RequestService *request = [[RequestService alloc] initReqeustUrl:appAPIVideoComment withPostData:requestData withResponseValidator:nil];
     return request;
 }
 

@@ -87,7 +87,7 @@
         _cellTitleLabel.text = data.nickName;
         _cellDetailLabel.text = data.content;
         [_cellImageView sd_setImageWithURL:data.logoUrl];
-        _cellDateLabel.text = [DisplayUtil getDateStringWithDate:data.createTime];
+        _cellDateLabel.text = [DisplayUtil getDateStringWithDate:data.createTime withDateFormat:@"MM-dd"];
         
     }else if(self.cellListType == kCellListVideo){
         
@@ -95,7 +95,7 @@
         _cellTitleLabel.text = data.name;
         _cellDetailLabel.text = data.desc;
         [_cellImageView sd_setImageWithURL:data.picUrl];
-        _cellDateLabel.text = [DisplayUtil getDateStringWithDate:data.createTime];
+        _cellDateLabel.text = [DisplayUtil getDateStringWithDate:data.createTime withDateFormat:@"MM-dd"];
         
     }else if(self.cellListType == kCellListMessage){
         
@@ -103,7 +103,7 @@
         _cellTitleLabel.text = data.fromNickName;
         _cellDetailLabel.text = data.content;
         [_cellImageView sd_setImageWithURL:data.fromLogoUrl];
-        _cellDateLabel.text = [DisplayUtil getDateStringWithDate:data.createTime];
+        _cellDateLabel.text = [DisplayUtil getDateStringWithDate:data.createTime withDateFormat:@"MM-dd"];
         _cellBadgeLabel.text = [NSString stringWithFormat:@"%@", data.msgNumbers];
         
     }
@@ -137,7 +137,7 @@
                                        (CGRectGetWidth(self.frame)-CGRectGetMaxX(_cellImageView.frame) - 50 -30),
                                        TitleFontSize);
     
-    _cellDateLabel.frame = CGRectMake(CGRectGetWidth(self.frame) - 50 - 10, CGRectGetMinY(_cellTitleLabel.frame), 50, DateFontSize);
+    _cellDateLabel.frame = CGRectMake(screenWidth - 50 - 10, CGRectGetMinY(_cellTitleLabel.frame), 50, DateFontSize);
 
     if (self.cellListType == kCellListComment) {
         CGFloat textX = CGRectGetMinX(_cellTitleLabel.frame);

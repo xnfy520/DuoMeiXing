@@ -42,9 +42,9 @@
     return self;
 }
 
-- (void)sendWorksRequest
+- (void)sendReviewRequest
 {
-    RequestService *api = [RequestService videoMemberReqeustPostData:[RequstVideoMember requstVideoMemberWithMemberId:_memberId PageNo:1 withPageSize:100]];
+    RequestService *api = [RequestService videoCommentReqeustPostData:[RequstVideoComment requstVideoReviewWithVideoId:_videoId PageNo:1 withPageSize:100]];
     [self sendRequestWith:api];
 }
 
@@ -54,11 +54,11 @@
     [self sendRequestWith:api];
 }
 
-//- (void)sendWorksRequest
-//{
-//    RequestService *api = [RequestService videoMemberReqeustPostData:[RequstVideoMember requstVideoMemberWithMemberId:_memberId PageNo:1 withPageSize:10]];
-//    [self sendRequestWith:api];
-//}
+- (void)sendWorksRequest
+{
+    RequestService *api = [RequestService videoMemberReqeustPostData:[RequstVideoMember requstVideoMemberWithMemberId:_memberId PageNo:1 withPageSize:100]];
+    [self sendRequestWith:api];
+}
 
 - (void)sendRequestWith:(RequestService *)api
 {
@@ -68,29 +68,14 @@
         NSMutableArray *resultArray = [[NSMutableArray alloc] init];
         
         if (_pannelType == kDisplayPannelWorks) {
+
             ResponseVideoResult *responseData = [ResponseVideoResult objectWithKeyValues:[request responseJSONObject]];
             [resultArray setArray:responseData.result];
             
         }else if (_pannelType == kDisplayPannelReview || _pannelType == kDisplayPannelComments){
-            ResponseVideoCommentResult *responseData = [ResponseVideoCommentResult objectWithKeyValues:[request responseJSONObject]];
 
-            NSMutableArray *reviewArray = [[NSMutableArray alloc] init];
-            
-            NSMutableArray *commentArray = [[NSMutableArray alloc] init];
-            
-            for (ResponseVideoComment *comment in responseData.result) {
-                if ([comment.type isEqualToString:commentTypeNormal]) {
-                    [commentArray addObject:comment];
-                }else{
-                    [reviewArray addObject:comment];
-                }
-            }
-            
-            if (_pannelType == kDisplayPannelReview){
-                resultArray = reviewArray;
-            }else if(_pannelType == kDisplayPannelComments){
-                resultArray = commentArray;
-            }
+            ResponseVideoCommentResult *responseData = [ResponseVideoCommentResult objectWithKeyValues:[request responseJSONObject]];
+            [resultArray setArray:responseData.result];
 
         }
         
@@ -110,7 +95,7 @@
         
     } failure:^(YTKBaseRequest *request) {
 
-        NSLog(@"failed");
+        NSLog(@"failed=-");
         
         NSLog(@"%@", [[request responseJSONObject] objectForKey:@"code"]);
         
@@ -183,10 +168,16 @@
     ListCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
     if (cell == nil) {
         cell = [[ListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
-        
     }
     
     cell.cellListType = _cellType;
+    
+    if (_cellType == kCellListVideo) {
+        ResponseVideo *videoData = [tableData objectAtIndex:indexPath.row];
+        if ([videoData.id isEqualToString:_videoId]) {
+//            [self.tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
+        }
+    }
     
     cell.cellData = [tableData objectAtIndex:indexPath.row];
 

@@ -215,9 +215,11 @@
     [mainTableView deselectRowAtIndexPath:indexPath animated:YES];
     
     ResponseVideo * result = [tableData objectAtIndex:indexPath.row];
+    
     DisplayViewController *displayCtrl = [[DisplayViewController alloc] init];
     displayCtrl.videoId = result.id;
     displayCtrl.videoData = result;
+    displayCtrl.pannelIndex = kDisplayPannelInformation;
     [self.navigationController pushViewController:displayCtrl animated:YES];
 }
 

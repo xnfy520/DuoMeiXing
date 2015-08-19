@@ -16,8 +16,12 @@
 #define displayVideoStateBarHeight 35
 #define segmentedCtrlHeight 35
 #define playButtonHeight 25
-#define playButtonMargin 15
+#define playButtonMargin 10
 #define floatCommentHeight 35
+
+#define videoDetailIndex 1000
+
+#define detailTitleFontSize 14
 
 
 #define maxContentHeight screenHeight-segmentedCtrlHeight-floatCommentHeight-statusBarWithNavigationBarHeight
@@ -44,7 +48,7 @@
     
     UIActivityIndicatorView *movieActivityIndicator;
     
-    UILabel *videoNickname;
+    UILabel *videoName;
     
     UIButton *videoPlayButton;
     
@@ -54,11 +58,20 @@
     
     float keyboardhight;
     
-    PannelTableView *panel1;
+    PannelTableView *reviewPannel;
     
-    PannelTableView *panel2;
+    PannelTableView *commentPannel;
     
-    PannelTableView *panel4;
+    PannelTableView *worksPannel;
+    
+    UIScrollView *detailsPannel;
+    
+    /** 需要计算高度UILabel的数组 */
+    NSMutableArray* heightLablesInDetailsView;
+    
+    UIView *moveLine;
+    
+    CGFloat lineWith;
     
 }
 
@@ -127,9 +140,13 @@
 - (void)requstApi
 {
     
+//    [self showHUB];
+    
     RequestService *request = [RequestService videoIdRequestPostData:[RequstVideoId requstVideoWithVideoId:_videoId]];
 
     [request startWithCompletionBlockWithSuccess:^(YTKBaseRequest *request) {
+        
+//        [self hideHUB];
         
         ResponseVideo *responseData = [ResponseVideo objectWithKeyValues:[request responseJSONObject]];
         NSLog(@"success");
@@ -181,6 +198,7 @@
     videoImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, statusBarHeight/2, CGRectGetWidth(videoView.frame), displayVideoHeight-statusBarHeight)];
     videoImageView.image = [UIImage imageNamed:@"video_bg"];
     videoImageView.contentMode = UIViewContentModeScaleAspectFill;
+
     [videoView addSubview:videoImageView];
     
     movieActivityIndicator = [[UIActivityIndicatorView alloc] initWithFrame:videoImageView.frame];
@@ -200,20 +218,22 @@
     [moviePlayer.view addSubview:videoStateBar];
 
     videoPlayButton = [UIButton buttonWithType:UIButtonTypeCustom];
+//    videoPlayButton.backgroundColor = [UIColor redColor];
     videoPlayButton.frame = CGRectMake(CGRectGetWidth(videoStateBar.frame)-playButtonHeight-playButtonMargin, (CGRectGetHeight(videoStateBar.frame)-playButtonHeight)/2, playButtonHeight, playButtonHeight);
     [videoPlayButton setBackgroundImage:[UIImage imageNamed:@"icon_play"] forState:UIControlStateNormal];
     [videoPlayButton addTarget:self action:@selector(videoPlay) forControlEvents:UIControlEventTouchUpInside];
     [videoStateBar addSubview:videoPlayButton];
     
-    plusFunButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    plusFunButton.frame = CGRectMake(CGRectGetMinX(videoPlayButton.frame)-playButtonHeight-playButtonMargin, (CGRectGetHeight(videoStateBar.frame)-playButtonHeight)/2, playButtonHeight, playButtonHeight);
-    [plusFunButton setBackgroundImage:[UIImage imageNamed:@"icon_plus_fan"] forState:UIControlStateNormal];
+//    plusFunButton = [UIButton buttonWithType:UIButtonTypeCustom];
+//    plusFunButton.frame = CGRectMake(CGRectGetMinX(videoPlayButton.frame)-playButtonHeight-playButtonMargin, (CGRectGetHeight(videoStateBar.frame)-playButtonHeight)/2, playButtonHeight, playButtonHeight);
+//    [plusFunButton setBackgroundImage:[UIImage imageNamed:@"icon_plus_fan"] forState:UIControlStateNormal];
 //    [videoStateBar addSubview:plusFunButton];
     
-    videoNickname = [[UILabel alloc] initWithFrame:CGRectMake(10, (CGRectGetHeight(videoStateBar.frame)-(playButtonHeight-10))/2, CGRectGetWidth(videoStateBar.frame)/2, playButtonHeight-10)];
-    videoNickname.font = [UIFont systemFontOfSize:17];
-    videoNickname.textColor = [UIColor whiteColor];
-    [videoStateBar addSubview:videoNickname];
+    videoName = [[UILabel alloc] initWithFrame:CGRectMake(10, (CGRectGetHeight(videoStateBar.frame)-(playButtonHeight-10))/2, CGRectGetWidth(videoStateBar.frame)-CGRectGetWidth(videoPlayButton.frame)-30, playButtonHeight-10)];
+//    videoName.backgroundColor = [UIColor yellowColor];
+    videoName.font = [UIFont systemFontOfSize:16];
+    videoName.textColor = [UIColor whiteColor];
+    [videoStateBar addSubview:videoName];
     
 }
 
@@ -262,6 +282,12 @@
     
     [mainScrollView addSubview:segmentedCtrl];
     
+    lineWith = CGRectGetWidth(segmentedCtrl.frame)/segmentedCtrl.numberOfSegments;
+    
+    moveLine = [[UIView alloc] initWithFrame:CGRectMake(_pannelIndex*lineWith, CGRectGetHeight(segmentedCtrl.frame)-1, lineWith, 1)];
+    moveLine.backgroundColor = defaultTabBarTitleColor;
+    [segmentedCtrl addSubview:moveLine];
+    
     
 }
 
@@ -270,6 +296,10 @@
     NSInteger index = Seg.selectedSegmentIndex;
     
     [contentScrollView setContentOffset:CGPointMake(CGRectGetWidth(contentScrollView.frame) * index, 0) animated:YES];
+    
+    [UIView animateWithDuration:0.3 animations:^{
+        [moveLine moveToHorizontal:index * lineWith toVertical:CGRectGetMinY(moveLine.frame)];
+    }];
 
 }
 
@@ -280,6 +310,9 @@
     }else if ([scrollView isEqual:contentScrollView]) {
         NSInteger index = scrollView.contentOffset.x/scrollView.frame.size.width;
         segmentedCtrl.selectedSegmentIndex = index;
+        [UIView animateWithDuration:0.3 animations:^{
+            [moveLine moveToHorizontal:index * lineWith toVertical:CGRectGetMinY(moveLine.frame)];
+        }];
     }
 }
 
@@ -315,9 +348,10 @@
     [UIView animateWithDuration:0.3 animations:^{
         [contentScrollView setHeight:height];
         [contentScrollView setContentSize:CGSizeMake(contentScrollView.contentSize.width, height)];
-        [panel1 setHeight:height];
-        [panel2 setHeight:height];
-        [panel4 setHeight:height];
+        [reviewPannel setHeight:height];
+        [commentPannel setHeight:height];
+        [detailsPannel setHeight:height];
+        [worksPannel setHeight:height];
     }];
 }
 
@@ -332,22 +366,112 @@
     [mainScrollView addSubview:contentScrollView];
     
     
-    panel1 = [[PannelTableView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, CGRectGetHeight(contentScrollView.frame))];
-    panel1.cellType = kCellListComment;
-    panel1.pannelType = kDisplayPannelReview;
-    [contentScrollView addSubview:panel1];
+    reviewPannel = [[PannelTableView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, CGRectGetHeight(contentScrollView.frame))];
+    reviewPannel.cellType = kCellListComment;
+    reviewPannel.pannelType = kDisplayPannelReview;
+    [contentScrollView addSubview:reviewPannel];
     
-    panel2 = [[PannelTableView alloc] initWithFrame:CGRectMake(screenWidth, 0, screenWidth, CGRectGetHeight(contentScrollView.frame))];
-    panel2.cellType = kCellListComment;
-    panel2.pannelType = kDisplayPannelComments;
-    [contentScrollView addSubview:panel2];
+    commentPannel = [[PannelTableView alloc] initWithFrame:CGRectMake(screenWidth, 0, screenWidth, CGRectGetHeight(contentScrollView.frame))];
+    commentPannel.cellType = kCellListComment;
+    commentPannel.pannelType = kDisplayPannelComments;
+    [contentScrollView addSubview:commentPannel];
     
-    panel4 = [[PannelTableView alloc] initWithFrame:CGRectMake(screenWidth*3, 0, screenWidth, CGRectGetHeight(contentScrollView.frame))];
-    panel4.cellType = kCellListVideo;
-    panel4.pannelType = kDisplayPannelWorks;
-    panel4.delegate = self;
-    [contentScrollView addSubview:panel4];
+    detailsPannel = [[UIScrollView alloc] initWithFrame:CGRectMake(screenWidth*2, 0, screenWidth, CGRectGetHeight(contentScrollView.frame))];
+    detailsPannel.backgroundColor = [UIColor whiteColor];
+    [contentScrollView addSubview:detailsPannel];
+    
+    worksPannel = [[PannelTableView alloc] initWithFrame:CGRectMake(screenWidth*3, 0, screenWidth, CGRectGetHeight(contentScrollView.frame))];
+    worksPannel.cellType = kCellListVideo;
+    worksPannel.pannelType = kDisplayPannelWorks;
+    worksPannel.delegate = self;
+    [contentScrollView addSubview:worksPannel];
+    
+    
+    [contentScrollView setContentOffset:CGPointMake(CGRectGetWidth(contentScrollView.frame) * _pannelIndex, 0)];
 
+}
+
+- (void)setupDetailsView
+{
+    if (heightLablesInDetailsView == nil) {
+        heightLablesInDetailsView = [[NSMutableArray alloc] init];
+    }else{
+        [heightLablesInDetailsView removeAllObjects];
+    }
+    
+    if(detailsPannel.subviews.count>0){
+        for (UIView *subview in detailsPannel.subviews) {
+            [subview removeFromSuperview];
+        }
+    }
+    
+    NSArray* detailInfoTitle = @[@"视频标题", @"视频描述", @"播放次数", @"点赞人数", @"视频大小", @"发布时间"];
+    
+    for (int i = 0; i < detailInfoTitle.count; i++) {
+        
+        UILabel *labelTitle = [[UILabel alloc] initWithFrame:CGRectMake(10, CGRectGetMinY(detailsPannel.frame)+10+i*25, 70, 16)];
+        labelTitle.font = [UIFont systemFontOfSize:detailTitleFontSize];
+        labelTitle.textColor = [UIColor grayColor];
+        labelTitle.textAlignment = NSTextAlignmentRight;
+        labelTitle.text = [NSString stringWithFormat:@"%@：",[detailInfoTitle objectAtIndex:i]];
+        [detailsPannel addSubview:labelTitle];
+        
+        UILabel *labelDesc = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetWidth(labelTitle.frame)+10, CGRectGetMinY(detailsPannel.frame)+10+i*25, CGRectGetWidth(detailsPannel.frame)-CGRectGetWidth(labelTitle.frame)-15, 16)];
+        labelDesc.font = [UIFont systemFontOfSize:detailTitleFontSize];
+        labelDesc.textAlignment = NSTextAlignmentLeft;
+        labelDesc.textColor = [UIColor lightGrayColor];
+        NSString *descString;
+        switch (i) {
+            case 0:
+                descString = _videoData.name;
+                break;
+            case 1:
+                descString = _videoData.desc;
+                break;
+            case 2:
+                descString = [_videoData.playTimes stringValue];
+                break;
+            case 3:
+                descString = [_videoData.likeTimes stringValue];
+                break;
+            case 4:
+                descString = [DisplayUtil convertWithBytes:[_videoData.totalBytes floatValue]];
+                break;
+            case 5:
+                descString = [DisplayUtil getDateStringWithDate:_videoData.publishTime withDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+                break;
+            default:
+                descString = @"";
+                break;
+        }
+        labelDesc.text = descString;
+        labelDesc.numberOfLines = 0;
+        int tagIdx = (int)videoDetailIndex;
+        labelDesc.tag = tagIdx+i;
+        [detailsPannel addSubview:labelDesc];
+        
+        [heightLablesInDetailsView addObject:[NSMutableArray arrayWithObjects:labelTitle, labelDesc, nil]];
+        
+    }
+    
+    [self refreshDetailLayout];
+}
+
+-(void)refreshDetailLayout
+{
+    CGFloat offset = 10;
+    for (int i = 0; i < [heightLablesInDetailsView count]; i++) {
+            CGFloat maxHeight = 0;
+            NSMutableArray *group = [heightLablesInDetailsView objectAtIndex:i];
+            for (int j = 0; j < [group count]; j++) {
+                UILabel *label = [group objectAtIndex:j];
+                CGSize size = [DisplayUtil getSize:detailTitleFontSize withString:label.text withWidth:CGRectGetWidth(label.frame)];
+                label.frame = CGRectMake(CGRectGetMinX(label.frame), offset, CGRectGetWidth(label.frame), size.height);
+                maxHeight = MAX(maxHeight, size.height+4);
+            }
+            offset+=maxHeight+4;
+    }
+    detailsPannel.contentSize = CGSizeMake(CGRectGetWidth(detailsPannel.frame), offset);
 }
 
 -(void) setupFloatCommentView
@@ -430,22 +554,24 @@
     }
     
     [videoImageView sd_setImageWithURL:_videoData.picUrl placeholderImage:[UIImage imageNamed:@"video_bg"]];
- 
+    
+    videoName.text = _videoData.name;
+
     [moviePlayer setContentURL:_videoData.videoUrl];
+
+    reviewPannel.memberId = _videoData.memberId;
+    reviewPannel.videoId = _videoData.id;
+    [reviewPannel sendReviewRequest];
     
-    videoNickname.text = _videoData.name;
+    commentPannel.memberId = _videoData.memberId;
+    commentPannel.videoId = _videoData.id;
+    [commentPannel sendCommentsRequest];
     
-    panel1.memberId = _videoData.memberId;
-    panel1.videoId = _videoData.id;
-//    [panel1 sendCommentsRequest];
+    [self setupDetailsView];
     
-    panel2.memberId = _videoData.memberId;
-    panel2.videoId = _videoData.id;
-//    [panel2 sendCommentsRequest];
-    
-    panel4.memberId = _videoData.memberId;
-    panel4.videoId = _videoData.id;
-    [panel4 sendWorksRequest];
+    worksPannel.memberId = _videoData.memberId;
+    worksPannel.videoId = _videoData.id;
+    [worksPannel sendWorksRequest];
     
 }
 
@@ -554,9 +680,11 @@
         case MPMoviePlaybackStatePaused:
             //暂停
             NSLog(@"视频暂停");
+            [movieActivityIndicator startAnimating];
             break;
         case MPMoviePlaybackStatePlaying:
             //播放中
+            [movieActivityIndicator stopAnimating];
             NSLog(@"视频播放中");
             break;
         case MPMoviePlaybackStateSeekingBackward:

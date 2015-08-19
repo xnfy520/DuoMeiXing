@@ -31,8 +31,10 @@
 
 - (void)setTableScrollEnabled:(BOOL)enabled;
 
-- (void)sendWorksRequest;
+- (void)sendReviewRequest;
 
 - (void)sendCommentsRequest;
+
+- (void)sendWorksRequest;
 
 @end

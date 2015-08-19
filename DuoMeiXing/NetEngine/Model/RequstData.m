@@ -74,15 +74,29 @@
 @end
 
 @implementation RequstVideoComment
+
+
++ (id)requstVideoReviewWithVideoId:(NSString *)videoId PageNo:(NSInteger)pageNo withPageSize:(NSInteger)pageSize
+{
+    return [self requstVideoCommentWithType:@"teacher" VideoId:videoId PageNo:pageNo withPageSize:pageSize];
+}
+
 + (id)requstVideoCommentWithVideoId:(NSString *)videoId PageNo:(NSInteger)pageNo withPageSize:(NSInteger)pageSize
 {
+    return [self requstVideoCommentWithType:@"normal" VideoId:videoId PageNo:pageNo withPageSize:pageSize];
+}
+
++ (id)requstVideoCommentWithType:(NSString *)type VideoId:(NSString *)videoId PageNo:(NSInteger)pageNo withPageSize:(NSInteger)pageSize
+{
     NSDictionary *dic = @{
+                          @"type":type,
                           @"videoId":videoId,
                           @"pageNo":@(pageNo),
                           @"pageSize":@(pageSize)
                           };
     return [self objectWithKeyValues:dic];
 }
+
 @end
 
 @implementation RequstVideoId

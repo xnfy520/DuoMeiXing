@@ -112,7 +112,11 @@
              @"picUrl": [NSString class],
              @"videoUrl": [NSString class],
              @"memberId": [NSString class],
-             @"createTime": [NSNumber class]
+             @"createTime": [NSNumber class],
+             @"publishTime": [NSNumber class],
+             @"totalBytes": [NSNumber class],
+             @"likeTimes": [NSNumber class],
+             @"playTimes": [NSNumber class]
              };
 }
 

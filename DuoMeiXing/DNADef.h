@@ -88,15 +88,17 @@ typedef enum : NSUInteger{
 
 #define apiBaseUrl @"http://app.dmxing.cn"
 
-#define appAPILogin        @"/dmx/app/ajax/login.dmx"                      //登录
-#define appAPIRegister     @"/dmx/app/ajax/member_register.dmx"            //注册
-#define appAPISMS          @"/dmx/app/ajax/send_smscode.dmx"               //验证码
-#define appAPIMessage      @"/dmx/app/ajax/video/message/get.dmx"          //消息
-#define appAPIVideo        @"/dmx/app/ajax/video/type/get.dmx"             //获取各类视频
-#define appAPIVideoLast    @"/dmx/app/ajax/video/get_last.dmx"             //获取最新视频
-#define appAPIVideoMember  @"/dmx/app/ajax/video/person/get.dmx"           //获取某个用户的所有视频
-#define appAPIVideoComment @"/dmx/app/ajax/video/comment/get_list.dmx"     //获取视频的评论
-#define appAPIVideoId      @"/dmx/app/ajax/video/get.dmx"                  //通过视频ID获取视频信息
+#define appAPILogin             @"/dmx/app/ajax/login.dmx"                      //登录
+#define appAPIRegister          @"/dmx/app/ajax/member_register.dmx"            //注册
+#define appAPISMS               @"/dmx/app/ajax/send_smscode.dmx"               //验证码
+//获取所有发送给我通知，包括我关注的朋友上传了新视频，我关注的朋友对我的视频发表了评论
+#define appAPIMessageSummary    @"/dmx/app/ajax/video/message/summary/get.dmx"
+#define appAPIMessageALL        @"/dmx/app/ajax/video/message/type/get_all.dmx"
+#define appAPIVideo             @"/dmx/app/ajax/video/type/get.dmx"             //获取各类视频
+#define appAPIVideoLast         @"/dmx/app/ajax/video/get_last.dmx"             //获取最新视频
+#define appAPIVideoMember       @"/dmx/app/ajax/video/person/get.dmx"           //获取某个用户的所有视频
+#define appAPIVideoComment      @"/dmx/app/ajax/video/comment/get_list.dmx"     //获取视频的评论
+#define appAPIVideoId           @"/dmx/app/ajax/video/get.dmx"                  //通过视频ID获取视频信息
 
 #define appCompanyCode @"dalmatian"
 
