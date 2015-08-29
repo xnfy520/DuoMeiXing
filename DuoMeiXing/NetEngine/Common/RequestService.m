@@ -7,6 +7,7 @@
 //
 
 #import "RequestService.h"
+#import "DNADef.h"
 
 @implementation RequestService
 
@@ -25,10 +26,21 @@
         _requestUrl = requestUrl;
         _requstData = requestData;
         _responseValidator = responseValidator;
-
-//        [self sese];
+        
     }
     return self;
+}
+
+- (NSDictionary *)requestHeaderFieldValueDictionary
+{
+    NSDictionary *properties = [[NSMutableDictionary alloc] init];
+    [properties setValue:
+     [NSString stringWithFormat:@"%@=%@;%@=%@",
+        sessionIdKey,
+        [UserDataManager sharedUserDataManager].sessionId,
+        sessionIdName,
+        [UserDataManager sharedUserDataManager].token] forKey:@"Cookie"];
+    return properties;
 }
 
 //- (void)sese
@@ -67,6 +79,12 @@
     return request;
 }
 
++ (id)messageAllReqeustPostData:(RequstData *)requestData
+{
+    RequestService *request = [[RequestService alloc] initReqeustUrl:appAPIMessageALL withPostData:requestData withResponseValidator:[ResponseMessageResult responseValidator]];
+    return request;
+}
+
 + (id)videoMemberReqeustPostData:(RequstData *)requestData
 {
     RequestService *request = [[RequestService alloc] initReqeustUrl:appAPIVideoMember withPostData:requestData withResponseValidator:[ResponseVideoResult responseValidator]];
@@ -76,6 +94,12 @@
 + (id)videoCommentReqeustPostData:(RequstData *)requestData
 {
     RequestService *request = [[RequestService alloc] initReqeustUrl:appAPIVideoComment withPostData:requestData withResponseValidator:nil];
+    return request;
+}
+
++ (id)gameReqeustPostData:(RequstData *)requestData
+{
+    RequestService *request = [[RequestService alloc] initReqeustUrl:appAPIGame withPostData:requestData withResponseValidator:[ResponseVideoResult responseValidator]];
     return request;
 }
 

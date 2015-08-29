@@ -156,6 +156,8 @@
 		7293867D1B331ADA006F3FED /* i301@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 729386751B331ADA006F3FED /* i301@2x.png */; };
 		7293867E1B331ADA006F3FED /* i400@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 729386761B331ADA006F3FED /* i400@2x.png */; };
 		7293867F1B331ADA006F3FED /* i401@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 729386771B331ADA006F3FED /* i401@2x.png */; };
+		729ED23C1B914F3900F32850 /* home_disc_game@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 729ED23B1B914F3900F32850 /* home_disc_game@2x.png */; };
+		729ED2401B915C5100F32850 /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 729ED23F1B915C5100F32850 /* MessageViewController.m */; };
 		72A945A31B5EBCF50089E381 /* ContactsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 72A945A21B5EBCF50089E381 /* ContactsCell.m */; };
 		72ABD1AE1B3065310099CB74 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 72ABD1AD1B3065310099CB74 /* main.m */; };
 		72ABD1B11B3065310099CB74 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 72ABD1B01B3065310099CB74 /* AppDelegate.m */; };
@@ -451,6 +453,9 @@
 		729386751B331ADA006F3FED /* i301@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "i301@2x.png"; sourceTree = "<group>"; };
 		729386761B331ADA006F3FED /* i400@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "i400@2x.png"; sourceTree = "<group>"; };
 		729386771B331ADA006F3FED /* i401@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "i401@2x.png"; sourceTree = "<group>"; };
+		729ED23B1B914F3900F32850 /* home_disc_game@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home_disc_game@2x.png"; sourceTree = "<group>"; };
+		729ED23E1B915C5100F32850 /* MessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageViewController.h; sourceTree = "<group>"; };
+		729ED23F1B915C5100F32850 /* MessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageViewController.m; sourceTree = "<group>"; };
 		72A945A11B5EBCF50089E381 /* ContactsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsCell.h; sourceTree = "<group>"; };
 		72A945A21B5EBCF50089E381 /* ContactsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsCell.m; sourceTree = "<group>"; };
 		72ABD1A81B3065310099CB74 /* DuoMeiXing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DuoMeiXing.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -656,6 +661,7 @@
 		39EBAD861B6886A0002140C7 /* Discover */ = {
 			isa = PBXGroup;
 			children = (
+				729ED23B1B914F3900F32850 /* home_disc_game@2x.png */,
 				39EBAD871B6886A0002140C7 /* home_disc_hot@2x.png */,
 				39EBAD881B6886A0002140C7 /* home_disc_instrument@2x.png */,
 				39EBAD891B6886A0002140C7 /* home_disc_last@2x.png */,
@@ -1054,6 +1060,15 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
+		729ED23D1B915C3900F32850 /* Message */ = {
+			isa = PBXGroup;
+			children = (
+				729ED23E1B915C5100F32850 /* MessageViewController.h */,
+				729ED23F1B915C5100F32850 /* MessageViewController.m */,
+			);
+			path = Message;
+			sourceTree = "<group>";
+		};
 		72ABD19F1B3065310099CB74 = {
 			isa = PBXGroup;
 			children = (
@@ -1090,6 +1105,7 @@
 				7293865C1B331480006F3FED /* Utils */,
 				723F20971B61656C00E312D3 /* NetEngine */,
 				724044901B4ACA55008AD6BA /* Cell */,
+				729ED23D1B915C3900F32850 /* Message */,
 				72ABD1D31B30810C0099CB74 /* Main */,
 				72ABD1D11B30810C0099CB74 /* Contacts */,
 				72ABD1D21B30810C0099CB74 /* Discover */,
@@ -1313,6 +1329,7 @@
 			files = (
 				729386791B331ADA006F3FED /* i101@2x.png in Resources */,
 				39F4EB581B4F6306009BBDC5 /* avatar.png in Resources */,
+				729ED23C1B914F3900F32850 /* home_disc_game@2x.png in Resources */,
 				39EBAD991B6886A0002140C7 /* home_disc_teaching_tgita@2x.png in Resources */,
 				39EBAD911B6886A0002140C7 /* home_disc_hot@2x.png in Resources */,
 				39EBADAD1B688807002140C7 /* video_arrow_right@2x.png in Resources */,
@@ -1394,6 +1411,7 @@
 				39AD39D61B6B7901001E3094 /* RequestService.m in Sources */,
 				723B5CEC1B649D8200ABF8B9 /* UIRefreshControl+AFNetworking.m in Sources */,
 				722C52E41B492F49004CBADA /* MJRefreshComponent.m in Sources */,
+				729ED2401B915C5100F32850 /* MessageViewController.m in Sources */,
 				3968D2A31B6791950098C0C2 /* dalmatian.xcdatamodeld in Sources */,
 				72ABD1E21B3081CD0099CB74 /* DiscoverViewController.m in Sources */,
 				722C52F31B492F49004CBADA /* UIScrollView+MJRefresh.m in Sources */,

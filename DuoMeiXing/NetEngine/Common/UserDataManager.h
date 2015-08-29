@@ -25,12 +25,15 @@ SINGLETON_INTERFACE(UserDataManager);
 @property(strong, nonatomic) NSString *avatar;
 @property(strong, nonatomic) NSURL  *avatarUrl;
 @property(strong, nonatomic) NSString *mobile;
+@property(strong, nonatomic) NSString *sessionId;
 
 - (BOOL)isLogin;
 
 - (void)initUser:(NSDictionary *)data;
 
 - (void)updateUser;
+
+- (void)saveUser;
 
 - (void)clearUser;
 

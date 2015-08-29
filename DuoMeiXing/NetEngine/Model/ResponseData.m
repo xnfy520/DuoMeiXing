@@ -99,7 +99,20 @@
 
 @end
 
+@implementation ResponseBaseInfo
 
++ (NSDictionary *)responseValidator
+{
+    return @{
+             @"id": [NSString class],
+             @"name": [NSString class],
+             @"desc": [NSString class],
+             @"picUrl": [NSString class],
+             @"createTime": [NSNumber class]
+             };
+}
+
+@end
 
 @implementation ResponseVideo
 
@@ -110,9 +123,9 @@
              @"name": [NSString class],
              @"desc": [NSString class],
              @"picUrl": [NSString class],
+             @"createTime": [NSNumber class],
              @"videoUrl": [NSString class],
              @"memberId": [NSString class],
-             @"createTime": [NSNumber class],
              @"publishTime": [NSNumber class],
              @"totalBytes": [NSNumber class],
              @"likeTimes": [NSNumber class],

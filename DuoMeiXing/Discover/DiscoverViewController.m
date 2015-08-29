@@ -93,7 +93,13 @@
     
     PhotographAlbumViewController *photographAlbumCtrl = [[PhotographAlbumViewController alloc] init];
     
-    if(option.ctrl == kOptionCtrlTypeNewest){
+    if(option.ctrl == kOptionCtrlTypeGame){
+        
+        photographAlbumCtrl.listType = kOptionCtrlTypeGame;
+        
+        [self.navigationController pushViewController:photographAlbumCtrl animated:YES];
+        
+    }else if(option.ctrl == kOptionCtrlTypeNewest){
         
         photographAlbumCtrl.listType = kOptionCtrlTypeNewest;
         
@@ -116,7 +122,7 @@
         
     }else if(option.ctrl == kOptionCtrlTypeInstrument){
         
-        [WebViewController showWebPageInViewCtrl:self withUrl:@"http://www.hao123.com" withPostData:nil withViewTitle:appName];
+        [WebViewController showWebPageInViewCtrl:self withUrl:[NSString stringWithFormat:@"%@/dalmatian/app/instruments/home.dmx", apiBaseUrl] withPostData:nil withViewTitle:appName];
         
     }else if(option.ctrl == kOptionCtrlTypeTeaching){
         

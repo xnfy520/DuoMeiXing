@@ -57,8 +57,8 @@
     
     [self setupInsetsTableView:mainTableView];
     
-    mainTableView.emptyDataSetDelegate = self;
-    mainTableView.emptyDataSetSource = self;
+//    mainTableView.emptyDataSetDelegate = self;
+//    mainTableView.emptyDataSetSource = self;
 }
 
 - (void)sendHotBatchRequest
@@ -250,27 +250,27 @@
     [self.navigationController pushViewController:photographAlbumCtrl animated:YES];
 }
 
-- (UIColor *)backgroundColorForEmptyDataSet:(UIScrollView *)scrollView
-{
-    return [UIColor whiteColor];
-}
-
-- (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView
-{
-    return [UIImage imageNamed:@"placeholder_instagram"];
-}
-
-- (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView
-{
-    NSString *text = @"没有数据";
-    NSMutableParagraphStyle *paragraph = [NSMutableParagraphStyle new];
-    paragraph.lineBreakMode = NSLineBreakByWordWrapping;
-    paragraph.alignment = NSTextAlignmentCenter;
-    NSDictionary *attributes = @{NSFontAttributeName: [UIFont systemFontOfSize:18.0],
-                                 NSForegroundColorAttributeName: [UIColor lightGrayColor],
-                                 NSParagraphStyleAttributeName: paragraph};
-    
-    return [[NSAttributedString alloc] initWithString:text attributes:attributes];
-}
+//- (UIColor *)backgroundColorForEmptyDataSet:(UIScrollView *)scrollView
+//{
+//    return [UIColor whiteColor];
+//}
+//
+//- (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView
+//{
+//    return [UIImage imageNamed:@"placeholder_instagram"];
+//}
+//
+//- (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView
+//{
+//    NSString *text = @"没有数据";
+//    NSMutableParagraphStyle *paragraph = [NSMutableParagraphStyle new];
+//    paragraph.lineBreakMode = NSLineBreakByWordWrapping;
+//    paragraph.alignment = NSTextAlignmentCenter;
+//    NSDictionary *attributes = @{NSFontAttributeName: [UIFont systemFontOfSize:18.0],
+//                                 NSForegroundColorAttributeName: [UIColor lightGrayColor],
+//                                 NSParagraphStyleAttributeName: paragraph};
+//    
+//    return [[NSAttributedString alloc] initWithString:text attributes:attributes];
+//}
 
 @end

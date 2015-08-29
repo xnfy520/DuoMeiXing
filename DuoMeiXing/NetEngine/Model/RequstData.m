@@ -15,7 +15,10 @@
 -(id)init
 {
     if (self = [super init]) {
-        self.token = [UserDataManager sharedUserDataManager].token;
+//        self.token = [UserDataManager sharedUserDataManager].token;
+        
+
+        
     }
     return self;
 }
@@ -60,6 +63,46 @@
 @implementation RequstPage
 
 @end
+
+@implementation RequstGame
+
++ (id)requstGameWithPageNo:(NSInteger)pageNo withPageSize:(NSInteger)pageSize
+{
+    NSDictionary *dic = @{
+                          @"pageNo":@(pageNo),
+                          @"pageSize":@(pageSize)
+                          };
+    return [self objectWithKeyValues:dic];
+}
+
+@end
+
+@implementation RequstMessageAll
+
+
++ (id)requstMessageCommentWithVideoId:(NSString *)videoId PageNo:(NSInteger)pageNo withPageSize:(NSInteger)pageSize
+{
+    return [self requstMessageAllWithAction:@"comment" withType:videoId PageNo:pageNo withPageSize:pageSize];
+}
+
++ (id)requstMessageUploadWithFirendId:(NSString *)firendId PageNo:(NSInteger)pageNo withPageSize:(NSInteger)pageSize
+{
+    return [self requstMessageAllWithAction:@"upload" withType:firendId PageNo:pageNo withPageSize:pageSize];
+}
+
++ (id)requstMessageAllWithAction:(NSString *)action withType:(NSString *)type PageNo:(NSInteger)pageNo withPageSize:(NSInteger)pageSize
+{
+    NSDictionary *dic = @{
+                          @"type":type,
+                          @"action":action,
+                          @"pageNo":@(pageNo),
+                          @"pageSize":@(pageSize)
+                          };
+    return [self objectWithKeyValues:dic];
+}
+
+@end
+
 
 @implementation RequstVideoMember
 + (id)requstVideoMemberWithMemberId:(NSString *)memberId PageNo:(NSInteger)pageNo withPageSize:(NSInteger)pageSize
@@ -110,6 +153,11 @@
 @end
 
 @implementation RequstVideo
+
++ (id)requstGameWithGameId:(NSString *)gameId WithPageNo:(NSInteger)pageNo withPageSize:(NSInteger)pageSize
+{
+    return [self requstAction:@"game" withType:gameId withPageNo:pageNo withPageSize:pageSize];
+}
 
 + (id)requstNewestWithPageNo:(NSInteger)pageNo withPageSize:(NSInteger)pageSize
 {

@@ -11,7 +11,7 @@
 #import "DNADef.h"
 #import "Singleton.h"
 
-@interface WebViewController : DNABaseViewController<UIWebViewDelegate, DZNEmptyDataSetDelegate, DZNEmptyDataSetSource>
+@interface WebViewController : DNABaseViewController<UIWebViewDelegate>
 
 SINGLETON_INTERFACE(WebViewController);
 

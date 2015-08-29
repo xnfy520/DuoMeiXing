@@ -7,6 +7,7 @@
 //
 
 #import "WebViewController.h"
+#import "DNADef.h"
 
 
 @interface WebViewController ()
@@ -48,8 +49,6 @@ SINGLETON_IMPLEMENTATION(WebViewController);
     if(_webview == nil){
         _webview = [[UIWebView alloc]initWithFrame:self.view.bounds];
         _webview.delegate = self;
-        _webview.scrollView.emptyDataSetSource = self;
-        _webview.scrollView.emptyDataSetDelegate = self;
 //        _webview.backgroundColor=[UIColor whiteColor];
         [self.view addSubview:_webview];
     }
@@ -61,12 +60,38 @@ SINGLETON_IMPLEMENTATION(WebViewController);
 //        [request setHTTPBody: [postDict getWebviewPostBody]];
         [_webview loadRequest:request];
     }else{
-        NSURLRequest* request = [NSURLRequest requestWithURL:nsUrl];
-        [_webview loadRequest:request];
+        [self loadUrl:nsUrl];
     }
     
     if(_parentViewCtrl!=nil)
         [_parentViewCtrl.navigationController pushViewController:self animated:YES];
+}
+
+- (void)loadUrl:(NSURL *)url
+{
+    NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:url];
+
+    // 定義 cookie 要設定的 host
+    NSURL *cookieHost = [NSURL URLWithString:apiBaseUrl];
+    
+    // 設定 cookie
+    NSHTTPCookie *cookie = [NSHTTPCookie cookieWithProperties:
+                            [NSDictionary dictionaryWithObjectsAndKeys:
+                             [cookieHost host], NSHTTPCookieDomain,
+                             [cookieHost path], NSHTTPCookiePath,
+                             sessionIdKey,  NSHTTPCookieName,
+                             [NSString stringWithFormat:@"%@=%@;%@=%@",
+                              sessionIdKey,
+                              [UserDataManager sharedUserDataManager].sessionId,
+                              sessionIdName,
+                              [UserDataManager sharedUserDataManager].token], NSHTTPCookieValue,
+                             nil]];
+    
+    // 設定 cookie 到 storage 中
+    [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookie];
+    
+    [_webview loadRequest:request];
+    
 }
 
 - (void)viewDidLoad {
@@ -90,14 +115,36 @@ SINGLETON_IMPLEMENTATION(WebViewController);
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
-    NSString *newUrlString =  [NSString stringWithFormat:@"%@%@",
-                               webView.request.URL.host, webView.request.URL.path];
+    NSLog(@"%@", request.URL);
+
+//    [self loadUrl:request.URL];
     
-    if ([newUrlString isEqualToString:@""]) {
-        self.failedLoading = YES;
-    }else{
-        self.failedLoading = NO;
+    NSHTTPCookie *cookie;
+    
+    NSHTTPCookieStorage *cookieJar = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+    
+    NSArray *cookieAry = [cookieJar cookiesForURL: request.URL];
+    
+    for (cookie in cookieAry) {
+        
+        
+        NSLog(@"%@", [cookie value]);
+//        [cookieJar deleteCookie: cookie];
+        
+        
+        
     }
+    
+    
+    
+    NSMutableURLRequest* requests = [NSMutableURLRequest requestWithURL:request.URL];
+    
+    [requests setValue: [NSString stringWithFormat:@"%@=%@;%@=%@",
+                        sessionIdKey,
+                        [UserDataManager sharedUserDataManager].sessionId,
+                        sessionIdName,
+                        [UserDataManager sharedUserDataManager].token] forHTTPHeaderField: @"Cookie"];
+
     return YES;
 }
 
@@ -105,12 +152,6 @@ SINGLETON_IMPLEMENTATION(WebViewController);
 {
     NSString *newUrlString =  [NSString stringWithFormat:@"%@%@",
                                webView.request.URL.host, webView.request.URL.path];
-    
-    if ([newUrlString isEqualToString:@""]) {
-        self.failedLoading = YES;
-    }else{
-        self.failedLoading = NO;
-    }
     
 //    NSLog(@"webViewDidStartLoad:%@",newUrlString);
     [self showHUB];
@@ -120,11 +161,6 @@ SINGLETON_IMPLEMENTATION(WebViewController);
     NSString *newUrlString =  [NSString stringWithFormat:@"%@%@",
                                webView.request.URL.host, webView.request.URL.path];
     
-    if ([newUrlString isEqualToString:@""]) {
-        self.failedLoading = YES;
-    }else{
-        self.failedLoading = NO;
-    }
     [self hideHUB];
 }
 
@@ -136,10 +172,10 @@ SINGLETON_IMPLEMENTATION(WebViewController);
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"about:blank"]];
     [_webview loadRequest:request];
     
-    self.failedLoading = YES;
+//    self.failedLoading = YES;
     
     
-    [_webview.scrollView reloadEmptyDataSet];
+//    [_webview.scrollView reloadEmptyDataSet];
     
 
     
@@ -147,43 +183,5 @@ SINGLETON_IMPLEMENTATION(WebViewController);
     
 }
 
-
-#pragma mark - DZNEmptyDataSetSource
-
-- (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView
-{
-    if (_webview.isLoading || !self.didFailLoading) {
-        return nil;
-    }
-    return [UIImage imageNamed:@"placeholder_remote"];
-}
-
-- (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView
-{
-    if (_webview.isLoading || !self.didFailLoading) {
-        return nil;
-    }
-    NSString *text = @"无法连接";
-    NSMutableParagraphStyle *paragraph = [NSMutableParagraphStyle new];
-    paragraph.lineBreakMode = NSLineBreakByWordWrapping;
-    paragraph.alignment = NSTextAlignmentCenter;
-    NSDictionary *attributes = @{NSFontAttributeName: [UIFont systemFontOfSize:18.0],
-                                 NSForegroundColorAttributeName: [UIColor lightGrayColor],
-                                 NSParagraphStyleAttributeName: paragraph};
-    
-    return [[NSAttributedString alloc] initWithString:text attributes:attributes];
-}
-
-#pragma mark - DZNEmptyDataSetDelegate
-
-- (BOOL)emptyDataSetShouldDisplay:(UIScrollView *)scrollView
-{
-    return YES;
-}
-
-- (BOOL)emptyDataSetShouldAllowScroll:(UIScrollView *)scrollView
-{
-    return YES;
-}
 
 @end

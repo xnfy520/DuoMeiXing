@@ -10,7 +10,7 @@
 #import "DNATabBar.h"
 #import "DNANavigationViewController.h"
 
-#import "MainViewController.h"
+#import "MessageViewController.h"
 #import "ContactsViewController.h"
 #import "DiscoverViewController.h"
 #import "MineViewController.h"
@@ -18,7 +18,7 @@
 @interface DNATabBarController : UITabBarController<DNATabBarDekegate, UITabBarControllerDelegate>
 
 @property (nonatomic, weak) DNATabBar *customTabBar;
-@property (nonatomic, weak) MainViewController * main;
+@property (nonatomic, weak) MessageViewController * main;
 
 + (DNANavigationViewController *)setCtrl:(UIViewController *)ctrl;
 

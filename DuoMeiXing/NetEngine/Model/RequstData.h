@@ -42,10 +42,22 @@
 @property (nonatomic, copy) NSString *mobile;
 @end
 
-
 @interface RequstPage : RequstData
 @property (nonatomic, copy) NSString *pageNo;
 @property (nonatomic, copy) NSString *pageSize;
+@end
+
+@interface RequstGame : RequstPage
++ (id)requstGameWithPageNo:(NSInteger)pageNo withPageSize:(NSInteger)pageSize;
+@end
+
+#pragma mark - 不同消息类型请求参数
+
+@interface RequstMessageAll : RequstPage
+@property (nonatomic, copy) NSString *action;
+@property (nonatomic, copy) NSString *type;
++ (id)requstMessageCommentWithVideoId:(NSString *)videoId PageNo:(NSInteger)pageNo withPageSize:(NSInteger)pageSize;
++ (id)requstMessageUploadWithFirendId:(NSString *)firendId PageNo:(NSInteger)pageNo withPageSize:(NSInteger)pageSize;
 @end
 
 @interface RequstVideoMember : RequstPage
@@ -68,6 +80,8 @@
 @interface RequstVideo : RequstPage
 @property (nonatomic, copy) NSString *action;
 @property (nonatomic, copy) NSString *type;
+
++ (id)requstGameWithGameId:(NSString *)gameId WithPageNo:(NSInteger)pageNo withPageSize:(NSInteger)pageSize;
 
 + (id)requstNewestWithPageNo:(NSInteger)pageNo withPageSize:(NSInteger)pageSize;
 

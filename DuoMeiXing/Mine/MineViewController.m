@@ -31,6 +31,8 @@
     
     [self setupMainTableView];
     
+     NSLog(@"%@???<<", [UserDataManager sharedUserDataManager].sessionId);
+    
 }
 
 - (void)setupMainTableView
@@ -156,7 +158,7 @@
         
     }else if(option.ctrl == kOptionCtrlTypeOrder){
         
-        [WebViewController showWebPageInViewCtrl:self withUrl:@"http://www.baidu.com" withPostData:nil withViewTitle:appName];
+        [WebViewController showWebPageInViewCtrl:self withUrl:[NSString stringWithFormat:@"%@/dalmatian/app/order/home.dmx", apiBaseUrl] withPostData:nil withViewTitle:appName];
         
     }
     

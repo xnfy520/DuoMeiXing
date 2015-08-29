@@ -149,6 +149,10 @@
 {
     NSString *typeString;
     switch (type) {
+            
+        case kOptionCtrlTypeGame:
+            typeString = @"比赛";
+            break;
         case kOptionCtrlTypeNewest:
             typeString = @"最新";
             break;

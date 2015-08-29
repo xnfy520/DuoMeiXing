@@ -84,16 +84,22 @@
 
 @end
 
-
-@interface ResponseVideo : NSObject
+@interface ResponseBaseInfo : NSObject
 
 @property (nonatomic, copy) NSString *id;
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, copy) NSString *desc;
 @property (nonatomic, copy) NSURL *picUrl;
+@property (nonatomic, copy) NSNumber *createTime;
+
++ (NSDictionary *)responseValidator;
+
+@end
+
+@interface ResponseVideo : ResponseBaseInfo
+
 @property (nonatomic, copy) NSURL *videoUrl;
 @property (nonatomic, copy) NSString *memberId;
-@property (nonatomic, copy) NSNumber *createTime;
 @property (nonatomic, copy) NSNumber *publishTime;
 @property (nonatomic, copy) NSNumber *totalBytes;
 @property (nonatomic, copy) NSNumber *likeTimes;

@@ -37,6 +37,8 @@ typedef enum : NSUInteger{
 } PhotographAlbumType;
 
 typedef enum : NSUInteger{
+    kOptionCtrlTypeGame,            //比赛
+    kOptionCtrlTypeGameAttend,      //某一比赛列表
     kOptionCtrlTypeNewest,          //最新
     kOptionCtrlTypeHot,             //最热
     kOptionCtrlTypeContacts,        //大师,专家
@@ -62,7 +64,9 @@ typedef enum : NSUInteger{
     kOptionCtrlTypeTeachingViolin,  //小提琴教材
     kOptionCtrlTypeMyPublished,     //发布成功
     kOptionCtrlTypeMyChecking,      //等待审核
-    kOptionCtrlTypeMyUploading      //正在上传
+    kOptionCtrlTypeMyUploading,     //正在上传
+    kOptionCtrlTypeMessageComment,  //消息类型为评论
+    kOptionCtrlTypeMessageUpload     //消息类型为视频
 } OptionCtrlType;
 
 typedef enum : NSUInteger{
@@ -99,8 +103,13 @@ typedef enum : NSUInteger{
 #define appAPIVideoMember       @"/dmx/app/ajax/video/person/get.dmx"           //获取某个用户的所有视频
 #define appAPIVideoComment      @"/dmx/app/ajax/video/comment/get_list.dmx"     //获取视频的评论
 #define appAPIVideoId           @"/dmx/app/ajax/video/get.dmx"                  //通过视频ID获取视频信息
+#define appAPIGame              @"/dmx/app/ajax/video/game/get_all.dmx"         //获取所有比赛
+#define appAPIGameAttend        @"/dmx/app/ajax/video/game/attend.dmx"          //
 
 #define appCompanyCode @"dalmatian"
+
+#define sessionIdName @"dalmatian_id"
+#define sessionIdKey @"JSESSIONID"
 
 #define addObs(a, b)\
 [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(b:) name:a object:nil];

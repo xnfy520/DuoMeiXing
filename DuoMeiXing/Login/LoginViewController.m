@@ -31,10 +31,12 @@
     
     loginIdField = [[FormTextField alloc] initWithFrame:CGRectMake(formFieldPadding, 20, formFieldWith, 40) withTitle:@"帐号" withPlaceholder:@"手机号码/用户名/邮箱" withLeftViewWidth:35];
     loginIdField.delegate = self;
+    loginIdField.text = @"15820448273";
     [self.view addSubview:loginIdField];
     
     passwordField = [[FormTextField alloc] initWithFrame:CGRectMake(formFieldPadding, CGRectGetMaxY(loginIdField.frame)+20, formFieldWith, 40) withTitle:@"密码" withPlaceholder:@"密码" withLeftViewWidth:35];
     passwordField.delegate = self;
+    passwordField.text = @"123456";
     passwordField.secureTextEntry = YES;
     [self.view addSubview:passwordField];
     
@@ -111,36 +113,61 @@
 
 - (void)loginAction
 {
-        NSString *loginId = loginIdField.text;
-        NSString *password = passwordField.text;
-        if (loginId.length > 0 && password.length > 0) {
-            
-            RequestLogin *requestData = [[RequestLogin alloc] init];
-            requestData.loginId = loginId;
-            requestData.password = password;
-            
-            RequestService *api = [[RequestService alloc] initReqeustUrl:appAPILogin withPostData:requestData withResponseValidator:[ResponseLogin responseValidator]];
-            
-            [api startWithCompletionBlockWithSuccess:^(YTKBaseRequest *request) {
+    NSString *loginId = loginIdField.text;
+    NSString *password = passwordField.text;
+    
+    if ([loginId isEqualToString:@""]) {
+        [self showTips:@"请输入帐号"];
+        return;
+    }else if([password isEqualToString:@""]){
+        [self showTips:@"请输入密码"];
+        return;
+    }else{
+        [self showHUB];
+        
+        RequestLogin *requestData = [[RequestLogin alloc] init];
+        requestData.loginId = loginId;
+        requestData.password = password;
+        
+        RequestService *api = [[RequestService alloc] initReqeustUrl:appAPILogin withPostData:requestData withResponseValidator:[ResponseLogin responseValidator]];
+        
+        [api startWithCompletionBlockWithSuccess:^(YTKBaseRequest *request) {
+            [self hideHUB];
+            ResponseLogin * responseData = [ResponseLogin objectWithKeyValues:[request responseJSONObject]];
+//            UserDataManager *manager = [[UserDataManager alloc] init];
 
-                ResponseLogin * responseData = [ResponseLogin objectWithKeyValues:[request responseJSONObject]];
-                UserDataManager *manager = [[UserDataManager alloc] init];
-
-                //登录成功,存储用户数据到数据库
-                [manager initUser:[responseData JSONObject]];
+            //登录成功,存储用户数据到数据库
+            [[UserDataManager sharedUserDataManager] initUser:[responseData JSONObject]];
 //                [manager initUser:[request responseJSONObject]];
-                //跳转到首页
-                [self mainViewWithAnimate:YES];
+            //跳转到首页
+            [self mainViewWithAnimate:YES];
+            
+            NSHTTPCookieStorage *cookieJar = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+            for (NSHTTPCookie *cookie in [cookieJar cookies]) {
+                if ([[cookie name] isEqualToString:sessionIdName]) {
+                                    NSLog(@"sessionIdName^^:%@", [cookie value]);
+//                    [DisplayUtil setCookieValueString:[cookie value]];
+                    break;
+                }else if([[cookie name] isEqualToString:sessionIdKey]){
+                    NSLog(@"JSESSIONID^^:%@", [cookie value]);
+                    [UserDataManager sharedUserDataManager].sessionId = [cookie value];
+                    [[UserDataManager sharedUserDataManager] saveUser];
+                    break;
+                }
                 
-            } failure:^(YTKBaseRequest *request) {
-                // 你可以直接在这里使用 self
-                
-                NSLog(@"failed");
-                
-                NSLog(@"%@", [[request responseJSONObject] objectForKey:@"code"]);
-                
-            }];
-        }
+            }
+            
+            NSLog(@"%@???", [UserDataManager sharedUserDataManager].sessionId);
+            
+        } failure:^(YTKBaseRequest *request) {
+            // 你可以直接在这里使用 self
+            
+            NSLog(@"failed");
+            
+            NSLog(@"%@", [[request responseJSONObject] objectForKey:@"code"]);
+            
+        }];
+    }
 }
 
 

@@ -35,8 +35,8 @@
         
         [self setupInsetsTableView:_tableView];
         
-        _tableView.emptyDataSetDelegate = self;
-        _tableView.emptyDataSetSource = self;
+//        _tableView.emptyDataSetDelegate = self;
+//        _tableView.emptyDataSetSource = self;
         
     }
     return self;
@@ -199,22 +199,22 @@
     
 }
 
-- (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView
-{
-    return [UIImage imageNamed:@"placeholder_instagram"];
-}
-
-- (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView
-{
-    NSString *text = @"没有数据";
-    NSMutableParagraphStyle *paragraph = [NSMutableParagraphStyle new];
-    paragraph.lineBreakMode = NSLineBreakByWordWrapping;
-    paragraph.alignment = NSTextAlignmentCenter;
-    NSDictionary *attributes = @{NSFontAttributeName: [UIFont systemFontOfSize:18.0],
-                                 NSForegroundColorAttributeName: [UIColor lightGrayColor],
-                                 NSParagraphStyleAttributeName: paragraph};
-    
-    return [[NSAttributedString alloc] initWithString:text attributes:attributes];
-}
+//- (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView
+//{
+//    return [UIImage imageNamed:@"placeholder_instagram"];
+//}
+//
+//- (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView
+//{
+//    NSString *text = @"没有数据";
+//    NSMutableParagraphStyle *paragraph = [NSMutableParagraphStyle new];
+//    paragraph.lineBreakMode = NSLineBreakByWordWrapping;
+//    paragraph.alignment = NSTextAlignmentCenter;
+//    NSDictionary *attributes = @{NSFontAttributeName: [UIFont systemFontOfSize:18.0],
+//                                 NSForegroundColorAttributeName: [UIColor lightGrayColor],
+//                                 NSParagraphStyleAttributeName: paragraph};
+//    
+//    return [[NSAttributedString alloc] initWithString:text attributes:attributes];
+//}
 
 @end

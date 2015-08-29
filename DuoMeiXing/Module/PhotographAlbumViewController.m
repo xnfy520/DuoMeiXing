@@ -26,13 +26,24 @@
     
     [super viewDidLoad];
     
-    self.title = [DisplayUtil stringWithOptionCtrlType:self.listType];
-
+    if (_listTitle) {
+        self.title = _listTitle;
+    }else{
+        self.title = [DisplayUtil stringWithOptionCtrlType:self.listType];
+    }
+    
     [self setupMainTableView];
     
     tableData = [[NSMutableArray alloc] init];
 
     switch (self.listType) {
+            
+        case kOptionCtrlTypeGame:
+            [self sendGameRequest];
+            break;
+        case kOptionCtrlTypeGameAttend:
+            [self sendGameVideRequest];
+            break;
         case kOptionCtrlTypeNewest:
             [self sendNewestRequest];
             break;
@@ -66,6 +77,18 @@
         default:
             break;
     }
+}
+
+- (void)sendGameRequest
+{
+    RequestService *api = [RequestService gameReqeustPostData:[RequstGame requstGameWithPageNo:1 withPageSize:20]];
+    [self sendRequestWith:api];
+}
+
+- (void)sendGameVideRequest
+{
+    RequestService *api = [RequestService videoReqeustPostData:[RequstVideo requstGameWithGameId:_userinfo WithPageNo:1 withPageSize:20]];
+    [self sendRequestWith:api];
 }
 
 - (void)sendNewestRequest
@@ -164,8 +187,8 @@
     [self.view addSubview:mainTableView];
     [self setupInsetsTableView:mainTableView];
     
-    mainTableView.emptyDataSetDelegate = self;
-    mainTableView.emptyDataSetSource = self;
+//    mainTableView.emptyDataSetDelegate = self;
+//    mainTableView.emptyDataSetSource = self;
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
@@ -204,6 +227,7 @@
     }
     
     cell.cellListType = kCellListVideo;
+   
     
     cell.cellData = [tableData objectAtIndex:indexPath.row];
 
@@ -213,33 +237,64 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [mainTableView deselectRowAtIndexPath:indexPath animated:YES];
+
     
-    ResponseVideo * result = [tableData objectAtIndex:indexPath.row];
     
-    DisplayViewController *displayCtrl = [[DisplayViewController alloc] init];
-    displayCtrl.videoId = result.id;
-    displayCtrl.videoData = result;
-    displayCtrl.pannelIndex = kDisplayPannelInformation;
-    [self.navigationController pushViewController:displayCtrl animated:YES];
+    ResponseVideo *result = [tableData objectAtIndex:indexPath.row];
+    
+
+    
+    if (_listType == kOptionCtrlTypeGame) {
+        
+        
+        
+        PhotographAlbumViewController *photographAlbumCtrl = [[PhotographAlbumViewController alloc] init];
+        
+        photographAlbumCtrl.listTitle = result.name;
+        photographAlbumCtrl.listType = kOptionCtrlTypeGameAttend;
+        photographAlbumCtrl.userinfo = result.id;
+        
+        [self.navigationController pushViewController:photographAlbumCtrl animated:YES];
+        
+    }else{
+  
+        if (result && result.id) {
+        
+            DisplayViewController *displayCtrl = [[DisplayViewController alloc] init];
+            
+            displayCtrl.videoId = result.id;
+            displayCtrl.videoData = result;
+            displayCtrl.pannelIndex = kDisplayPannelInformation;
+            
+            [self.navigationController pushViewController:displayCtrl animated:YES];
+        
+        }
+        
+        
+        
+
+        
+    }
+
 }
 
 
-- (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView
-{
-    return [UIImage imageNamed:@"placeholder_instagram"];
-}
-
-- (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView
-{
-    NSString *text = @"没有数据";
-    NSMutableParagraphStyle *paragraph = [NSMutableParagraphStyle new];
-    paragraph.lineBreakMode = NSLineBreakByWordWrapping;
-    paragraph.alignment = NSTextAlignmentCenter;
-    NSDictionary *attributes = @{NSFontAttributeName: [UIFont systemFontOfSize:18.0],
-                                 NSForegroundColorAttributeName: [UIColor lightGrayColor],
-                                 NSParagraphStyleAttributeName: paragraph};
-    
-    return [[NSAttributedString alloc] initWithString:text attributes:attributes];
-}
+//- (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView
+//{
+//    return [UIImage imageNamed:@"placeholder_instagram"];
+//}
+//
+//- (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView
+//{
+//    NSString *text = @"没有数据";
+//    NSMutableParagraphStyle *paragraph = [NSMutableParagraphStyle new];
+//    paragraph.lineBreakMode = NSLineBreakByWordWrapping;
+//    paragraph.alignment = NSTextAlignmentCenter;
+//    NSDictionary *attributes = @{NSFontAttributeName: [UIFont systemFontOfSize:18.0],
+//                                 NSForegroundColorAttributeName: [UIColor lightGrayColor],
+//                                 NSParagraphStyleAttributeName: paragraph};
+//    
+//    return [[NSAttributedString alloc] initWithString:text attributes:attributes];
+//}
 
 @end

@@ -19,9 +19,15 @@
 
 + (id)messageSummaryReqeust;
 
++ (id)messageAllReqeustPostData:(RequstData *)requestData;
+
 + (id)videoMemberReqeustPostData:(RequstData *)requestData;
 
 + (id)videoCommentReqeustPostData:(RequstData *)requestData;
+
++ (id)gameAttendReqeustPostData:(RequstData *)requestData;
+
++ (id)gameReqeustPostData:(RequstData *)requestData;
 
 + (id)videoLastReqeustPostData:(RequstData *)requestData;
 

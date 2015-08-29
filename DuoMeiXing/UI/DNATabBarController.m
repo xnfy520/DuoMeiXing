@@ -76,7 +76,7 @@
 - (void)setupChildViewControls
 {
 
-    MainViewController *mainCtrl = [[MainViewController alloc]init];
+    MessageViewController *mainCtrl = [[MessageViewController alloc]init];
     [self addChildViewControl:mainCtrl title:@"哆每星" imageName:@"i100" selectedImageName:@"i101" selectedTag:0];
     self.main = mainCtrl;
     

@@ -69,6 +69,13 @@
     NSArray *array = @[
                        @[
                            @{
+                               @"title":@"比赛",
+                               @"icon":@"home_disc_game",
+                               @"ctrl":@(kOptionCtrlTypeGame)
+                               }
+                           ],
+                       @[
+                           @{
                                @"title":@"最新",
                                @"icon":@"home_disc_last",
                                @"ctrl":@(kOptionCtrlTypeNewest)
@@ -95,7 +102,7 @@
                        @[
                            @{
                                @"title":@"乐器",
-                               @"icon":@"home_disc_teaching_tgita",
+                               @"icon":@"home_disc_instrument",
                                @"ctrl":@(kOptionCtrlTypeInstrument)
                                }
                            ],

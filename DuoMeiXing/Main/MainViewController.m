@@ -9,6 +9,7 @@
 #import "MainViewController.h"
 #import "DNADef.h"
 #import "ListCell.h"
+#import "PhotographAlbumViewController.h"
 #import "DisplayViewController.h"
 
 
@@ -92,8 +93,8 @@
     [self.view addSubview:mainTableView];
     [self setupInsetsTableView:mainTableView];
     
-    mainTableView.emptyDataSetDelegate = self;
-    mainTableView.emptyDataSetSource = self;
+//    mainTableView.emptyDataSetDelegate = self;
+//    mainTableView.emptyDataSetSource = self;
     
 }
 
@@ -144,35 +145,49 @@
     [mainTableView deselectRowAtIndexPath:indexPath animated:YES];
     
     ResponseMessage *result = [tableData objectAtIndex:indexPath.row];
-    DisplayViewController *displayCtrl = [[DisplayViewController alloc] init];
-    displayCtrl.videoId = result.videoId;
+    
+    PhotographAlbumViewController *photographAlbumCtrl = [[PhotographAlbumViewController alloc] init];
+
+//    photographAlbumCtrl.listTitle = result.fromNickName;
     if ([result.chatType isEqualToString:@"VIDEOFILE"]) {
-        displayCtrl.pannelIndex = kDisplayPannelInformation;
+        photographAlbumCtrl.listType = kOptionCtrlTypeMessageUpload;
+//        photographAlbumCtrl.userinfo = result.fromId;
     }else{
-        displayCtrl.pannelIndex = kDisplayPannelReview;
+//        photographAlbumCtrl.userinfo = result.videoId;
+        photographAlbumCtrl.listType = kOptionCtrlTypeMessageComment;
     }
     
-    [self.navigationController pushViewController:displayCtrl animated:YES];
+    [self.navigationController pushViewController:photographAlbumCtrl animated:YES];
+    
+//    DisplayViewController *displayCtrl = [[DisplayViewController alloc] init];
+//    displayCtrl.videoId = result.videoId;
+//    if ([result.chatType isEqualToString:@"VIDEOFILE"]) {
+//        displayCtrl.pannelIndex = kDisplayPannelInformation;
+//    }else{
+//        displayCtrl.pannelIndex = kDisplayPannelReview;
+//    }
+//    
+//    [self.navigationController pushViewController:displayCtrl animated:YES];
     
 }
 
 
-- (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView
-{
-    return [UIImage imageNamed:@"placeholder_airbnb"];
-}
-
-- (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView
-{
-    NSString *text = @"没有新的消息";
-    NSMutableParagraphStyle *paragraph = [NSMutableParagraphStyle new];
-    paragraph.lineBreakMode = NSLineBreakByWordWrapping;
-    paragraph.alignment = NSTextAlignmentCenter;
-    NSDictionary *attributes = @{NSFontAttributeName: [UIFont systemFontOfSize:18.0],
-                                 NSForegroundColorAttributeName: [UIColor lightGrayColor],
-                                 NSParagraphStyleAttributeName: paragraph};
-    
-    return [[NSAttributedString alloc] initWithString:text attributes:attributes];
-}
+//- (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView
+//{
+//    return [UIImage imageNamed:@"placeholder_airbnb"];
+//}
+//
+//- (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView
+//{
+//    NSString *text = @"没有新的消息";
+//    NSMutableParagraphStyle *paragraph = [NSMutableParagraphStyle new];
+//    paragraph.lineBreakMode = NSLineBreakByWordWrapping;
+//    paragraph.alignment = NSTextAlignmentCenter;
+//    NSDictionary *attributes = @{NSFontAttributeName: [UIFont systemFontOfSize:18.0],
+//                                 NSForegroundColorAttributeName: [UIColor lightGrayColor],
+//                                 NSParagraphStyleAttributeName: paragraph};
+//    
+//    return [[NSAttributedString alloc] initWithString:text attributes:attributes];
+//}
 
 @end

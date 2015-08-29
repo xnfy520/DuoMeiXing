@@ -45,6 +45,7 @@ SINGLETON_IMPLEMENTATION(UserDataManager);
     _avatar = [data objectForKey:@"avatar"];
     _avatarUrl = [data objectForKey:@"avatarUrl"];
     _mobile = [data objectForKey:@"mobile"];
+    _sessionId = [data objectForKey:@"sessionId"];
 
     [self addUser]; //添加用户
 }
@@ -64,6 +65,7 @@ SINGLETON_IMPLEMENTATION(UserDataManager);
         [user setValue:_avatar forKey:@"avatar"];
         [user setValue:_avatarUrl forKey:@"avatarUrl"];
         [user setValue:_mobile forKey:@"mobile"];
+        [user setValue:_sessionId forKey:@"sessionId"];
         NSError *error = nil;
         if ([context save:&error]) {
             NSLog(@"addUser 更新成功");
@@ -102,6 +104,7 @@ SINGLETON_IMPLEMENTATION(UserDataManager);
         [user setValue:_avatar forKey:@"avatar"];
         [user setValue:_avatarUrl forKey:@"avatarUrl"];
         [user setValue:_mobile forKey:@"mobile"];
+        [user setValue:_sessionId forKey:@"sessionId"];
         NSError *error = nil;
         if ([context save:&error]) {
             //更新成功
@@ -122,6 +125,7 @@ SINGLETON_IMPLEMENTATION(UserDataManager);
         [user setValue:@"" forKey:@"avatar"];
         [user setValue:@"" forKey:@"avatarUrl"];
         [user setValue:@"" forKey:@"mobile"];
+        [user setValue:@"" forKey:@"sessionId"];
         NSError *error = nil;
         if ([context save:&error]) {
             [self initUserData];
@@ -145,6 +149,7 @@ SINGLETON_IMPLEMENTATION(UserDataManager);
         _avatar = [user valueForKey:@"avatar"];
         _avatarUrl = [user valueForKey:@"avatarUrl"];
         _mobile = [user valueForKey:@"mobile"];
+        _sessionId = [user valueForKey:@"sessionId"];
     }
 }
 
@@ -158,6 +163,7 @@ SINGLETON_IMPLEMENTATION(UserDataManager);
     _avatar = @"";
     _avatarUrl = nil;
     _mobile = @"";
+    _sessionId = @"";
 }
 
 - (NSArray *)fetchUser{
