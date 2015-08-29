@@ -362,9 +362,9 @@
         }
         [self.navigationController pushViewController:contactsCtrl animated:YES];
     }else{
-        DisplayViewController *displayCtrl = [[DisplayViewController alloc] init];
-        displayCtrl.haveViedo = NO;
-        [self.navigationController pushViewController:displayCtrl animated:YES];
+//        DisplayViewController *displayCtrl = [[DisplayViewController alloc] init];
+//        displayCtrl.haveViedo = NO;
+//        [self.navigationController pushViewController:displayCtrl animated:YES];
     }
 }
 

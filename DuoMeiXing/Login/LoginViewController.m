@@ -31,12 +31,12 @@
     
     loginIdField = [[FormTextField alloc] initWithFrame:CGRectMake(formFieldPadding, 20, formFieldWith, 40) withTitle:@"帐号" withPlaceholder:@"手机号码/用户名/邮箱" withLeftViewWidth:35];
     loginIdField.delegate = self;
-    loginIdField.text = @"15820448273";
+//    loginIdField.text = @"15820448273";
     [self.view addSubview:loginIdField];
     
     passwordField = [[FormTextField alloc] initWithFrame:CGRectMake(formFieldPadding, CGRectGetMaxY(loginIdField.frame)+20, formFieldWith, 40) withTitle:@"密码" withPlaceholder:@"密码" withLeftViewWidth:35];
     passwordField.delegate = self;
-    passwordField.text = @"123456";
+//    passwordField.text = @"123456";
     passwordField.secureTextEntry = YES;
     [self.view addSubview:passwordField];
     

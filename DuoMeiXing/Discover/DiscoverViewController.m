@@ -122,7 +122,7 @@
         
     }else if(option.ctrl == kOptionCtrlTypeInstrument){
         
-        [WebViewController showWebPageInViewCtrl:self withUrl:[NSString stringWithFormat:@"%@/dalmatian/app/instruments/home.dmx", apiBaseUrl] withPostData:nil withViewTitle:appName];
+        [WebViewController showWebPageInViewCtrl:self withUrl:[NSString stringWithFormat:@"%@/dalmatian/app/instruments/home.dmx", apiBaseUrl] withPostData:nil withViewTitle:@"乐器"];
         
     }else if(option.ctrl == kOptionCtrlTypeTeaching){
         

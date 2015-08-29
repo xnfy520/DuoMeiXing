@@ -164,7 +164,6 @@
 		72ABD1B91B3065310099CB74 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 72ABD1B81B3065310099CB74 /* Images.xcassets */; };
 		72ABD1C81B3065310099CB74 /* DuoMeiXingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 72ABD1C71B3065310099CB74 /* DuoMeiXingTests.m */; };
 		72ABD1D81B3081820099CB74 /* MineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72ABD1D61B3081820099CB74 /* MineViewController.m */; };
-		72ABD1DD1B3081A80099CB74 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72ABD1DB1B3081A80099CB74 /* MainViewController.m */; };
 		72ABD1E21B3081CD0099CB74 /* DiscoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72ABD1E01B3081CD0099CB74 /* DiscoverViewController.m */; };
 		72ABD1E71B3081DD0099CB74 /* ContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72ABD1E51B3081DD0099CB74 /* ContactsViewController.m */; };
 		72B1C8FF1B6FD785008FF23F /* UIScrollView+EmptyDataSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 72B1C8FE1B6FD785008FF23F /* UIScrollView+EmptyDataSet.m */; };
@@ -470,8 +469,6 @@
 		72ABD1C71B3065310099CB74 /* DuoMeiXingTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DuoMeiXingTests.m; sourceTree = "<group>"; };
 		72ABD1D51B3081820099CB74 /* MineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineViewController.h; sourceTree = "<group>"; };
 		72ABD1D61B3081820099CB74 /* MineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineViewController.m; sourceTree = "<group>"; };
-		72ABD1DA1B3081A80099CB74 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
-		72ABD1DB1B3081A80099CB74 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		72ABD1DF1B3081CD0099CB74 /* DiscoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoverViewController.h; sourceTree = "<group>"; };
 		72ABD1E01B3081CD0099CB74 /* DiscoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoverViewController.m; sourceTree = "<group>"; };
 		72ABD1E41B3081DD0099CB74 /* ContactsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsViewController.h; sourceTree = "<group>"; };
@@ -1106,7 +1103,6 @@
 				723F20971B61656C00E312D3 /* NetEngine */,
 				724044901B4ACA55008AD6BA /* Cell */,
 				729ED23D1B915C3900F32850 /* Message */,
-				72ABD1D31B30810C0099CB74 /* Main */,
 				72ABD1D11B30810C0099CB74 /* Contacts */,
 				72ABD1D21B30810C0099CB74 /* Discover */,
 				72ABD1D41B30810C0099CB74 /* Mine */,
@@ -1164,15 +1160,6 @@
 				72ABD1E01B3081CD0099CB74 /* DiscoverViewController.m */,
 			);
 			path = Discover;
-			sourceTree = "<group>";
-		};
-		72ABD1D31B30810C0099CB74 /* Main */ = {
-			isa = PBXGroup;
-			children = (
-				72ABD1DA1B3081A80099CB74 /* MainViewController.h */,
-				72ABD1DB1B3081A80099CB74 /* MainViewController.m */,
-			);
-			path = Main;
 			sourceTree = "<group>";
 		};
 		72ABD1D41B30810C0099CB74 /* Mine */ = {
@@ -1510,7 +1497,6 @@
 				722C52F21B492F49004CBADA /* UIScrollView+MJExtension.m in Sources */,
 				722C52E91B492F49004CBADA /* MJRefreshAutoStateFooter.m in Sources */,
 				723B5CE01B649D8200ABF8B9 /* AFNetworkReachabilityManager.m in Sources */,
-				72ABD1DD1B3081A80099CB74 /* MainViewController.m in Sources */,
 				72D8F7F11B5D6D6A001F1260 /* FormTextField.m in Sources */,
 				723B5CDF1B649D8200ABF8B9 /* AFHTTPSessionManager.m in Sources */,
 				39AD39D71B6B7901001E3094 /* UserDataManager.m in Sources */,

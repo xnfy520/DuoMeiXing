@@ -158,7 +158,7 @@
         
     }else if(option.ctrl == kOptionCtrlTypeOrder){
         
-        [WebViewController showWebPageInViewCtrl:self withUrl:[NSString stringWithFormat:@"%@/dalmatian/app/order/home.dmx", apiBaseUrl] withPostData:nil withViewTitle:appName];
+        [WebViewController showWebPageInViewCtrl:self withUrl:[NSString stringWithFormat:@"%@/dalmatian/app/order/home.dmx", apiBaseUrl] withPostData:nil withViewTitle:@"订单"];
         
     }
     
