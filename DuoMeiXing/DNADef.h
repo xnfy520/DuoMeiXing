@@ -66,7 +66,11 @@ typedef enum : NSUInteger{
     kOptionCtrlTypeMyChecking,      //等待审核
     kOptionCtrlTypeMyUploading,     //正在上传
     kOptionCtrlTypeMessageComment,  //消息类型为评论
-    kOptionCtrlTypeMessageUpload     //消息类型为视频
+    kOptionCtrlTypeMessageUpload,   //消息类型为视频
+    kOptionCtrlTypeFriendAll,       //所有关注的朋友
+    kOptionCtrlTypeFriendTeacher,   //所有关注的老师
+    kOptionCtrlTypeTeacherAll,      //所有老师
+    kOptionCtrlTypeMentorAll        //所有大师
 } OptionCtrlType;
 
 typedef enum : NSUInteger{
@@ -105,6 +109,10 @@ typedef enum : NSUInteger{
 #define appAPIVideoId           @"/dmx/app/ajax/video/get.dmx"                  //通过视频ID获取视频信息
 #define appAPIGame              @"/dmx/app/ajax/video/game/get_all.dmx"         //获取所有比赛
 #define appAPIGameAttend        @"/dmx/app/ajax/video/game/attend.dmx"          //
+#define appAPIFriendAll         @"/dmx/app/ajax/friend/get_all.dmx"             //获取所有我关注的朋友关系
+#define appAPIFriendTeacher     @"/dmx/app/ajax/friend/teacher/get_all.dmx"     //获取所有我关注的老师关系，包括大师关系
+#define appAPITeacherAll        @"/dmx/app/ajax/teacher/get_all.dmx"            //获取所有的老师信息
+#define appAPIMentorAll         @"/dmx/app/ajax/mentor/get_all.dmx"             //获取所有的大师信息
 
 #define appCompanyCode @"dalmatian"
 

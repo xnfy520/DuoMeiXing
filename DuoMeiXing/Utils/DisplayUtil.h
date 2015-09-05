@@ -34,4 +34,6 @@
 
 + (NSString *)stringWithPhotographAlbumCategory:(NSUInteger)type;
 
++ (BOOL)checkChinese:(NSString *)nString;
+
 @end

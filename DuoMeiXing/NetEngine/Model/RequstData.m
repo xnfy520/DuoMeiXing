@@ -77,6 +77,49 @@
 
 @end
 
+@implementation RequstFriendAll
+
++ (id)requstFriendAllWithPageNo:(NSInteger)pageNo withPageSize:(NSInteger)pageSize
+{
+    NSDictionary *dic = @{
+                          @"pageNo":@(pageNo),
+                          @"pageSize":@(pageSize)
+                          };
+    return [self objectWithKeyValues:dic];
+}
+
+@end
+
+@implementation RequstFriendTeacher
++ (id)requstFriendTeacherWithPageNo:(NSInteger)pageNo withPageSize:(NSInteger)pageSize{
+    NSDictionary *dic = @{
+                          @"pageNo":@(pageNo),
+                          @"pageSize":@(pageSize)
+                          };
+    return [self objectWithKeyValues:dic];
+}
+@end
+
+@implementation RequstTeacherAll
++ (id)requstTeacherAllWithPageNo:(NSInteger)pageNo withPageSize:(NSInteger)pageSize{
+    NSDictionary *dic = @{
+                          @"pageNo":@(pageNo),
+                          @"pageSize":@(pageSize)
+                          };
+    return [self objectWithKeyValues:dic];
+}
+@end
+
+@implementation RequstMentorAll
++ (id)requstMentorAllWithPageNo:(NSInteger)pageNo withPageSize:(NSInteger)pageSize{
+    NSDictionary *dic = @{
+                          @"pageNo":@(pageNo),
+                          @"pageSize":@(pageSize)
+                          };
+    return [self objectWithKeyValues:dic];
+}
+@end
+
 @implementation RequstMessageAll
 
 

@@ -122,6 +122,30 @@
     return request;
 }
 
++ (id)friendAllRequestPostData:(RequstData *)requestData
+{
+    RequestService *request = [[RequestService alloc] initReqeustUrl:appAPIFriendAll withPostData:requestData withResponseValidator:[ResponseFriendResult responseValidator]];
+    return request;
+}
+
++ (id)friendTeacherRequestPostData:(RequstData *)requestData
+{
+    RequestService *request = [[RequestService alloc] initReqeustUrl:appAPIFriendTeacher withPostData:requestData withResponseValidator:[ResponseFriendResult responseValidator]];
+    return request;
+}
+
++ (id)teacherAllRequestPostData:(RequstData *)requestData
+{
+    RequestService *request = [[RequestService alloc] initReqeustUrl:appAPITeacherAll withPostData:requestData withResponseValidator:[ResponseFriendResult responseValidator]];
+    return request;
+}
+
++ (id)mentorAllRequestPostData:(RequstData *)requestData
+{
+    RequestService *request = [[RequestService alloc] initReqeustUrl:appAPIMentorAll withPostData:requestData withResponseValidator:[ResponseFriendResult responseValidator]];
+    return request;
+}
+
 - (YTKRequestMethod)requestMethod
 {
     return YTKRequestMethodPost;

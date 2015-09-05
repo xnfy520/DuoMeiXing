@@ -190,3 +190,49 @@
 }
 
 @end
+
+
+//--
+
+@implementation ResponseFriend
+
++ (NSDictionary *)responseValidator
+{
+    return @{
+             @"id": [NSString class],
+             @"logoUrl": [NSURL class],
+             @"memberId": [NSString class],
+             @"nickName": [NSString class],
+             @"relationId": [NSString class],
+             @"type": [NSString class]
+             };
+}
+
+@end
+
+
+@implementation ResponseFriendResult
+
++ (NSDictionary *)objectClassInArray
+{
+    return @{
+             @"result" : @"ResponseFriend"
+             };
+}
+
++ (NSDictionary *)responseValidator
+{
+    return @{
+             @"pageNo": [NSNumber class],
+             @"pageSize": [NSNumber class],
+             @"prePage": [NSNumber class],
+             @"nextPage": [NSNumber class],
+             @"totalCount": [NSNumber class],
+             @"totalPages": [NSNumber class],
+             @"result": [NSArray class]
+             };
+}
+
+@end
+
+

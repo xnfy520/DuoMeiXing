@@ -51,6 +51,22 @@
 + (id)requstGameWithPageNo:(NSInteger)pageNo withPageSize:(NSInteger)pageSize;
 @end
 
+@interface RequstFriendAll : RequstPage
++ (id)requstFriendAllWithPageNo:(NSInteger)pageNo withPageSize:(NSInteger)pageSize;
+@end
+
+@interface RequstFriendTeacher : RequstPage
++ (id)requstFriendTeacherWithPageNo:(NSInteger)pageNo withPageSize:(NSInteger)pageSize;
+@end
+
+@interface RequstTeacherAll : RequstPage
++ (id)requstTeacherAllWithPageNo:(NSInteger)pageNo withPageSize:(NSInteger)pageSize;
+@end
+
+@interface RequstMentorAll : RequstPage
++ (id)requstMentorAllWithPageNo:(NSInteger)pageNo withPageSize:(NSInteger)pageSize;
+@end
+
 #pragma mark - 不同消息类型请求参数
 
 @interface RequstMessageAll : RequstPage

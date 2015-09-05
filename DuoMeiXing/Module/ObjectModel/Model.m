@@ -90,12 +90,12 @@
                            @{
                                @"title":@"大师",
                                @"icon":@"home_disc_mentor",
-                               @"ctrl":@(kOptionCtrlTypeContacts)
+                               @"ctrl":@(kOptionCtrlTypeMentorAll)
                             },
                            @{
                                @"title":@"专业老师",
                                @"icon":@"home_disc_teacher",
-                               @"ctrl":@(kOptionCtrlTypeContacts)
+                               @"ctrl":@(kOptionCtrlTypeTeacherAll)
                                
                                }
                            ],

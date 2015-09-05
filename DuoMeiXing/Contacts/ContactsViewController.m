@@ -11,8 +11,10 @@
 #import "DisplayViewController.h"
 #import "Person.h"
 #import "ContactsCell.h"
+#import "PinYinForObjc.h"
+#import "PinyinHelper.h"
 
-@interface ContactsViewController ()<UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating, UISearchBarDelegate, DZNEmptyDataSetDelegate, DZNEmptyDataSetSource>
+@interface ContactsViewController ()<UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating, UISearchBarDelegate>
 
 @end
 
@@ -22,6 +24,9 @@
     UITableView *mainTableView;
     UISearchBar *searchBar;
     UISearchController *searchCtrl;
+    
+    NSMutableArray *baseData;
+    
     NSMutableArray  *dataList;
     NSMutableArray  *searchList;
     
@@ -35,6 +40,8 @@
     
     NSMutableArray *keys;
     NSMutableArray *values;
+    
+    NSMutableDictionary *firstDic;
 }
 
 - (void)viewDidLoad {
@@ -44,115 +51,136 @@
         [self setupRightButton];
     }
     
+    baseData = [[NSMutableArray alloc] init];
+    
     [self setupMainTableView];
     
     keys = [[NSMutableArray alloc] init];
     
     values = [[NSMutableArray alloc] init];
-    
-    [keys addObjectsFromArray:@[@"", @"A", @"B", @"C", @"D", @"E"]];
-    
-    [values addObjectsFromArray: @[
-               @[
-                   @"新朋友",
-                   @"老师"
-                   ],
-               @[
-                   @"alipay",
-                   @"alipay",
-                   @"alipay",
-                   @"alipay",
-                   @"alipay",
-                   @"alipay",
-                   @"alipay",
-                   @"alipay",
-                   @"alipay",
-                   @"alipay",
-                   @"alipay",
-                   @"alipay",
-                   @"alipay",
-                   @"alipay",
-                   @"alipay",
-                   @"alipay"
-                   ],
-               @[
-                   @"bady",
-                   @"bady",
-                   @"bady",
-                   @"bady",
-                   @"bady",
-                   @"bady",
-                   @"bady",
-                   @"bady",
-                   @"bady",
-                   @"bady",
-                   @"bady",
-                   @"bady",
-                   @"bady",
-                   @"bady",
-                   @"bady",
-                   @"bady",
-                   @"bady",
-                   @"bady"
-                   ],
-               @[
-                   @"cosplay",
-                   @"cosplay",
-                   @"cosplay",
-                   @"cosplay",
-                   @"cosplay",
-                   @"cosplay",
-                   @"cosplay",
-                   @"cosplay",
-                   @"cosplay",
-                   @"cosplay",
-                   @"cosplay",
-                   @"cosplay",
-                   @"cosplay",
-                   @"cosplay"
-                   ],
-               @[
-                   @"display",
-                   @"display",
-                   @"display",
-                   @"display",
-                   @"display",
-                   @"display",
-                   @"display",
-                   @"display",
-                   @"display",
-                   @"display",
-                   @"display",
-                   @"display",
-                   @"display",
-                   @"display",
-                   @"display"
-                   ],
-               @[
-                   @"emial",
-                   @"emial",
-                   @"emial",
-                   @"emial",
-                   @"emial",
-                   @"emial",
-                   @"emial",
-                   @"emial",
-                   @"emial",
-                   @"emial",
-                   @"emial",
-                   @"emial",
-                   @"emial",
-                   @"emial",
-                   @"emial"
-                   ]
-               
-               ]];
-    
-    if (self.notHeader) {
-        [keys removeObjectAtIndex:0];
-        [values removeObjectAtIndex:0];
+
+    if (_listType == kOptionCtrlTypeFriendTeacher) {
+        [self requestFriendTeacher];
+    }else if(_listType == kOptionCtrlTypeMentorAll){
+        [self requestMentorAll];
+    }else if(_listType == kOptionCtrlTypeTeacherAll){
+        [self requestTeacherAll];
+    }else{
+        [self requestFriendAll];
     }
 
+}
+
+- (void)requestFriendAll
+{
+    RequestService *api = [RequestService friendAllRequestPostData:[RequstFriendAll requstFriendAllWithPageNo:1 withPageSize:10]];
+    [self sendRequestWith:api];
+}
+
+- (void)requestFriendTeacher
+{
+    RequestService *api = [RequestService friendTeacherRequestPostData:[RequstFriendTeacher requstFriendTeacherWithPageNo:1 withPageSize:10]];
+    [self sendRequestWith:api];
+}
+
+- (void)requestTeacherAll
+{
+    RequestService *api = [RequestService teacherAllRequestPostData:[RequstTeacherAll requstTeacherAllWithPageNo:1 withPageSize:10]];
+    [self sendRequestWith:api];
+}
+
+- (void)requestMentorAll
+{
+    RequestService *api = [RequestService mentorAllRequestPostData:[RequstMentorAll requstMentorAllWithPageNo:1 withPageSize:10]];
+    [self sendRequestWith:api];
+}
+
+- (void)sendRequestWith:(RequestService *)api
+{
+    
+    [api startWithCompletionBlockWithSuccess:^(YTKBaseRequest *request) {
+        
+        NSLog(@"succeed");
+        
+        if (_listType == kOptionCtrlTypeTeacherAll  || _listType == kOptionCtrlTypeMentorAll) {
+            
+            
+            
+        }else{
+            ResponseFriendResult *responseData = [ResponseFriendResult objectWithKeyValues:[request responseJSONObject]];
+            
+            [baseData setArray:responseData.result];
+        }
+        
+
+        
+        [self disposeData];
+        
+        [mainTableView reloadData];
+        
+    } failure:^(YTKBaseRequest *request) {
+        
+        [self hideHUB];
+        
+        NSLog(@"failed");
+        
+        NSLog(@"%@", [[request responseJSONObject] objectForKey:@"code"]);
+        
+        
+    }];
+}
+
+- (void)disposeData
+{
+    firstDic = [[NSMutableDictionary alloc] init];
+    
+    if (self.notHeader == NO) {
+        [firstDic setObject:@[@"新朋友",@"老师"] forKey:@""];
+    }
+
+//    ResponseFriend * ff = [[ResponseFriend alloc] init];
+//    ff.nickName = @"hello";
+//    [baseData addObject:ff];
+//    
+//    ResponseFriend * ffs = [[ResponseFriend alloc] init];
+//    ffs.nickName = @"hellosef";
+//    [baseData addObject:ffs];
+//    
+//    ResponseFriend * ffa = [[ResponseFriend alloc] init];
+//    ffa.nickName = @"hello3ff";
+//    [baseData addObject:ffa];
+//    
+//    ResponseFriend * ffx = [[ResponseFriend alloc] init];
+//    ffx.nickName = @"asev11";
+//    [baseData addObject:ffx];
+//    
+//    ResponseFriend * fff = [[ResponseFriend alloc] init];
+//    fff.nickName = @"せいおん";
+//    [baseData addObject:fff];
+    
+    if ([baseData count]>0) {
+        for (ResponseFriend *friend in baseData) {
+            
+            NSString *pf = [PinYinForObjc chineseConvertToPinYinHeadFirst:friend.nickName];
+            
+            if ([[firstDic allKeys] containsObject:pf]) {
+                NSMutableArray *tmpArr = [firstDic objectForKey:pf];
+                [tmpArr addObject:friend];
+                [firstDic setObject:tmpArr forKey:pf];
+            }else{
+                NSMutableArray *tmpArr = [[NSMutableArray alloc] init];
+                [tmpArr addObject:friend];
+                [firstDic setObject:tmpArr forKey:pf];
+            }
+        }
+    }
+    
+    NSMutableArray *keyArray = [[NSMutableArray alloc] init];
+
+    [keyArray addObjectsFromArray:[[firstDic allKeys]  sortedArrayUsingSelector:@selector(compare:)]];
+
+    [keys setArray:keyArray];
+    
 }
 
 - (void)setupMainTableView
@@ -163,9 +191,6 @@
     mainTableView.tableFooterView = [[UIView alloc] init];
     [self.view addSubview:mainTableView];
     [self setupInsetsTableView:mainTableView];
-    
-    mainTableView.emptyDataSetDelegate = self;
-    mainTableView.emptyDataSetSource = self;
 
     
     //索引栏颜色
@@ -243,7 +268,8 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
 
-    return [[values objectAtIndex:section] count];
+    NSString *key = [keys objectAtIndex:section];
+    return [[firstDic objectForKey:key] count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -253,46 +279,51 @@
     if (cell==nil) {
         cell=[[ContactsCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:flag];
     }
-    
-    NSString *title = [[values objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
-    
-    cell.textLabel.text = title;
-    
     cell.textLabel.font = [UIFont systemFontOfSize:15];
-    
-    if ([title isEqualToString:@"新朋友"]) {
-        
-        cell.imageView.image = [UIImage imageNamed:@"home_friend_new"];
-        
-        cell.textLabel.textColor = [UIColor darkTextColor];
-        
-    }else if([title isEqualToString:@"老师"]) {
-        
-        cell.imageView.image = [UIImage imageNamed:@"home_friend_teacher"];
-        
-        cell.textLabel.textColor = [UIColor darkTextColor];
-        
-    }else{
-        
-        cell.imageView.image = [UIImage imageNamed:@"limbo"];
-        
-        cell.textLabel.textColor = [UIColor lightGrayColor];
-        
-    }
-    
-    
-    NSString *key = [keys objectAtIndex:indexPath.section];
+    if ([keys count]>0) {
+        NSString *key = [keys objectAtIndex:indexPath.section];
+        if (_notHeader == NO) {
+            
+            
+            if ([key isEqualToString:@""]) {
+                
+                NSString *title = [[firstDic objectForKey:key] objectAtIndex:indexPath.row];
+                
+                cell.textLabel.text = title;
+                
+                if ([title isEqualToString:@"新朋友"]) {
+                    
+                    cell.imageView.image = [UIImage imageNamed:@"home_friend_new"];
+                    
+                    cell.textLabel.textColor = [UIColor darkTextColor];
+                    
+                }else if([title isEqualToString:@"老师"]) {
+                    
+                    cell.imageView.image = [UIImage imageNamed:@"home_friend_teacher"];
+                    
+                    cell.textLabel.textColor = [UIColor darkTextColor];
+                    
+                }
+                
+            }else{
+                ResponseFriend *friend = [[firstDic objectForKey:key] objectAtIndex:indexPath.row];
+                cell.textLabel.text = friend.nickName;
+                [cell.imageView sd_setImageWithURL:friend.logoUrl];
+            }
 
-    if ([key isEqualToString:@""]) {
-        cell.showInvitation = NO;
-    }else{
-        if (self.hasInvitation) {
-            cell.showInvitation = YES;
-//            cell.alreadyInvitation = YES;
         }else{
-            cell.showInvitation = NO;
+            ResponseFriend *friend = [[firstDic objectForKey:key] objectAtIndex:indexPath.row];
+            cell.textLabel.text = friend.nickName;
+            [cell.imageView sd_setImageWithURL:friend.logoUrl];
         }
     }
+
+    if (self.hasInvitation) {
+        cell.showInvitation = YES;
+    }else{
+        cell.showInvitation = NO;
+    }
+
 
     return cell;
 }
@@ -347,12 +378,15 @@
     NSString *key = [keys objectAtIndex:indexPath.section];
     
     if ([key isEqualToString:@""]) {
-        NSString *ctrl = [[values objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+        
+        NSString *ctrl = [[firstDic objectForKey:key] objectAtIndex:indexPath.row];
+        
         ContactsViewController *contactsCtrl = [[ContactsViewController alloc] init];
         if ([ctrl isEqualToString:@"老师"]) {
             contactsCtrl.title = @"老师";
             contactsCtrl.notPopover = YES;
             contactsCtrl.notHeader = YES;
+            contactsCtrl.listType = kOptionCtrlTypeFriendTeacher;
         }else if([ctrl isEqualToString:@"新朋友"]){
             contactsCtrl.title = @"新朋友";
             contactsCtrl.notPopover = YES;
@@ -362,10 +396,11 @@
         }
         [self.navigationController pushViewController:contactsCtrl animated:YES];
     }else{
-//        DisplayViewController *displayCtrl = [[DisplayViewController alloc] init];
-//        displayCtrl.haveViedo = NO;
-//        [self.navigationController pushViewController:displayCtrl animated:YES];
+        DisplayViewController *displayCtrl = [[DisplayViewController alloc] init];
+        displayCtrl.pannelIndex = kDisplayPannelInformation;
+        [self.navigationController pushViewController:displayCtrl animated:YES];
     }
+
 }
 
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar{
@@ -376,102 +411,6 @@
 - (BOOL)searchBarShouldEndEditing:(UISearchBar *)searchBar{
     NSLog(@"搜索End");
     return YES;
-}
-
-#pragma mark -------配置分组信息------
-#define NEW_USER(str) [[Person alloc] init:str name:str]
-
-- (void)configureSections {
-    
-    //初始化测试数据
-    userArray = [[NSMutableArray alloc] init];
-    [userArray addObject:NEW_USER(@"")];
-    [userArray addObject:NEW_USER(@"")];
-    [userArray addObject:NEW_USER(@"test001")];
-    [userArray addObject:NEW_USER(@"test002")];
-    [userArray addObject:NEW_USER(@"test003")];
-    [userArray addObject:NEW_USER(@"test004")];
-    [userArray addObject:NEW_USER(@"test005")];
-    
-    [userArray addObject:NEW_USER(@"adam01")];
-    [userArray addObject:NEW_USER(@"adam02")];
-    [userArray addObject:NEW_USER(@"adam03")];
-    
-    [userArray addObject:NEW_USER(@"bobm01")];
-    [userArray addObject:NEW_USER(@"bobm02")];
-    
-    [userArray addObject:NEW_USER(@"what01")];
-    [userArray addObject:NEW_USER(@"0what02")];
-    
-    [userArray addObject:NEW_USER(@"李一")];
-    [userArray addObject:NEW_USER(@"李二")];
-    
-    [userArray addObject:NEW_USER(@"胡一")];
-    [userArray addObject:NEW_USER(@"胡二")];
-    
-    //获得当前UILocalizedIndexedCollation对象并且引用赋给collation,A-Z的数据
-    collation = [UILocalizedIndexedCollation currentCollation];
-    //获得索引数和section标题数
-    NSInteger index, sectionTitlesCount = [[collation sectionTitles] count];
-    NSLog(@"%ld---", (long)sectionTitlesCount);
-    //临时数据，存放section对应的userObjs数组数据
-    NSMutableArray *newSectionsArray = [[NSMutableArray alloc] initWithCapacity:sectionTitlesCount];
-    
-    //设置sections数组初始化：元素包含userObjs数据的空数据
-    for (index = 0; index < sectionTitlesCount+1; index++) {
-        NSMutableArray *array = [[NSMutableArray alloc] init];
-        [newSectionsArray addObject:array];
-    }
-    NSLog(@"%ld===", newSectionsArray.count);
-    //将用户数据进行分类，存储到对应的sesion数组中
-    for (Person *userObj in userArray) {
-        
-        //根据timezone的localename，获得对应的的section number
-        NSInteger sectionNumber = [collation sectionForObject:userObj collationStringSelector:@selector(username)];
-        NSLog(@"%ld==>%@", (long)sectionNumber, userObj.name);
-        //获得section的数组
-        NSMutableArray *sectionUserObjs = [newSectionsArray objectAtIndex:sectionNumber];
-        
-        //添加内容到section中
-        [sectionUserObjs addObject:userObj];
-    }
-    
-    //排序，对每个已经分类的数组中的数据进行排序，如果仅仅只是分类的话可以不用这步
-    for (index = 0; index < sectionTitlesCount; index++) {
-        
-        NSMutableArray *userObjsArrayForSection = [newSectionsArray objectAtIndex:index];
-
-        //获得排序结果
-        NSArray *sortedUserObjsArrayForSection = [collation sortedArrayFromArray:userObjsArrayForSection collationStringSelector:@selector(username)];
-        
-        //替换原来数组
-        [newSectionsArray replaceObjectAtIndex:index withObject:sortedUserObjsArrayForSection];
-        
-    }
-    
-    
-    sectionsArray = newSectionsArray;
-    
-    NSLog(@"%@", sectionsArray);
-    
-}
-
-- (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView
-{
-    return [UIImage imageNamed:@"placeholder_instagram"];
-}
-
-- (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView
-{
-    NSString *text = @"没有数据";
-    NSMutableParagraphStyle *paragraph = [NSMutableParagraphStyle new];
-    paragraph.lineBreakMode = NSLineBreakByWordWrapping;
-    paragraph.alignment = NSTextAlignmentCenter;
-    NSDictionary *attributes = @{NSFontAttributeName: [UIFont systemFontOfSize:18.0],
-                                 NSForegroundColorAttributeName: [UIColor lightGrayColor],
-                                 NSParagraphStyleAttributeName: paragraph};
-    
-    return [[NSAttributedString alloc] initWithString:text attributes:attributes];
 }
 
 @end

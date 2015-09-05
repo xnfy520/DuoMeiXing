@@ -35,4 +35,12 @@
 
 + (id)videoIdRequestPostData:(RequstData *)requestData;
 
++ (id)friendAllRequestPostData:(RequstData *)requestData;
+
++ (id)friendTeacherRequestPostData:(RequstData *)requestData;
+
++ (id)teacherAllRequestPostData:(RequstData *)requestData;
+
++ (id)mentorAllRequestPostData:(RequstData *)requestData;
+
 @end

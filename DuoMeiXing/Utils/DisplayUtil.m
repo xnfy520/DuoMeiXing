@@ -210,4 +210,29 @@
     return typeString;
 }
 
++ (BOOL)checkChinese:(NSString *)nString
+{
+    if(nString){
+        for (int i=0; i<nString.length; i++) {
+            NSRange range=NSMakeRange(i,1);
+            NSString *subString=[nString substringWithRange:range];
+            const char *cString=[subString UTF8String];
+            if (strlen(cString)==3)
+            {
+                return YES;
+            }else if(strlen(cString)==1)
+            {
+                return NO;
+            }
+        }
+    }
+    return NO;
+}
+
+- (BOOL)isPureInt:(NSString*)string{
+    NSScanner* scan = [NSScanner scannerWithString:string];
+    int val;
+    return[scan scanInt:&val] && [scan isAtEnd];
+}
+
 @end

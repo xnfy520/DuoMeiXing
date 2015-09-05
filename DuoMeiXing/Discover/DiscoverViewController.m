@@ -111,13 +111,17 @@
         photographAlbumCategoryCtrl.category = kPhotographAlbumCategoryHot;
         [self.navigationController pushViewController:photographAlbumCategoryCtrl animated:YES];
         
-    }else if(option.ctrl == kOptionCtrlTypeContacts){
+    }else if(option.ctrl == kOptionCtrlTypeMentorAll || option.ctrl == kOptionCtrlTypeTeacherAll){
         
         ContactsViewController *contactsCtrl = [[ContactsViewController alloc] init];
         contactsCtrl.title = option.title;
         contactsCtrl.notHeader = YES;
         contactsCtrl.notPopover = YES;
         contactsCtrl.hasInvitation = NO;
+        contactsCtrl.listType = option.ctrl;
+        
+        NSLog(@"%ld?????", option.ctrl);
+        
         [self.navigationController pushViewController:contactsCtrl animated:YES];
         
     }else if(option.ctrl == kOptionCtrlTypeInstrument){

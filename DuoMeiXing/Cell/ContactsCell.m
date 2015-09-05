@@ -39,6 +39,10 @@
     
     invitationButton.hidden = !_showInvitation;
     
+    self.imageView.frame = CGRectMake(15, (CGRectGetHeight(self.contentView.frame)-30)/2, 30, 30);
+    
+    self.textLabel.frame = CGRectMake(CGRectGetMaxX(self.imageView.frame)+15, self.textLabel.frame.origin.y, self.textLabel.frame.size.width, self.textLabel.frame.size.height);
+    
     if(_alreadyInvitation){
         [invitationButton setEnabled:NO];
         [invitationButton setBackgroundColor:[UIColor clearColor]];

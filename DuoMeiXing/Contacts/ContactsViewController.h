@@ -16,5 +16,6 @@
 @property(nonatomic, assign)BOOL notPopover;
 @property(nonatomic, assign)BOOL hasInvitation;
 @property(nonatomic, assign)BOOL notSelection;
+@property(nonatomic, assign)NSUInteger listType;
 
 @end
