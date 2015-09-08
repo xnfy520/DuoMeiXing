@@ -69,6 +69,18 @@
 //    [aef.reachabilityManager startMonitoring];
 //}
 
++ (id)registerReqeustPostData:(RequstData *)requestData
+{
+    RequestService *request = [[RequestService alloc] initReqeustUrl:appAPIRegister withPostData:requestData withResponseValidator:nil];
+    return request;
+}
+
++ (id)verifySmscodeReqeustPostData:(RequstData *)requestData
+{
+    RequestService *request = [[RequestService alloc] initReqeustUrl:appAPIVerifySMS withPostData:requestData withResponseValidator:nil];
+    return request;
+}
+
 + (id)messageSummaryReqeust
 {
     RequstPage *requestData = [[RequstPage alloc] init];

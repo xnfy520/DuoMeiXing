@@ -17,6 +17,11 @@
 
 - (id)initReqeustUrl:(NSString*) requestUrl withPostData:(RequstData *)requestData withResponseValidator :(NSDictionary *)responseValidator;
 
+
++ (id)registerReqeustPostData:(RequstData *)requestData;
+
++ (id)verifySmscodeReqeustPostData:(RequstData *)requestData;
+
 + (id)messageSummaryReqeust;
 
 + (id)messageAllReqeustPostData:(RequstData *)requestData;

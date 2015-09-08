@@ -31,10 +31,14 @@
 @property (nonatomic, copy) NSString *password;
 @property (nonatomic, copy) NSString *smsCode;
 @property (nonatomic, copy) NSString *nickname;
-@property (nonatomic, copy) NSString *avatar;
 @property (nonatomic, copy) NSString *companyCode;
 @end
 
+@interface RequestVerifySmscode : RequstData
+@property (nonatomic, copy) NSString *mobile;
+@property (nonatomic, copy) NSString *smsCode;
++ (id)requstMobile:(NSString *)mobile withSmscode:(NSString *)smsCode;
+@end
 
 #pragma mark - 短信验证码请求参数
 

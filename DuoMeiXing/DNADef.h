@@ -99,6 +99,7 @@ typedef enum : NSUInteger{
 #define appAPILogin             @"/dmx/app/ajax/login.dmx"                      //登录
 #define appAPIRegister          @"/dmx/app/ajax/member_register.dmx"            //注册
 #define appAPISMS               @"/dmx/app/ajax/send_smscode.dmx"               //验证码
+#define appAPIVerifySMS         @"/dmx/app/ajax/verify_smscode.dmx"             //验证码校验
 //获取所有发送给我通知，包括我关注的朋友上传了新视频，我关注的朋友对我的视频发表了评论
 #define appAPIMessageSummary    @"/dmx/app/ajax/video/message/summary/get.dmx"
 #define appAPIMessageALL        @"/dmx/app/ajax/video/message/type/get_all.dmx"
@@ -113,6 +114,7 @@ typedef enum : NSUInteger{
 #define appAPIFriendTeacher     @"/dmx/app/ajax/friend/teacher/get_all.dmx"     //获取所有我关注的老师关系，包括大师关系
 #define appAPITeacherAll        @"/dmx/app/ajax/teacher/get_all.dmx"            //获取所有的老师信息
 #define appAPIMentorAll         @"/dmx/app/ajax/mentor/get_all.dmx"             //获取所有的大师信息
+
 
 #define appCompanyCode @"dalmatian"
 

@@ -50,6 +50,16 @@
 }
 @end
 
+@implementation RequestVerifySmscode
++ (id)requstMobile:(NSString *)mobile withSmscode:(NSString *)smsCode;
+{
+    NSDictionary *dic = @{
+                          @"mobile":mobile,
+                          @"smsCode":smsCode
+                          };
+    return [self objectWithKeyValues:dic];
+}
+@end
 
 #pragma mark - 短信验证码请求
 

@@ -236,3 +236,47 @@
 @end
 
 
+//==
+
+@implementation ResponseMember
+
++ (NSDictionary *)responseValidator
+{
+    return @{
+             @"id": [NSString class],
+             @"nickname": [NSString class],
+             @"name": [NSString class],
+             @"photoUrl": [NSURL class],
+             @"userId": [NSString class],
+             @"username": [NSString class]
+             };
+}
+
+@end
+
+
+@implementation ResponseMemberResult
+
++ (NSDictionary *)objectClassInArray
+{
+    return @{
+             @"result" : @"ResponseMember"
+             };
+}
+
++ (NSDictionary *)responseValidator
+{
+    return @{
+             @"pageNo": [NSNumber class],
+             @"pageSize": [NSNumber class],
+             @"prePage": [NSNumber class],
+             @"nextPage": [NSNumber class],
+             @"totalCount": [NSNumber class],
+             @"totalPages": [NSNumber class],
+             @"result": [NSArray class]
+             };
+}
+
+@end
+
+

@@ -103,7 +103,10 @@
     
     if (_videoData != nil) {
         [self refreshData];
-    }else if(![_videoId isEqualToString:@""]){
+    }else if(_memberId != nil){
+        NSLog(@"%@", _memberId);
+        NSLog(@"hello");
+    }else if(_videoId != nil){
         [self requstApi];
     }
     

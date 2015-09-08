@@ -16,6 +16,8 @@
 
 @property (nonatomic, strong) NSString *videoId;
 
+@property (nonatomic, strong) NSString *memberId;
+
 @property (nonatomic, strong) ResponseVideo *videoData;
 
 @property (nonatomic, assign) NSInteger pannelIndex;

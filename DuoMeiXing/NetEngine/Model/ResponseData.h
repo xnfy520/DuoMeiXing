@@ -147,7 +147,7 @@
 @end
 
 
-@interface ResponseFriend : NSObject
+@interface ResponseFriend : ResponseData
 
 @property (nonatomic, copy) NSString *id;
 @property (nonatomic, copy) NSURL *logoUrl;
@@ -166,6 +166,35 @@
 #pragma mark - 视频响应数据
 
 @interface ResponseFriendResult : ResponseBasePage
+
+@property (nonatomic, copy) NSArray *result;
+
++ (NSDictionary *)responseValidator;
+
+@end
+
+
+//==
+
+@interface ResponseMember : ResponseData
+
+@property (nonatomic, copy) NSString *id;
+@property (nonatomic, copy) NSString *nickname;
+@property (nonatomic, copy) NSString *name;
+@property (nonatomic, copy) NSURL *photoUrl;
+@property (nonatomic, copy) NSString *userId;
+@property (nonatomic, copy) NSString *username;
+
+
++ (NSDictionary *)responseValidator;
+
+@end
+
+
+
+#pragma mark - 视频响应数据
+
+@interface ResponseMemberResult : ResponseBasePage
 
 @property (nonatomic, copy) NSArray *result;
 

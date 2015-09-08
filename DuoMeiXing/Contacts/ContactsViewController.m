@@ -9,7 +9,6 @@
 #import "ContactsViewController.h"
 #import "DNADef.h"
 #import "DisplayViewController.h"
-#import "Person.h"
 #import "ContactsCell.h"
 #import "PinYinForObjc.h"
 #import "PinyinHelper.h"
@@ -104,7 +103,9 @@
         
         if (_listType == kOptionCtrlTypeTeacherAll  || _listType == kOptionCtrlTypeMentorAll) {
             
+            ResponseMemberResult *responseData = [ResponseMemberResult objectWithKeyValues:[request responseJSONObject]];
             
+            [baseData setArray:responseData.result];
             
         }else{
             ResponseFriendResult *responseData = [ResponseFriendResult objectWithKeyValues:[request responseJSONObject]];
@@ -112,7 +113,6 @@
             [baseData setArray:responseData.result];
         }
         
-
         
         [self disposeData];
         
@@ -138,30 +138,17 @@
         [firstDic setObject:@[@"新朋友",@"老师"] forKey:@""];
     }
 
-//    ResponseFriend * ff = [[ResponseFriend alloc] init];
-//    ff.nickName = @"hello";
-//    [baseData addObject:ff];
-//    
-//    ResponseFriend * ffs = [[ResponseFriend alloc] init];
-//    ffs.nickName = @"hellosef";
-//    [baseData addObject:ffs];
-//    
-//    ResponseFriend * ffa = [[ResponseFriend alloc] init];
-//    ffa.nickName = @"hello3ff";
-//    [baseData addObject:ffa];
-//    
-//    ResponseFriend * ffx = [[ResponseFriend alloc] init];
-//    ffx.nickName = @"asev11";
-//    [baseData addObject:ffx];
-//    
-//    ResponseFriend * fff = [[ResponseFriend alloc] init];
-//    fff.nickName = @"せいおん";
-//    [baseData addObject:fff];
-    
     if ([baseData count]>0) {
-        for (ResponseFriend *friend in baseData) {
+
+        for (id friend in baseData) {
             
-            NSString *pf = [PinYinForObjc chineseConvertToPinYinHeadFirst:friend.nickName];
+            NSString *pf;
+            
+            if (_listType == kOptionCtrlTypeTeacherAll  || _listType == kOptionCtrlTypeMentorAll) {
+                pf = [PinYinForObjc chineseConvertToPinYinHeadFirst:[(ResponseMember *)friend nickname]];
+            }else{
+                pf = [PinYinForObjc chineseConvertToPinYinHeadFirst:[(ResponseFriend *)friend nickName]];
+            }
             
             if ([[firstDic allKeys] containsObject:pf]) {
                 NSMutableArray *tmpArr = [firstDic objectForKey:pf];
@@ -306,15 +293,28 @@
                 }
                 
             }else{
+                
+                if (_listType == kOptionCtrlTypeTeacherAll  || _listType == kOptionCtrlTypeMentorAll) {
+                    ResponseMember *friend = [[firstDic objectForKey:key] objectAtIndex:indexPath.row];
+                    cell.textLabel.text = friend.nickname;
+                    [cell.imageView sd_setImageWithURL:friend.photoUrl];
+                }else{
+                    ResponseFriend *friend = [[firstDic objectForKey:key] objectAtIndex:indexPath.row];
+                    cell.textLabel.text = friend.nickName;
+                    [cell.imageView sd_setImageWithURL:friend.logoUrl];
+                }
+            }
+
+        }else{
+            if (_listType == kOptionCtrlTypeTeacherAll  || _listType == kOptionCtrlTypeMentorAll) {
+                ResponseMember *friend = [[firstDic objectForKey:key] objectAtIndex:indexPath.row];
+                cell.textLabel.text = friend.nickname;
+                [cell.imageView sd_setImageWithURL:friend.photoUrl];
+            }else{
                 ResponseFriend *friend = [[firstDic objectForKey:key] objectAtIndex:indexPath.row];
                 cell.textLabel.text = friend.nickName;
                 [cell.imageView sd_setImageWithURL:friend.logoUrl];
             }
-
-        }else{
-            ResponseFriend *friend = [[firstDic objectForKey:key] objectAtIndex:indexPath.row];
-            cell.textLabel.text = friend.nickName;
-            [cell.imageView sd_setImageWithURL:friend.logoUrl];
         }
     }
 
